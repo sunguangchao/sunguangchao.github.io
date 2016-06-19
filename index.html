@@ -86,58 +86,59 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>今天终于把这个Blog给搞好了，前面一直纠结于Jelly+Github的模式，配置环境太过于麻烦而放下了一段时间，最近有空就看看，就给弄好了。这里推荐的Hexo+Github的模式就好很多。</p>
+<p>##名词解释</p>
+<p>###What is Hexo?<br>官方是这样解释的：Hexo is a fast, simple and powerful blog framework. You write posts in Markdown (or other languages) and Hexo generates static files with a beautiful theme in seconds.<br>附上官方网址：<a href="https://hexo.io/&quot;title&quot;" target="_blank" rel="external">Hexo</a>.</p>
+<p>###What is Github?<br>不知道的自行google（自备梯子-Lantern）</p>
+<p>##环境配置</p>
+<p>###git<br>这里默认已经安装好git并且已有Github的账号，SSH已经配置好（挖个坑，后面再填）。</p>
+<p>###Node.js<br>官网地址：<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a><br>Node.js简介：Node.js is a JavaScript runtime built on Chrome’s V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js’ package ecosystem, npm, is the largest ecosystem of open source libraries in the world.<br>下载好Node.js一路默认安装就好。</p>
+<p>##安装Hexo<br>上面的步骤全部完成之后，下一步就是安装Hexo：</p>
+<pre><code>$ npm install -g hexo-cli
+</code></pre><p>安装完成后，进行初始化。建立一个文件夹命名为”Hexo”。<br>在那个文件夹中打开Git Bash，输入以下命令：</p>
+<pre><code>$ hexo init 
+$ npm install
+</code></pre><p>初始化完成之后，可以看到目录结构:</p>
+<pre><code>.
+├── _config.yml
+├── package.json
+├── scaffolds
+├── source
+|   ├── _drafts
+|   └── _posts
+└── themes
+</code></pre><p>各个部分都有其作用（再挖个坑），比较重要的是_config.yml这个文件。</p>
+<p>##配置更改<br>在_config.yml这个文件中，需要将deploy下面改成这个形式：</p>
+<pre><code>deploy:
+  type: git
+  repo: &lt;repository url&gt;
+  branch: [branch]
+  message: [message]
+</code></pre><p>特别注意的是”：”之后必须有一个空格，不然肯定是错的。改好之后就为后面发布自己的Blog做好了准备。</p>
+<p>##新建一篇文章</p>
+<pre><code>$ hexo new [layout] &lt;title&gt;
+</code></pre><p>使用这个命令可以新建一个markdown文件，在Hexo\source’\’_posts根目录下<br>直接进行编辑，就是一片文章。</p>
+<p>##本地测试<br>在Hexo3中server和主体结构动画是分开的，所以需要安装server。</p>
+<pre><code>$ npm install hexo-server --save
+</code></pre><p>安装之后用以下命令可以运行server：</p>
+<pre><code>$ hexo server
+</code></pre><p>一般来说在浏览器中输入<a href="http://localhost:4000就可以看到Blog的页面。" target="_blank" rel="external">http://localhost:4000就可以看到Blog的页面。</a><br>我这里的4000端口被占用了，可以用以下命令来改变端口：</p>
+<pre><code>$ hexo server -p 5000
+</code></pre><p>##发布博客<br>先安装hexo-deployer-git：</p>
+<pre><code>$ npm install hexo-deployer-git --save
+</code></pre><p>三步走：</p>
+<pre><code>$ hexo clean
+$ hexo generate
+$ hexo deploy
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/19/如何利用Hexo和Github建立属于自己的博客/" data-id="cipm9vdku0000p4tw9sf2yryv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/19/如何利用Hexo和Github建立属于自己的博客/" data-id="cipmg6v1x0000egtw1snbj0pl" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo-Github-Blog/">Hexo Github Blog</a></li></ul>
 
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/19/hello-world/" class="article-date">
-  <time datetime="2016-06-19T03:06:05.528Z" itemprop="datePublished">2016-06-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/19/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/19/hello-world/" data-id="cipm9vdku0001p4twe3g5qoyi" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -154,9 +155,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Github-Blog/">Hexo Github Blog</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Hexo-Github-Blog/" style="font-size: 10px;">Hexo Github Blog</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -176,10 +191,6 @@
         
           <li>
             <a href="/2016/06/19/如何利用Hexo和Github建立属于自己的博客/">如何利用Hexo和Github建立属于自己的博客</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/19/hello-world/">Hello World</a>
           </li>
         
       </ul>
