@@ -68,42 +68,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="[layout]-aaa" class="article article-type-[layout]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/21/aaa/" class="article-date">
-  <time datetime="2016-06-21T11:44:43.000Z" itemprop="datePublished">2016-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/21/aaa/">aaa</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/21/aaa/" data-id="cippea5h40000vgtw0byiegic" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="[layout]-插入排序" class="article article-type-[layout]" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/21/插入排序/" class="article-date">
@@ -130,7 +94,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###插入排序<br>插入排序由N-1趟排序组成<br>C语言代码实现：</p>
+        <a id="more"></a>
+<h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>插入排序由N-1趟排序组成<br>C语言代码实现：</p>
 <pre><code>void(InsertionSort)(ElementType A[],int N)
 {
   int j,P;
@@ -144,11 +109,10 @@
  }
 }/*插入排序例程*/
 </code></pre><p>插入排序为O（N^2）<br>N个互异数的数组的平均逆序数是N（N-1）/4。</p>
-<p>###希尔排序-缩小增量排序<br><strong>思想：</strong>  </p>
+<h1 id="希尔排序-缩小增量排序"><a href="#希尔排序-缩小增量排序" class="headerlink" title="希尔排序-缩小增量排序"></a>希尔排序-缩小增量排序</h1><p><strong>思想：</strong>  </p>
 <blockquote>
 <p>把记录按步长 gap 分组，对每组记录采用直接插入排序方法进行排序。随着步长逐渐减小，所分成的组包含的记录越来越多，当步长的值减小到 1 时，整个数据合成为一组，构成一组有序记录，则完成排序。</p>
-<p>#####直接插入排序和希尔排序的比较：</p>
-<ul>
+<h2 id="直接插入排序和希尔排序的比较："><a href="#直接插入排序和希尔排序的比较：" class="headerlink" title="直接插入排序和希尔排序的比较："></a>直接插入排序和希尔排序的比较：</h2><ul>
 <li>直接插入排序是稳定的；而希尔排序是不稳定的。</li>
 <li>直接插入排序更适合于原始记录基本有序的集合。</li>
 <li>希尔排序的比较次数和移动次数都要比直接插入排序少，当N越大时，效果越明显。</li>
@@ -214,7 +178,7 @@ public static void main(String[] args) {
     shell.printAll(array);
  }
 }
-</code></pre><p>###堆排序<br><strong>基本方法：</strong><br><code>建立N个元素的二叉堆，花费时间O(N)，然后执行N次DeletedMin操作花费时间
+</code></pre><h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><p><strong>基本方法：</strong><br><code>建立N个元素的二叉堆，花费时间O(N)，然后执行N次DeletedMin操作花费时间
 O(log⁡N)，所以总的运行时间为O(Nlog⁡N)。</code><br><strong>缺点：</strong><br><code>DeleteMin操作中使用了一个数组用来存储离开堆得元素，所以存储需求增加一倍。</code><br><strong>算法步骤：</strong></p>
 <blockquote>
 <ol>
@@ -254,7 +218,7 @@ void Heapsort(ElementType A[],int N)
    PercDown(A,0,i);
  }
 }
-</code></pre><p>###归并排序<br><code>归并排序以O（NlogN）最坏情形运行时间运行，而所使用的比较次数几乎是最优的。是递归算法的一个很好的实例。分治是递归非常有用的用法。</code><br><strong>算法步骤:</strong>  </p>
+</code></pre><h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p><code>归并排序以O（NlogN）最坏情形运行时间运行，而所使用的比较次数几乎是最优的。是递归算法的一个很好的实例。分治是递归非常有用的用法。</code><br><strong>算法步骤:</strong>  </p>
 <blockquote>
 <ol>
 <li>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列</li>
@@ -289,7 +253,7 @@ void Mergesort(ElementType A[],int N)
     FatalError(&quot;No space for tmp array!&quot;);
 }/*归并排序例程*/
 </code></pre><p><strong>问题：</strong><br>因为合并两个排序的表需要线性附加内存，在整个算法中还要花费将数据拷贝到临时数组再拷贝回来这样一些附加工作，其结果严重放慢了排序的速度。所以很难用于主存排序。</p>
-<p>###快速排序<br>快速排序是在实践中最快的已知排序算法，它的平均运行时间为O（NlogN）。该算法非常快的原因是非常精炼和高度优化的内部循环。最坏情况的性能为O（N^2），但稍加努力就可以避免。<br><strong>三数中值分割法：</strong><br>消除了预排序输入的坏情况，并且减少了快速排序大约5%的运行时间。<br>对于很小的数组（N&lt;=20）不递归地使用快速排序，而代之以诸如插入排序这种对小数组有效的排序算法。<br><strong>算法步骤：</strong>  </p>
+<h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><p>快速排序是在实践中最快的已知排序算法，它的平均运行时间为O（NlogN）。该算法非常快的原因是非常精炼和高度优化的内部循环。最坏情况的性能为O（N^2），但稍加努力就可以避免。<br><strong>三数中值分割法：</strong><br>消除了预排序输入的坏情况，并且减少了快速排序大约5%的运行时间。<br>对于很小的数组（N&lt;=20）不递归地使用快速排序，而代之以诸如插入排序这种对小数组有效的排序算法。<br><strong>算法步骤：</strong>  </p>
 <blockquote>
 <ol>
 <li>从数列中挑出一个元素，称为 “基准”（pivot）</li>
@@ -374,138 +338,9 @@ void Heapsort(ElementType A[],int N)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="cippea5h80002vgtw261wn1fd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="cippesx7x0000xgtwftau2xbl" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="[layout]-插入算法" class="article article-type-[layout]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/20/插入算法/" class="article-date">
-  <time datetime="2016-06-20T15:59:10.000Z" itemprop="datePublished">2016-06-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/算法/">算法</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/20/插入算法/">插入算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><h2 id="qw"><a href="#qw" class="headerlink" title="qw"></a>qw</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/20/插入算法/" data-id="cippea5h80001vgtwbvju48j2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="[layout]-如何利用Hexo和Github建立属于自己的博客" class="article article-type-[layout]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/19/如何利用Hexo和Github建立属于自己的博客/" class="article-date">
-  <time datetime="2016-06-19T05:38:58.000Z" itemprop="datePublished">2016-06-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/随笔/">随笔</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/19/如何利用Hexo和Github建立属于自己的博客/">如何利用Hexo和Github建立属于自己的博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天终于把这个Blog给搞好了，前面一直纠结于Jelly+Github的模式，配置环境太过于麻烦而放下了一段时间，最近有空就看看，就给弄好了。这里推荐的Hexo+Github的模式就好很多。</p>
-<p>###名词解释</p>
-<p>####What is Hexo?<br>官方是这样解释的：</p>
-<blockquote>
-<p>Hexo is a fast, simple and powerful blog framework. You write posts in Markdown (or other languages) and Hexo generates static files with a beautiful theme in seconds.<br>附上官方网址：<a href="https://hexo.io/&quot;title&quot;" target="_blank" rel="external">Hexo</a>.</p>
-<p>####What is Github?<br>不知道的自行google（自备梯子-Lantern）</p>
-<p>###环境配置</p>
-<p>####git<br>这里默认已经安装好git并且已有Github的账号，SSH已经配置好（挖个坑，后面再填）。</p>
-<p>###Node.js<br>官网地址：<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a><br>Node.js简介：Node.js is a JavaScript runtime built on Chrome’s V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js’ package ecosystem, npm, is the largest ecosystem of open source libraries in the world.<br>下载好Node.js一路默认安装就好。</p>
-<p>###安装Hexo<br>上面的步骤全部完成之后，下一步就是安装Hexo：</p>
-</blockquote>
-<pre><code>$ npm install -g hexo-cli
-</code></pre><p>安装完成后，进行初始化。建立一个文件夹命名为”Hexo”。<br>在那个文件夹中打开Git Bash，输入以下命令：</p>
-<pre><code>$ hexo init 
-$ npm install
-</code></pre><p>初始化完成之后，可以看到目录结构:</p>
-<pre><code>.
-├── _config.yml
-├── package.json
-├── scaffolds
-├── source
-|   ├── _drafts
-|   └── _posts
-└── themes
-</code></pre><p>各个部分都有其作用（再挖个坑），比较重要的是_config.yml这个文件。</p>
-<p>###配置更改<br><code>在_config.yml这个文件中，需要将deploy下面改成这个形式：</code></p>
-<pre><code>deploy:
-  type: git
-  repo: &lt;repository url&gt;
-  branch: [branch]
-  message: [message]
-</code></pre><p>特别注意的是”：”之后必须有一个空格，不然肯定是错的。改好之后就为后面发布自己的Blog做好了准备。</p>
-<p>###新建一篇文章</p>
-<pre><code>$ hexo new [layout] &lt;title&gt;
-</code></pre><p>使用这个命令可以新建一个markdown文件，在Hexo\source’\’_posts根目录下<br>直接进行编辑，就是一片文章。</p>
-<p>###本地测试<br>在Hexo3中server和主体结构动画是分开的，所以需要安装server。</p>
-<pre><code>$ npm install hexo-server --save
-</code></pre><p>安装之后用以下命令可以运行server：</p>
-<pre><code>$ hexo server
-</code></pre><p>一般来说在浏览器中输入<a href="http://localhost:4000就可以看到Blog的页面。" target="_blank" rel="external">http://localhost:4000就可以看到Blog的页面。</a><br>我这里的4000端口被占用了，可以用以下命令来改变端口：</p>
-<pre><code>$ hexo server -p 5000
-</code></pre><p>###发布博客<br>先安装hexo-deployer-git：</p>
-<pre><code>$ npm install hexo-deployer-git --save
-</code></pre><p>三步走：</p>
-<pre><code>$ hexo clean
-$ hexo generate
-$ hexo deploy
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/19/如何利用Hexo和Github建立属于自己的博客/" data-id="cippea5ho0004vgtwgruwx426" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo-Github-Blog/">Hexo Github Blog</a></li></ul>
-
     </footer>
   </div>
   
@@ -522,30 +357,16 @@ $ hexo deploy
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li></ul>
     </div>
   </div>
 
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Github-Blog/">Hexo Github Blog</a></li></ul>
-    </div>
-  </div>
-
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Hexo-Github-Blog/" style="font-size: 10px;">Hexo Github Blog</a>
-    </div>
-  </div>
-
   
     
   <div class="widget-wrap">
@@ -564,19 +385,7 @@ $ hexo deploy
       <ul>
         
           <li>
-            <a href="/2016/06/21/aaa/">aaa</a>
-          </li>
-        
-          <li>
             <a href="/2016/06/21/插入排序/">插入排序</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/20/插入算法/">插入算法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/19/如何利用Hexo和Github建立属于自己的博客/">如何利用Hexo和Github建立属于自己的博客</a>
           </li>
         
       </ul>

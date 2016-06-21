@@ -5,7 +5,7 @@
   
   <title>插入排序 | Sunguangchao&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="###插入排序插入排序由N-1趟排序组成C语言代码实现：
+  <meta name="description" content="插入排序插入排序由N-1趟排序组成C语言代码实现：
 void(InsertionSort)(ElementType A[],int N)
 {
   int j,P;
@@ -13,12 +13,13 @@ void(InsertionSort)(ElementType A[],int N)
   for(P=1;P&amp;lt;N;P++)
 {
     tmp = A[P];
-    for(j = P;j&amp;gt;0&amp;amp;&amp;amp;A[j-1]&amp;gt;tmp;j--)">
+    for(j = P;j&amp;gt;0&amp;amp;&amp;amp;A[j-1]&amp;gt;tmp;j--)
+        A">
 <meta property="og:type" content="article">
 <meta property="og:title" content="插入排序">
 <meta property="og:url" content="http://yoursite.com/2016/06/21/插入排序/index.html">
 <meta property="og:site_name" content="Sunguangchao's Blog">
-<meta property="og:description" content="###插入排序插入排序由N-1趟排序组成C语言代码实现：
+<meta property="og:description" content="插入排序插入排序由N-1趟排序组成C语言代码实现：
 void(InsertionSort)(ElementType A[],int N)
 {
   int j,P;
@@ -26,11 +27,12 @@ void(InsertionSort)(ElementType A[],int N)
   for(P=1;P&amp;lt;N;P++)
 {
     tmp = A[P];
-    for(j = P;j&amp;gt;0&amp;amp;&amp;amp;A[j-1]&amp;gt;tmp;j--)">
-<meta property="og:updated_time" content="2016-06-21T11:37:56.996Z">
+    for(j = P;j&amp;gt;0&amp;amp;&amp;amp;A[j-1]&amp;gt;tmp;j--)
+        A">
+<meta property="og:updated_time" content="2016-06-21T12:10:01.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="插入排序">
-<meta name="twitter:description" content="###插入排序插入排序由N-1趟排序组成C语言代码实现：
+<meta name="twitter:description" content="插入排序插入排序由N-1趟排序组成C语言代码实现：
 void(InsertionSort)(ElementType A[],int N)
 {
   int j,P;
@@ -38,7 +40,8 @@ void(InsertionSort)(ElementType A[],int N)
   for(P=1;P&amp;lt;N;P++)
 {
     tmp = A[P];
-    for(j = P;j&amp;gt;0&amp;amp;&amp;amp;A[j-1]&amp;gt;tmp;j--)">
+    for(j = P;j&amp;gt;0&amp;amp;&amp;amp;A[j-1]&amp;gt;tmp;j--)
+        A">
   
     <link rel="alternate" href="/atom.xml" title="Sunguangchao&#39;s Blog" type="application/atom+xml">
   
@@ -117,7 +120,8 @@ void(InsertionSort)(ElementType A[],int N)
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###插入排序<br>插入排序由N-1趟排序组成<br>C语言代码实现：</p>
+        <a id="more"></a>
+<h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>插入排序由N-1趟排序组成<br>C语言代码实现：</p>
 <pre><code>void(InsertionSort)(ElementType A[],int N)
 {
   int j,P;
@@ -131,11 +135,10 @@ void(InsertionSort)(ElementType A[],int N)
  }
 }/*插入排序例程*/
 </code></pre><p>插入排序为O（N^2）<br>N个互异数的数组的平均逆序数是N（N-1）/4。</p>
-<p>###希尔排序-缩小增量排序<br><strong>思想：</strong>  </p>
+<h1 id="希尔排序-缩小增量排序"><a href="#希尔排序-缩小增量排序" class="headerlink" title="希尔排序-缩小增量排序"></a>希尔排序-缩小增量排序</h1><p><strong>思想：</strong>  </p>
 <blockquote>
 <p>把记录按步长 gap 分组，对每组记录采用直接插入排序方法进行排序。随着步长逐渐减小，所分成的组包含的记录越来越多，当步长的值减小到 1 时，整个数据合成为一组，构成一组有序记录，则完成排序。</p>
-<p>#####直接插入排序和希尔排序的比较：</p>
-<ul>
+<h2 id="直接插入排序和希尔排序的比较："><a href="#直接插入排序和希尔排序的比较：" class="headerlink" title="直接插入排序和希尔排序的比较："></a>直接插入排序和希尔排序的比较：</h2><ul>
 <li>直接插入排序是稳定的；而希尔排序是不稳定的。</li>
 <li>直接插入排序更适合于原始记录基本有序的集合。</li>
 <li>希尔排序的比较次数和移动次数都要比直接插入排序少，当N越大时，效果越明显。</li>
@@ -201,7 +204,7 @@ public static void main(String[] args) {
     shell.printAll(array);
  }
 }
-</code></pre><p>###堆排序<br><strong>基本方法：</strong><br><code>建立N个元素的二叉堆，花费时间O(N)，然后执行N次DeletedMin操作花费时间
+</code></pre><h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><p><strong>基本方法：</strong><br><code>建立N个元素的二叉堆，花费时间O(N)，然后执行N次DeletedMin操作花费时间
 O(log⁡N)，所以总的运行时间为O(Nlog⁡N)。</code><br><strong>缺点：</strong><br><code>DeleteMin操作中使用了一个数组用来存储离开堆得元素，所以存储需求增加一倍。</code><br><strong>算法步骤：</strong></p>
 <blockquote>
 <ol>
@@ -241,7 +244,7 @@ void Heapsort(ElementType A[],int N)
    PercDown(A,0,i);
  }
 }
-</code></pre><p>###归并排序<br><code>归并排序以O（NlogN）最坏情形运行时间运行，而所使用的比较次数几乎是最优的。是递归算法的一个很好的实例。分治是递归非常有用的用法。</code><br><strong>算法步骤:</strong>  </p>
+</code></pre><h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p><code>归并排序以O（NlogN）最坏情形运行时间运行，而所使用的比较次数几乎是最优的。是递归算法的一个很好的实例。分治是递归非常有用的用法。</code><br><strong>算法步骤:</strong>  </p>
 <blockquote>
 <ol>
 <li>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列</li>
@@ -276,7 +279,7 @@ void Mergesort(ElementType A[],int N)
     FatalError(&quot;No space for tmp array!&quot;);
 }/*归并排序例程*/
 </code></pre><p><strong>问题：</strong><br>因为合并两个排序的表需要线性附加内存，在整个算法中还要花费将数据拷贝到临时数组再拷贝回来这样一些附加工作，其结果严重放慢了排序的速度。所以很难用于主存排序。</p>
-<p>###快速排序<br>快速排序是在实践中最快的已知排序算法，它的平均运行时间为O（NlogN）。该算法非常快的原因是非常精炼和高度优化的内部循环。最坏情况的性能为O（N^2），但稍加努力就可以避免。<br><strong>三数中值分割法：</strong><br>消除了预排序输入的坏情况，并且减少了快速排序大约5%的运行时间。<br>对于很小的数组（N&lt;=20）不递归地使用快速排序，而代之以诸如插入排序这种对小数组有效的排序算法。<br><strong>算法步骤：</strong>  </p>
+<h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><p>快速排序是在实践中最快的已知排序算法，它的平均运行时间为O（NlogN）。该算法非常快的原因是非常精炼和高度优化的内部循环。最坏情况的性能为O（N^2），但稍加努力就可以避免。<br><strong>三数中值分割法：</strong><br>消除了预排序输入的坏情况，并且减少了快速排序大约5%的运行时间。<br>对于很小的数组（N&lt;=20）不递归地使用快速排序，而代之以诸如插入排序这种对小数组有效的排序算法。<br><strong>算法步骤：</strong>  </p>
 <blockquote>
 <ol>
 <li>从数列中挑出一个元素，称为 “基准”（pivot）</li>
@@ -361,32 +364,13 @@ void Heapsort(ElementType A[],int N)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="cippea5h80002vgtw261wn1fd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="cippesx7x0000xgtwftau2xbl" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
-<nav id="article-nav">
-  
-    <a href="/2016/06/21/aaa/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          aaa
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/06/20/插入算法/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">插入算法</div>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -398,30 +382,16 @@ void Heapsort(ElementType A[],int N)
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li></ul>
     </div>
   </div>
 
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Github-Blog/">Hexo Github Blog</a></li></ul>
-    </div>
-  </div>
-
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Hexo-Github-Blog/" style="font-size: 10px;">Hexo Github Blog</a>
-    </div>
-  </div>
-
   
     
   <div class="widget-wrap">
@@ -440,19 +410,7 @@ void Heapsort(ElementType A[],int N)
       <ul>
         
           <li>
-            <a href="/2016/06/21/aaa/">aaa</a>
-          </li>
-        
-          <li>
             <a href="/2016/06/21/插入排序/">插入排序</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/20/插入算法/">插入算法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/19/如何利用Hexo和Github建立属于自己的博客/">如何利用Hexo和Github建立属于自己的博客</a>
           </li>
         
       </ul>
