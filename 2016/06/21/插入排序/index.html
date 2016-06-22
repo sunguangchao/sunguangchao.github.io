@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/21/插入排序/index.html">
 <meta property="og:site_name" content="Sunguangchao's Blog">
 <meta property="og:description" content="插入排序由N-1趟排序组成">
-<meta property="og:updated_time" content="2016-06-22T13:24:21.671Z">
+<meta property="og:updated_time" content="2016-06-22T13:34:22.090Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="插入排序">
 <meta name="twitter:description" content="插入排序由N-1趟排序组成">
@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -214,25 +214,26 @@ void Heapsort(ElementType A[],int N)
 <li>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置  </li>
 <li>重复步骤3直到某一指针达到序列尾  </li>
 <li><p>将另一序列剩下的所有元素直接复制到合并序列尾<br>C语言实现：</p>
-<p> void MSort(ElementType A[],ElementType TmpArray[],int Left,int Right)<br> {</p>
-<pre><code>   int Center;
+<p>  void MSort(ElementType A[],ElementType TmpArray[],int Left,int Right)<br> {</p>
+<pre><code>int Center;
 if(Left&lt;Right)
 {
-    Center = (Left + Right)/2;
-    MSort(A,TmpArray,Left,Center);
-    MSort(A,TmpArray,Center+1,Right);
-    Merge(A,TmpArray,Left,Center+1,Right);
+      Center = (Left + Right)/2;
+      MSort(A,TmpArray,Left,Center);
+      MSort(A,TmpArray,Center+1,Right);
+      Merge(A,TmpArray,Left,Center+1,Right);
 }
-</code></pre><p> }<br> void Mergesort(ElementType A[],int N)<br> {</p>
-<pre><code>ElementType *TmpArray;
-TmpArray = malloc(N*sizeof(ElementType));
+</code></pre><p> }</p>
+<p>  void Mergesort(ElementType A[],int N)<br>  {</p>
+<pre><code> ElementType *TmpArray;
+mpArray = malloc(N*sizeof(ElementType));
 if(TmpArray != NULL)
 {
-  MSort(A,TmpArray,0,N-1);
-  free(TmpArray);
-}
+       MSort(A,TmpArray,0,N-1);
+      free(TmpArray);
+   }
 else
-  FatalError(&quot;No space for tmp array!&quot;);
+FatalError(&quot;No space for tmp array!&quot;);
 </code></pre><p> }</p>
 </li>
 </ol>
@@ -320,7 +321,7 @@ void Heapsort(ElementType A[],int N)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="cipqwx4rc000168twaoe9vgx5" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="cipqx94c60001x4tw61vxerq2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -331,7 +332,7 @@ void Heapsort(ElementType A[],int N)
   
   
     <a href="/2016/06/19/如何利用Hexo和Github建立属于自己的博客/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">如何利用Hexo和Github建立属于自己的博客</div>
     </a>
   
@@ -346,7 +347,7 @@ void Heapsort(ElementType A[],int N)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul>
     </div>
@@ -371,7 +372,7 @@ void Heapsort(ElementType A[],int N)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -396,7 +397,7 @@ void Heapsort(ElementType A[],int N)
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Sunguangchao<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
