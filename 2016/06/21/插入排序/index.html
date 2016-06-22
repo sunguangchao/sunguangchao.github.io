@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/21/插入排序/index.html">
 <meta property="og:site_name" content="Sunguangchao's Blog">
 <meta property="og:description" content="插入排序由N-1趟排序组成">
-<meta property="og:updated_time" content="2016-06-21T15:23:30.764Z">
+<meta property="og:updated_time" content="2016-06-22T13:24:21.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="插入排序">
 <meta name="twitter:description" content="插入排序由N-1趟排序组成">
@@ -213,27 +213,27 @@ void Heapsort(ElementType A[],int N)
 <li>设定两个指针，最初位置分别为两个已经排序序列的起始位置  </li>
 <li>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置  </li>
 <li>重复步骤3直到某一指针达到序列尾  </li>
-<li><p>将另一序列剩下的所有元素直接复制到合并序列尾  </p>
+<li><p>将另一序列剩下的所有元素直接复制到合并序列尾<br>C语言实现：</p>
 <p> void MSort(ElementType A[],ElementType TmpArray[],int Left,int Right)<br> {</p>
-<pre><code> int Center;
- if(Left&lt;Right)
+<pre><code>   int Center;
+if(Left&lt;Right)
 {
-     Center = (Left + Right)/2;
-     MSort(A,TmpArray,Left,Center);
-     MSort(A,TmpArray,Center+1,Right);
-     Merge(A,TmpArray,Left,Center+1,Right);
+    Center = (Left + Right)/2;
+    MSort(A,TmpArray,Left,Center);
+    MSort(A,TmpArray,Center+1,Right);
+    Merge(A,TmpArray,Left,Center+1,Right);
 }
-</code></pre><p>  }<br> void Mergesort(ElementType A[],int N)<br> {</p>
-<pre><code>  ElementType *TmpArray;
-  TmpArray = malloc(N*sizeof(ElementType));
-  if(TmpArray != NULL)
- {
+</code></pre><p> }<br> void Mergesort(ElementType A[],int N)<br> {</p>
+<pre><code>ElementType *TmpArray;
+TmpArray = malloc(N*sizeof(ElementType));
+if(TmpArray != NULL)
+{
   MSort(A,TmpArray,0,N-1);
   free(TmpArray);
- }
- else
-FatalError(&quot;No space for tmp array!&quot;);
-</code></pre><p> }/<em>归并排序例程</em>/</p>
+}
+else
+  FatalError(&quot;No space for tmp array!&quot;);
+</code></pre><p> }</p>
 </li>
 </ol>
 <p><strong>问题：</strong><br>因为合并两个排序的表需要线性附加内存，在整个算法中还要花费将数据拷贝到临时数组再拷贝回来这样一些附加工作，其结果严重放慢了排序的速度。所以很难用于主存排序。</p>
@@ -320,7 +320,7 @@ void Heapsort(ElementType A[],int N)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="cipplq7n50000v8twws7xfj4b" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="cipqwx4rc000168twaoe9vgx5" class="article-share-link">Partager</a>
       
       
     </footer>
