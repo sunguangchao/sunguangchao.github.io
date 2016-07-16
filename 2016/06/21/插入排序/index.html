@@ -5,16 +5,16 @@
   
   <title>插入排序 | Sunguangchao&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="插入排序由N-1趟排序组成">
+  <meta name="description" content="本文主要介绍插入排序的几种实现">
 <meta property="og:type" content="article">
 <meta property="og:title" content="插入排序">
 <meta property="og:url" content="http://yoursite.com/2016/06/21/插入排序/index.html">
 <meta property="og:site_name" content="Sunguangchao's Blog">
-<meta property="og:description" content="插入排序由N-1趟排序组成">
-<meta property="og:updated_time" content="2016-06-22T13:34:22.090Z">
+<meta property="og:description" content="本文主要介绍插入排序的几种实现">
+<meta property="og:updated_time" content="2016-07-16T02:47:57.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="插入排序">
-<meta name="twitter:description" content="插入排序由N-1趟排序组成">
+<meta name="twitter:description" content="本文主要介绍插入排序的几种实现">
   
     <link rel="alternate" href="/atom.xml" title="Sunguangchao&#39;s Blog" type="application/atom+xml">
   
@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -89,7 +89,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>插入排序由N-1趟排序组成<br><a id="more"></a><br>C语言代码实现：</p>
+        <p>本文主要介绍插入排序的几种实现<br><a id="more"></a><br>插入排序由N-1趟排序组成<br>C语言代码实现：</p>
 <pre><code>void(InsertionSort)(ElementType A[],int N)
 {
   int j,P;
@@ -214,7 +214,7 @@ void Heapsort(ElementType A[],int N)
 <li>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置  </li>
 <li>重复步骤3直到某一指针达到序列尾  </li>
 <li><p>将另一序列剩下的所有元素直接复制到合并序列尾<br>C语言实现：</p>
-<p>  void MSort(ElementType A[],ElementType TmpArray[],int Left,int Right)<br> {</p>
+<p>  `void MSort(ElementType A[],ElementType TmpArray[],int Left,int Right)<br> {</p>
 <pre><code>int Center;
 if(Left&lt;Right)
 {
@@ -223,8 +223,7 @@ if(Left&lt;Right)
       MSort(A,TmpArray,Center+1,Right);
       Merge(A,TmpArray,Left,Center+1,Right);
 }
-</code></pre><p> }</p>
-<p>  void Mergesort(ElementType A[],int N)<br>  {</p>
+</code></pre><p> }<br>  void Mergesort(ElementType A[],int N)<br>  {</p>
 <pre><code> ElementType *TmpArray;
 mpArray = malloc(N*sizeof(ElementType));
 if(TmpArray != NULL)
@@ -234,7 +233,7 @@ if(TmpArray != NULL)
    }
 else
 FatalError(&quot;No space for tmp array!&quot;);
-</code></pre><p> }</p>
+</code></pre><p> }`</p>
 </li>
 </ol>
 <p><strong>问题：</strong><br>因为合并两个排序的表需要线性附加内存，在整个算法中还要花费将数据拷贝到临时数组再拷贝回来这样一些附加工作，其结果严重放慢了排序的速度。所以很难用于主存排序。</p>
@@ -321,7 +320,7 @@ void Heapsort(ElementType A[],int N)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="ciqokfzsu0001cctwbitczxh8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="ciqokt43o0003t0twwu870okw" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -331,7 +330,7 @@ void Heapsort(ElementType A[],int N)
 <nav id="article-nav">
   
     <a href="/2016/07/16/Single-LinkedList-Reverse/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           Single LinkedList Reverse
@@ -341,7 +340,7 @@ void Heapsort(ElementType A[],int N)
   
   
     <a href="/2016/06/19/如何利用Hexo和Github建立属于自己的博客/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">如何利用Hexo和Github建立属于自己的博客</div>
     </a>
   
@@ -356,7 +355,7 @@ void Heapsort(ElementType A[],int N)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul>
     </div>
@@ -381,7 +380,7 @@ void Heapsort(ElementType A[],int N)
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -410,7 +409,7 @@ void Heapsort(ElementType A[],int N)
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Sunguangchao<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

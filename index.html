@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -64,7 +64,7 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Single-LinkedList-Reverse" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="[layout]-Single-LinkedList-Reverse" class="article article-type-[layout]" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/07/16/Single-LinkedList-Reverse/" class="article-date">
   <time datetime="2016-07-16T02:37:45.000Z" itemprop="datePublished">2016-07-16</time>
@@ -90,130 +90,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本题要求实现一个函数，将给定的单链表逆转<br>函数接口定义：  </p>
-<pre><code>List Reverse(List L);
-</code></pre><p>其中List结构定义如下:</p>
-<pre><code>typedef struct Node *PtrToNode;
-strut Node
-   {
-      ElementType Data;
-      PtrToNode Next;
-    };
-typedef PtrToNode List;
-</code></pre><p>L是给定链表，函数Reverse要返回被逆转后的链表<br>裁判测试程序样例：</p>
-<pre><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-typedef int ElementType;
-typedef struct Node *PtrToNode;
-struct Node{
-    ElementType Data;
-    PtrToNode Next;
-};
-typedef PtrToNode List;
-
-List Read();
-void Print(List L);
-List Reverse(List L);
-int main()
-{
-    List L1,L2;
-    L1 = Read();
-    L2 = Reverse(L1);
-    Print(L1);
-    Print(L2);
-    return 0;
-}
-</code></pre><p><strong>code:</strong></p>
-<pre><code>#include &lt;stdio.h&gt;//未能成功输出结果 
-#include &lt;stdlib.h&gt;
-typedef int ElementType;
-typedef struct Node *PtrToNode;
-struct Node{
-    ElementType Data;
-    PtrToNode Next;
-};
-typedef PtrToNode List;
-
-List Read();
-void Print(List L);
-List Reverse(List L);
-int main()
-{
-    List L1,L2;
-    L1 = Read();
-    L2 = Reverse(L1);
-    Print(L1);
-    Print(L2);
-    return 0;
-}
-
-List Read()
-{
-    int len = 0;
-    int num = 0;
-    PtrToNode list = NULL;
-    PtrToNode last = NULL;
-
-    scanf(&quot;%d&quot;,&amp;len);
-    if( 0== len){
-        return NULL;
-    }
-    scanf(&quot;%d&quot;,&amp;num);
-    list = (PtrToNode)malloc(sizeof(struct Node));
-    list-&gt;Data = num;
-    list-&gt;Next = NULL;
-    last = list;
-    len--;
-    while(len &gt; 0){
-        scanf(&quot;%d&quot;,&amp;num);
-        PtrToNode node = (PtrToNode)malloc(sizeof(struct Node));
-        node-&gt;Data = num;
-        node-&gt;Next = NULL;
-        last-&gt;Next = node;
-        len --;
-
-    }
-    return list;
-}
-
-void Print(List L){
-    if(NULL == L){
-        return ;
-    }
-    PtrToNode last = L;
-    while(NULL != last){
-        printf(&quot;%d&quot;,last-&gt;Data);
-        last = last-&gt;Next;
-    }
-    putchar(&apos;\n&apos;);
-
-}
-List Reverse(List L){
-    if(NULL == L){
-        return NULL;
-    }
-    PtrToNode listre = NULL;
-    PtrToNode t = L-&gt;Next;
-    if(NULL == t){
-        listre = L;
-        return listre;
-    }
-    L-&gt;Next = t-&gt;Next;
-    listre = t;
-    t-&gt;Next = L;
-    while(NULL != L-&gt;Next){
-        t = L-&gt;Next;
-        L-&gt;Next = t-&gt;Next;
-        t-&gt;Next = listre;
-        listre = t;
-    }
-    return listre;
-}
-</code></pre>
+        <p>本题要求实现一个函数，将给定的单链表逆转<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/16/Single-LinkedList-Reverse/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/16/Single-LinkedList-Reverse/" data-id="ciqokfzsm0000cctwt3mhlnrs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/16/Single-LinkedList-Reverse/" data-id="ciqokt43e0001t0twzjldutpl" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -249,7 +135,7 @@ List Reverse(List L){
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>插入排序由N-1趟排序组成<br>
+        <p>本文主要介绍插入排序的几种实现<br>
         
           <p class="article-more-link">
             <a href="/2016/06/21/插入排序/#more">Read More</a>
@@ -258,7 +144,7 @@ List Reverse(List L){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="ciqokfzsu0001cctwbitczxh8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="ciqokt43o0003t0twwu870okw" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -294,7 +180,7 @@ List Reverse(List L){
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天终于把这个Blog给搞好了，就是目前你所看到的这个样子，当然这只是初始阶段，没有用模板，也没有进行优化，这几步会在后面进行。前面一段时间一直纠结于Jelly+Github的模式，因为配置环境太过于麻烦而放下了一段时间，正好最近有空就看看，恰好就给弄好了。这里我要推荐的是Hexo+Github模式，简单很多，也比较好用。<br>
+        <p>如何利用Github建立属于自己的博客？？本文给出一种Github+Hexo的实现方法<br>
         
           <p class="article-more-link">
             <a href="/2016/06/19/如何利用Hexo和Github建立属于自己的博客/#more">Read More</a>
@@ -303,7 +189,7 @@ List Reverse(List L){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/19/如何利用Hexo和Github建立属于自己的博客/" data-id="ciqokfzt40003cctwyb0nk4lk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/19/如何利用Hexo和Github建立属于自己的博客/" data-id="ciqokt4330000t0twffu5qhzq" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -320,7 +206,7 @@ List Reverse(List L){
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul>
     </div>
@@ -345,7 +231,7 @@ List Reverse(List L){
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -374,7 +260,7 @@ List Reverse(List L){
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Sunguangchao<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
