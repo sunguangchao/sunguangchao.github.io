@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Sunguangchao's Blog">
 <meta property="og:description" content="本题要求实现一个函数，将给定的单链表逆转。">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/signal_list_revese.png">
-<meta property="og:updated_time" content="2016-09-25T09:38:05.373Z">
+<meta property="og:updated_time" content="2016-09-25T10:18:12.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Single LinkedList Reverse">
 <meta name="twitter:description" content="本题要求实现一个函数，将给定的单链表逆转。">
@@ -130,7 +130,7 @@ List Read()
     int len = 0;
     int num = 0;
     PtrToNode head = NULL;
-    PtrToNode last = NULL;
+    PtrToNode last = NULL;/*用于存放线性表*/
 
     scanf(&quot;%d&quot;,&amp;len);
     if( 0== len){
@@ -173,7 +173,7 @@ List Reverse(List L){
     }
     PtrToNode listre = NULL;
     PtrToNode t = L-&gt;Next;
-    if(NULL == t){
+    if(NULL == t){/*只有一个的情况*/
         listre = L;
         return listre;
     }
@@ -193,7 +193,7 @@ List Reverse(List L){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/16/Single-LinkedList-Reverse/" data-id="citifv9el00000wtwv0utqnh7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/16/Single-LinkedList-Reverse/" data-id="citikm2lp0000b0twr0aaegaj" class="article-share-link">Share</a>
       
       
     </footer>
