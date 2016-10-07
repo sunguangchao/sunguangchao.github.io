@@ -92,7 +92,7 @@
 <meta property="og:description" content="如何利用Github建立属于自己的博客？？本文给出一种Github+Hexo的实现方法。">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/cmd.png">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/deploy.png">
-<meta property="og:updated_time" content="2016-09-21T00:23:58.743Z">
+<meta property="og:updated_time" content="2016-10-07T14:32:57.896Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何利用Hexo和Github建立属于自己的博客">
 <meta name="twitter:description" content="如何利用Github建立属于自己的博客？？本文给出一种Github+Hexo的实现方法。">
@@ -299,9 +299,11 @@
 
       
         <p>如何利用Github建立属于自己的博客？？本文给出一种Github+Hexo的实现方法。<br><a id="more"></a><br>以前一直在用CSDN的博客，虽然自己只是个菜鸟，还是希望能把自己的成长经历记录下来，也是对自己有一个鞭策。所以一直想拥有自己的博客，实现比较自由的定制。<br>今天终于把这个Blog给搞好了，就是目前你所看到的这个样子，当然这只是初始阶段，没有用模板，也没有进行优化，这几步会在后面学习过前端的知识后来进行，最后可以购买个域名，就差不多了。前面一段时间一直纠结于Jelly+Github的模式，因为配置环境太过于麻烦而放下了一段时间，正好最近有空就看看，恰好就给弄好了。这里我要推荐的是Hexo+Github模式，简单很多，也比较好用。</p>
-<h2 id="1-名词解释"><a href="#1-名词解释" class="headerlink" title="1.名词解释"></a>1.名词解释</h2><p><strong>What is Hexo?</strong><br>官方是这样解释的：<br>Hexo is a fast, simple and powerful blog framework. You write posts in Markdown (or other languages) and Hexo generates static files with a beautiful theme in seconds.<br>附上官方网址：<a href="https://hexo.io/" target="_blank" rel="external">Hexo</a><br><strong>What is Github?</strong><br>基本常识，不知道的请找google（自备梯子-Lantern）。</p>
-<h2 id="2-环境配置"><a href="#2-环境配置" class="headerlink" title="2.环境配置"></a>2.环境配置</h2><p>环境配置总的来说要分为三步：<br><strong>2.1 Git</strong><br>这里默认已经安装好git并且已有Github的账号，SSH也已经配置好（最基本的，不清楚的请自行google）。<br><strong>2.2 Node.js</strong><br><a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>  ：<br>Node.js is a JavaScript runtime built on Chrome’s V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js’ package ecosystem, npm, is the largest ecosystem of open source libraries in the world.<br>下载好Node.js一路默认安装就好。最后可以通过下图的命令测试是否安装通过。<br><img src="http://o90jubpdi.bkt.clouddn.com/cmd.png" alt="图片"></p>
-<h2 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3.安装Hexo"></a>3.安装Hexo</h2><p>上面的步骤全部完成之后，下一步就是安装Hexo：</p>
+<p>##名词解释<br><strong>What is Hexo?</strong><br>官方是这样解释的：<br>Hexo is a fast, simple and powerful blog framework. You write posts in Markdown (or other languages) and Hexo generates static files with a beautiful theme in seconds.<br>附上官方网址：<a href="https://hexo.io/" target="_blank" rel="external">Hexo</a><br><strong>What is Github?</strong><br>基本常识，不知道的请找google（自备梯子-Lantern）。</p>
+<p>##环境配置<br>环境配置总的来说要分为三步：  </p>
+<p>####Git<br>这里默认已经安装好git并且已有Github的账号，SSH也已经配置好（最基本的，不清楚的请自行google）。  </p>
+<p>####Node.js<br><a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>  ：<br>Node.js is a JavaScript runtime built on Chrome’s V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js’ package ecosystem, npm, is the largest ecosystem of open source libraries in the world.<br>下载好Node.js一路默认安装就好。最后可以通过下图的命令测试是否安装通过。<br><img src="http://o90jubpdi.bkt.clouddn.com/cmd.png" alt="图片"></p>
+<p>##安装Hexo<br>上面的步骤全部完成之后，下一步就是安装Hexo：</p>
 <pre><code>$ npm install -g hexo-cli
 </code></pre><p>安装完成后，进行初始化。建立一个文件夹命名为”Hexo”。<br>在那个文件夹中右键打开Git Bash，输入以下命令：</p>
 <pre><code>$ hexo init 
@@ -316,22 +318,23 @@ $ npm install
 |   └── _posts
 └── themes
 </code></pre><p>各个部分都有其作用（挖个坑），比较重要的是_config.yml这个文件，是关于博客的一些配置。</p>
-<h2 id="4-配置更改"><a href="#4-配置更改" class="headerlink" title="4.配置更改"></a>4.配置更改</h2><p><code>在_config.yml这个文件中，需要将deploy下面改成这个形式：</code></p>
+<p>##配置更改<br><code>在_config.yml这个文件中，需要将deploy下面改成这个形式：</code></p>
 <pre><code>deploy:
   type: git
   repo: &lt;repository url&gt;
   branch: [branch]
   message: [message]
 </code></pre><p>我的是这个样子：<br><img src="http://o90jubpdi.bkt.clouddn.com/deploy.png" alt="deploy"><br>特别注意的是”：”之后必须有一个空格，不然肯定是错的。改好之后就为后面发布自己的Blog做好了准备。</p>
-<h2 id="5-新建一篇文章"><a href="#5-新建一篇文章" class="headerlink" title="5.新建一篇文章"></a>5.新建一篇文章</h2><pre><code>$ hexo new [layout] &lt;title&gt;
-</code></pre><p>使用这个命令可以新建一个markdown文件，在Hexo\source’\’_posts根目录下<br>直接进行编辑，就是一片文章。</p>
-<h2 id="6-本地测试"><a href="#6-本地测试" class="headerlink" title="6.本地测试"></a>6.本地测试</h2><p>在Hexo3中server和主体结构动画是分开的，所以需要安装server。</p>
+<p>##新建一篇文章</p>
+<pre><code>$ hexo new [layout] &lt;title&gt;
+</code></pre><p>使用这个命令可以新建一个markdown文件，在<code>Hexo\source\_posts</code>根目录下<br>直接进行编辑，就是一片文章。</p>
+<p>##本地测试<br>在Hexo3中server和主体结构动画是分开的，所以需要安装server。</p>
 <pre><code>$ npm install hexo-server --save
 </code></pre><p>安装之后用以下命令可以运行server：</p>
 <pre><code>$ hexo server
 </code></pre><p>一般来说在浏览器中输入<code>http://localhost:4000</code>就可以看到Blog的页面。<br>我这里的4000端口被占用了，可以用以下命令来改变端口：</p>
 <pre><code>$ hexo server -p 5000
-</code></pre><h2 id="7-发布博客"><a href="#7-发布博客" class="headerlink" title="7.发布博客"></a>7.发布博客</h2><p>先安装hexo-deployer-git：</p>
+</code></pre><p>##发布博客<br>先安装hexo-deployer-git：</p>
 <pre><code>$ npm install hexo-deployer-git --save
 </code></pre><p>三步走：</p>
 <pre><code>$ hexo clean
@@ -476,7 +479,7 @@ $ hexo deploy
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-名词解释"><span class="nav-number">1.</span> <span class="nav-text">1.名词解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-环境配置"><span class="nav-number">2.</span> <span class="nav-text">2.环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-安装Hexo"><span class="nav-number">3.</span> <span class="nav-text">3.安装Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-配置更改"><span class="nav-number">4.</span> <span class="nav-text">4.配置更改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-新建一篇文章"><span class="nav-number">5.</span> <span class="nav-text">5.新建一篇文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-本地测试"><span class="nav-number">6.</span> <span class="nav-text">6.本地测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-发布博客"><span class="nav-number">7.</span> <span class="nav-text">7.发布博客</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
