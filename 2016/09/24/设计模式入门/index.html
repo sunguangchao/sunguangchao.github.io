@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="设计模式-Java进阶之路">
+<meta name="description" content="设计模式–Java进阶之路">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式入门">
 <meta property="og:url" content="http://yoursite.com/2016/09/24/设计模式入门/index.html">
 <meta property="og:site_name" content="Sunguangchao's Blog">
-<meta property="og:description" content="设计模式-Java进阶之路">
-<meta property="og:updated_time" content="2016-10-07T14:58:23.652Z">
+<meta property="og:description" content="设计模式–Java进阶之路">
+<meta property="og:updated_time" content="2016-11-10T15:38:14.703Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式入门">
-<meta name="twitter:description" content="设计模式-Java进阶之路">
+<meta name="twitter:description" content="设计模式–Java进阶之路">
 
 
 
@@ -302,8 +302,7 @@
       
 
       
-        <p>设计模式-Java进阶之路<br><a id="more"></a><br>设计原则  </p>
-<blockquote>
+        <p>设计模式–Java进阶之路<br><a id="more"></a><br>设计原则  </p>
 <ul>
 <li>找出应用中可能需要变化之外，把它们独立出来，不要和那些不需要变化的代码混在一起  </li>
 <li>针对接口编程，而不是针对实现编程</li>
@@ -312,11 +311,7 @@
 <li>主题与观察者都使用接口：观察者利用主题的接口向主题注册，而主题利用观察者接口通知观察者.这样可以让两者之间运作正常，同时又具有松耦合的优点。</li>
 <li>观察者模式利用“组合”将许多观察者组合进主题中，对象之间的这种关系不是通过继承产生的，而是在运行过程时利用组合的方式而产生的。  </li>
 </ul>
-</blockquote>
-<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式  "></a>策略模式  </h2><p>定义了算法族，分别封装起来，让他们之间可以互相替换，此模式让（行为）算法的变化独立于使用算法的客户。</p>
-<blockquote>
-<p>自己的见解：<br>首先有一个抽象类（主体），具体的角色来继承这个主体。抽象类对应着一个接口，抽象类中实现了接口的实例。接口负责封装行为，具体的行为可以实现这些接口，所以当有新的行为增加时，就可以不必改变原有的代码。具体见P22  </p>
-</blockquote>
+<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式  "></a>策略模式  </h2><p>定义了算法族，分别封装起来，让他们之间可以互相替换，此模式让（行为）算法的变化独立于使用算法的客户。<br><strong>自己的见解：</strong><br>首先有一个抽象类（主体），具体的角色来继承这个主体。抽象类对应着一个接口，抽象类中实现了接口的实例。接口负责封装行为，具体的行为可以实现这些接口，所以当有新的行为增加时，就可以不必改变原有的代码。具体见P22  </p>
 <h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><blockquote>
 <p>定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。  </p>
 </blockquote>
@@ -410,18 +405,13 @@ public interface Displayment{
 }
 </code></pre><p>具体的可以看<a href="http://https://github.com/sunguangchao/shiyanlou/tree/master/WeatherData" title="WeatherData" target="_blank" rel="external">WeatherData</a><br>注：<code>java.util.Observable</code>是一个类而不是接口。  </p>
 <h2 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式  "></a>装饰者模式  </h2><p>设计原则：类应该对扩展开放，对修改关闭。<br>装饰着模式动态地将责任附加到对象上。若要扩展功能，装饰者提供了比继承更有弹性的替代方案。<br>注意：  </p>
-<blockquote>
 <ul>
 <li>装饰者和被装饰者对象有相同的超类型  </li>
 <li>可以用一个或多个装饰者包装一个对象  </li>
 <li>装饰者可以在所委托被装饰者的行为之前\或之后，加上自己的行为，以达到特定的目的  </li>
 </ul>
-</blockquote>
 <p><code>装饰者模式的缺点：</code><br>1.可能会在设计中加入大量的小类<br>2.类型问题<br>3.采用装饰者模式在实例化组件时，将增加代码的复杂度</p>
-<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p><strong>工厂方法模式</strong><br>声明一个工厂方法：<br><code>abstract Product factoryMethod(String type)</code><br><code>sauce = ingredientFactory.creatSzuce</code><br>工厂方法模式通过让子类决定该创建的对象是什么，来达到将对象创建的过程封装的目的。<br>定义：工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。<br>优点：</p>
-<blockquote>
-<p>将创建对象的代码集中在一个对象或方法中，可以避免代码的重复并且更方便以后的维护。</p>
-</blockquote>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p><strong>工厂方法模式</strong><br>声明一个工厂方法：<br><code>abstract Product factoryMethod(String type)</code><br><code>sauce = ingredientFactory.creatSzuce</code><br>工厂方法模式通过让子类决定该创建的对象是什么，来达到将对象创建的过程封装的目的。<br>定义：工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。<br>优点：<br>将创建对象的代码集中在一个对象或方法中，可以避免代码的重复并且更方便以后的维护。</p>
 <p>设计原则：要依赖抽象，不要依赖具体类</p>
 <p><strong>抽象工厂模式：</strong><br>抽象工厂模式提供一个接口，用于创建相关或依赖对象或依赖对象的家族，而不需要明确指定具体类。</p>
 
@@ -531,7 +521,7 @@ public interface Displayment{
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -545,6 +535,13 @@ public interface Displayment{
             </div>
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
