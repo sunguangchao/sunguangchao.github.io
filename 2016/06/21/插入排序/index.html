@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>插入排序 | Sunguangchao&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文主要介绍排序的几种实现，简单计算一下复杂度。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="插入排序">
+<meta property="og:url" content="http://yoursite.com/2016/06/21/插入排序/index.html">
+<meta property="og:site_name" content="Sunguangchao's Blog">
+<meta property="og:description" content="本文主要介绍排序的几种实现，简单计算一下复杂度。">
+<meta property="og:updated_time" content="2016-10-07T14:51:21.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="插入排序">
+<meta name="twitter:description" content="本文主要介绍排序的几种实现，简单计算一下复杂度。">
+  
+    <link rel="alternate" href="/atom.xml" title="Sunguangchao&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Sunguangchao&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="[layout]-插入排序" class="article article-type-[layout]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/21/插入排序/" class="article-date">
+  <time datetime="2016-06-21T11:33:33.000Z" itemprop="datePublished">2016-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      插入排序
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文主要介绍<code>排序</code>的几种实现，简单计算一下复杂度。<br><a id="more"></a></p>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><pre><code>void BubbleSort(ElementType A[],int N)
+{
+    int P,flag;
+    for(P = N-1;P&gt;=0;p--)
+    {
+        flag = 0;/*建立一个检查标志：在某次排序提前完成后终止循环*/
+        for(int i=0;i &lt; p;i++)/*一趟冒泡*/
+        {
+            if(A[i]&gt;A[i+1])
+            {
+                swap(A[i],A[i+1]);
+                flag = 1;
+            }
+        }
+        if (flag = 0) break;
+    }
+}/*冒泡排序*/
+</code></pre><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>由<code>N-1</code>趟排序组成<br>C语言代码实现：</p>
+<pre><code>void(InsertionSort)(ElementType A[],int N)
+{
+  int j,P;
+  ElementType tmp;
+  for(P=1;P&lt;N;P++)
+{
+    tmp = A[P];
+    for(j = P;j&gt;0&amp;&amp;A[j-1]&gt;tmp;j--)
+        A[j] = A[j-1];
+    A[j] = tmp;
+ }
+}/*插入排序例程*/
+</code></pre><p>插入排序为O（N^2）<br>N个互异数的数组的平均逆序数是N（N-1）/4。</p>
+<h2 id="希尔排序-缩小增量排序"><a href="#希尔排序-缩小增量排序" class="headerlink" title="希尔排序-缩小增量排序"></a>希尔排序-缩小增量排序</h2><p><strong>思想：</strong><br>把记录按步长 gap 分组，对每组记录采用直接插入排序方法进行排序。随着步长逐渐减小，所分成的组包含的记录越来越多，当步长的值减小到 1 时，整个数据合成为一组，构成一组有序记录，则完成排序。<br><strong>直接插入排序和希尔排序的比较：</strong>  </p>
+<blockquote>
+<ol>
+<li>直接插入排序是稳定的；而希尔排序是不稳定的。  </li>
+<li>直接插入排序更适合于原始记录基本有序的集合。  </li>
+<li>希尔排序的比较次数和移动次数都要比直接插入排序少，当N越大时，效果越明显。  </li>
+<li>在希尔排序中，增量序列gap的取法必须满足：最后一个步长必须是1 。   </li>
+<li>直接插入排序也适用于链式存储结构；希尔排序不适用于链式结构。  </li>
+</ol>
+</blockquote>
+<p>C语言代码实现：</p>
+<pre><code>void Shellsort(ElementType A[],int N)
+{
+int i,j,Increment;
+ElementType tmp;
+for (Increment = N/2; Increment&gt;0; Increment/=2)
+for ( i = Increment; i &lt; N; i++)
+{
+  tmp = A[i];
+  for ( j = i; j &gt;= Increment; j-=Increment)
+       if(tmp&lt;A[j - Increment)
+      A[j] = A[j- Increment];
+    else
+      break;
+  A[j] = tmp;
+  }
+}/*使用希尔增量的希尔排序例程*/
+</code></pre><p>Java代码实现：</p>
+<pre><code>package notes.javase.algorithm.sort;
+public class ShellSort {
+public void shellSort(int[] list) {
+    int gap = list.length / 2;
+ while (1 &lt;= gap) {
+        // 把距离为 gap 的元素编为一个组，扫描所有组
+        for (int i = gap; i &lt; list.length; i++) {
+            int j = 0;
+            int temp = list[i];
+            // 对距离为 gap 的元素组进行排序
+            for (j = i - gap; j &gt;= 0 &amp;&amp; temp &lt; list[j]; j = j - gap) {
+                list[j + gap] = list[j];
+            }
+            list[j + gap] = temp;
+        }
+        System.out.format(&quot;gap = %d:\t&quot;, gap);
+        printAll(list);
+        gap = gap / 2; // 减小增量
+    }
+}
+// 打印完整序列
+public void printAll(int[] list) {
+    for (int value : list) {
+        System.out.print(value + &quot;\t&quot;);
+    }
+    System.out.println();
+}
+public static void main(String[] args) {
+    int[] array = {
+            9, 1, 2, 5, 7, 4, 8, 6, 3, 5
+    };
+    // 调用希尔排序方法
+    ShellSort shell = new ShellSort();
+    System.out.print(&quot;排序前:\t\t&quot;);
+    shell.printAll(array);
+    shell.shellSort(array);
+    System.out.print(&quot;排序后:\t\t&quot;);
+    shell.printAll(array);
+ }
+}
+</code></pre><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p><strong>基本方法：</strong><br><code>建立N个元素的二叉堆，花费时间O(N)，然后执行N次DeletedMin操作花费时间O(log⁡N)，所以总的运行时间为O(Nlog⁡N)。</code><br><strong>缺点：</strong><br><code>DeleteMin操作中使用了一个数组用来存储离开堆得元素，所以存储需求增加一倍。</code><br><strong>算法步骤：</strong>  </p>
+<blockquote>
+<ol>
+<li>创建一个堆H[0..n-1]  </li>
+<li>把堆首（最大值）和堆尾互换  </li>
+<li>把堆的尺寸缩小1，并调用PercDown（）,目的是把新的数组顶端数据调整到相应位置  </li>
+<li>重复步骤2，直到堆的尺寸为1       </li>
+</ol>
+</blockquote>
+<p>C语言实现：</p>
+<pre><code>#define LeftChild(i)(2*(i)+1)
+void
+PercDown(ElementType A[],int i,int N)
+{
+ int Child;
+ ElementType tmp;
+ for(tmp = A[i];LeftChild(i)&lt;N;i = Child)
+ {
+    Child = LeftChild(i);
+    if(Child!=N-1&amp;&amp;A[Child + 1]&gt;A[Child])
+      Child++;
+    if(tmp&lt;A[Child])
+     A[i] = A[Child];
+    else 
+     break;  
+  }
+  A[i] = tmp;
+}
+void Heapsort(ElementType A[],int N)
+{
+ int i;
+ for(i = N/2;i&gt;=0;i--)
+   PercDown(A,i,N);
+ for(i = N-1;i &gt;0;i--)
+ {
+   Swap(&amp;A[0],&amp;A[i]);
+   PercDown(A,0,i);
+ }
+}
+</code></pre><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p><code>归并排序以O（NlogN）最坏情形运行时间运行，而所使用的比较次数几乎是最优的。是递归算法的一个很好的实例。分治是递归非常有用的用法。</code><br><strong>算法步骤:</strong>  </p>
+<blockquote>
+<ol>
+<li>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列  </li>
+<li>设定两个指针，最初位置分别为两个已经排序序列的起始位置  </li>
+<li>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置  </li>
+<li>重复步骤3直到某一指针达到序列尾  </li>
+<li>将另一序列剩下的所有元素直接复制到合并序列尾  </li>
+</ol>
+</blockquote>
+<p>C语言实现：</p>
+<pre><code>void MSort(ElementType A[],ElementType TmpArray[],int Left,int Right)
+{
+int Center;
+if(Left&lt;Right)
+    {
+          Center = (Left + Right)/2;
+          MSort(A,TmpArray,Left,Center);
+          MSort(A,TmpArray,Center+1,Right);
+         Merge(A,TmpArray,Left,Center+1,Right);
+    }
+}
+
+void Mergesort(ElementType A[],int N)
+{
+ ElementType *TmpArray;
+ mpArray = malloc(N*sizeof(ElementType));
+ if(TmpArray != NULL)
+    {
+           MSort(A,TmpArray,0,N-1);
+          free(TmpArray);
+       }
+    else
+        FatalError(&quot;No space for tmp array!&quot;);
+}
+</code></pre><p><strong>问题：</strong><br>因为合并两个排序的表需要线性附加内存，在整个算法中还要花费将数据拷贝到临时数组再拷贝回来这样一些附加工作，其结果严重放慢了排序的速度。所以很难用于主存排序。</p>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>快速排序是在实践中最快的已知排序算法，它的平均运行时间为O（NlogN）。该算法非常快的原因是非常精炼和高度优化的内部循环。最坏情况的性能为O（N^2），但稍加努力就可以避免。<br><strong>三数中值分割法：</strong><br>消除了预排序输入的坏情况，并且减少了快速排序大约5%的运行时间。<br>对于很小的数组（N&lt;=20）不递归地使用快速排序，而代之以诸如插入排序这种对小数组有效的排序算法。<br><strong>算法步骤：</strong>  </p>
+<blockquote>
+<ol>
+<li>从数列中挑出一个元素，称为 “基准”（pivot）  </li>
+<li>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。  </li>
+<li>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。   </li>
+</ol>
+</blockquote>
+<p>伪代码：  </p>
+<pre><code>  void Quicksort(ElementType A[],int N)
+{
+    Qsort(A,0,N-1);
+}
+
+ElementType Median3(ElementType A[],int Left,int Right)
+{
+    int Center = (Left + Right)/2;
+    if(A[Left]&gt;A[Center])
+        Swap(&amp;A[Left],&amp;A[Center]);
+    if(A[Left]&gt;A[Right])
+        Swap(&amp;A[Left],&amp;A[Right]);
+    if(A[Center]&gt;A[Right])
+        Swap(&amp;A[Center],&amp;A[Right]);
+    Swap(&amp;A[Center],&amp;A[Right-1]);
+    return A[Right-1];
+}/*实现三数中值分割方法的程序*/
+
+#define Cutoff(3)
+void Qsort(ElementType A[],int Left,int Right)
+{
+    int i,j;
+    ElementType Pivot;
+    if(Left+Cutoff &lt;=Right)
+    {
+        Pivot = Median3(A,Left,Right);
+        i = Left;j = Right-1;
+        for( : : )
+        {
+            while(A[++j]&lt;Pivot){}
+            while(A[--j]&gt;Pivot){}
+            if(i&lt;j)
+                Swap(&amp;A[i],&amp;A[j]);
+            else
+                break;
+        }
+        Swap(&amp;A[i],&amp;A[Right-1]);
+        Qsort(A,Left,i-1);
+        Qsort(A,i+1,Right);
+    }
+    else
+        InsertionSort(A+Left,Right - Left + 1)；
+  }/*快速排序的主例程序*/
+#define LeftChild(i)(2*(i)+1)
+void
+PercDown(ElementType A[],int i,int N)
+{
+ int Child;
+ ElementType tmp;
+ for(tmp = A[i];LeftChild(i)&lt;N;i = Child)
+ {
+    Child = LeftChild(i);
+    if(Child!=N-1&amp;&amp;A[Child + 1]&gt;A[Child])
+      Child++;
+    if(tmp&lt;A[Child])
+     A[i] = A[Child];
+    else 
+     break;  
+  }
+  A[i] = tmp;
+}
+void Heapsort(ElementType A[],int N)
+{
+ int i;
+ for(i = N/2;i&gt;=0;i--)
+   PercDown(A,i,N);
+ for(i = N-1;i &gt;0;i--)
+ {
+   Swap(&amp;A[0],&amp;A[i]);
+   PercDown(A,0,i);
+ }
+}
+</code></pre><p>Over：缺少自己的理解</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/06/21/插入排序/" data-id="cive0c19d0005yotwuayzsp9y" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/16/Single-LinkedList-Reverse/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Single LinkedList Reverse
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/19/如何利用Hexo和Github建立属于自己的博客/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何利用Hexo和Github建立属于自己的博客</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/算法/" style="font-size: 10px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/10/用两个stack实现一个queue/">用两个stack实现一个queue</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/08/git阶段总结/">git阶段总结</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/24/设计模式入门/">设计模式入门</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/21/Java-记事本/">Java-记事本</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/16/Single-LinkedList-Reverse/">Single LinkedList Reverse</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Sunguangchao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
