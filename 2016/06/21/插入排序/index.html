@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/06/21/插入排序/index.html">
 <meta property="og:site_name" content="Sunguangchao's Blog">
 <meta property="og:description" content="本文主要介绍排序的几种实现，简单计算一下复杂度。">
-<meta property="og:updated_time" content="2016-10-07T14:51:21.436Z">
+<meta property="og:updated_time" content="2016-11-14T13:59:27.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="插入排序">
 <meta name="twitter:description" content="本文主要介绍排序的几种实现，简单计算一下复杂度。">
@@ -283,8 +283,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-10-07T22:51:21+08:00">
-              2016-10-07
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T21:59:27+08:00">
+              2016-11-14
             </time>
             
           </span>
@@ -372,7 +372,7 @@
     A[j] = tmp;
  }
 }/*插入排序例程*/
-</code></pre><p>插入排序为O（N^2）<br>N个互异数的数组的平均逆序数是N（N-1）/4。</p>
+</code></pre><p>插入排序为<code>O(N^2)</code><br>N个互异数的数组的平均逆序数是<code>N(N-1)/4</code>。</p>
 <h2 id="希尔排序-缩小增量排序"><a href="#希尔排序-缩小增量排序" class="headerlink" title="希尔排序-缩小增量排序"></a>希尔排序-缩小增量排序</h2><p><strong>思想：</strong><br>把记录按步长 gap 分组，对每组记录采用直接插入排序方法进行排序。随着步长逐渐减小，所分成的组包含的记录越来越多，当步长的值减小到 1 时，整个数据合成为一组，构成一组有序记录，则完成排序。<br><strong>直接插入排序和希尔排序的比较：</strong>  </p>
 <blockquote>
 <ol>
@@ -441,7 +441,7 @@ public static void main(String[] args) {
     shell.printAll(array);
  }
 }
-</code></pre><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p><strong>基本方法：</strong><br><code>建立N个元素的二叉堆，花费时间O(N)，然后执行N次DeletedMin操作花费时间O(log⁡N)，所以总的运行时间为O(Nlog⁡N)。</code><br><strong>缺点：</strong><br><code>DeleteMin操作中使用了一个数组用来存储离开堆得元素，所以存储需求增加一倍。</code><br><strong>算法步骤：</strong>  </p>
+</code></pre><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p><strong>基本方法：</strong><br>建立N个元素的二叉堆，花费时间<code>O(N)</code>，然后执行N次<code>DeletedMin</code>操作花费时间<code>O(log⁡N)</code>，所以总的运行时间为<code>O(Nlog⁡N)</code>。<br><strong>缺点：</strong><br><code>DeleteMin</code>操作中使用了一个数组用来存储离开堆得元素，所以存储需求增加一倍。<br><strong>算法步骤：</strong>  </p>
 <blockquote>
 <ol>
 <li>创建一个堆H[0..n-1]  </li>
@@ -480,7 +480,7 @@ void Heapsort(ElementType A[],int N)
    PercDown(A,0,i);
  }
 }
-</code></pre><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p><code>归并排序以O（NlogN）最坏情形运行时间运行，而所使用的比较次数几乎是最优的。是递归算法的一个很好的实例。分治是递归非常有用的用法。</code><br><strong>算法步骤:</strong>  </p>
+</code></pre><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>归并排序以<code>O(NlogN)</code>最坏情形运行时间运行，而所使用的比较次数几乎是最优的。是递归算法的一个很好的实例。分治是递归非常有用的用法。<br><strong>算法步骤:</strong>  </p>
 <blockquote>
 <ol>
 <li>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列  </li>
@@ -516,12 +516,12 @@ void Mergesort(ElementType A[],int N)
         FatalError(&quot;No space for tmp array!&quot;);
 }
 </code></pre><p><strong>问题：</strong><br>因为合并两个排序的表需要线性附加内存，在整个算法中还要花费将数据拷贝到临时数组再拷贝回来这样一些附加工作，其结果严重放慢了排序的速度。所以很难用于主存排序。</p>
-<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>快速排序是在实践中最快的已知排序算法，它的平均运行时间为O（NlogN）。该算法非常快的原因是非常精炼和高度优化的内部循环。最坏情况的性能为O（N^2），但稍加努力就可以避免。<br><strong>三数中值分割法：</strong><br>消除了预排序输入的坏情况，并且减少了快速排序大约5%的运行时间。<br>对于很小的数组（N&lt;=20）不递归地使用快速排序，而代之以诸如插入排序这种对小数组有效的排序算法。<br><strong>算法步骤：</strong>  </p>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>快速排序是在实践中最快的已知排序算法，它的平均运行时间为<code>O(NlogN)</code>。该算法非常快的原因是非常精炼和高度优化的内部循环。最坏情况的性能为<code>O(N^2)</code>，但稍加努力就可以避免。<br><strong>三数中值分割法：</strong><br>消除了预排序输入的坏情况，并且减少了快速排序大约5%的运行时间。<br>对于很小的数组<code>(N&lt;=20)</code>不递归地使用快速排序，而代之以诸如插入排序这种对小数组有效的排序算法。<br><strong>算法步骤：</strong>  </p>
 <blockquote>
 <ol>
 <li>从数列中挑出一个元素，称为 “基准”（pivot）  </li>
-<li>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。  </li>
-<li>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。   </li>
+<li>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为<code>分区（partition）</code>操作。  </li>
+<li>递归地<code>（recursive）</code>把小于基准值元素的子数列和大于基准值元素的子数列排序。   </li>
 </ol>
 </blockquote>
 <p>伪代码：  </p>
@@ -597,7 +597,8 @@ void Heapsort(ElementType A[],int N)
    PercDown(A,0,i);
  }
 }
-</code></pre><p>Over：缺少自己的理解</p>
+</code></pre><p><strong>参考：</strong><br><a href="http://blog.csdn.net/fendouzhe123/article/details/34491877" target="_blank" rel="external">1.  程序员必须知道的10大基础实用算法及其讲解</a></p>
+<p><a href="http://www.cnblogs.com/jingmoxukong/p/4303279.html" target="_blank" rel="external">2. 排序四 希尔排序</a></p>
 
       
     </div>
@@ -634,8 +635,8 @@ void Heapsort(ElementType A[],int N)
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/16/Single-LinkedList-Reverse/" rel="prev" title="Single LinkedList Reverse">
-                Single LinkedList Reverse <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/16/单链表逆转/" rel="prev" title="单链表逆转">
+                单链表逆转 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -725,7 +726,7 @@ void Heapsort(ElementType A[],int N)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -287,7 +287,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T20:49:19+08:00">
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T21:47:48+08:00">
               2016-11-14
             </time>
             
@@ -419,8 +419,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-10-08T07:19:54+08:00">
-              2016-10-08
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T21:46:51+08:00">
+              2016-11-14
             </time>
             
           </span>
@@ -478,14 +478,81 @@
 
       
         
-          <p>因为在工作中要经常与git打交道，想想入职时间有四个五月了，实际工作时间两三个月左右。正好趁着这个假期做一下总结。<br>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/08/git阶段总结/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>因为在工作中要经常与git打交道，想想入职时间有四个五月了，实际工作时间两三个月左右。正好趁着这个假期做一下总结。<br>先推荐两个git的教程：<br>a. <a href="https://git-scm.com/book/zh/v2" title="git-book" target="_blank" rel="external">git-book</a><br>b. <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/" target="_blank" rel="external">git教程-廖雪峰</a></p>
+<h2 id="git基础-获取git仓库"><a href="#git基础-获取git仓库" class="headerlink" title="git基础-获取git仓库"></a>git基础-获取git仓库</h2><p>git版本库的初始化，一般有两种方式：<br><strong>a. 克隆现有的仓库</strong><br>克隆仓库的命令格式为<code>git clone [url]</code>，比如：</p>
+<pre><code>$ git clone https://github.com/libgit2/libgit2
+</code></pre><p><strong>b. 在现有的目录下初始化仓库</strong><br>如果你打算使用 Git 来对现有的项目进行管理，你只需要进入该项目目录并输入：</p>
+<pre><code>$ git init
+</code></pre><p>这时候如果你需要将它放到远程服务器上，可以在远程服务器上创建一个目录，并把可访问的URL记录下来，此时你就可以利用<code>git remote add</code>命令来增加一个远程服务器端</p>
+<pre><code>$git remote add origin git://github.com/someone/another_project.git
+</code></pre><p>上面的命令就会增加URL地址为<code>git://github.com/someone/another_project.git</code>，名称为 <code>origin</code> 的远程服务器，以后提交代码的时候只需要使用 <code>origin</code> 别名即可.</p>
+<h2 id="git-分支"><a href="#git-分支" class="headerlink" title="git-分支"></a>git-分支</h2><p>首先，如果我们要创建一个<code>dev</code>分支，然后切换到<code>dev</code>分支：  </p>
+<pre><code>$ git branch dev
+$ git checkout dev
+Switched to branch &apos;dev&apos;
+</code></pre><p>可以用下面的一行来代替：</p>
+<pre><code>$ git checkout -b dev
+</code></pre><p>如果我们在<code>dev</code>分支上做了一些工作，完成后要先切回<code>master</code>分支</p>
+<pre><code>$ git checkout master
+Switched to branch &apos;master&apos;
+</code></pre><p>现在，我们把<code>dev</code>分支的工作提交到<code>master</code>分支上：</p>
+<pre><code>$ git merge dev
+Updating d17efd8..fec145a
+Fast-forward
+ readme.txt |    1 +
+ 1 file changed, 1 insertion(+)    
+</code></pre><p><code>git merge</code>命令用于合并指定分支到当前分支。<br>合并完成后，就可以放心地删除<code>dev</code>分支了：</p>
+<pre><code>$ git branch -d dev
+Deleted branch dev (was fec145a).
+</code></pre><p>工作中经常遇到的情景是：别人远程创建了一个分支，怎么切换到远程的分支上呢？</p>
+<pre><code>git branch -D #删除一个分支
+git branch -va #查看所有的远程分支
+git branch -b &lt;name&gt; &lt;remote name&gt; #创建并转到远程分支并改名字为name
+</code></pre><p><code>git branch -b &lt;name&gt; &lt;remote name&gt;</code>就是在本地新建一个名为<code>&lt;name&gt;</code>的分支，并转到远程的分支<code>&lt;remote name&gt;</code>上。</p>
+<h2 id="git-版本回退"><a href="#git-版本回退" class="headerlink" title="git-版本回退"></a>git-版本回退</h2><p>有时候我们发现，自己<code>commit</code>提交的东西不对，那可怎么办呢？<br>首先，git必须知道当前版本是哪个版本，在git中，用<code>HEAD</code>表示当前版本，也就是最新的提交，上一个版本就是<code>HEAD^</code>，上上一个版本就是<code>HEAD^^</code>，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。</p>
+<pre><code>$ git reset --hard HEAD^
+</code></pre><p>总结一下：   </p>
+<blockquote>
+<ul>
+<li>HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令<code>git reset --hard commit_id</code>。</li>
+<li>穿梭前，用<code>git log</code>可以查看提交历史，以便确定要回退到哪个版本。</li>
+<li>要重返未来，用<code>git reflog</code>查看命令历史，以便确定要回到未来的哪个版本。</li>
+</ul>
+</blockquote>
+<h2 id="git-子模块-submoudle"><a href="#git-子模块-submoudle" class="headerlink" title="git-子模块(submoudle)"></a>git-子模块(submoudle)</h2><p>有种情况我们经常会遇到：某个工作中的项目需要包含并使用另一个项目。 也许是第三方库，或者你独立开发的，用于多个父项目的库。 现在问题来了：你想要把它们当做两个独立的项目，同时又想在一个项目中使用另一个。<br>git通过<code>子模块</code>来解决这个问题。 子模块允许你将一个 Git 仓库作为另一个git仓库的子目录。 它能让你将另一个仓库克隆到自己的项目中，同时还保持提交的独立。<br>我们首先将一个已存在的git仓库添加为正在工作的仓库的子模块。 你可以通过在 <code>git submodule add</code>命令后面加上想要跟踪的项目 <code>URL</code> 来添加新的子模块。</p>
+<pre><code>$ git submodule add https://github.com/chaconinc/DbConnector
+</code></pre><h2 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h2><blockquote>
+<ol>
+<li>使用<code>git stash</code>保存当前的工作现场，那么就可以切换到其他分支进行工作，或者在当前分支上完成其他紧急的工作，比如修订一个bug测试提交。</li>
+<li>如果一个使用了一个<code>git stash</code>，切换到一个分支，且在该分支上的工作未完成也需要保存它的工作现场。再使用<code>git stash</code>。那么stash 队列中就有了两个工作现场。</li>
+<li>可以使用<code>git stash list</code>。查看stash队列。</li>
+<li>如果在一个分支上想要恢复某一个工作现场怎么办：先用<code>git stash list</code>查看stash队列。确定要恢复哪个工作现场到当前分支。然后用<code>git stash pop stash@{num</code>}。<code>num</code> 就是你要恢复的工作现场的编号。</li>
+<li>如果想要清空<code>stash</code>队列则使用<code>git stash clear</code>。</li>
+<li>同时注意使用<code>git stash pop</code>命令是恢复<code>stash</code>队列中的<code>stash@{0}</code>即最上层的那个工</li>
+<li><code>git stash apply [--index] [&lt;stash&gt;]</code> 不删除已恢复的进度，其他同<code>git stash pop</code></li>
+</ol>
+</blockquote>
+<h2 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title=" cherry-pick"></a> cherry-pick</h2><pre><code>git cherry-pick commit_ID
+</code></pre><p>简而言之，<code>cherry-pick</code>就是从不同的分支中捡出一个单独的<code>commit</code>，并把它和你当前的分支合并。如果你以并行方式在处理两个或以上分支，你可能会发现一个在全部分支中都有的<code>bug</code>。如果你在一个分支中解决了它，你可以使用<code>cherry-pick</code>命令把它<code>commit</code>到其它分支上去，而不会弄乱其他的文件或<code>commit</code>。</p>
+<h2 id="git-常用命令"><a href="#git-常用命令" class="headerlink" title="git-常用命令"></a>git-常用命令</h2><p><strong>a. <code>版本（tag）</code>操作相关命令</strong></p>
+<pre><code>$ git tag #查看版本
+$ git tag [name] #创建版本
+$ git tag -d [name]#删除版本
+$ git tag -r #查看远程版本
+</code></pre><p><strong>b. <code>git clean</code>用法</strong></p>
+<pre><code>$ git clean -fd -n #列出要删除的文件列表
+$ git clean -f -d
+$ git clean -fd
+</code></pre><p>其中 <code>-f</code> 表示文件 <code>-d</code> 表示目录, 如果还要删除<code>.gitignore</code>中的文件那么再加上-x.<br>如果<code>git submodule</code>中也存在需要删除的文件那么需要再加个<code>-f</code>， 变成<code>git clean -dff</code> </p>
+<pre><code>$ git revert
+</code></pre><p>还原一个版本的修改，必须提供一个具体的Git版本号，例如<code>git revert bbaf6fb5060b4875b18ff9ff637ce118256d6f20</code>，Git的版本号都是生成的一个哈希值<br><strong>c. <code>git pull --rebase</code>用法</strong></p>
+<pre><code>git pull = git fetch + git merge  
+git pull --rebase = git fetch + git rebase
+</code></pre><p><strong>d. <code>git add .</code>和<code>git reset HEAD 文件名</code>配合使用</strong><br><code>git reset HEAD 文件名</code>可以将某文件从已经git add的列表中剔除出去<br><strong>e. 撤销git本地的所有修改:</strong></p>
+<pre><code>git checkout .
+</code></pre>
+          
         
       
     </div>
@@ -570,8 +637,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-10T23:38:14+08:00">
-              2016-11-10
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T21:51:03+08:00">
+              2016-11-14
             </time>
             
           </span>
@@ -673,7 +740,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/21/Java-记事本/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/21/Java实现记事本/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Sunguangchao">
@@ -698,8 +765,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/21/Java-记事本/" itemprop="url">
-                  Java-记事本
+                <a class="post-title-link" href="/2016/09/21/Java实现记事本/" itemprop="url">
+                  Java实现记事本
                 </a>
               
             
@@ -721,8 +788,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-10-07T22:55:58+08:00">
-              2016-10-07
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T21:54:42+08:00">
+              2016-11-14
             </time>
             
           </span>
@@ -752,8 +819,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/21/Java-记事本/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/21/Java-记事本/" itemprop="commentCount"></span>
+                <a href="/2016/09/21/Java实现记事本/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/21/Java实现记事本/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -783,7 +850,7 @@
           <p>这个实验使用Java语言编写一个记事本应用，涉及到Swing界面编程、文件读写等知识点。<br>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/21/Java-记事本/#more" rel="contents">
+            <a class="btn" href="/2016/09/21/Java实现记事本/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -824,7 +891,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/16/Single-LinkedList-Reverse/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/16/单链表逆转/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Sunguangchao">
@@ -849,8 +916,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/16/Single-LinkedList-Reverse/" itemprop="url">
-                  Single LinkedList Reverse
+                <a class="post-title-link" href="/2016/07/16/单链表逆转/" itemprop="url">
+                  单链表逆转
                 </a>
               
             
@@ -872,8 +939,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-10-07T22:55:19+08:00">
-              2016-10-07
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T21:53:28+08:00">
+              2016-11-14
             </time>
             
           </span>
@@ -903,8 +970,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/16/Single-LinkedList-Reverse/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/16/Single-LinkedList-Reverse/" itemprop="commentCount"></span>
+                <a href="/2016/07/16/单链表逆转/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/16/单链表逆转/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -931,10 +998,10 @@
 
       
         
-          <p>本题要求实现一个函数，将给定的单链表逆转。<br>
+          <p>Single LinkedList Reverse<br>本题要求实现一个函数，将给定的单链表逆转。<br>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/16/Single-LinkedList-Reverse/#more" rel="contents">
+            <a class="btn" href="/2016/07/16/单链表逆转/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1023,8 +1090,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-10-07T22:51:21+08:00">
-              2016-10-07
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T21:59:27+08:00">
+              2016-11-14
             </time>
             
           </span>
@@ -1326,7 +1393,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
