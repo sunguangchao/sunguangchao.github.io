@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/19/1-3-Stack-and-Queues/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
 <meta property="og:description" content="泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
-<meta property="og:updated_time" content="2016-11-19T02:16:28.206Z">
+<meta property="og:updated_time" content="2016-11-19T02:21:02.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.3 Stack and Queues">
 <meta name="twitter:description" content="泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
@@ -283,7 +283,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-19T10:16:28+08:00">
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-19T10:21:02+08:00">
               2016-11-19
             </time>
             
@@ -350,12 +350,10 @@
 <li>算法1.3 先进先出队列<a href="https://github.com/sunguangchao/Alorithms_4th_edition/blob/master/web_exercise1_3/Queue.java" target="_blank" rel="external">Queue</a> </li>
 <li>算法1.4 背包<a href="https://github.com/sunguangchao/Alorithms_4th_edition/blob/master/web_exercise1_3/Bag.java" target="_blank" rel="external">Bag</a></li>
 </ul>
-<h2 id="Autoboxing-Q-N"><a href="#Autoboxing-Q-N" class="headerlink" title="Autoboxing Q + N"></a>Autoboxing Q + N</h2><ol>
-<li>How does the autoboxing handle the following code fragment?  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer a = null;</span><br><span class="line">int b = a;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>It result in a run-time error.Primitive type store every value of their corresponding wrapper type except <code>null</code>2. Why does the first group of statements print true, but the second false?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Integer a1 = 100;  </span><br><span class="line">Integer a2 = 100;  </span><br><span class="line">System.out.println(a1 == a2);   // true  </span><br><span class="line"></span><br><span class="line">Integer b1 = new Integer(100);  </span><br><span class="line">Integer b2 = new Integer(100);  </span><br><span class="line">System.out.println(b1 == b2);   // false  </span><br><span class="line"></span><br><span class="line">Integer c1 = 150;  </span><br><span class="line">Integer c2 = 150;  </span><br><span class="line">System.out.println(c1 == c2);   // false</span><br></pre></td></tr></table></figure></p>
-<p>The second prints false because b1 and b2 are references to different Integer objects. The first and third code fragments rely on autoboxing. Surprisingly the first prints true because values between -128 and 127 appear to refer to the same immutable Integer objects (Java’s implementation of valueOf() retrieves a cached values if the integer is between -128 and 127), while Java constructs new objects for each integer outside this range.</p>
+<h2 id="Autoboxing-Q-N"><a href="#Autoboxing-Q-N" class="headerlink" title="Autoboxing Q + N"></a>Autoboxing Q + N</h2><p>Q:How does the autoboxing handle the following code fragment?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer a = null;</span><br><span class="line">int b = a;</span><br></pre></td></tr></table></figure></p>
+<p>N:It result in a run-time error.Primitive type store every value of their corresponding wrapper type except <code>null</code></p>
+<p>Q:Why does the first group of statements print true, but the second false?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Integer a1 = 100;  </span><br><span class="line">Integer a2 = 100;  </span><br><span class="line">System.out.println(a1 == a2);   // true  </span><br><span class="line"></span><br><span class="line">Integer b1 = new Integer(100);  </span><br><span class="line">Integer b2 = new Integer(100);  </span><br><span class="line">System.out.println(b1 == b2);   // false  </span><br><span class="line"></span><br><span class="line">Integer c1 = 150;  </span><br><span class="line">Integer c2 = 150;  </span><br><span class="line">System.out.println(c1 == c2);   // false</span><br></pre></td></tr></table></figure></p>
+<p>N:The second prints false because b1 and b2 are references to different Integer objects. The first and third code fragments rely on autoboxing. Surprisingly the first prints true because values between -128 and 127 appear to refer to the same immutable Integer objects (Java’s implementation of valueOf() retrieves a cached values if the integer is between -128 and 127), while Java constructs new objects for each integer outside this range.</p>
 
       
     </div>
