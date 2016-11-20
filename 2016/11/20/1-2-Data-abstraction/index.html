@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="算法," />
 
 
 
@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="剁手过去快一周了，这几天吃土吃的不亦乐乎。">
+<meta name="description" content="抽象数据类型(ADT)是一种能够对使用者隐蔽数据表示的数据类型。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="11.16随笔">
-<meta property="og:url" content="http://yoursite.com/2016/11/16/11-16随笔/index.html">
+<meta property="og:title" content="1.2 Data abstraction">
+<meta property="og:url" content="http://yoursite.com/2016/11/20/1-2-Data-abstraction/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="剁手过去快一周了，这几天吃土吃的不亦乐乎。">
-<meta property="og:updated_time" content="2016-11-16T12:25:01.551Z">
+<meta property="og:description" content="抽象数据类型(ADT)是一种能够对使用者隐蔽数据表示的数据类型。">
+<meta property="og:updated_time" content="2016-11-20T01:27:23.118Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="11.16随笔">
-<meta name="twitter:description" content="剁手过去快一周了，这几天吃土吃的不亦乐乎。">
+<meta name="twitter:title" content="1.2 Data abstraction">
+<meta name="twitter:description" content="抽象数据类型(ADT)是一种能够对使用者隐蔽数据表示的数据类型。">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/16/11-16随笔/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/20/1-2-Data-abstraction/"/>
 
 
 
 
 
-  <title> 11.16随笔 | GuangchaoSun's Blog </title>
+  <title> 1.2 Data abstraction | GuangchaoSun's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -238,7 +238,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/16/11-16随笔/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/20/1-2-Data-abstraction/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="GuangchaoSun">
@@ -262,7 +262,7 @@
             
             
               
-                11.16随笔
+                1.2 Data abstraction
               
             
           </h1>
@@ -274,8 +274,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-16T20:13:51+08:00">
-              2016-11-16
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-20T09:25:50+08:00">
+              2016-11-20
             </time>
 
             &nbsp;|&nbsp;
@@ -283,8 +283,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-16T20:25:01+08:00">
-              2016-11-16
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-20T09:27:23+08:00">
+              2016-11-20
             </time>
             
           </span>
@@ -295,8 +295,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/16/11-16随笔/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/16/11-16随笔/" itemprop="commentCount"></span>
+                <a href="/2016/11/20/1-2-Data-abstraction/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/20/1-2-Data-abstraction/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -322,14 +322,18 @@
       
 
       
-        <p>剁手过去快一周了，这几天吃土吃的不亦乐乎。<br><a id="more"></a><br>话说Java自学半年了，感觉进步不是很大。最近还在看算法，有点迷茫。不知道看了有什么用，忘得也很快，看来要多刷一下LeetCode。决定要把学习算法的笔记搬到网上来，增加一下自己的动力，还是弱鸡阶段，希望可以与大神多多交流。<br>下一阶段： </p>
-<blockquote>
+        <p>抽象数据类型(ADT)是一种能够对使用者隐蔽数据表示的数据类型。<br><a id="more"></a><br>每当用例调用了new，系统就会</p>
 <ol>
-<li>整理下自己的github，现在的有点乱   </li>
-<li>多刷一下算法题 </li>
-<li>整理学习笔记</li>
+<li>为新的对象分配存储空间</li>
+<li>调用构造函数初始化对象中的值</li>
+<li>返回该对象的一个引用<br>方法的每次触发都是和一个对象相关的</li>
 </ol>
-</blockquote>
+<h2 id="web-exercise"><a href="#web-exercise" class="headerlink" title="web exercise"></a>web exercise</h2><ol>
+<li><p>A string s is a circular rotation of a string t if it matches when the characters are circularly shifted by any number of positions; e.g., <code>ACTGACG</code> is a circular shift of <code>TGACGAC</code>, and vice versa. Detecting this condition is important in the study of genomic sequences. Write a program that checks whether two given strings s and t are circular shifts of one another.</p>
+<p> solution:<br> <code>(s.length() == t.length())&amp;&amp;(s.concat(s).indexOf(t) &gt; 0)</code></p>
+</li>
+<li><code>recursive(递归的)</code>loop:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">     public static String mystery(String s)</span><br><span class="line">&#123;</span><br><span class="line">     int N = s.length();</span><br><span class="line">     if(N &lt;= 1) return s;</span><br><span class="line">     String a = substring(0,N/2);</span><br><span class="line">     String b = subString(N/2,0);</span><br><span class="line">     return b + a;</span><br><span class="line"> &#125;//Reverse the string</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
@@ -351,13 +355,19 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/10/用两个stack实现一个queue/" rel="next" title="用两个stack实现一个queue">
-                <i class="fa fa-chevron-left"></i> 用两个stack实现一个queue
+              <a href="/2016/11/19/1-3-Stack-and-Queues/" rel="next" title="1.3 Stack and Queues">
+                <i class="fa fa-chevron-left"></i> 1.3 Stack and Queues
               </a>
             
           </div>
@@ -365,10 +375,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/19/1-3-Stack-and-Queues/" rel="prev" title="1.3 Stack and Queues">
-                1.3 Stack and Queues <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -394,8 +400,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/16/11-16随笔/"
-           data-title="11.16随笔" data-url="http://yoursite.com/2016/11/16/11-16随笔/">
+      <div class="ds-thread" data-thread-key="2016/11/20/1-2-Data-abstraction/"
+           data-title="1.2 Data abstraction" data-url="http://yoursite.com/2016/11/20/1-2-Data-abstraction/">
       </div>
     
   </div>
@@ -419,8 +425,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg"
@@ -473,6 +488,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#web-exercise"><span class="nav-number">1.</span> <span class="nav-text">web exercise</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
