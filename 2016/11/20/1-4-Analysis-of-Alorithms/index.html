@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/Integer-memory.png">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/Date-memory.png">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/Node-memory.png">
-<meta property="og:updated_time" content="2016-11-20T06:29:01.275Z">
+<meta property="og:updated_time" content="2016-11-20T06:32:21.540Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.4 Analysis of Alorithms">
 <meta name="twitter:description" content="运行时间的数学模型：
@@ -120,8 +120,8 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -167,7 +167,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -302,7 +302,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-20T14:29:01+08:00">
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-20T14:32:21+08:00">
               2016-11-20
             </time>
             
@@ -346,10 +346,10 @@
 <li>确定输入模型，定义问题的规模</li>
 <li>识别内循环</li>
 <li>根据内循环中的的操作确定成本模型</li>
-<li>对于给定的输入，判断这些操作的执行频率<a id="more"></a>
-找到数组中三者和为零的个数<br>ThreeSumFast:    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static int count(int[] a)</span><br><span class="line">&#123;</span><br><span class="line">    Array.sort(a);</span><br><span class="line">    int N = a.length();</span><br><span class="line">    itn cnt = 0;</span><br><span class="line">    for(int i = 0;i &lt; N;i++)</span><br><span class="line">        for(int j = i+1;j &lt; N;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            int k = Array.binarySearch(-a[i]-a[j],a);</span><br><span class="line">            if(k &gt; j) cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        return cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>对于给定的输入，判断这些操作的执行频率</li>
 </ul>
+<a id="more"></a>
+<p>找到数组中三者和为零的个数<br>ThreeSumFast:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static int count(int[] a)</span><br><span class="line">&#123;</span><br><span class="line">    Array.sort(a);</span><br><span class="line">    int N = a.length();</span><br><span class="line">    itn cnt = 0;</span><br><span class="line">    for(int i = 0;i &lt; N;i++)</span><br><span class="line">        for(int j = i+1;j &lt; N;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            int k = Array.binarySearch(-a[i]-a[j],a);</span><br><span class="line">            if(k &gt; j) cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        return cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>TwoSumFast:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static int count(int[] a)</span><br><span class="line">&#123;</span><br><span class="line">    int n = a.length;</span><br><span class="line">    Array.sort(a);</span><br><span class="line">    int count = 0;</span><br><span class="line">    for(int i = 0;i &lt; n; i++)&#123;</span><br><span class="line">        int j = Array.binarySearch(a,-a[i]);</span><br><span class="line">        if(j &gt; i) count++;</span><br><span class="line">    &#125;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>2-sum问题的线性对数级别的解决<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class TwoSumFast&#123;</span><br><span class="line">    public static int count(int [] a)</span><br><span class="line">    &#123;</span><br><span class="line">        Arrays.sort(a);</span><br><span class="line">        int N = a.length();</span><br><span class="line">        int cnt = 0;</span><br><span class="line">        for(int i = 0;i &lt; N;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (BinarySearch.rank(-a[i],a) &gt; 0)</span><br><span class="line">                cnt ++;</span><br><span class="line">        &#125;</span><br><span class="line">        return cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        int[] a = In.readInts(args[0]);</span><br><span class="line">        StdOut.println(count(a));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>3-sum问题的快速算法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class ThreeSumFast&#123;</span><br><span class="line">	public static int count(int[] a)</span><br><span class="line">	&#123;</span><br><span class="line">		Array.sort(a);</span><br><span class="line">		int N = a.length();</span><br><span class="line">		int cnt = 0;</span><br><span class="line">		for(int i = 0;i &lt; N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			for(j = i+1;j &lt; N;j++)</span><br><span class="line">				if(BnarySearch.rank(-a[i]-a[j],a) &gt; j)</span><br><span class="line">					cnt ++;</span><br><span class="line">		&#125;</span><br><span class="line">		return cnt;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args)&#123;</span><br><span class="line">		int[] a = In.readInts(args[0]);</span><br><span class="line">		StdOut.println(count(a));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -564,7 +564,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
+    NexT.Mist
   </a>
 </div>
 
@@ -631,13 +631,6 @@
   
   
 
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
-
-
-
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
@@ -658,7 +651,7 @@
   
 
   <script type="text/javascript">
-    var duoshuoQuery = {short_name:"GuangchaoSun"};
+    var duoshuoQuery = {short_name:"sunguangchao"};
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;
