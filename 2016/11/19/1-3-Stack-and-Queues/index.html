@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/19/1-3-Stack-and-Queues/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
 <meta property="og:description" content="泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
-<meta property="og:updated_time" content="2016-11-20T01:27:25.067Z">
+<meta property="og:updated_time" content="2016-11-22T15:53:09.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.3 Stack and Queues">
 <meta name="twitter:description" content="泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
@@ -190,6 +190,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -283,12 +293,31 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-20T09:27:25+08:00">
-              2016-11-20
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-22T23:53:09+08:00">
+              2016-11-22
             </time>
             
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -334,12 +363,10 @@
 <ul>
 <li>创建泛型数组在Java中是不允许的，需要使用类型转换<br><code>a = (Item[])new Object[cap];</code></li>
 <li><p>可迭代的集合数据类型需要实现：</p>
-<blockquote>
-<ol>
+<ul>
 <li>集合数据类型必须实现一个iterator()方法并返回一个iterator对象；</li>
 <li>Iterator类必须包含两个方法：hasNext()(返回一个boolean值)和next()(返回集合中的一个泛型元素)</li>
-</ol>
-</blockquote>
+</ul>
 </li>
 <li><p>算法1.1 下压(LIFO)栈（能够动态调整数组大小的实现）<a href="https://github.com/sunguangchao/Alorithms_4th_edition/blob/master/web_exercise1_2/ResizingArrayStack.java" target="_blank" rel="external">ResizingArrayStack</a></p>
 </li>
@@ -477,10 +504,10 @@
 
           
             <div class="site-state-item site-state-categories">
-              
+              <a href="/categories">
                 <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
@@ -498,6 +525,35 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sunguangchao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/sun-guang-chao-64" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2966219821/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
           
         </div>
 
