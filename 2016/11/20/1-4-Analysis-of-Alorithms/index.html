@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/Integer-memory.png">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/Date-memory.png">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/Node-memory.png">
-<meta property="og:updated_time" content="2016-11-22T15:49:13.929Z">
+<meta property="og:updated_time" content="2016-11-25T13:07:31.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.4 Analysis of Alorithms">
 <meta name="twitter:description" content="运行时间的数学模型：
@@ -312,8 +312,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-22T23:49:13+08:00">
-              2016-11-22
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-25T21:07:31+08:00">
+              2016-11-25
             </time>
             
           </span>
@@ -393,6 +393,96 @@
 <li>多个问题参量</li>
 </ul>
 <h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><p>对象<br>一个Integer对象会使用24字节的空间，其中16字节的对象开销，4字节存储int值，还有4字节填充字节（padding）。<br><img src="http://o90jubpdi.bkt.clouddn.com/Integer-memory.png" alt="Integer memory"><br>同理，一个Date对象使用32字节的空间。<br><img src="http://o90jubpdi.bkt.clouddn.com/Date-memory.png" alt="Date momery"><br>链表<br>一个内部类的话：<code>16字节的对象开销</code>+<code>8字节的额外开销</code>+<code>指向item和next对象引用各需8字节</code> = <code>40byte</code><br><img src="http://o90jubpdi.bkt.clouddn.com/Node-memory.png" alt="此处输入图片的描述"><br>数组<br>Java中数组被实现为对象，数组的空间包括对象所需内存加上引用所需内存。<br>例如，一个含有N个Date对象的数组，需要使用24字节（数组开销，包括16字节的对象开销，4字节保存长度以及4填充字节）加上8N字节（所有对象的引用）加上每个Date对象的32字节，总共（24+40N）字节<br>字符串对象<br>一个String对象一般需要40字节（16字节表示对象，三个int实例变量：偏移量、计数器、散列值个需要4字节，加上数组引用8个字节和4个填充字节）。</p>
+<h2 id="Q-A"><a href="#Q-A" class="headerlink" title="Q + A"></a>Q + A</h2><p>Q. What is the purpose of padding(填充字节)?<br>A. Padding makes all abjects take space that is a mulitple of 8 bytes.This can waste some memory but it speeds up memory access and garbage collection(垃圾回收).</p>
+<h2 id="Creative-Problems"><a href="#Creative-Problems" class="headerlink" title="Creative Problems"></a>Creative Problems</h2><ol>
+<li><p><strong>4-sum</strong>.Develop a brute-force solution FourSum.java to the 4-sum problem.</p>
+<pre><code>public class FourSum {
+
+    // print distinct 4-tuples (i, j, k, l) such that a[i] + a[j] + a[k] + a[l] = 0
+    public static int printAll(long[] a) {
+        int N = a.length;
+        int cnt = 0;
+        for (int i = 0; i &lt; N; i++) {
+            for (int j = i+1; j &lt; N; j++) {
+                for (int k = j+1; k &lt; N; k++) {
+                    for (int l = k+1; l &lt; N; l++) {
+                        if (a[i] + a[j] + a[k] + a[l] == 0) {
+                            StdOut.println(a[i] + &quot; &quot; + a[j] + &quot; &quot; + a[k] + &quot; &quot; + a[l]);
+                        }
+                    }
+                }
+            }
+        }
+        return cnt;
+    } 
+
+    // return number of distinct 4-tuples (i, j, k, l) such that a[i] + a[j] + a[k] + a[l] = 0
+    public static int count(long[] a) {
+        int N = a.length;
+        int cnt = 0;
+        for (int i = 0; i &lt; N; i++) {
+            for (int j = i+1; j &lt; N; j++) {
+                for (int k = j+1; k &lt; N; k++) {
+                    for (int l = k+1; l &lt; N; l++) {
+                        if (a[i] + a[j] + a[k] + a[l] == 0) {
+                            cnt++;
+                        }
+                    }
+                }
+            }
+        }
+        return cnt;
+    } 
+
+    public static void main(String[] args)  { 
+        int N = StdIn.readInt(); 
+        long[] a = new long[N]; 
+        for (int i = 0; i &lt; N; i++) {
+            a[i] = StdIn.readLong();
+        }
+        int cnt = count(a);
+        StdOut.println(cnt);
+        if (cnt &lt; 10) {
+            printAll(a);
+        }
+    } 
+} 
+</code></pre></li>
+<li><p><strong>bitonic search</strong>.An array is bitonic if it is comprised of an increasing sequence of integers followed immediately by a decreasing sequence of integers. Write a program that, given a bitonic array of N distinct int values, determines whether a given integer is in the array. Your program should use ~ 3 lg N compares in the worst case.<br>Answer: Use a version of binary search, as in BitonicMax.java, to find the maximum (in ~ 1 lg N compares); then use binary search to search in each piece (in ~ 1 lg N compares per piece).</p>
+<pre><code>public class BitonicMax{
+    public static int[] bitonic(int N){
+        int mid = StdRandom.uniform(N);
+        int[] a = new int[N];
+        for(int i=1; i&lt;mid; i++){
+            a[i] = a[i-1] + 1 + StdRandom.uniform(9);
+        }
+        if(mid &gt; 0) a[mid] = a[mid-1] + StdRandom.uniform(10) - 5;
+
+        for(int i = mid+1; i&lt;N; i++){
+            a[i] = a[i-1] - 1 - StdRandom.uniform(9); 
+        }
+
+        for(int i = 0;i &lt; N; i++){
+            StdOut.println(a[i]);
+        }
+        return a;
+    }
+    public static int max(int[] a,int lo,int hi){
+        if(hi == lo) return hi;
+        int mid = lo + (hi-lo)/2;
+        if(a[mid] &lt;a[mid+1]) return max(a,mid+1,hi);
+        if(a[mid] &gt;a[mid+1]) return max(a,lo,mid);
+        else return mid;
+    }
+
+    public static void main(String[] args){
+        int N = Integer.parseInt(args[0]);
+        int[] a = bitonic(N);
+        StdOut.println(&quot;max = &quot; + a[max(a,0,N-1)]);
+    }
+}
+</code></pre></li>
+</ol>
 
       
     </div>
@@ -434,6 +524,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/25/1-5-union-find-算法/" rel="prev" title="1.5 union-find 算法">
+                1.5 union-find 算法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -586,7 +680,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存"><span class="nav-number">1.</span> <span class="nav-text">内存</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存"><span class="nav-number">1.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-A"><span class="nav-number">2.</span> <span class="nav-text">Q + A</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creative-Problems"><span class="nav-number">3.</span> <span class="nav-text">Creative Problems</span></a></li></ol></div>
             
 
           </div>

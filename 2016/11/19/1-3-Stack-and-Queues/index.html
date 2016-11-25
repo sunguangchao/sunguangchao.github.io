@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/19/1-3-Stack-and-Queues/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
 <meta property="og:description" content="泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
-<meta property="og:updated_time" content="2016-11-22T15:53:09.254Z">
+<meta property="og:updated_time" content="2016-11-25T13:06:31.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.3 Stack and Queues">
 <meta name="twitter:description" content="泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
@@ -293,8 +293,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-22T23:53:09+08:00">
-              2016-11-22
+            <time title="Post modified" itemprop="dateModified" datetime="2016-11-25T21:06:31+08:00">
+              2016-11-25
             </time>
             
           </span>
@@ -362,25 +362,94 @@
 <h2 id="Pushdown-stack"><a href="#Pushdown-stack" class="headerlink" title="Pushdown stack"></a>Pushdown stack</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Reverse&#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();</span><br><span class="line">        while(!StdIn.isEmpty())&#123;</span><br><span class="line">            Stack.push(StdIn.readInt());</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i : stack) &#123;</span><br><span class="line">            StdOut.println(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>创建泛型数组在Java中是不允许的，需要使用类型转换<br><code>a = (Item[])new Object[cap];</code></li>
-<li><p>可迭代的集合数据类型需要实现：</p>
-<ul>
+<li>可迭代的集合数据类型需要实现：<ul>
 <li>集合数据类型必须实现一个iterator()方法并返回一个iterator对象；</li>
 <li>Iterator类必须包含两个方法：hasNext()(返回一个boolean值)和next()(返回集合中的一个泛型元素)</li>
 </ul>
 </li>
-<li><p>算法1.1 下压(LIFO)栈（能够动态调整数组大小的实现）<a href="https://github.com/sunguangchao/Alorithms_4th_edition/blob/master/web_exercise1_2/ResizingArrayStack.java" target="_blank" rel="external">ResizingArrayStack</a></p>
-</li>
 </ul>
-<h2 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked List"></a>Linked List</h2><p>A linked list is a recurive data that is either empty(null) or a reference to a node having a generic item and a reference to a linked list.<br>在表头插入结点先将<code>first</code>保存在结点<code>oldfirst</code>中，然后将一个新结点赋予<code>first</code>，并将它的<code>item</code>域设为<code>not</code>，<code>next</code>域设为<code>oldfirst</code>。<br><strong>遍历</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(Node x = first,x != null,x = x.next)</span><br><span class="line">&#123;</span><br><span class="line">		operation</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked List"></a>Linked List</h2><p>A linked list is a recurive data that is either empty(null) or a reference to a node having a generic item and a reference to a linked list.<br>在表头插入结点先将<code>first</code>保存在结点<code>oldfirst</code>中，然后将一个新结点赋予<code>first</code>，并将它的<code>item</code>域设为<code>not</code>，<code>next</code>域设为<code>oldfirst</code>。<br><strong>遍历</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(Node x = first,x != null,x = x.next)</span><br><span class="line">&#123;</span><br><span class="line">        operation</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>算法1.2 下压堆栈（链表实现)<a href="https://github.com/sunguangchao/Alorithms_4th_edition/blob/master/web_exercise1_3/Stack.java" target="_blank" rel="external">Stack</a></li>
-<li>算法1.3 先进先出队列<a href="https://github.com/sunguangchao/Alorithms_4th_edition/blob/master/web_exercise1_3/Queue.java" target="_blank" rel="external">Queue</a> </li>
-<li>算法1.4 背包<a href="https://github.com/sunguangchao/Alorithms_4th_edition/blob/master/web_exercise1_3/Bag.java" target="_blank" rel="external">Bag</a></li>
+<li>算法1.1-下压(LIFO)栈（能够动态调整数组大小的实现）: <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise1_2/ResizingArrayStack.java" target="_blank" rel="external">ResizingArrayStack</a></li>
+<li>算法1.2-下压堆栈（链表实现): <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise1_3/Stack.java" target="_blank" rel="external">Stack</a></li>
+<li>算法1.3-先进先出队列: <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise1_3/Queue.java" target="_blank" rel="external">Queue</a> </li>
+<li>算法1.4-背包: <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise1_3/Bag.java" target="_blank" rel="external">Bag</a></li>
 </ul>
 <h2 id="Autoboxing-Q-N"><a href="#Autoboxing-Q-N" class="headerlink" title="Autoboxing Q + N"></a>Autoboxing Q + N</h2><p>Q:How does the autoboxing handle the following code fragment?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer a = null;</span><br><span class="line">int b = a;</span><br></pre></td></tr></table></figure></p>
 <p>N:It result in a run-time error.Primitive type store every value of their corresponding wrapper type except <code>null</code></p>
 <p>Q:Why does the first group of statements print true, but the second false?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Integer a1 = 100;  </span><br><span class="line">Integer a2 = 100;  </span><br><span class="line">System.out.println(a1 == a2);   // true  </span><br><span class="line"></span><br><span class="line">Integer b1 = new Integer(100);  </span><br><span class="line">Integer b2 = new Integer(100);  </span><br><span class="line">System.out.println(b1 == b2);   // false  </span><br><span class="line"></span><br><span class="line">Integer c1 = 150;  </span><br><span class="line">Integer c2 = 150;  </span><br><span class="line">System.out.println(c1 == c2);   // false</span><br></pre></td></tr></table></figure></p>
 <p>N:The second prints false because b1 and b2 are references to different Integer objects. The first and third code fragments rely on autoboxing. Surprisingly the first prints true because values between -128 and 127 appear to refer to the same immutable Integer objects (Java’s implementation of valueOf() retrieves a cached values if the integer is between -128 and 127), while Java constructs new objects for each integer outside this range.</p>
+<h2 id="exercise"><a href="#exercise" class="headerlink" title="exercise"></a>exercise</h2><ol>
+<li><p>Write a stack client Parentheses.java that reads in sequence of left and right parentheses, braces, and brackets from standard input and uses a stack to determine whether the sequence is properly balanced. For example, your program should print true for <code>[()]{}{[()()]()}</code> and false for <code>[(])</code>.</p>
+</li>
+<li><p>What does the following code fragment print when n is 50? Give a high-level description of what it does when presented with a positive integer n.</p>
+</li>
+<li><p>What does the following code fragment do to the queue q?</p>
+<pre><code>Stack&lt;String&gt; s = new Stack&lt;String&gt;();
+while(!q.isEmpty())
+   s.push(q.dequeue());
+while(!s.isEmpty())
+   q.enqueue(s.pop());
+</code></pre><p> Reverse the item on the queue.</p>
+</li>
+<li><p>Write a filter Program InfixToPostfix.java that converts an arithmetic expression from infix to postfix.</p>
+<pre><code>public class InfixToPostfix {
+    public static void main(String[] args) {
+        Stack&lt;String&gt; stack = new Stack&lt;String&gt;();
+        while (!StdIn.isEmpty()) {
+            String s = StdIn.readString();
+            if      (s.equals(&quot;+&quot;)) stack.push(s);
+            else if (s.equals(&quot;*&quot;)) stack.push(s);
+            else if (s.equals(&quot;)&quot;)) StdOut.print(stack.pop() + &quot; &quot;);
+            else if (s.equals(&quot;(&quot;)) StdOut.print(&quot;&quot;);
+            else                    StdOut.print(s + &quot; &quot;);
+        }
+        StdOut.println();
+    }
+}
+</code></pre></li>
+</ol>
+<ol>
+<li><p>Write a program EvaluatePostfix.java that that takes a postfix expression from standard input, evaluates it, and prints the value. (Piping the output of your program from the previous exercise to this program gives equivalent behavior to Evaluate.java.)</p>
+<pre><code>public class EvaluatePostfix {
+    public static void main(String[] args) {
+        Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
+        while (!StdIn.isEmpty()) {
+            String s = StdIn.readString();
+            if      (s.equals(&quot;+&quot;)) stack.push(stack.pop() + stack.pop());
+            else if (s.equals(&quot;*&quot;)) stack.push(stack.pop() * stack.pop());
+            else stack.push(Integer.parseInt(s));
+        }
+        StdOut.println(stack.pop());
+    }
+}
+</code></pre></li>
+</ol>
+<ol>
+<li><p>Josephus problem. In the Josephus problem from antiquity, N people are in dire straits and agree to the following strategy to reduce the population. They arrange themselves in a circle (at positions numbered from 0 to N-1) and proceed around the circle, eliminating every Mth person until only one person is left. Legend has it that Josephus figured out where to sit to avoid being eliminated. Write a Queue client Josephus.java that takes M and N from the command line and prints out the order in which people are eliminated (and thus would show Josephus where to sit in the circle).</p>
+<pre><code>% java Josephus 2 7
+1 3 5 0 4 2 6
+</code></pre></li>
+<li><p>Copy a stack. Create a new constructor for the linked-list implementation of <code>Stack.java</code> so that Stack t = new Stack(s) makes t reference a new and independent copy of the stack s.<br>Recursive solution: create a copy constructor for a linked list starting at a given Node and use this to create the new stack.</p>
+<pre><code>Node(Node x) {
+   item = x.item;
+   if (x.next != null) next = new Node(x.next);
+}
+public Stack(Stack&lt;Item&gt; s) { first = new Node(s.first); }
+</code></pre><p>Nonrecursive solution: create a copy constructor for a single Node object.</p>
+<pre><code>Node(Node x) { this.item = x.item; this.next = x.next; }
+
+public Stack(Stack&lt;Item&gt; s) {
+   if (s.first != null) {
+      first = new Node(s.first);
+      for (Node x = first; x.next != null; x = x.next)
+         x.next = new Node(x.next);
+   }
+}
+</code></pre><p>web exercise</p>
+</li>
+</ol>
+<hr>
 
       
     </div>
@@ -413,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/16/11-16随笔/" rel="next" title="11.16随笔">
-                <i class="fa fa-chevron-left"></i> 11.16随笔
+              <a href="/2016/11/10/用两个stack实现一个queue/" rel="next" title="用两个stack实现一个queue">
+                <i class="fa fa-chevron-left"></i> 用两个stack实现一个queue
               </a>
             
           </div>
@@ -578,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型-Generics"><span class="nav-number">1.</span> <span class="nav-text">泛型(Generics)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autoboxing"><span class="nav-number">2.</span> <span class="nav-text">Autoboxing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterable-collections"><span class="nav-number">3.</span> <span class="nav-text">Iterable collections</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bags"><span class="nav-number">4.</span> <span class="nav-text">Bags</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pushdown-stack"><span class="nav-number">5.</span> <span class="nav-text">Pushdown stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autoboxing-Q-N"><span class="nav-number">7.</span> <span class="nav-text">Autoboxing Q + N</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型-Generics"><span class="nav-number">1.</span> <span class="nav-text">泛型(Generics)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autoboxing"><span class="nav-number">2.</span> <span class="nav-text">Autoboxing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterable-collections"><span class="nav-number">3.</span> <span class="nav-text">Iterable collections</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bags"><span class="nav-number">4.</span> <span class="nav-text">Bags</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pushdown-stack"><span class="nav-number">5.</span> <span class="nav-text">Pushdown stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linked-List"><span class="nav-number">6.</span> <span class="nav-text">Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autoboxing-Q-N"><span class="nav-number">7.</span> <span class="nav-text">Autoboxing Q + N</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exercise"><span class="nav-number">8.</span> <span class="nav-text">exercise</span></a></li></ol></div>
             
 
           </div>
