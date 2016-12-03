@@ -84,18 +84,29 @@
 
 
 
-<meta name="description" content="这个实验使用Java语言编写一个记事本应用，涉及到Swing界面编程、文件读写等知识点。">
+<meta name="description" content="这个程序实现的功能有：  
+
+Java代码的编辑  
+编译及运行Java程序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java实现记事本">
-<meta property="og:url" content="http://yoursite.com/2016/09/21/Java实现记事本/index.html">
+<meta property="og:title" content="Java实现小型编译器">
+<meta property="og:url" content="http://yoursite.com/2016/12/03/Java实现小型编译器/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="这个实验使用Java语言编写一个记事本应用，涉及到Swing界面编程、文件读写等知识点。">
-<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/FIleEditor.png">
-<meta property="og:updated_time" content="2016-12-03T05:43:17.700Z">
+<meta property="og:description" content="这个程序实现的功能有：  
+
+Java代码的编辑  
+编译及运行Java程序">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E5%9B%BE%E5%83%8F%203.png">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/2016_12_03_2.png">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/2016_12_03_3.png">
+<meta property="og:updated_time" content="2016-12-03T09:23:53.963Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java实现记事本">
-<meta name="twitter:description" content="这个实验使用Java语言编写一个记事本应用，涉及到Swing界面编程、文件读写等知识点。">
-<meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/FIleEditor.png">
+<meta name="twitter:title" content="Java实现小型编译器">
+<meta name="twitter:description" content="这个程序实现的功能有：  
+
+Java代码的编辑  
+编译及运行Java程序">
+<meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/%E5%9B%BE%E5%83%8F%203.png">
 
 
 
@@ -123,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/21/Java实现记事本/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/12/03/Java实现小型编译器/"/>
 
 
 
 
 
-  <title> Java实现记事本 | GuangchaoSun's Blog </title>
+  <title> Java实现小型编译器 | GuangchaoSun's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -250,7 +261,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/21/Java实现记事本/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/03/Java实现小型编译器/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="GuangchaoSun">
@@ -274,7 +285,7 @@
             
             
               
-                Java实现记事本
+                Java实现小型编译器
               
             
           </h1>
@@ -286,8 +297,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-21T07:33:37+08:00">
-              2016-09-21
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-03T13:28:23+08:00">
+              2016-12-03
             </time>
 
             &nbsp;|&nbsp;
@@ -295,7 +306,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-03T13:43:17+08:00">
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-03T17:23:53+08:00">
               2016-12-03
             </time>
             
@@ -326,8 +337,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/21/Java实现记事本/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/21/Java实现记事本/" itemprop="commentCount"></span>
+                <a href="/2016/12/03/Java实现小型编译器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/03/Java实现小型编译器/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -353,21 +364,22 @@
       
 
       
-        <p>这个实验使用Java语言编写一个记事本应用，涉及到Swing界面编程、文件读写等知识点。<br><a id="more"></a></p>
-<h2 id="实验环境介绍"><a href="#实验环境介绍" class="headerlink" title="实验环境介绍"></a>实验环境介绍</h2><p>本实验环境采用带桌面的 Ubuntu Linux 环境，实验中会用到桌面上的程序 Eclipse 。</p>
-<p>实验报告可以在个人主页中查看，其中含有每次实验的截图及笔记，以及每次实验的有效学习时间（即在实验环境内操作的时间。如果没有操作，系统会记录为发呆时间）。这些都是您学习的真实性证明。</p>
-<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
-<li>Java Swing 界面编程  </li>
-<li>文件读写</li>
+        <p>这个程序实现的功能有：  </p>
+<ul>
+<li>Java代码的编辑  </li>
+<li>编译及运行Java程序  </li>
 </ul>
-<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>实验效果图如下：<br>可以在完成后的记事本中编辑文本内容、保存文本文件，以及按照指定的路径读取文本文件并显示在文本框中。<br><img src="http://o90jubpdi.bkt.clouddn.com/FIleEditor.png" alt="FileEditor"></p>
-<p>同时，代码在<a href="https://github.com/sunguangchao/shiyanlou/tree/master/FileEditor" title="github" target="_blank" rel="external">FileEditor</a>,里面有比较详细的注释。</p>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>public class <strong>FileWriter</strong> extends OutputStreamWriter<br>用来写入字符文件的便捷类。此类的构造方法假定默认字符编码和默认字节缓冲区大小都是可接受的。要自己指定这些值，可以先在 <code>FileOutputStream</code> 上构造一个 <code>OutputStreamWriter</code>。<br>文件是否可用或是否可以被创建取决于基础平台。特别是某些平台一次只允许一个 FileWriter（或其他文件写入对象）打开文件进行写入。在这种情况下，如果所涉及的文件已经打开，则此类中的构造方法将失败。<br><code>FileWriter</code> 用于写入字符流。要写入原始字节流，请考虑使用 <code>FileOutputStream</code>。 </p>
-<p>public class <strong>FileInputStream</strong> extends InputStream<br><code>FileInputStream</code> 文件系统中的某个文件中获取输入字节。哪些文件可用取决于主机环境。<br><code>FileInputStream</code> 用于读取诸如图像数据之类的原始字节流。要读取字符流，请考虑使用 <code>FileReader</code> 。 </p>
-<p>public class <strong>BufferedReader</strong> extends Reader<br>从字符输入流中读取文本，缓冲各个字符，从而提供字符、数组和行的高效读取。<br>可以指定缓冲区的大小，或者可使用默认的大小。大多数情况下，默认值就足够大了。<br>通常，Reader 所作的每个读取请求都会导致对基础字符或字节流进行相应的读取请求。因此，建议用 <code>BufferedReader</code> 包装所有其 <code>read()</code> 操作可能开销很高的 <code>Reader</code>（如 FileReader 和 InputStreamReader）。例如， </p>
-<pre><code>BufferedReader in
-  = new BufferedReader(new FileReader(&quot;foo.in&quot;));
-</code></pre><p>将缓冲指定文件的输入。如果没有缓冲，则每次调用 <code>read()</code> 或 <code>readLine()</code> 都会导致从文件中读取字节，并将其转换为字符后返回，而这是极其低效的。<br>可以对使用 <code>DataInputStream</code> 进行按原文输入的程序进行本地化，方法是用合适的 <code>BufferedReader</code> 替换每个 <code>DataInputStream</code>。 </p>
+<a id="more"></a>
+<p>主要用到的知识有:  </p>
+<ul>
+<li>IO流的操作</li>
+<li>Runtime</li>
+<li>线程的使用</li>
+</ul>
+<p>测试程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class a</span><br><span class="line">    &#123;</span><br><span class="line">        public static void main(String [] args)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(&quot;Hello ShiYanLou&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>程序运行结果：<br>输入区输入测试程序：<br><img src="http://o90jubpdi.bkt.clouddn.com/%E5%9B%BE%E5%83%8F%203.png" alt=""><br>编译：<br><img src="http://o90jubpdi.bkt.clouddn.com/2016_12_03_2.png" alt=""><br>运行：<br><img src="http://o90jubpdi.bkt.clouddn.com/2016_12_03_3.png" alt=""></p>
+<p>最后，代码放在<a href="https://github.com/sunguangchao/shiyanlou/tree/master/Java_compiler" title="Java_compiler" target="_blank" rel="external">Java_compiler</a>.</p>
+<h2 id="Runtime-java-lang-类"><a href="#Runtime-java-lang-类" class="headerlink" title="Runtime(java.lang 类 )"></a>Runtime(java.lang 类 )</h2><p>每个 Java 应用程序都有一个 <code>Runtime</code> 类实例，使应用程序能够与其运行的环境相连接。可以通过 <code>getRuntime</code> 方法获取当前运行时。<br><strong>exec</strong><br>在单独的进程中执行指定的字符串命令。<br>这是一个很有用的方法。对于 <code>exec(command)</code> 形式的调用而言，其行为与调用 <code>exec(command, null, null)</code> 完全相同<br>参数：<br><code>command</code> - 一条指定的系统命令。<br>返回：<br>一个新的 <code>Process</code> 对象，用于管理子进程<br>抛出：<br><code>SecurityException</code> - 如果安全管理器存在，并且其 <code>checkExec</code> 方法不允许创建子进程<br><code>IOException</code> - 如果发生 I/O 错误<br><code>NullPointerException</code> - 如果 command 为 null<br><code>IllegalArgumentException</code> - 如果 command 为空</p>
 
       
     </div>
@@ -400,8 +412,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/16/单链表逆转/" rel="next" title="单链表逆转">
-                <i class="fa fa-chevron-left"></i> 单链表逆转
+              <a href="/2016/11/30/2-3-Quicksort/" rel="next" title="2.3 Quicksort">
+                <i class="fa fa-chevron-left"></i> 2.3 Quicksort
               </a>
             
           </div>
@@ -410,8 +422,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/09/24/设计模式入门/" rel="prev" title="设计模式入门">
-                设计模式入门 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/12/03/2-4-Priority-Queues/" rel="prev" title="2.4 Priority Queues">
+                2.4 Priority Queues <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -438,8 +450,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/21/Java实现记事本/"
-           data-title="Java实现记事本" data-url="http://yoursite.com/2016/09/21/Java实现记事本/">
+      <div class="ds-thread" data-thread-key="2016/12/03/Java实现小型编译器/"
+           data-title="Java实现小型编译器" data-url="http://yoursite.com/2016/12/03/Java实现小型编译器/">
       </div>
     
   </div>
@@ -565,7 +577,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验环境介绍"><span class="nav-number">1.</span> <span class="nav-text">实验环境介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">2.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验结果"><span class="nav-number">3.</span> <span class="nav-text">实验结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考："><span class="nav-number">4.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime-java-lang-类"><span class="nav-number">1.</span> <span class="nav-text">Runtime(java.lang 类 )</span></a></li></ol></div>
             
 
           </div>
