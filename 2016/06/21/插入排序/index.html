@@ -86,13 +86,13 @@
 
 <meta name="description" content="本文主要介绍排序的几种实现，简单计算一下复杂度。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="插入排序">
+<meta property="og:title" content="几种常用的排序算法">
 <meta property="og:url" content="http://yoursite.com/2016/06/21/插入排序/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
 <meta property="og:description" content="本文主要介绍排序的几种实现，简单计算一下复杂度。">
-<meta property="og:updated_time" content="2016-11-14T13:59:27.982Z">
+<meta property="og:updated_time" content="2016-12-04T01:58:48.602Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="插入排序">
+<meta name="twitter:title" content="几种常用的排序算法">
 <meta name="twitter:description" content="本文主要介绍排序的几种实现，简单计算一下复杂度。">
 
 
@@ -127,7 +127,7 @@
 
 
 
-  <title> 插入排序 | GuangchaoSun's Blog </title>
+  <title> 几种常用的排序算法 | GuangchaoSun's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -272,7 +272,7 @@
             
             
               
-                插入排序
+                几种常用的排序算法
               
             
           </h1>
@@ -293,8 +293,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T21:59:27+08:00">
-              2016-11-14
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-04T09:58:48+08:00">
+              2016-12-04
             </time>
             
           </span>
@@ -384,7 +384,6 @@
 }/*插入排序例程*/
 </code></pre><p>插入排序为<code>O(N^2)</code><br>N个互异数的数组的平均逆序数是<code>N(N-1)/4</code>。</p>
 <h2 id="希尔排序-缩小增量排序"><a href="#希尔排序-缩小增量排序" class="headerlink" title="希尔排序-缩小增量排序"></a>希尔排序-缩小增量排序</h2><p><strong>思想：</strong><br>把记录按步长 gap 分组，对每组记录采用直接插入排序方法进行排序。随着步长逐渐减小，所分成的组包含的记录越来越多，当步长的值减小到 1 时，整个数据合成为一组，构成一组有序记录，则完成排序。<br><strong>直接插入排序和希尔排序的比较：</strong>  </p>
-<blockquote>
 <ol>
 <li>直接插入排序是稳定的；而希尔排序是不稳定的。  </li>
 <li>直接插入排序更适合于原始记录基本有序的集合。  </li>
@@ -392,7 +391,6 @@
 <li>在希尔排序中，增量序列gap的取法必须满足：最后一个步长必须是1 。   </li>
 <li>直接插入排序也适用于链式存储结构；希尔排序不适用于链式结构。  </li>
 </ol>
-</blockquote>
 <p>C语言代码实现：</p>
 <pre><code>void Shellsort(ElementType A[],int N)
 {
@@ -452,14 +450,12 @@ public static void main(String[] args) {
  }
 }
 </code></pre><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p><strong>基本方法：</strong><br>建立N个元素的二叉堆，花费时间<code>O(N)</code>，然后执行N次<code>DeletedMin</code>操作花费时间<code>O(log⁡N)</code>，所以总的运行时间为<code>O(Nlog⁡N)</code>。<br><strong>缺点：</strong><br><code>DeleteMin</code>操作中使用了一个数组用来存储离开堆得元素，所以存储需求增加一倍。<br><strong>算法步骤：</strong>  </p>
-<blockquote>
 <ol>
 <li>创建一个堆H[0..n-1]  </li>
 <li>把堆首（最大值）和堆尾互换  </li>
 <li>把堆的尺寸缩小1，并调用PercDown（）,目的是把新的数组顶端数据调整到相应位置  </li>
 <li>重复步骤2，直到堆的尺寸为1       </li>
 </ol>
-</blockquote>
 <p>C语言实现：</p>
 <pre><code>#define LeftChild(i)(2*(i)+1)
 void
@@ -491,7 +487,6 @@ void Heapsort(ElementType A[],int N)
  }
 }
 </code></pre><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>归并排序以<code>O(NlogN)</code>最坏情形运行时间运行，而所使用的比较次数几乎是最优的。是递归算法的一个很好的实例。分治是递归非常有用的用法。<br><strong>算法步骤:</strong>  </p>
-<blockquote>
 <ol>
 <li>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列  </li>
 <li>设定两个指针，最初位置分别为两个已经排序序列的起始位置  </li>
@@ -499,7 +494,6 @@ void Heapsort(ElementType A[],int N)
 <li>重复步骤3直到某一指针达到序列尾  </li>
 <li>将另一序列剩下的所有元素直接复制到合并序列尾  </li>
 </ol>
-</blockquote>
 <p>C语言实现：</p>
 <pre><code>void MSort(ElementType A[],ElementType TmpArray[],int Left,int Right)
 {
@@ -674,7 +668,7 @@ void Heapsort(ElementType A[],int N)
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/06/21/插入排序/"
-           data-title="插入排序" data-url="http://yoursite.com/2016/06/21/插入排序/">
+           data-title="几种常用的排序算法" data-url="http://yoursite.com/2016/06/21/插入排序/">
       </div>
     
   </div>
@@ -727,7 +721,7 @@ void Heapsort(ElementType A[],int N)
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -736,7 +730,7 @@ void Heapsort(ElementType A[],int N)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="GuangchaoSun's Blog">
 <meta property="og:description" content="Single LinkedList Reverse本题要求实现一个函数，将给定的单链表逆转。">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/signal_list_revese.png">
-<meta property="og:updated_time" content="2016-11-14T13:53:28.181Z">
+<meta property="og:updated_time" content="2016-12-04T01:56:56.050Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单链表逆转">
 <meta name="twitter:description" content="Single LinkedList Reverse本题要求实现一个函数，将给定的单链表逆转。">
@@ -295,8 +295,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T21:53:28+08:00">
-              2016-11-14
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-04T09:56:56+08:00">
+              2016-12-04
             </time>
             
           </span>
@@ -355,102 +355,96 @@
       
         <p>Single LinkedList Reverse<br>本题要求实现一个函数，将给定的单链表逆转。<br><a id="more"></a><br><strong>函数接口定义：</strong>  </p>
 <pre><code>List Reverse(List L);
-</code></pre><p>其中<code>List</code>结构定义如下:</p>
-<pre><code>typedef struct Node *PtrToNode;
-strut Node
-   {
-      ElementType Data;/*存储结点数据*/
-      PtrToNode Next;/*指向下一个结点的指针*/
-    };
-typedef PtrToNode List;/*定义单链表类型*/
-</code></pre><p><code>L</code>是给定链表，函数<code>Reverse</code>要返回被逆转后的链表。<br>最后的代码：</p>
-<pre><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-typedef int ElementType;
-typedef struct Node *PtrToNode;
-struct Node{
+</code></pre><p>其中<code>List</code>结构定义如下:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> Node *PtrToNode;</span><br><span class="line">strut Node</span><br><span class="line">   &#123;</span><br><span class="line">      ElementType Data;<span class="comment">/*存储结点数据*/</span></span><br><span class="line">      PtrToNode Next;<span class="comment">/*指向下一个结点的指针*/</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="keyword">typedef</span> PtrToNode List;<span class="comment">/*定义单链表类型*/</span></span><br></pre></td></tr></table></figure></p>
+<p><code>L</code>是给定链表，函数<code>Reverse</code>要返回被逆转后的链表。<br>最后的代码：</p>
+<pre><code class="c"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span>
+<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="keyword">typedef</span> <span class="keyword">int</span> ElementType;
+<span class="keyword">typedef</span> <span class="keyword">struct</span> Node *PtrToNode;
+<span class="keyword">struct</span> Node{
     ElementType Data;
     PtrToNode Next;
 };
-typedef PtrToNode List;
+<span class="keyword">typedef</span> PtrToNode List;
 
-List Read();
-void Print(List L);
-List Reverse(List L);
-int main()
-{
+<span class="function">List <span class="title">Read</span><span class="params">()</span></span>;
+<span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">(List L)</span></span>;
+<span class="function">List <span class="title">Reverse</span><span class="params">(List L)</span></span>;
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
     List L1,L2;
     L1 = Read();
     L2 = Reverse(L1);
     Print(L1);
     Print(L2);
-    return 0;
+    <span class="keyword">return</span> <span class="number">0</span>;
 }
 
-List Read()
-{
-    int len = 0;
-    int num = 0;
-    PtrToNode head = NULL;
-    PtrToNode last = NULL;/*用于存放线性表*/
+<span class="function">List <span class="title">Read</span><span class="params">()</span>
+</span>{
+    <span class="keyword">int</span> len = <span class="number">0</span>;
+    <span class="keyword">int</span> num = <span class="number">0</span>;
+    PtrToNode head = <span class="literal">NULL</span>;
+    PtrToNode last = <span class="literal">NULL</span>;<span class="comment">/*用于存放线性表*/</span>
 
-    scanf(&quot;%d&quot;,&amp;len);
-    if( 0== len){
-        return NULL;
+    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;len);
+    <span class="keyword">if</span>( <span class="number">0</span>== len){
+        <span class="keyword">return</span> <span class="literal">NULL</span>;
     }
-    scanf(&quot;%d&quot;,&amp;num);/*读取第一个结点*/ 
-    head = (PtrToNode)malloc(sizeof(struct Node));
+    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;num);<span class="comment">/*读取第一个结点*/</span> 
+    head = (PtrToNode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> Node));
     head-&gt;Data = num;
-    head-&gt;Next = NULL;
+    head-&gt;Next = <span class="literal">NULL</span>;
     last = head;
     len--;  
-    while(len &gt; 0){
-        scanf(&quot;%d&quot;,&amp;num);
-        PtrToNode node = (PtrToNode)malloc(sizeof(struct Node));
+    <span class="keyword">while</span>(len &gt; <span class="number">0</span>){
+        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;num);
+        PtrToNode node = (PtrToNode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> Node));
         node-&gt;Data = num;
-        node-&gt;Next = NULL;
+        node-&gt;Next = <span class="literal">NULL</span>;
         last-&gt;Next = node;
-        last = node;/*将两部分连接起来*/
+        last = node;<span class="comment">/*将两部分连接起来*/</span>
         len --;
 
     }
-    return head;
+    <span class="keyword">return</span> head;
 }
 
-void Print(List L){
-    if(NULL == L){
-        return ;
+<span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">(List L)</span></span>{
+    <span class="keyword">if</span>(<span class="literal">NULL</span> == L){
+        <span class="keyword">return</span> ;
     }
     PtrToNode last = L;
-    while(NULL != last){
-        printf(&quot;%d &quot;,last-&gt;Data);
+    <span class="keyword">while</span>(<span class="literal">NULL</span> != last){
+        <span class="built_in">printf</span>(<span class="string">"%d "</span>,last-&gt;Data);
         last = last-&gt;Next;
     }
-    putchar(&apos;\n&apos;);
+    <span class="built_in">putchar</span>(<span class="string">'\n'</span>);
 
 }
-List Reverse(List L){
-    if(NULL == L){
-        return NULL;
+<span class="function">List <span class="title">Reverse</span><span class="params">(List L)</span></span>{
+    <span class="keyword">if</span>(<span class="literal">NULL</span> == L){
+        <span class="keyword">return</span> <span class="literal">NULL</span>;
     }
-    PtrToNode listre = NULL;
+    PtrToNode listre = <span class="literal">NULL</span>;
     PtrToNode t = L-&gt;Next;
-    if(NULL == t){/*只有一个的情况*/
+    <span class="keyword">if</span>(<span class="literal">NULL</span> == t){<span class="comment">/*只有一个的情况*/</span>
         listre = L;
-        return listre;
+        <span class="keyword">return</span> listre;
     }
     L-&gt;Next = t-&gt;Next;
     listre = t;
     t-&gt;Next = L;
-    while(NULL != L-&gt;Next){
+    <span class="keyword">while</span>(<span class="literal">NULL</span> != L-&gt;Next){
         t = L-&gt;Next;
         L-&gt;Next = t-&gt;Next;
         t-&gt;Next = listre;
         listre = t;
     }
-    return listre;
+    <span class="keyword">return</span> listre;
 }
-</code></pre><p>结果：<br><img src="http://o90jubpdi.bkt.clouddn.com/signal_list_revese.png" alt="signal_list_reverse"></p>
+</code></pre>
+<p>结果：<br><img src="http://o90jubpdi.bkt.clouddn.com/signal_list_revese.png" alt="signal_list_reverse"></p>
 
       
     </div>
@@ -483,8 +477,8 @@ List Reverse(List L){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/21/插入排序/" rel="next" title="插入排序">
-                <i class="fa fa-chevron-left"></i> 插入排序
+              <a href="/2016/06/21/插入排序/" rel="next" title="几种常用的排序算法">
+                <i class="fa fa-chevron-left"></i> 几种常用的排序算法
               </a>
             
           </div>
@@ -566,7 +560,7 @@ List Reverse(List L){
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -575,7 +569,7 @@ List Reverse(List L){
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
