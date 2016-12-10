@@ -84,25 +84,16 @@
 
 
 
-<meta name="description" content="性质：
-
-长度为N的数组排序所需时间和NlogN成正比
-但缺点是所需额外空间和N成正比">
+<meta name="description" content="归并排序将两个有序的数组归并成成一个更大的数组。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2.2 Mergesort">
 <meta property="og:url" content="http://yoursite.com/2016/11/30/2-2-Mergesort/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="性质：
-
-长度为N的数组排序所需时间和NlogN成正比
-但缺点是所需额外空间和N成正比">
-<meta property="og:updated_time" content="2016-11-30T15:37:57.052Z">
+<meta property="og:description" content="归并排序将两个有序的数组归并成成一个更大的数组。">
+<meta property="og:updated_time" content="2016-12-10T01:46:39.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2.2 Mergesort">
-<meta name="twitter:description" content="性质：
-
-长度为N的数组排序所需时间和NlogN成正比
-但缺点是所需额外空间和N成正比">
+<meta name="twitter:description" content="归并排序将两个有序的数组归并成成一个更大的数组。">
 
 
 
@@ -302,8 +293,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-30T23:37:57+08:00">
-              2016-11-30
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-10T09:46:39+08:00">
+              2016-12-10
             </time>
             
           </span>
@@ -360,23 +351,23 @@
       
 
       
-        <p>性质：</p>
+        <p>归并排序将两个有序的数组归并成成一个更大的数组。<br><a id="more"></a><br>性质：</p>
 <ul>
 <li>长度为N的数组排序所需时间和NlogN成正比</li>
 <li>但缺点是所需额外空间和N成正比</li>
 </ul>
-<a id="more"></a>
 <p>所以是典型的以空间换时间的算法。</p>
-<h2 id="原地归并的抽象方法"><a href="#原地归并的抽象方法" class="headerlink" title="原地归并的抽象方法"></a>原地归并的抽象方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void merge(Comparable[] a, int lo, int mid, int hi)</span><br><span class="line">&#123;</span><br><span class="line">	//将a[lo...mid]和a[mid...hi]归并</span><br><span class="line">	int i = lo,j = mid+1;</span><br><span class="line">	//将a[lo...hi]复制到aux[lo...hi]</span><br><span class="line">	for(int k = lo; k &lt;= hi; k++)</span><br><span class="line">		aux[k] = a[k];</span><br><span class="line"></span><br><span class="line">	for(int k = lo; k &lt;= hi; k++)&#123;</span><br><span class="line">		if     (i &gt; mid)           a[k] = aux[j++];//左边用尽，取右边</span><br><span class="line">		else if(j &gt; hi)            a[k] = aux[i++];//右边用尽，取左边</span><br><span class="line">		else if(less(a[j], a[i]))  a[k] = aux[j++];//相比的两个值，右边小就把右边的放入归并队列</span><br><span class="line">		else                       a[k] = aux[i++];//同理，左边小，就把左边的放入归并序列</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="自顶向下的归并排序"><a href="#自顶向下的归并排序" class="headerlink" title="自顶向下的归并排序"></a>自顶向下的归并排序</h2><p>下面这段代码证明了：如果它能将两个子数组排序，它就能够通过归并两个子数组来将<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Merge&#123;</span><br><span class="line">	private static Comparable[] aux; //归并所需的辅助数组</span><br><span class="line">	public static void sort()&#123;</span><br><span class="line">		aux = new Comparable[a.length];//一次性分配空间</span><br><span class="line">		sort(a, 0, a.length-1);</span><br><span class="line">	&#125;</span><br><span class="line">	public static void sort(Comparable[] a,int lo,int hi)&#123;</span><br><span class="line">		if(hi &lt; lo) return;</span><br><span class="line">		int mid = lo + (hi-lo)/2;</span><br><span class="line">		sort(a, lo, mid);          //将左半边排序</span><br><span class="line">		sort(a, mid+1, hi);        //将右半边排序</span><br><span class="line">		merge(a, lo, mid, hi);     //归并结果</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><code>sort()</code>方法的作用在于安排多次<code>merge()</code>方法的调用顺序<br>归并排序所需的时间和NlgN成正比，只需要比遍历数组多个对数因子的时间就能将一个庞大的数组排序。<br>缺点是辅助数组所使用的额外空间和N的大小成正比。<br><strong>改进：</strong></p>
+<h2 id="原地归并的抽象方法"><a href="#原地归并的抽象方法" class="headerlink" title="原地归并的抽象方法"></a>原地归并的抽象方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(Comparable[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> mid, <span class="keyword">int</span> hi)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="comment">//将a[lo...mid]和a[mid...hi]归并</span></span><br><span class="line">	<span class="keyword">int</span> i = lo,j = mid+<span class="number">1</span>;</span><br><span class="line">	<span class="comment">//将a[lo...hi]复制到aux[lo...hi]</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = lo; k &lt;= hi; k++)</span><br><span class="line">		aux[k] = a[k];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = lo; k &lt;= hi; k++)&#123;</span><br><span class="line">		<span class="keyword">if</span>     (i &gt; mid)           a[k] = aux[j++];<span class="comment">//左边用尽，取右边</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(j &gt; hi)            a[k] = aux[i++];<span class="comment">//右边用尽，取左边</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(less(a[j], a[i]))  a[k] = aux[j++];<span class="comment">//相比的两个值，右边小就把右边的放入归并队列</span></span><br><span class="line">		<span class="keyword">else</span>                       a[k] = aux[i++];<span class="comment">//同理，左边小，就把左边的放入归并序列</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自顶向下的归并排序"><a href="#自顶向下的归并排序" class="headerlink" title="自顶向下的归并排序"></a>自顶向下的归并排序</h2><p>下面这段代码证明了：如果它能将两个子数组排序，它就能够通过归并两个子数组来将<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Merge</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Comparable[] aux; <span class="comment">//归并所需的辅助数组</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">()</span></span>&#123;</span><br><span class="line">		aux = <span class="keyword">new</span> Comparable[a.length];<span class="comment">//一次性分配空间</span></span><br><span class="line">		sort(a, <span class="number">0</span>, a.length-<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a,<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(hi &lt; lo) <span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">int</span> mid = lo + (hi-lo)/<span class="number">2</span>;</span><br><span class="line">		sort(a, lo, mid);          <span class="comment">//将左半边排序</span></span><br><span class="line">		sort(a, mid+<span class="number">1</span>, hi);        <span class="comment">//将右半边排序</span></span><br><span class="line">		merge(a, lo, mid, hi);     <span class="comment">//归并结果</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>sort()</code>方法的作用在于安排多次<code>merge()</code>方法的调用顺序。<br>归并排序所需的时间和<code>NlgN</code>成正比，只需要比遍历数组多个对数因子的时间就能将一个庞大的数组排序。<br><code>缺点</code>是辅助数组所使用的额外空间和N的大小成正比。<br><strong>改进：</strong>  </p>
 <ul>
 <li>对小规模子数组使用插入排序</li>
 <li>测试数组是否有序</li>
-<li>不将元素复制到辅助数组<br>MergeX.java implements these improvements.</li>
+<li>不将元素复制到辅助数组</li>
 </ul>
-<h2 id="自底向上的归并序列"><a href="#自底向上的归并序列" class="headerlink" title="自底向上的归并序列"></a>自底向上的归并序列</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class MergeBU&#123;</span><br><span class="line">	private static Comparable[] aux; //归并所需辅助数组</span><br><span class="line">	public static void sort(Comparable[] a)&#123;</span><br><span class="line">		int N = a.length;</span><br><span class="line">		aux = new Comparable[N];</span><br><span class="line">		for(int sz = 1;sz &lt; N;sz = sz + sz) //sz子数组大小</span><br><span class="line">			for(int lo = 0;lo &lt; N-sz;lo += sz+sz) //lo：子数组索引</span><br><span class="line">				merge(a, lo, lo+sz-1, Math.min(lo+sz+sz-1, N-1));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>自底向上的归并排序比较适合用链表组织的数据。<br>归并排序是一种渐进最优的基于比较排序的算法。</p>
+<p><a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise2_2/MergeX.java" target="_blank" rel="external">MergeX.java</a> implements these improvements.</p>
+<h2 id="自底向上的归并序列"><a href="#自底向上的归并序列" class="headerlink" title="自底向上的归并序列"></a>自底向上的归并序列</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MergeBU</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Comparable[] aux; <span class="comment">//归并所需辅助数组</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> N = a.length;</span><br><span class="line">		aux = <span class="keyword">new</span> Comparable[N];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> sz = <span class="number">1</span>;sz &lt; N;sz = sz + sz) <span class="comment">//sz子数组大小</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> lo = <span class="number">0</span>;lo &lt; N-sz;lo += sz+sz) <span class="comment">//lo：子数组索引</span></span><br><span class="line">				merge(a, lo, lo+sz-<span class="number">1</span>, Math.min(lo+sz+sz-<span class="number">1</span>, N-<span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>自底向上的归并排序比较适合用链表组织的数据。<br>归并排序是一种渐进最优的基于比较排序的算法。  </p>
 <h2 id="Creative-Problems"><a href="#Creative-Problems" class="headerlink" title="Creative Problems"></a>Creative Problems</h2><ol>
 <li><p>Faster merge. Implement a version of merge() that copies the second half of a[] to aux[] in decreasing order and then does the merge back to a[]. This change allows you to remove the code to test that each of the halves has been exhausted from the inner loop. Note: the resulting sort is not stable.</p>
 <pre><code>private static void merge(Comparable[] a, int lo, int mid, int hi){
@@ -391,9 +382,9 @@
         else                    a[k] = aux[i++];
 }
 </code></pre></li>
-<li><p>Improvements. Write a program MergeX.java that implements the three improvements to mergesort that are described in the text: add a cutoff from small subarrays, test whether the array is already in order, and avoid the copy by switching arguments in the recursive code.</p>
+<li><p>Improvements. Write a program <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise2_2/MergeX.java" target="_blank" rel="external">MergeX.java</a> that implements the three improvements to mergesort that are described in the text: add a cutoff from small subarrays, test whether the array is already in order, and avoid the copy by switching arguments in the recursive code.</p>
 </li>
-<li>Inversions. Develop and implement a linearithmic algorithm Inversions.java for computing the number of inversions in a given array (the number of exchanges that would be performed by insertion sort for that array—see Section 2.1). This quantity is related to the Kendall tau distance; see Section 2.5.<br>Web Exercise</li>
+<li>Inversions. Develop and implement a linearithmic algorithm <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise2_2/Inversions.java" target="_blank" rel="external">Inversions.java</a> for computing the number of inversions in a given array (the number of exchanges that would be performed by insertion sort for that array—see Section 2.1). This quantity is related to the Kendall tau distance; see Section 2.5.<br>Web Exercise(N)</li>
 </ol>
 <hr>
 
@@ -512,7 +503,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

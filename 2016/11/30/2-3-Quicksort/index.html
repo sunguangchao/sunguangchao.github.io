@@ -84,7 +84,7 @@
 
 
 
-<meta name="description" content="优点：
+<meta name="description" content="快速排序是应用最广泛的排序算法优点：  
 
 原地排序（只需要一个很小的辅助栈）
 长度为N的数组排序所时间和NlgN成正比">
@@ -92,14 +92,14 @@
 <meta property="og:title" content="2.3 Quicksort">
 <meta property="og:url" content="http://yoursite.com/2016/11/30/2-3-Quicksort/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="优点：
+<meta property="og:description" content="快速排序是应用最广泛的排序算法优点：  
 
 原地排序（只需要一个很小的辅助栈）
 长度为N的数组排序所时间和NlgN成正比">
-<meta property="og:updated_time" content="2016-11-30T15:41:07.339Z">
+<meta property="og:updated_time" content="2016-12-10T01:43:01.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2.3 Quicksort">
-<meta name="twitter:description" content="优点：
+<meta name="twitter:description" content="快速排序是应用最广泛的排序算法优点：  
 
 原地排序（只需要一个很小的辅助栈）
 长度为N的数组排序所时间和NlgN成正比">
@@ -302,8 +302,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-30T23:41:07+08:00">
-              2016-11-30
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-10T09:43:01+08:00">
+              2016-12-10
             </time>
             
           </span>
@@ -360,68 +360,30 @@
       
 
       
-        <p>优点：</p>
+        <p>快速排序是应用最广泛的排序算法<br>优点：  </p>
 <ul>
 <li>原地排序（只需要一个很小的辅助栈）</li>
 <li>长度为N的数组排序所时间和NlgN成正比</li>
 </ul>
 <a id="more"></a>
 <p>但需要非常小心才能避免低劣的性能。<br>Quick Sort is a divide-and-conquer method for sorting.<br>递归调用发生在处理整个数组之后，<code>切分（partition）</code>的位置取决于数据组的内容。</p>
-<pre><code>public class Quick{
-
-    public static void sort(Comparable[] a)
-    {
-        StdRandom.shuffle(a);//消除对依赖的输入
-        sort(a,0,a.length-1);
-    }
-    public static void sort(Comparable[] a,int lo,int hi)
-    {
-        if(hi&lt;lo) return;
-        int  j = portation(a,lo,hi);//切分
-        sort(a,lo,j-1);//将左半部分排序
-        sort(a,j+1,hi);//将右半部分排序
-    }
-}
-</code></pre><p>切分（portition）需要满足三个条件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Quick</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span></span><br><span class="line">	</span>&#123;</span><br><span class="line">		StdRandom.shuffle(a);<span class="comment">//消除对依赖的输入</span></span><br><span class="line">		sort(a,<span class="number">0</span>,a.length-<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a,<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span><br><span class="line">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(hi&lt;lo) <span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">int</span>  j = portation(a,lo,hi);<span class="comment">//切分</span></span><br><span class="line">		sort(a,lo,j-<span class="number">1</span>);<span class="comment">//将左半部分排序</span></span><br><span class="line">		sort(a,j+<span class="number">1</span>,hi);<span class="comment">//将右半部分排序</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>切分（portition）需要满足三个条件：</p>
 <ul>
 <li>对于某个j，a[j]已经排定  </li>
 <li>a[lo]到a[j-1]的所有元素都不大于a[j]  </li>
 <li>a[j+1]到a[hi]的所有元素都不小于a[j]</li>
 </ul>
-<p>快速排序的切分：</p>
-<pre><code>private static int partition(Comparable[] a,int lo,int hi)
-{
-    int i = lo,j = hi+1; //左右扫描指针
-    Comparable v = a[lo];//切分元素
-    while(true)
-    {
-            //扫描左右，检查扫描是否结束并交换元素
-        while(less(a[++i],v)) if(i == lo) break;
-        while(less(v,a[--j])) if(i == hi) break;
-        if(i &gt;= j) break;
-        exch(a,i,j);
-
-    }
-    exch(a,lo,j);//将v = a[j]放入正确的位置
-    return j;//a[lo..j-1] &lt;= a[j] &lt;= a[j+1..hi]达成
-}
-</code></pre><p>具体的思路是：随意地取a[lo]为切分元素，然后从数组的左端开始扫描直到找到一个大于等于他的元素，再从右端开始扫描，直到找到一个小于等于他的元素。我们交换这两个元素的位置。<br>快速排序的缺点：在切分不平衡时程序可能会极为低效。</p>
-<h2 id="三向切分的快速排序："><a href="#三向切分的快速排序：" class="headerlink" title="三向切分的快速排序："></a>三向切分的快速排序：</h2><pre><code>public class Quick3way{
-    private static void sort(Comparable[] a,int lo,int hi){
-        if(hi &lt;= lo) return;
-        int lt = lo,i = lo+1,gt = hi;
-        Comparable v = a[lo];
-        while(i &lt;= gt){
-            int cmp = a[i].compareTo(v);
-            if     (cmp &lt; 0) exch(a, lt++, i++);
-            else if(cmp &gt; 0) ecah(a, i, gt--);
-            else i++;
-        }//现在a[lo..lt-1] &lt; V =a[lt..gt] &lt; a[gt..hi]成立
-        sort(a, lo, lt - 1);
-        sort(a, gt + 1, hi);
-    }
-}
-</code></pre><h2 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h2><ol>
+<p>快速排序的切分：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(Comparable[] a,<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = lo,j = hi+<span class="number">1</span>; <span class="comment">//左右扫描指针</span></span><br><span class="line">	Comparable v = a[lo];<span class="comment">//切分元素</span></span><br><span class="line">	<span class="keyword">while</span>(<span class="keyword">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">            <span class="comment">//扫描左右，检查扫描是否结束并交换元素</span></span><br><span class="line">		<span class="keyword">while</span>(less(a[++i],v)) <span class="keyword">if</span>(i == lo) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">while</span>(less(v,a[--j])) <span class="keyword">if</span>(i == hi) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">if</span>(i &gt;= j) <span class="keyword">break</span>;</span><br><span class="line">		exch(a,i,j);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	exch(a,lo,j);<span class="comment">//将v = a[j]放入正确的位置</span></span><br><span class="line">	<span class="keyword">return</span> j;<span class="comment">//a[lo..j-1] &lt;= a[j] &lt;= a[j+1..hi]达成</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>具体的思路是：随意地取<code>a[lo]</code>为切分元素，然后从数组的<code>左端</code>开始扫描直到找到一个大于等于他的元素，再从右端开始扫描，直到找到一个小于等于他的元素。我们<code>交换</code>这两个元素的位置。<br>快速排序的缺点：在切分<code>不平衡</code>时程序可能会极为低效。</p>
+<h2 id="三向切分的快速排序："><a href="#三向切分的快速排序：" class="headerlink" title="三向切分的快速排序："></a>三向切分的快速排序：</h2><p>应用场景：如果出现有大量重复的数组，这时候就需要用到三向切分的快速排序。<br>使用<code>Comparable</code>接口（而非less()）对a[i]进行三向比较来直接处理以下三种情况：</p>
+<ul>
+<li>a[i]小于v，将a[lt]和a[i]交换，将lt和i加一；</li>
+<li>a[i]大于v，将a[gt]和a[i]交换，将gt减一；</li>
+<li>a[i]等于v，将i加一；</li>
+</ul>
+<p>下面为代码实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Quick3way</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a,<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(hi &lt;= lo) <span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">int</span> lt = lo,i = lo+<span class="number">1</span>,gt = hi;</span><br><span class="line">		Comparable v = a[lo];</span><br><span class="line">		<span class="keyword">while</span>(i &lt;= gt)&#123;</span><br><span class="line">			<span class="keyword">int</span> cmp = a[i].compareTo(v);</span><br><span class="line">			<span class="keyword">if</span>     (cmp &lt; <span class="number">0</span>) exch(a, lt++, i++);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(cmp &gt; <span class="number">0</span>) ecah(a, i, gt--);</span><br><span class="line">			<span class="keyword">else</span> i++;</span><br><span class="line">		&#125;<span class="comment">//现在a[lo..lt-1] &lt; V =a[lt..gt] &lt; a[gt..hi]成立</span></span><br><span class="line">		sort(a, lo, lt - <span class="number">1</span>);</span><br><span class="line">		sort(a, gt + <span class="number">1</span>, hi);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h2><ol>
 <li>Write a program <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise2_3/Sort2distinct.java" target="_blank" rel="external">Sort2distinct.java</a> that sorts an array that is known to contain just two distinct key values.</li>
 <li>About how many compares will Quick.sort() make when sorting an array of N items that are all equal?<br>Solution. ~ N lg N compares. Each partition will divide the array in half, plus or minus one.</li>
 <li>Show, in the style of the trace given with the code, how the entropy-optimal sort first partitions the array <code>B A B A B A B A C A D A B R A</code>.</li>
@@ -542,7 +504,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
