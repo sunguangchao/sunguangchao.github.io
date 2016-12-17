@@ -90,10 +90,12 @@
 <meta property="og:url" content="http://yoursite.com/2016/12/10/2-5-Sorting-Application/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
 <meta property="og:description" content="Java的约定使得我们能够利用Java的回调机制将任意实现了Comparable的数据类型排序。实现Comparable接口只需要定义一个compareTo()函数并在其中定义该类型数据的大小关系。">
-<meta property="og:updated_time" content="2016-12-10T01:56:49.278Z">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/sort-characteristics.png">
+<meta property="og:updated_time" content="2016-12-17T08:47:41.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2.5 Sorting Application">
 <meta name="twitter:description" content="Java的约定使得我们能够利用Java的回调机制将任意实现了Comparable的数据类型排序。实现Comparable接口只需要定义一个compareTo()函数并在其中定义该类型数据的大小关系。">
+<meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/sort-characteristics.png">
 
 
 
@@ -293,8 +295,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-10T09:56:49+08:00">
-              2016-12-10
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-17T16:47:41+08:00">
+              2016-12-17
             </time>
             
           </span>
@@ -351,8 +353,9 @@
       
 
       
-        <p>Java的约定使得我们能够利用Java的回调机制将任意实现了Comparable的数据类型排序。<br>实现Comparable接口只需要定义一个compareTo()函数并在其中定义该类型数据的大小关系。<br><a id="more"></a><br>统计a[]中不重复元素的个数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Quick.sort(a);</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;<span class="comment">//假设a.length &gt; 0</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; a.length; i++)</span><br><span class="line">	<span class="keyword">if</span>(a[i].compareTo(a[i+<span class="number">1</span>]) != <span class="number">0</span>)</span><br><span class="line">		count ++;</span><br></pre></td></tr></table></figure></p>
-<p>找出一组数中的第k小元素<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Comparable <span class="title">select</span><span class="params">(Comparable[] a, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">	StdRandom.shuffle(a);</span><br><span class="line">	<span class="keyword">int</span> lo = <span class="number">0</span>, hi = a.length - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(hi &gt; lo)&#123;</span><br><span class="line">		<span class="keyword">int</span> j = partition(a, lo, hi);</span><br><span class="line">		<span class="keyword">if</span>(j == k) <span class="keyword">return</span> a[k];</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(j &gt; k) hi = j - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(j &lt; k) lo = j + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> a[k];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p>Java的约定使得我们能够利用Java的回调机制将任意实现了Comparable的数据类型排序。<br>实现Comparable接口只需要定义一个compareTo()函数并在其中定义该类型数据的大小关系。<br><a id="more"></a><br>指针排序<br>我们使用的方法在经典的教材中被称为指针排序，因为我们只处理元素的引用而不移动数据本身。除了原始数据类型之外，我们操作的总是数据的引用。<br>多种排序方法<br>Java的<code>Comparator</code>方法允许我们在一个类中实现多种排序方法。用<code>Comparator</code>接口来代替<code>Comparable</code>接口能够更地将数据类型的定义和两个该类型的对象应该如何比较的定义区分开来。<br>稳定性：<br>如果一个排序算法能够用保留数组中重复元素的相对位置可以被称为稳定的。<br><img src="http://o90jubpdi.bkt.clouddn.com/sort-characteristics.png" alt=""></p>
+<p>统计<code>a[]</code>中不重复元素的个数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Quick.sort(a);</span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;<span class="comment">//假设a.length &gt; 0</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; a.length; i++)</span><br><span class="line">    <span class="keyword">if</span>(a[i].compareTo(a[i+<span class="number">1</span>]) != <span class="number">0</span>)</span><br><span class="line">        count ++;</span><br></pre></td></tr></table></figure></p>
+<p>找出一组数中的第k小元素：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Comparable <span class="title">select</span><span class="params">(Comparable[] a, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    StdRandom.shuffle(a);</span><br><span class="line">    <span class="keyword">int</span> lo = <span class="number">0</span>, hi = a.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(hi &gt; lo)&#123;</span><br><span class="line">        <span class="keyword">int</span> j = partition(a, lo, hi);</span><br><span class="line">        <span class="keyword">if</span>(j == k) <span class="keyword">return</span> a[k];</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(j &gt; k) hi = j - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(j &lt; k) lo = j + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a[k];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><code>partition()</code>方法会将数组<code>a[lo]</code>至<code>a[hi]</code>重新排列并返回一个整数j使得<code>a[lo..j-1]</code>小于等于<code>a[j]</code>且<code>a[j+1..hi]</code>大于等于<code>a[j]</code>。</p>
 <h2 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h2><ol>
 <li><p>Consider the following implementation of the compareTo() method for String. How does the third line help with efficiency?</p>
@@ -371,9 +374,15 @@
 <li>Write a program Frequency.java that reads strings from standard input and prints the number of times each string occurs, in descending order of frequency.</li>
 </ol>
 <h2 id="Creative-Problems"><a href="#Creative-Problems" class="headerlink" title="Creative Problems"></a>Creative Problems</h2><ol>
-<li><strong>Scheduling.</strong> Write a program SPT.java that reads job names and processing times from standard input and prints a schedule that minimizes average completion time, as described in the text.</li>
+<li><strong>Scheduling.</strong> Write a program <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise2_5/SPT.java" target="_blank" rel="external">SPT.java</a> that reads job names and processing times from standard input and prints a schedule that minimizes average completion time, as described in the text.</li>
 <li><strong>Load balancing.</strong> Write a program LPT.java that takes an integer M as a command-line argument, reads N job names and processing times from standard input and prints a scheduling assignment the jobs to M processors that approximately minimizes the time when the last job completes, as described in the text.</li>
+<li><p><strong>Sort by reverse domain.</strong> Write a data type <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise2_5/Domain.java" target="_blank" rel="external">Domain.java</a> that represents domain names, including an appropriate compareTo() method where the natural order is in order of the reverse domain name. For example, the reverse domain of cs.princeton.edu is edu.princeton.cs. This is useful for web log analysis. Write a client that reads domain names from standard input and prints the reverse domains in sorted order.</p>
+</li>
+<li><p><strong>Unbiased election.</strong> In order to thwart bias against candidates whose names appear toward the end of the alphabet, California sorted the candidates appearing on its 2003 gubernatorial ballot by using the following order:</p>
+</li>
 </ol>
+<pre><code>R W Q O J M V A H B S G Z X N T C I E K U P D Y F L
+</code></pre><p>Create a data type <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise2_5/California.java" target="_blank" rel="external">California.java</a> where this is the natural order. Write a client that sorts strings according to this ordering. Assume that each string is comprised solely of uppercase letters.</p>
 <h2 id="Web-exercise-N"><a href="#Web-exercise-N" class="headerlink" title="Web exercise(N)"></a>Web exercise(N)</h2>
       
     </div>
@@ -490,7 +499,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -498,7 +507,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
