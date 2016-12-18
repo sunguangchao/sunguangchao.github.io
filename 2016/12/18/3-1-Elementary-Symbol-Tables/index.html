@@ -1,0 +1,755 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="API符号表的主要目的就是将一个键和一个值联系起来。定义：符号表是一种存储键值对的数据结构，支持两种操作：
+
+插入（put）,即将一组新的键值对插入表中；
+查找（get），即根据给定的键得到相应的值。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3.1 Elementary Symbol Tables">
+<meta property="og:url" content="http://yoursite.com/2016/12/18/3-1-Elementary-Symbol-Tables/index.html">
+<meta property="og:site_name" content="GuangchaoSun's Blog">
+<meta property="og:description" content="API符号表的主要目的就是将一个键和一个值联系起来。定义：符号表是一种存储键值对的数据结构，支持两种操作：
+
+插入（put）,即将一组新的键值对插入表中；
+查找（get），即根据给定的键得到相应的值。">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/sequential-search.png">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/binary-search.png">
+<meta property="og:updated_time" content="2016-12-18T07:19:12.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3.1 Elementary Symbol Tables">
+<meta name="twitter:description" content="API符号表的主要目的就是将一个键和一个值联系起来。定义：符号表是一种存储键值对的数据结构，支持两种操作：
+
+插入（put）,即将一组新的键值对插入表中；
+查找（get），即根据给定的键得到相应的值。">
+<meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/sequential-search.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/18/3-1-Elementary-Symbol-Tables/"/>
+
+
+
+
+
+  <title> 3.1 Elementary Symbol Tables | GuangchaoSun's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">GuangchaoSun's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/18/3-1-Elementary-Symbol-Tables/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="GuangchaoSun">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="GuangchaoSun's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="GuangchaoSun's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                3.1 Elementary Symbol Tables
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-18T15:09:12+08:00">
+              2016-12-18
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-18T15:19:12+08:00">
+              2016-12-18
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/18/3-1-Elementary-Symbol-Tables/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/18/3-1-Elementary-Symbol-Tables/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p>符号表的主要目的就是将一个键和一个值联系起来。<br>定义：符号表是一种存储<code>键值对</code>的数据结构，支持两种操作：</p>
+<ul>
+<li><code>插入（put）</code>,即将一组新的键值对插入表中；</li>
+<li><code>查找（get）</code>，即根据给定的键得到相应的值。</li>
+</ul>
+<a id="more"></a>
+<p>规则：</p>
+<ul>
+<li>每个键只对应一个值（表中不允许存在重复的键）</li>
+<li>每当用例代码向表中存入新的键值对和表中已有的键（及关联的值）冲突时，新的值对代替旧的值。</li>
+</ul>
+<p>键不能为空，不允许有空值。<br>删除操作：</p>
+<ul>
+<li>延时删除： put(key ,null)</li>
+<li>即时删除： 立刻从表中删除指定的键</li>
+</ul>
+<p><strong>键的等价性:</strong><br>Java的一条最佳实践就是维护所有<code>Comparable</code>类型中<code>compareTo()</code>方法和<code>equals()</code>方法的一致性。也就是说，任何一种Comparable类型的两个值a和b都要保证<code>(a.compareTo(b)==0)</code>和<code>a.equals(b)</code>的返回值相等。</p>
+<h2 id="用例举例"><a href="#用例举例" class="headerlink" title="用例举例"></a>用例举例</h2><p><strong>简单的符号表测试用例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    ST&lt;String,Integer&gt; st</span><br><span class="line">    st = <span class="keyword">new</span> ST&lt;String,Integer&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;!StdIn.isEmpty();i++)</span><br><span class="line">    &#123;</span><br><span class="line">        String key =  StdIn.readString();</span><br><span class="line">        st.put(key,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(String s : st.key())</span><br><span class="line">        StdOut.println(s + <span class="string">" "</span> + st.get(s));  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>FrequencyCounter测试用例:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FrequencyCounter</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> minlen = Integer.parseInt(args[<span class="number">0</span>]);<span class="comment">//最小键长</span></span><br><span class="line">        ST&lt;String,Integer&gt; st = <span class="keyword">new</span> ST&lt;String,Integer&gt;();</span><br><span class="line">        <span class="keyword">while</span>(!StdIn.isEmpty())</span><br><span class="line">        &#123;</span><br><span class="line">            String word = StdIn.readString();</span><br><span class="line">            <span class="keyword">if</span>(word.length() &lt; minlen) <span class="keyword">continue</span>;<span class="comment">//忽略较短的单词</span></span><br><span class="line">            <span class="keyword">if</span>(!st.contains(word)) st.put(word,<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">else</span>   st.put(word,st.get(word) + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        String max = <span class="string">" "</span>;</span><br><span class="line">        st.put(max,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(String s : st.keys())</span><br><span class="line">            <span class="keyword">if</span>(st.get(word) &gt; st.get(max))</span><br><span class="line">                max = word;</span><br><span class="line">        StdOut.println(max + <span class="string">" "</span> + st.get(max));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>无序链表的顺序查找：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SequencetialSearchST</span>&lt;<span class="title">Key</span>, <span class="title">Value</span>&gt;</span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Node first; <span class="comment">//链表首结点</span></span><br><span class="line">	<span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">		Key key;</span><br><span class="line">		Value val;</span><br><span class="line">		Node next;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(Key key,Value val,Node next)</span></span><br><span class="line">		</span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.key = key;</span><br><span class="line">			<span class="keyword">this</span>.val = val;</span><br><span class="line">			<span class="keyword">this</span>.next = next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Value <span class="title">get</span><span class="params">(Key key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(Node x = first; x != <span class="keyword">null</span>;x = x.next)</span><br><span class="line">			<span class="keyword">if</span>(key.equals(x.key))</span><br><span class="line">				<span class="keyword">return</span> x.val; <span class="comment">//命中</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;                  <span class="comment">//未命中</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(Key key,Value val)</span></span>&#123;</span><br><span class="line">                <span class="comment">//查找给定的键，找到则更新其值，否则在表中新建结点</span></span><br><span class="line">		<span class="keyword">for</span>(Node x = first;x != <span class="keyword">null</span>;x = x.next)</span><br><span class="line">			<span class="keyword">if</span>(key.equals(x.key))</span><br><span class="line">			&#123;</span><br><span class="line">				x.val = val;<span class="comment">//命中，更新</span></span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			first = <span class="keyword">new</span> Node(key,val,first);<span class="comment">//未命中，新建结点</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://o90jubpdi.bkt.clouddn.com/sequential-search.png" alt=""><br>在含有N对键值的基于（无序）链表的符号表中未命中的查找和插入操作都需要N次比较。</p>
+<p><strong>有序数组中的二分查找：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BianrySearchST</span>&lt;<span class="title">Key</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">Key</span>&gt;,<span class="title">Value</span>&gt;</span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Key[] keys;</span><br><span class="line">	<span class="keyword">private</span> Value[] vals;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> N;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">BianrySearchST</span><span class="params">(<span class="keyword">int</span> capacity)</span></span><br><span class="line">	</span>&#123;</span><br><span class="line">		keys = (Key[])<span class="keyword">new</span> Comparable[capacity];</span><br><span class="line">		vals = (Value[]) <span class="keyword">new</span> Object[capacity];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> N;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Value <span class="title">get</span><span class="params">(Key key)</span></span><br><span class="line">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(isEmpty()) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">int</span> i = rank(key);</span><br><span class="line">		<span class="keyword">if</span>(i &lt; N &amp;&amp;keys[i].compareTo(key)==<span class="number">0</span>) <span class="keyword">return</span> vals[i];</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rank</span><span class="params">(Key key)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> lo = <span class="number">0</span>,hi = N-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(lo &lt;= hi)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> mid = lo + (hi - lo)/<span class="number">2</span>;</span><br><span class="line">			<span class="keyword">int</span> cmp = key.compareTo(keys[mid]);</span><br><span class="line">			<span class="keyword">if</span>(com &lt; <span class="number">0</span>)       hi = mid - <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(com &gt; <span class="number">0</span> ) lo = mid + <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">return</span> mid;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> lo;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(Key key,Value val)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i = rank(key);</span><br><span class="line">		<span class="keyword">if</span>(i &lt; N &amp;&amp; keys[i].compareTo(key) == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			vals[i] = val;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = N;j &gt; i;j--)</span><br><span class="line">		&#123;</span><br><span class="line">			keys[j] = keys[j-<span class="number">1</span>];</span><br><span class="line">			vals[j] = vals[j-<span class="number">1</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		keys[i] = key;</span><br><span class="line">		vals[i] = val;</span><br><span class="line">		N++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(Key key)</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://o90jubpdi.bkt.clouddn.com/binary-search.png" alt=""><br>在N个键的有序数组中进行二分查找最多需要(lgN + 1)次比较(无论是否成功)。<br>Inserting a new key into an ordered array uses ~ 2N array accesses in the worst case, so inserting N keys into an initially empty table uses ~ N^2 array accesses in the worst case.</p>
+<h2 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h2><ol>
+<li><p>Write a client program <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise3_1/GPA.java" target="_blank" rel="external">GPA.java</a> that creates a symbol table mapping letter grades to numerical scores, as in the table below, then reads from standard input a list of letter grades and computes and prints the GPA (the average of the numerical scores of the corresponding grades).</p>
+<pre><code>A+    A     A-    B+    B     B-    C+    C     C-    D     F
+4.33  4.00  3.67  3.33  3.00  2.67  2.33  2.00  1.67  1.00  0.00
+</code></pre></li>
+<li><p>Develop a symbol-table implementation ArrayST.java that uses an (unordered) array as the underlying data structure to implement our basic symbol table API</p>
+</li>
+</ol>
+<h2 id="Creative-Problems"><a href="#Creative-Problems" class="headerlink" title="Creative Problems"></a>Creative Problems</h2><h2 id="Web-Exercise"><a href="#Web-Exercise" class="headerlink" title="Web Exercise"></a>Web Exercise</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/17/深入理解Arrays-sort/" rel="next" title="深入理解Arrays.sort()">
+                <i class="fa fa-chevron-left"></i> 深入理解Arrays.sort()
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/18/3-1-Elementary-Symbol-Tables/"
+           data-title="3.1 Elementary Symbol Tables" data-url="http://yoursite.com/2016/12/18/3-1-Elementary-Symbol-Tables/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg"
+               alt="GuangchaoSun" />
+          <p class="site-author-name" itemprop="name">GuangchaoSun</p>
+          <p class="site-description motion-element" itemprop="description">coding change the world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sunguangchao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/sun-guang-chao-64" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-delicious"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2966219821/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">1.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用例举例"><span class="nav-number">2.</span> <span class="nav-text">用例举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise"><span class="nav-number">3.</span> <span class="nav-text">Exercise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creative-Problems"><span class="nav-number">4.</span> <span class="nav-text">Creative Problems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-Exercise"><span class="nav-number">5.</span> <span class="nav-text">Web Exercise</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuangchaoSun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunguangchao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
