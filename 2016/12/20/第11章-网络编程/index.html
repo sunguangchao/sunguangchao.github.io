@@ -1,0 +1,901 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="网络架构每个网络应用都是基于客户端-服务器模型。对于一个主机而言，网络只是一种I/O设备，作为数据源和数据接收方。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第11章 网络编程">
+<meta property="og:url" content="http://yoursite.com/2016/12/20/第11章-网络编程/index.html">
+<meta property="og:site_name" content="GuangchaoSun's Blog">
+<meta property="og:description" content="网络架构每个网络应用都是基于客户端-服务器模型。对于一个主机而言，网络只是一种I/O设备，作为数据源和数据接收方。">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E4%B8%BB%E6%9C%BA%E7%9A%84%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E4%BB%A5%E5%A4%AA%E7%BD%91%E6%AE%B5.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E6%A1%A5%E6%8E%A5%E4%BB%A5%E5%A4%AA%E7%BD%91.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E4%BA%92%E8%81%94%E7%BD%91%E7%BB%9C.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E4%BA%92%E8%81%94%E7%BD%91%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E5%A5%97%E6%8E%A5%E5%AD%97%E6%8E%A5%E5%8F%A3%E6%A6%82%E8%BF%B0.jpg">
+<meta property="og:updated_time" content="2016-12-20T14:04:18.880Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第11章 网络编程">
+<meta name="twitter:description" content="网络架构每个网络应用都是基于客户端-服务器模型。对于一个主机而言，网络只是一种I/O设备，作为数据源和数据接收方。">
+<meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E4%B8%BB%E6%9C%BA%E7%9A%84%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/20/第11章-网络编程/"/>
+
+
+
+
+
+  <title> 第11章 网络编程 | GuangchaoSun's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">GuangchaoSun's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-battery-1"></i> <br />
+            
+            书单
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/20/第11章-网络编程/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="GuangchaoSun">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="GuangchaoSun's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="GuangchaoSun's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第11章 网络编程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-20T21:59:54+08:00">
+              2016-12-20
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-20T22:04:18+08:00">
+              2016-12-20
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSAPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CSAPP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/20/第11章-网络编程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/20/第11章-网络编程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h1><p>每个网络应用都是基于<code>客户端-服务器</code>模型。对于一个主机而言，网络只是一种I/O设备，作为数据源和数据接收方。<br><a id="more"></a><br><img src="http://o90jubpdi.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E4%B8%BB%E6%9C%BA%E7%9A%84%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90.jpg" alt=""><br>根据网络的应用范围和架构层级：</p>
+<ul>
+<li>LAN-Local Area Network<ul>
+<li>以太网(Ethernet)</li>
+</ul>
+</li>
+<li>WAN-Wide Area Network<ul>
+<li>High speed point-to-point phone lines</li>
+</ul>
+</li>
+</ul>
+<h2 id="最底层Ethernet-segment"><a href="#最底层Ethernet-segment" class="headerlink" title="最底层Ethernet segment"></a>最底层Ethernet segment</h2><p>几个host连接到hub上，通常范围是一个房间或一个楼层。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E4%BB%A5%E5%A4%AA%E7%BD%91%E6%AE%B5.jpg" alt=""></p>
+<ul>
+<li>每个以太网适配器都有一个全球唯一的48位地址（也就是MAC地址）</li>
+<li>不同主机间传送数据的称为帧，由header和有效载荷组成</li>
+</ul>
+<h2 id="桥接以太网bridge-Ethernet"><a href="#桥接以太网bridge-Ethernet" class="headerlink" title="桥接以太网bridge Ethernet"></a>桥接以太网bridge Ethernet</h2><p>通常是一层楼的范围，Bridge知道从某端口可达的主机，并有选择在端口间复制数据。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E6%A1%A5%E6%8E%A5%E4%BB%A5%E5%A4%AA%E7%BD%91.jpg" alt=""></p>
+<h2 id="下一层-internet"><a href="#下一层-internet" class="headerlink" title="下一层-internet"></a>下一层-internet</h2><p>互联网络重要的特性是：由采用完全不同和不兼容技术的各种局域网和广域网组成，关键在于<code>协议软件</code>。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E4%BA%92%E8%81%94%E7%BD%91%E7%BB%9C.jpg" alt=""></p>
+<h1 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h1><p>这种协议控制主机和路由器协同工作来实现数据传输。在不同的 LAN 和 WAN 中传输数据，就要守规矩，这个规矩就是协议。协议负责做的事情有：</p>
+<ul>
+<li>命名机制<ul>
+<li>定义 host address 格式</li>
+<li>每个主机和路由器至少有一个internet address</li>
+</ul>
+</li>
+<li>传送机制<ul>
+<li>标准传输单元-package(把数据位捆扎成不连续的片)</li>
+<li>包由包头和有效载荷组成<ul>
+<li>包头：包的大小、源主机和目的主机的地址</li>
+<li>有效载荷：源主机发出的数据位</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>在网络协议下，具体的数据传输如下图所示，PH = Internet pachage header, FH = LAN frame header.<br><img src="http://o90jubpdi.bkt.clouddn.com/%E4%BA%92%E8%81%94%E7%BD%91%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93.jpg" alt=""></p>
+<p>TCP/IP 实际上是一个协议族。</p>
+<ul>
+<li>IP 协议提供基本的命名方法和递送机制，这种递送机制能够从一台因特网主机往其他主机发送包，也叫做数据报（datagram）。</li>
+<li>TCP 是一个构建在 IP 之上的复杂协议，提供子进程间可靠的全双工（双向的）连接。</li>
+</ul>
+<p>Internet 是 internet 最著名的例子。主要基于 TCP/IP 协议族：</p>
+<ul>
+<li>IP(Internet Protocal)<ul>
+<li>Provides basic naming scheme and unreliable delivery capability of packages(datagrams) from host-to-host</li>
+</ul>
+</li>
+<li>UDP(Unreliable Datagram Protocal)<ul>
+<li>Use IP to provide unreliable datagram delivery from process-to-process(进程间)</li>
+</ul>
+</li>
+<li>TCP(Transmission Control Protocal)<ul>
+<li>Uses IP to provide reliable byte streams from process-to-process over connection</li>
+</ul>
+</li>
+</ul>
+<p>Accessed via a mix of Unix file I/O and functions from sockets interface</p>
+<ul>
+<li>主机集合被映射为一组32位的IP地址</li>
+<li>IP地址被映射到域名</li>
+<li>不同主机之间通信，可以通过 connection 来交换数据<br>Internet域名</li>
+</ul>
+<hr>
+<ul>
+<li>因特网定义了域名集合和IP地址集合之间的映射。</li>
+<li>这个映射是通过分布世界范围内的数据库DNS（Domain Name System，域名系统）来维护的。</li>
+<li>DNS数据库是由数以百万计的<code>主机条目结构（host entry structure）</code>组成的。  </li>
+</ul>
+<p>因特网应用通过<code>gethostname</code>和<code>gethostbyaddr</code>函数，从DNS数据库检索任意的主机条目。</p>
+<h2 id="Internet连接"><a href="#Internet连接" class="headerlink" title="Internet连接"></a>Internet连接</h2><p>客户端和服务器通过连接（connection）来发送字节流，特点是：</p>
+<ul>
+<li>点对点：连接一对进程</li>
+<li>全双工：数据可以同时双向流动</li>
+<li>可靠：字节的发送循序和收到的一致</li>
+</ul>
+<p>Socket 则可以被认为是 connection 的 endpoint，socket 地址是一个<code>IPaddress:port</code> 对。<br>Port是一个16位的整数，用来标识不同的进程，利用不同的端口来连接不同的服务：</p>
+<ul>
+<li>Ephemeral port(临时端口):Assigned automatically by client kernel when client makes a connection request</li>
+<li>Well-known port:Associated with some service provided by a server<ul>
+<li>echo server:7/echo</li>
+<li>ssh server:22/ssh</li>
+<li>email server:25/smtp</li>
+<li>web servers:80/http</li>
+</ul>
+</li>
+</ul>
+<h2 id="套接字接口"><a href="#套接字接口" class="headerlink" title="套接字接口"></a>套接字接口</h2><p>套接字接口（socket interface）是一组函数，它们和<code>Unix I/O</code>函数结合起来，用以创建应用。<br>从Unix内核的角度来看，一个套接字就是通信的一个端点；从Unix程序的角度来看，套接字就是一个有相应描述符的打开文件。<br>connect、bind和accept函数要求一个指向与协议相关的套接字地址结构的指针。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E5%A5%97%E6%8E%A5%E5%AD%97%E6%8E%A5%E5%8F%A3%E6%A6%82%E8%BF%B0.jpg" alt=""></p>
+<h1 id="简单服务器实现"><a href="#简单服务器实现" class="headerlink" title="简单服务器实现"></a>简单服务器实现</h1><p>架构总览<br>根据上面的流程图，总共有5个步骤：</p>
+<ol>
+<li>开启服务器(open_listenfd函数)<ul>
+<li><code>getaddrinfo</code>:设置服务器的相关信息</li>
+<li><code>socket</code>:创建socket descriptor, 也就是后来用来读写的file descriptor<ul>
+<li><code>int socket(int domain, int type, int protocol);</code></li>
+<li>例如<code>int clientfd = socket(AF_INET, SOCK_STREAM, 0);</code></li>
+<li><code>AF_INET</code>表示在用32位IPv4地址</li>
+<li><code>SOCK_STREAM</code>表示这个 socket 将是 connection 的 endpoint</li>
+<li>前面这种写法是协议相关的，建议使用<code>getaddrinfo</code>生成的参数来进行配置，这样就与协议无关</li>
+</ul>
+</li>
+<li><code>bind</code>：请求kernel把socket address和socket desctiptor绑定<ul>
+<li>int bind(int sockfd, SA *addr, socklen_t addrlen); </li>
+<li>The process can read bytes that arrive on the connection whose endpoint is <code>addr</code> by reading from descriptor <code>sockfd</code></li>
+<li>Similarly,writes to sockfd are transferred along connection whose endpoint is <code>addr</code></li>
+<li>最好用<code>getaddrinfo</code>生成的参数作为<code>addr</code>和<code>addrlen</code></li>
+</ul>
+</li>
+<li><code>listen</code>: 默认来说，我们从socket函数中得到的descriptor默认是active socket(也就是客户端的连接)，调用listen函数告诉kernel这个socket是被服务器使用的<ul>
+<li><code>int listen(int sockfd, int backlog);</code></li>
+<li>把<code>sockfd</code>从active socket转换成listening socket，用来接收客户端的请求</li>
+<li><code>backlog</code>的数值表示kernel在接收多少个请求之后（队列缓存起来）开始拒绝请求</li>
+</ul>
+</li>
+<li><code>accept</code>:调用accept函数，开始等待客户端请求<ul>
+<li><code>int accept(int listenfd, SA *addr, int *addrlen);</code></li>
+<li>等待绑定到<code>listenfd</code>的连接接收到请求，然后把客户端的socket address写入到<code>addr</code>，大小写入到<code>addrlen</code></li>
+<li>返回一个connected descriptor用来进行信息传输（类似Unix I/O）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>开启客户端（open_clientfd 函数，设定访问地址，尝试连接）<ul>
+<li><code>getaddrinfo</code>：设置客户端的相关信息</li>
+<li><code>socket</code>:创建socket descriptor，也就是之后用来读写的file descriptor</li>
+<li><code>connect</code>:客户端调用connect来建立和服务器的连接<ul>
+<li><code>int connect(int clientfd, SA *addr, socklen_t addrlen);</code></li>
+<li>尝试与在socket address <code>addr</code>的服务器建立连接</li>
+<li>如果成功<code>clientfd</code>可以进行读写</li>
+<li>connection由socket对描述<code>(x:y, addr.sin_addr:addr.sin_port)</code></li>
+<li><code>x</code>是客户端地址，<code>y</code>是客户端临时端口，后面两个是服务器的地址和端口</li>
+<li>最好用<code>getaddrinfo</code>生成的参数作为<code>addr</code>和<code>addrlen</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>交换数据（主要是一个流程循环，客户端向服务器写入，就是发送请求；服务器向客户端写入，就是发送响应）<ul>
+<li>[Client]<code>rio_writen</code>:写入数据，相当于向服务器发送请求</li>
+<li>[Client]<code>rio_readlineb</code>:读取数据，相当于从服务器接收响应</li>
+<li>[Server]<code>rio_readlineb</code>:读取数据，相当于从客户端接收请求</li>
+<li>[Server]<code>rio_writen</code>:写入数据，相当于向客户端发送响应</li>
+</ul>
+</li>
+<li>关闭客户端（主要是<code>close</code>）<ul>
+<li>[Client]<code>close</code>:关闭连接</li>
+</ul>
+</li>
+<li>断开客户端<ul>
+<li>[Server]<code>rio_readlined</code>:收到客户端发来的关闭连接请求</li>
+<li>[Server]<code>close</code>:关闭与客户端的连接  </li>
+</ul>
+</li>
+</ol>
+<h2 id="Client-open-clientfd"><a href="#Client-open-clientfd" class="headerlink" title="Client:open_clientfd "></a>Client:<code>open_clientfd</code> </h2><p>将<code>socket</code>和<code>connect</code>函数包装成一个叫做<code>open_clientfd</code>的辅助函数。<br><code>open_clientfd</code>函数和运行在主机<code>hostname</code>上的服务器建立一个连接，并在知名端口<code>port</code>上监听连接请求。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">open_clientfd</span><span class="params">(<span class="keyword">char</span> *hostname, <span class="keyword">int</span> port)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> clientfd;</span><br><span class="line">	<span class="keyword">struct</span> hostent *hp;</span><br><span class="line">	<span class="keyword">struct</span> sockaddr_in serveraddr;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>((clientfd = socket(AF_INET,SOCK_STREAM, <span class="number">0</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>((hp = gethostbyname(hostname)) == <span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-2</span>;</span><br><span class="line">	bzero((<span class="keyword">char</span> *) &amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br><span class="line">	serveraddr.sin_family = AF_INET;</span><br><span class="line">	bcopy((<span class="keyword">char</span>*)hp-&gt;h_addr_list[<span class="number">0</span>],(<span class="keyword">char</span> *)&amp;serveraddr.sin_addr.s_addr, hp-&gt;h_length);</span><br><span class="line">	serveraddr.sin_port = htons(port);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*Establish a connection with the server*/</span></span><br><span class="line">	<span class="keyword">if</span>(connect(clientfd,(SA *) &amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr)) &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">return</span> clientfd;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这里用文字描述一下流程：在创建了套接字描述符（第7行）后，我们检索服务器的<code>DNS主机条目</code>，并拷贝主机条目中的第一个IP地址到服务器的<code>套接字地址结构</code>（10~14行）。在用按照<code>网络字节顺序</code>的服务器的<code>知名端口号</code>初始化套接字地址结构（15行）之后，我们发起了一个到服务器的<code>连接请求</code>（18行）。当<code>connect</code>函数返回时，我们返回<code>套接字描述符</code>给客户端，客户端就可以立即开始用<code>Unix I/O</code>和服务器通信了。</p>
+<h2 id="Server-open-listenfd"><a href="#Server-open-listenfd" class="headerlink" title="Server:open_listenfd"></a>Server:open_listenfd</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">nt <span class="title">open_listenfd</span><span class="params">(<span class="keyword">int</span> port)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> listenfd, optval = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">struct</span> sockaddr_in serveraddr;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*create a socket descriptor*/</span></span><br><span class="line">	<span class="keyword">if</span>((listenfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">if</span>(setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, (<span class="keyword">const</span> <span class="keyword">void</span> *)&amp;optval, <span class="keyword">sizeof</span>(<span class="keyword">int</span>)) &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	<span class="comment">/*Listenfd will be an end point for all request to port on any IP address for this host*/</span></span><br><span class="line">	bzero((<span class="keyword">char</span> *) &amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br><span class="line">	serveraddr.sin_family = AF_INET;</span><br><span class="line">	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);</span><br><span class="line">	serveraddr.sin_port = htons((<span class="keyword">unsigned</span> <span class="keyword">short</span>)port);</span><br><span class="line">	<span class="keyword">if</span>(bind(listenfd, (SA *)&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr)) &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(listen(listenfd, LISTENQ) &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">return</span> listenfd;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="简单的socket服务器实例"><a href="#简单的socket服务器实例" class="headerlink" title="简单的socket服务器实例"></a>简单的socket服务器实例</h1>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/18/3-1-Elementary-Symbol-Tables/" rel="next" title="3.1 Elementary Symbol Tables">
+                <i class="fa fa-chevron-left"></i> 3.1 Elementary Symbol Tables
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/20/第11章-网络编程/"
+           data-title="第11章 网络编程" data-url="http://yoursite.com/2016/12/20/第11章-网络编程/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg"
+               alt="GuangchaoSun" />
+          <p class="site-author-name" itemprop="name">GuangchaoSun</p>
+          <p class="site-description motion-element" itemprop="description">coding change the world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sunguangchao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/sun-guang-chao-64" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-delicious"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2966219821/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络架构"><span class="nav-number">1.</span> <span class="nav-text">网络架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最底层Ethernet-segment"><span class="nav-number">1.1.</span> <span class="nav-text">最底层Ethernet segment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#桥接以太网bridge-Ethernet"><span class="nav-number">1.2.</span> <span class="nav-text">桥接以太网bridge Ethernet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下一层-internet"><span class="nav-number">1.3.</span> <span class="nav-text">下一层-internet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络协议"><span class="nav-number">2.</span> <span class="nav-text">网络协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Internet连接"><span class="nav-number">2.1.</span> <span class="nav-text">Internet连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#套接字接口"><span class="nav-number">2.2.</span> <span class="nav-text">套接字接口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单服务器实现"><span class="nav-number">3.</span> <span class="nav-text">简单服务器实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Client-open-clientfd"><span class="nav-number">3.1.</span> <span class="nav-text">Client:open_clientfd </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Server-open-listenfd"><span class="nav-number">3.2.</span> <span class="nav-text">Server:open_listenfd</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单的socket服务器实例"><span class="nav-number">4.</span> <span class="nav-text">简单的socket服务器实例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuangchaoSun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunguangchao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
