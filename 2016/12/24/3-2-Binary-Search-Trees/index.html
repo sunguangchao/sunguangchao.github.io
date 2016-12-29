@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/12/24/3-2-Binary-Search-Trees/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
 <meta property="og:description" content="定义：一颗二叉查找树（BST）是一颗二叉树，其中每个结点都含有一个Comparable的键（以及相关联的值）且每个结点的键都大于其左子树中的任意结点的键而小于右子树的任意结点的键。">
-<meta property="og:updated_time" content="2016-12-24T11:29:30.987Z">
+<meta property="og:updated_time" content="2016-12-29T14:22:58.166Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3.2 Binary Search Trees">
 <meta name="twitter:description" content="定义：一颗二叉查找树（BST）是一颗二叉树，其中每个结点都含有一个Comparable的键（以及相关联的值）且每个结点的键都大于其左子树中的任意结点的键而小于右子树的任意结点的键。">
@@ -323,8 +323,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-24T19:29:30+08:00">
-              2016-12-24
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-29T22:22:58+08:00">
+              2016-12-29
             </time>
             
           </span>
@@ -397,7 +397,14 @@
 <li>Give nonrecursive implementations of <code>get()</code>,<code>put()</code>,and <code>keys()</code> for BST.<br>solution:<a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise3_2/NonrecursiveBST.java" target="_blank" rel="external">NonrecuisiveBST.java</a><br>Creative Problems</li>
 </ol>
 <hr>
-<h2 id="Web-Exercise"><a href="#Web-Exercise" class="headerlink" title="Web Exercise"></a>Web Exercise</h2>
+<ol>
+<li><strong>Perfect balance.</strong> Write a program <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise3_2/PerfectBalance.java" target="_blank" rel="external">PerfectBalance.java</a> that inserts a set of keys into an initially empty BST such that the tree produced is equivalent to binary search, in the sense that the sequence of compares done in the search for any key in the BST is the same as the sequence of compares used by binary search for the same set of keys.<br>Hint: Put the median at the root and recursively build the left and right subtree.</li>
+<li><strong>Certification.</strong> Write a method isBST() in <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise3_2/BST.java" target="_blank" rel="external">BST.java</a> that takes a Node as argument and returns true if the argument node is the root of a binary search tree, false otherwise.</li>
+<li><strong>Subtree count check.</strong> Write a recursive method isSizeConsistent() in <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise3_2/BST.java" target="_blank" rel="external">BST.java</a> that takes a Node as argument and returns true if the subtree count field N is consistent in the data structure rooted at that node, false otherwise.</li>
+<li><strong>Select/rank check.</strong> Write a method isRankConsistent() in <a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise3_2/BST.java" target="_blank" rel="external">BST.java</a> that checks, for all i from 0 to size() - 1, whether i is equal to rank(select(i)) and, for all keys in the BST, whether key is equal to select(rank(key)).<br>Web Exercise</li>
+</ol>
+<hr>
+
       
     </div>
 
@@ -507,7 +514,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -588,7 +595,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise"><span class="nav-number">1.</span> <span class="nav-text">Exercise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-Exercise"><span class="nav-number">2.</span> <span class="nav-text">Web Exercise</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise"><span class="nav-number">1.</span> <span class="nav-text">Exercise</span></a></li></ol></div>
             
 
           </div>

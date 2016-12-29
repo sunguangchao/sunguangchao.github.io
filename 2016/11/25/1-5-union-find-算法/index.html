@@ -84,16 +84,30 @@
 
 
 
-<meta name="description" content="quick-find算法">
+<meta name="description" content="动态连通性什么叫动态连通性？
+
+symmetric（对称性）: If p is connected to q, then q is connected to p.
+transitive（传递性）: If p is connected to q and q is connected to r, then p is connected to r.
+reflexive（自反性）: p is connec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1.5 union-find 算法">
 <meta property="og:url" content="http://yoursite.com/2016/11/25/1-5-union-find-算法/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="quick-find算法">
-<meta property="og:updated_time" content="2016-11-30T15:37:31.820Z">
+<meta property="og:description" content="动态连通性什么叫动态连通性？
+
+symmetric（对称性）: If p is connected to q, then q is connected to p.
+transitive（传递性）: If p is connected to q and q is connected to r, then p is connected to r.
+reflexive（自反性）: p is connec">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/uf-performance.png">
+<meta property="og:updated_time" content="2016-12-29T14:19:39.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.5 union-find 算法">
-<meta name="twitter:description" content="quick-find算法">
+<meta name="twitter:description" content="动态连通性什么叫动态连通性？
+
+symmetric（对称性）: If p is connected to q, then q is connected to p.
+transitive（传递性）: If p is connected to q and q is connected to r, then p is connected to r.
+reflexive（自反性）: p is connec">
+<meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/uf-performance.png">
 
 
 
@@ -323,8 +337,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-30T23:37:31+08:00">
-              2016-11-30
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-29T22:19:39+08:00">
+              2016-12-29
             </time>
             
           </span>
@@ -381,8 +395,14 @@
       
 
       
-        <p>quick-find算法<br><a id="more"></a></p>
-<pre><code>public int find(int q){
+        <h2 id="动态连通性"><a href="#动态连通性" class="headerlink" title="动态连通性"></a>动态连通性</h2><p>什么叫动态连通性？</p>
+<ul>
+<li>symmetric（对称性）: If p is connected to q, then q is connected to p.</li>
+<li>transitive（传递性）: If p is connected to q and q is connected to r, then p is connected to r.</li>
+<li>reflexive（自反性）: p is connected to p.</li>
+</ul>
+<a id="more"></a>
+<h2 id="quick-find算法"><a href="#quick-find算法" class="headerlink" title="quick-find算法"></a>quick-find算法</h2><pre><code>public int find(int q){
     return id[q]
 }
 public void union(int p,int q){
@@ -394,8 +414,8 @@ public void union(int p,int q){
         if(id[i] == pID) id[i] == qID;
     count --;
 }
-</code></pre><p>quick-union算法</p>
-<pre><code>private int find(int p){
+</code></pre><p>在<code>quick-find</code>算法中，每次<code>find()</code>调用都要访问数组一次，要归并两个分量的<code>union()</code>操作访问数组的次数在<code>(N+3)</code>到<code>(2N+1)</code>之间。</p>
+<h2 id="quick-union算法"><a href="#quick-union算法" class="headerlink" title="quick-union算法"></a>quick-union算法</h2><pre><code>private int find(int p){
     //找出分量的名称
     while(p != id[p])
         p = id[p];
@@ -409,8 +429,7 @@ public void union(int p,int q){
     id[pRoot] = qRoot;
     count --;
 }
-</code></pre><p>union算法的实现（加权quick-union算法）</p>
-<pre><code>public class WeightedQuickUnionUF{
+</code></pre><h2 id="union算法的实现（加权quick-union算法）"><a href="#union算法的实现（加权quick-union算法）" class="headerlink" title="union算法的实现（加权quick-union算法）"></a>union算法的实现（加权quick-union算法）</h2><pre><code>public class WeightedQuickUnionUF{
     private int[] id;    //父链接数组（由触点索引）
     private int[] sz;    //（由触点索引的）各个根结点所对应的分量的大小
     private int count;   //连通分量的数量
@@ -450,11 +469,12 @@ public void union(int p,int q){
         count --;
     }
 }
-</code></pre><h2 id="exercise"><a href="#exercise" class="headerlink" title="exercise"></a>exercise</h2><ol>
+</code></pre><p>各种<code>union-find</code>算法的性能特点：<br><img src="http://o90jubpdi.bkt.clouddn.com/uf-performance.png" alt=""></p>
+<h2 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h2><h2 id="Creative-Problems"><a href="#Creative-Problems" class="headerlink" title="Creative Problems"></a>Creative Problems</h2><ol>
 <li>Quick-union with path compression. Modify QuickUnionUF.java to include path compression, by adding a loop to find() that links every sie on the path from p to the root. Give a sequence of input pairs that causes this method to produce a path of length 4. Note: the amortized cost per operation for this algorithm is known to be logarithmic.</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">public class QuickUnionPathCompressionUF&#123;</span><br><span class="line">    	private int[] id;</span><br><span class="line">    	private int count;</span><br><span class="line">      	public QuickUnionPathCompressionUF(int n)&#123;</span><br><span class="line">    		count = n;</span><br><span class="line">    		id = new int[n];</span><br><span class="line">    		for(int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">    			id[i] = i;</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125;</span><br><span class="line">    	public int count()&#123;</span><br><span class="line">    		return count;</span><br><span class="line">    	&#125;</span><br><span class="line">    	public int find(int p)&#123;</span><br><span class="line">    		int root = p;</span><br><span class="line">    		while(root != id[root])</span><br><span class="line">    			root = id[root];</span><br><span class="line">    		while(p != root)&#123;</span><br><span class="line">    			int newp = id[p];</span><br><span class="line">    			id[p] = root;</span><br><span class="line">    			p = newp;</span><br><span class="line">    		&#125;</span><br><span class="line">    		return root;</span><br><span class="line">    	&#125;</span><br><span class="line">    	public boolean connected(int p,int q)&#123;</span><br><span class="line">    		return find(p) == find(q);</span><br><span class="line">    	&#125;</span><br><span class="line">    	public void union(int p,int q)&#123;</span><br><span class="line">    		int rootP = find(p);</span><br><span class="line">    		int rootQ = find(q);</span><br><span class="line">    		if(rootP == rootQ) return;</span><br><span class="line">    		id[rootP] = rootQ;</span><br><span class="line">    		count--;</span><br><span class="line">    	&#125;   </span><br><span class="line">    	public static void main(String[] args)&#123;</span><br><span class="line">    		int n = StdIn.read();</span><br><span class="line">    		QuickUnionPathCompressionUF uf = new QuickUnionPathCompressionUF(n);</span><br><span class="line">    		while(!StdIn.isEmpty())&#123;</span><br><span class="line">    			int p = StdIn.readInt();</span><br><span class="line">    			int q = StdIn.readInt();</span><br><span class="line">    			if(uf.connected(p,q)) continue;</span><br><span class="line">    			uf.union(p,q);</span><br><span class="line">    			StdOut.println(p + &quot; &quot; + q);</span><br><span class="line">    		&#125;</span><br><span class="line">    		StdOut.println(uf.count() + &quot; components&quot;);</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickUnionPathCompressionUF</span></span>&#123;</span><br><span class="line">    	<span class="keyword">private</span> <span class="keyword">int</span>[] id;</span><br><span class="line">    	<span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">      	<span class="function"><span class="keyword">public</span> <span class="title">QuickUnionPathCompressionUF</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    		count = n;</span><br><span class="line">    		id = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">    			id[i] = i;</span><br><span class="line">    		&#125;</span><br><span class="line">    	&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span></span>&#123;</span><br><span class="line">    		<span class="keyword">return</span> count;</span><br><span class="line">    	&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">    		<span class="keyword">int</span> root = p;</span><br><span class="line">    		<span class="keyword">while</span>(root != id[root])</span><br><span class="line">    			root = id[root];</span><br><span class="line">    		<span class="keyword">while</span>(p != root)&#123;</span><br><span class="line">    			<span class="keyword">int</span> newp = id[p];</span><br><span class="line">    			id[p] = root;</span><br><span class="line">    			p = newp;</span><br><span class="line">    		&#125;</span><br><span class="line">    		<span class="keyword">return</span> root;</span><br><span class="line">    	&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">connected</span><span class="params">(<span class="keyword">int</span> p,<span class="keyword">int</span> q)</span></span>&#123;</span><br><span class="line">    		<span class="keyword">return</span> find(p) == find(q);</span><br><span class="line">    	&#125;</span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p,<span class="keyword">int</span> q)</span></span>&#123;</span><br><span class="line">    		<span class="keyword">int</span> rootP = find(p);</span><br><span class="line">    		<span class="keyword">int</span> rootQ = find(q);</span><br><span class="line">    		<span class="keyword">if</span>(rootP == rootQ) <span class="keyword">return</span>;</span><br><span class="line">    		id[rootP] = rootQ;</span><br><span class="line">    		count--;</span><br><span class="line">    	&#125;</span><br><span class="line">    </span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    		<span class="keyword">int</span> n = StdIn.read();</span><br><span class="line">    		QuickUnionPathCompressionUF uf = <span class="keyword">new</span> QuickUnionPathCompressionUF(n);</span><br><span class="line">    		<span class="keyword">while</span>(!StdIn.isEmpty())&#123;</span><br><span class="line">    			<span class="keyword">int</span> p = StdIn.readInt();</span><br><span class="line">    			<span class="keyword">int</span> q = StdIn.readInt();</span><br><span class="line">    			<span class="keyword">if</span>(uf.connected(p,q)) <span class="keyword">continue</span>;</span><br><span class="line">    			uf.union(p,q);</span><br><span class="line">    			StdOut.println(p + <span class="string">" "</span> + q);</span><br><span class="line">    		&#125;</span><br><span class="line">    		StdOut.println(uf.count() + <span class="string">" components"</span>);</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Web-Exercise"><a href="#Web-Exercise" class="headerlink" title="Web Exercise"></a>Web Exercise</h2>
       
     </div>
 
@@ -570,7 +590,7 @@ public void union(int p,int q){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -651,7 +671,7 @@ public void union(int p,int q){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#exercise"><span class="nav-number">1.</span> <span class="nav-text">exercise</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动态连通性"><span class="nav-number">1.</span> <span class="nav-text">动态连通性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quick-find算法"><span class="nav-number">2.</span> <span class="nav-text">quick-find算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quick-union算法"><span class="nav-number">3.</span> <span class="nav-text">quick-union算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#union算法的实现（加权quick-union算法）"><span class="nav-number">4.</span> <span class="nav-text">union算法的实现（加权quick-union算法）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise"><span class="nav-number">5.</span> <span class="nav-text">Exercise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creative-Problems"><span class="nav-number">6.</span> <span class="nav-text">Creative Problems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-Exercise"><span class="nav-number">7.</span> <span class="nav-text">Web Exercise</span></a></li></ol></div>
             
 
           </div>

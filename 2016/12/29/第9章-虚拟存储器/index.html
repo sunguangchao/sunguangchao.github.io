@@ -1,0 +1,876 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="虚拟存储器（VM）的三大功能：
+
+高效使用主存：通过将主存看成是一个存储在磁盘上的地址空间的高速缓存，在主存中只保留活动区域，并根据需要在磁盘和主存之间来回传送数据。
+为每个进程提供了一致的地址空间，简化了存储管理，进而简化了链接、进程间共享数据、进程的存储器分配以及程序加载。
+通过在每条页表条目中加入保护位，从而保护了每个进程的地址空间不被其他进程破坏。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第9章 虚拟存储器">
+<meta property="og:url" content="http://yoursite.com/2016/12/29/第9章-虚拟存储器/index.html">
+<meta property="og:site_name" content="GuangchaoSun's Blog">
+<meta property="og:description" content="虚拟存储器（VM）的三大功能：
+
+高效使用主存：通过将主存看成是一个存储在磁盘上的地址空间的高速缓存，在主存中只保留活动区域，并根据需要在磁盘和主存之间来回传送数据。
+为每个进程提供了一致的地址空间，简化了存储管理，进而简化了链接、进程间共享数据、进程的存储器分配以及程序加载。
+通过在每条页表条目中加入保护位，从而保护了每个进程的地址空间不被其他进程破坏。">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E7%89%A9%E7%90%86%E5%AF%BB%E5%9D%80.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E7%BC%93%E5%AD%98%E5%B7%A5%E5%85%B7.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E9%A1%B5%E8%A1%A8.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E5%AD%98%E5%82%A8%E5%99%A8%E4%BF%9D%E6%8A%A4.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E5%9C%B0%E5%9D%80%E7%BF%BB%E8%AF%91.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/page%20hit.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/page%20fault.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/TLB.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E5%8A%A8%E6%80%81%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D%E5%99%A8.png">
+<meta property="og:updated_time" content="2016-12-29T14:30:04.452Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第9章 虚拟存储器">
+<meta name="twitter:description" content="虚拟存储器（VM）的三大功能：
+
+高效使用主存：通过将主存看成是一个存储在磁盘上的地址空间的高速缓存，在主存中只保留活动区域，并根据需要在磁盘和主存之间来回传送数据。
+为每个进程提供了一致的地址空间，简化了存储管理，进而简化了链接、进程间共享数据、进程的存储器分配以及程序加载。
+通过在每条页表条目中加入保护位，从而保护了每个进程的地址空间不被其他进程破坏。">
+<meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/%E7%89%A9%E7%90%86%E5%AF%BB%E5%9D%80.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/29/第9章-虚拟存储器/"/>
+
+
+
+
+
+  <title> 第9章 虚拟存储器 | GuangchaoSun's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">GuangchaoSun's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-battery-1"></i> <br />
+            
+            书单
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/29/第9章-虚拟存储器/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="GuangchaoSun">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="GuangchaoSun's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="GuangchaoSun's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第9章 虚拟存储器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-29T22:25:37+08:00">
+              2016-12-29
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-29T22:30:04+08:00">
+              2016-12-29
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSAPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CSAPP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/29/第9章-虚拟存储器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/29/第9章-虚拟存储器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>虚拟存储器（VM）的三大功能：</p>
+<ul>
+<li>高效使用主存：通过将主存看成是一个存储在磁盘上的地址空间的高速缓存，在主存中只保留活动区域，并根据需要在磁盘和主存之间来回传送数据。</li>
+<li>为每个进程提供了一致的地址空间，简化了存储管理，进而简化了链接、进程间共享数据、进程的存储器分配以及程序加载。</li>
+<li>通过在每条页表条目中加入保护位，从而保护了每个进程的地址空间不被其他进程破坏。</li>
+</ul>
+<a id="more"></a>
+<p>使用虚拟寻址时，CPU通过生成一个虚拟地址<code>(Virtual Address,VA)</code>来访问主存，这个虚拟地址在被送到存储器之前先转换成适当的物理地址。</p>
+<p>CPU 芯片上有个叫存储器管理单元<code>(Memory Managemnet Unit,MMU)</code>，利用存放在主存中的<code>查询表</code>来<code>动态翻译</code>虚拟地址，该表的内容是由操作系统管理的。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E7%89%A9%E7%90%86%E5%AF%BB%E5%9D%80.jpg" alt=""></p>
+<p>虚拟存储器的基本思想:<br>地址空间清楚地区分了数据对象（字节）和它们的属性（地址）。其允许每个数据对象有多个独立的地址，其中每个地址都选自一个不同的地址空间。主存中每个字节都有一个选自<code>虚拟地址空间</code>的虚拟地址和一个选自<code>物理地址空间</code>的物理地址。</p>
+<h1 id="虚拟内存的三个角色"><a href="#虚拟内存的三个角色" class="headerlink" title="虚拟内存的三个角色"></a>虚拟内存的三个角色</h1><h2 id="作为缓存的工具"><a href="#作为缓存的工具" class="headerlink" title="作为缓存的工具"></a>作为缓存的工具</h2><p>虚拟存储器就是一个由存放在磁盘上的 N 个连续的字节大小的单元组成的数组。这个数组的部分内容，会缓存在DRAM中，在DRAM中的内个缓存块(cache block)就称为页(page)，如下图所示：<br><img src="http://o90jubpdi.bkt.clouddn.com/%E7%BC%93%E5%AD%98%E5%B7%A5%E5%85%B7.jpg" alt=""></p>
+<p>大致的思路和以前 cache memory 是类似的，就是利用 DRAM 比较快的特性，把最常用的数据缓存起来。如果要访问磁盘的话，大约会比访问 DRAM 慢一万倍，所以我们的目标是尽可能从 DRAM 中拿数据，所以需要：</p>
+<ul>
+<li>更大的虚拟页（4KB~2MB）</li>
+<li>全相连：任何虚拟页都可以放在任何物理页中</li>
+<li>操作系统对DRAM缓存使用了更复杂精密的替换算法<ul>
+<li>DRAM总使用写回而不是直写</li>
+</ul>
+</li>
+</ul>
+<p>具体怎么做呢？通过页表(page table)<br>页表将虚拟页映射到物理页。每次地址翻译硬件将一个虚拟地址转换为物理地址时都会读取页表。操作系统负责维护页表的内容，以及在磁盘和DRAM之间来回传送页。</p>
+<p>页表其实就是一个页表条目（Page Table Entry,PTE）的数组。虚拟地址空间中的每个页在页表中一个固定偏移量处都有一个PTE。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E9%A1%B5%E8%A1%A8.jpg" alt=""></p>
+<p>因为有一个表可以查询，就会遇到两种情况，一种是命中(Page Hit)，另一种是未命中(Page fault)</p>
+<p>命中的时候，即访问到页表中蓝色条目的地址时，因为在DRAM中有对应的数据，可以直接访问。<br>不命中的时候，即访问到page table中灰色条目的时候，因为在DRAM中并没有对应的数据，所以需要执行一系列操作（从磁盘复制到DRAM中），具体为：</p>
+<ul>
+<li>触发Page fault，也就是一个异常</li>
+<li>Page fault handler 会选择 DRAM 中需要被替换的 page，并把数据从磁盘复制到 DRAM 中</li>
+<li>重新执行访问指令，这时候就会是 page hit</li>
+</ul>
+<p>复制过程中等待的时间成为 demand paging。</p>
+<p>留意上面的页表，会发现有一个条目是null，也就是没有分配。具体的分配过程，就是让该条目指向虚拟内存的某个页，但不复制到 DRAM，只有当出现 page fault 的时候才需要拷贝数据。</p>
+<h2 id="虚拟存储器作为存储器管理的工具"><a href="#虚拟存储器作为存储器管理的工具" class="headerlink" title="虚拟存储器作为存储器管理的工具"></a>虚拟存储器作为存储器管理的工具</h2><p>操作系统为每一个进程提供了一个页表，也就是一个独立的虚拟地址空间，多个虚拟页面可以映射到同一个共享物理页面上。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7.jpg" alt=""><br>内存分配没有太多的限制，每个虚拟页都可以被映射到任何的物理页上。这样也带来一个好处，如果两个进程间有共享的数据，那么直接指向同一个物理页即可。</p>
+<p>虚拟内存带来的另一个好处就是可以简化链接和载入的结构</p>
+<h2 id="虚拟存储器作为存储器保护的工具"><a href="#虚拟存储器作为存储器保护的工具" class="headerlink" title="虚拟存储器作为存储器保护的工具"></a>虚拟存储器作为存储器保护的工具</h2><p>现代计算机系统必须为操作系统提供手段来控制对存储器系统的访问。<br>提供独立的地址空间使得分离不同进程的私有存储器变得容易。但是，地址翻译机制可以以一种自然的方式扩展到提供更好的访问控制。<br>页表中每个高位部分是表示权限的位，MMU可以通过检查这些位来进行权限控制(读、写、执行)，运行在用户模式下的进程只能访问那些SUP为0的页面。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E5%AD%98%E5%82%A8%E5%99%A8%E4%BF%9D%E6%8A%A4.jpg" alt=""><br>进程1运行在用户模式下，它有读 VP0 和读写 VP1 的权限。</p>
+<h1 id="地址翻译"><a href="#地址翻译" class="headerlink" title="地址翻译"></a>地址翻译</h1><p>下面通过一个例子来说明如何进行地址翻译<br><img src="http://o90jubpdi.bkt.clouddn.com/%E5%9C%B0%E5%9D%80%E7%BF%BB%E8%AF%91.jpg" alt=""></p>
+<p>具体的过程为：</p>
+<ul>
+<li>通过虚拟地址找到页表(page table)中对应的条目</li>
+<li>检查有效位(valid bit)，是否需要触发页错误(page fault)</li>
+<li>然后根据页表中的物理页编号(physical page number)找到内存中的对应地址</li>
+<li>最后把虚拟内存页偏移(virtual page offset)和前面的地址拼起来，就是最终的物理地址了。</li>
+</ul>
+<p>这里又分为两种情况：Page Hit 和 Page Fault，我们先来看 Page Hit 的情况：<br><img src="http://o90jubpdi.bkt.clouddn.com/page%20hit.jpg" alt=""></p>
+<p>主要步骤：</p>
+<ul>
+<li>第一步：CPU 首先把虚拟地址发送给 MMU</li>
+<li>第二步：MMU 生成 PTE 地址，并从高速缓存/主存请求得到它</li>
+<li>第三步：MMU 高速缓存/主存向 MMU 返回 PTE</li>
+<li>第四步：MMU 构造物理地址，并把它传送给高速缓存/主存</li>
+<li>第五步：高速缓存/主存返回所请求的数据字给处理器</li>
+</ul>
+<p>Page Fault：<br><img src="http://o90jubpdi.bkt.clouddn.com/page%20fault.jpg" alt=""></p>
+<ul>
+<li>第一步到第三步，和上面相同</li>
+<li>第四步：PTE 中的有效位是零，所以 MMU 触发了一次异常，传递 CPU 中的控制到操作系统内核中的<code>缺页异常处理程序</code>。</li>
+<li>第五步：缺页处理程序确定出物理存储器中的<code>牺牲页</code>，如果这个页面已经修改了，则把它换出磁盘。</li>
+<li>第六步：缺页处理程序页面调入新的页面，并<code>更新</code>存储器中的 PTE</li>
+<li>第七步：缺页处理程序返回到原来的进程，再次执行导致缺页程序的指令。CPU 将引起缺页的<code>虚拟地址</code>重新发送给 MMU。因为虚拟页面现在缓存在物理存储器中，所以会<code>命中</code>，在 MMU 执行了page hit的步骤后，主存就会将所有请求字返回给处理器。</li>
+</ul>
+<h2 id="翻译后备缓冲器-TLB"><a href="#翻译后备缓冲器-TLB" class="headerlink" title="翻译后备缓冲器(TLB)"></a>翻译后备缓冲器(TLB)</h2><p>虽然缓存已经很快了，但还是有进步的空间，那就是在MMU中集成一个小的、虚拟寻址的缓存(Translation Lookaside Buffer,TLB)。<br><img src="http://o90jubpdi.bkt.clouddn.com/TLB.jpg" alt=""><br>这里VPN + VPO就是虚拟地址，同样分为三部分，分别用于匹配标签、确定集合，如果TLB中有对应的记录，那么直接返回对应页表项(PTE)即可，如果没有的话，就要从缓存/内存中获取，并更新TLB的对应集合。</p>
+<h1 id="动态内存分配"><a href="#动态内存分配" class="headerlink" title="动态内存分配"></a>动态内存分配</h1><p>程序员通过动态内存分配（例如malloc）来让程序在运行时得到虚拟内存。动态存储器分配器维护着一个进程的虚拟存储器区域，称为堆(heap)<br>分配器有两种风格：</p>
+<ul>
+<li>显示分配器(explict allocator)，要求应用显式地释放任何已分配的块。C程序通过调用 malloc 函数来分配一个块，并通过 free 函数来释放一个块。</li>
+<li>隐式分配器(implict allocator)，也叫垃圾收集器(garbage collection)，而自动释放未使用的已分配的块的过程叫做垃圾收集。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,*p;</span><br><span class="line">	<span class="comment">/*Allocate a block of n ints*/</span></span><br><span class="line">	p = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(n * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">	<span class="keyword">if</span> (p == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		perror(<span class="string">"malloc"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*Initialize allocted block*/</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">		p[i] = i;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*Return allocated block to the heap*/</span></span><br><span class="line">	<span class="built_in">free</span>(p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分配器的要求和目标：</p>
+<ul>
+<li>处理任意请求序列</li>
+<li>立即响应请求</li>
+<li>只使用堆</li>
+<li>对齐块</li>
+<li>不修改已分配的块</li>
+</ul>
+<h2 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h2><p>如何能够实现一个高效的内存分配算法？首先要考虑下列问题：</p>
+<ul>
+<li>给定一个指针，我们如何知道需要释放多少内存？</li>
+<li>如何记录未分配的块？</li>
+<li>实际需要的空间比未分配的空间要小的时候，剩下的空间怎么办？</li>
+<li>如果有对个区域满足条件，如何选择？</li>
+<li>释放空间之后如何进行记录？</li>
+</ul>
+<p>书中给出四种方法：</p>
+<ul>
+<li>隐式空闲列表Implicit List</li>
+<li>显式空闲列表Explicit List</li>
+<li>分离的空闲列表 Segregated Free List</li>
+<li>按照大小对块进行排序 Blocks Sorted by Size</li>
+</ul>
+<p>如何确定哪部分空间合适，有三种方法：</p>
+<ol>
+<li>First Fit:每次都从头进行搜索，找到第一个合适的块，线性查找</li>
+<li>Next Fit:每次从上次搜索结束的位置继续搜索，速度较快，但可能会有更多碎片</li>
+<li>Best Fit:每次遍历列表，找到最合适的块，碎片较少，但是速度最慢</li>
+</ol>
+<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1><p>垃圾回收器(garbage collector)是一种动态存储分配器，它自动释放程序不再需要的已分配块。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E5%8A%A8%E6%80%81%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D%E5%99%A8.png" alt=""></p>
+<ul>
+<li>无论何时需要堆空间，应用都会用通常的方式调用 malloc。</li>
+<li>如果 malloc 找不到一个合适的空闲块，那么它就调用垃圾收集器，希望能够回收一些垃圾到空闲链表。</li>
+<li>收集器识别出垃圾块，并调用 free 函数将它们返回堆。关键的思想是收集器代替应用程序去调用 free。</li>
+<li>当对收集器的调用返回时，malloc 重试，试图发现一个合适的空闲块。如果还是失败，就会向操作系统要求额外的存储器。</li>
+<li>最后，malloc 返回一个指向请求块的指针（成功）或者返回一个空指（失败）</li>
+</ul>
+<h1 id="内存陷阱"><a href="#内存陷阱" class="headerlink" title="内存陷阱"></a>内存陷阱</h1><p>关于内存的使用要注意避免以下问题：</p>
+<ul>
+<li>间接引用坏指针</li>
+<li>读取未初始化的内存</li>
+<li>覆盖内存</li>
+<li>引用不存在的变量</li>
+<li>多次释放同一个块</li>
+<li>释放块失败</li>
+</ul>
+<p>具体的间见书本P582</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/29/第10章-系统级I-O/" rel="next" title="第10章 系统级I/O">
+                <i class="fa fa-chevron-left"></i> 第10章 系统级I/O
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/29/第9章-虚拟存储器/"
+           data-title="第9章 虚拟存储器" data-url="http://yoursite.com/2016/12/29/第9章-虚拟存储器/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg"
+               alt="GuangchaoSun" />
+          <p class="site-author-name" itemprop="name">GuangchaoSun</p>
+          <p class="site-description motion-element" itemprop="description">coding change the world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sunguangchao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/sun-guang-chao-64" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-delicious"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2966219821/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟内存的三个角色"><span class="nav-number">1.</span> <span class="nav-text">虚拟内存的三个角色</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作为缓存的工具"><span class="nav-number">1.1.</span> <span class="nav-text">作为缓存的工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟存储器作为存储器管理的工具"><span class="nav-number">1.2.</span> <span class="nav-text">虚拟存储器作为存储器管理的工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟存储器作为存储器保护的工具"><span class="nav-number">1.3.</span> <span class="nav-text">虚拟存储器作为存储器保护的工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#地址翻译"><span class="nav-number">2.</span> <span class="nav-text">地址翻译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#翻译后备缓冲器-TLB"><span class="nav-number">2.1.</span> <span class="nav-text">翻译后备缓冲器(TLB)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态内存分配"><span class="nav-number">3.</span> <span class="nav-text">动态内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现细节"><span class="nav-number">3.1.</span> <span class="nav-text">实现细节</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾回收"><span class="nav-number">4.</span> <span class="nav-text">垃圾回收</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存陷阱"><span class="nav-number">5.</span> <span class="nav-text">内存陷阱</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuangchaoSun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunguangchao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
