@@ -1,0 +1,955 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="异常控制流异常控制流存在于系统的每个层级，最底层的机制称为异常(Exception)，用以改变控制流以响应系统事件，通常是由硬件和操作系统共同实现的。更高层次的异常控制流包括进程切换(Process Context Switch)、信号(Signal)和非本地跳转(Nonlocal Jumps)，也可以看做是一个从硬件过渡到操作系统。再从操作系统过渡到语言库的过程。进程切换是由硬件计时器和操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第8章 异常控制流">
+<meta property="og:url" content="http://yoursite.com/2017/01/08/第8章-异常控制流/index.html">
+<meta property="og:site_name" content="GuangchaoSun's Blog">
+<meta property="og:description" content="异常控制流异常控制流存在于系统的每个层级，最底层的机制称为异常(Exception)，用以改变控制流以响应系统事件，通常是由硬件和操作系统共同实现的。更高层次的异常控制流包括进程切换(Process Context Switch)、信号(Signal)和非本地跳转(Nonlocal Jumps)，也可以看做是一个从硬件过渡到操作系统。再从操作系统过渡到语言库的过程。进程切换是由硬件计时器和操作系统">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A21.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A22.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A23.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/fork.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86.jpg">
+<meta property="og:updated_time" content="2017-01-08T14:10:19.690Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第8章 异常控制流">
+<meta name="twitter:description" content="异常控制流异常控制流存在于系统的每个层级，最底层的机制称为异常(Exception)，用以改变控制流以响应系统事件，通常是由硬件和操作系统共同实现的。更高层次的异常控制流包括进程切换(Process Context Switch)、信号(Signal)和非本地跳转(Nonlocal Jumps)，也可以看做是一个从硬件过渡到操作系统。再从操作系统过渡到语言库的过程。进程切换是由硬件计时器和操作系统">
+<meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/08/第8章-异常控制流/"/>
+
+
+
+
+
+  <title> 第8章 异常控制流 | GuangchaoSun's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">GuangchaoSun's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-battery-1"></i> <br />
+            
+            书单
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/08/第8章-异常控制流/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="GuangchaoSun">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="GuangchaoSun's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="GuangchaoSun's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第8章 异常控制流
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-08T21:59:57+08:00">
+              2017-01-08
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-01-08T22:10:19+08:00">
+              2017-01-08
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSAPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CSAPP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/08/第8章-异常控制流/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/08/第8章-异常控制流/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="异常控制流"><a href="#异常控制流" class="headerlink" title="异常控制流"></a>异常控制流</h1><p>异常控制流存在于系统的每个层级，最底层的机制称为<code>异常(Exception)</code>，用以改变控制流以响应系统事件，通常是由硬件和操作系统共同实现的。更高层次的异常控制流包括<code>进程切换(Process Context Switch)</code>、<code>信号(Signal)</code>和<code>非本地跳转(Nonlocal Jumps)</code>，也可以看做是一个从硬件过渡到操作系统。再从操作系统过渡到语言库的过程。进程切换是由硬件计时器和操作系统共同实现的，而信号只是操作系统层面的概念看了，到了非本地跳转就已经是在C运行库中实现了。<br><a id="more"></a><br>接下来我们就分别来看看这四个跨域计算机不同层级的异常控制流机制</p>
+<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p>异常（exception）就是控制流中的突变，用来响应处理器状态中的某些变化。</p>
+<p>当处理器检测到有事件（event）发生时，它会通过一张叫做异常表（exception table）的跳转表，进行一个间接过程调用（异常），到一个专门设计用来处理这类事件的操作系统子程序（异常处理程序（exception handler））。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.jpg" alt=""></p>
+<p>当异常处理完成后，根据引起异常的事件的类型，会发生以下三种情况：</p>
+<ol>
+<li>处理程序将控制返回给当前指令I(curr)，即当事件发生时正在执行的指令。</li>
+<li>处理程序将控制返回给I(next)，即如果没有发生异常将会执行的下一条指令。</li>
+<li>处理程序终止被中断的程序。</li>
+</ol>
+<p>系统中每种类型的异常都分配了唯一一个非负整数的异常号（exception number）。<br>异常号是异常表中的索引，异常表的起始地址放在一个叫做异常表基址寄存器（exception table base register）的特殊CPU寄存器里。</p>
+<p>异常的分类：中断（interrupt）、陷阱（trap）、故障（fault）和终止（abort）。</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>原因</th>
+<th>异步/同步</th>
+<th>返回指令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中断</td>
+<td>来自I/O设备的信号</td>
+<td>异步</td>
+<td>总是返回到下一条指令</td>
+</tr>
+<tr>
+<td>陷阱</td>
+<td>有意的异常</td>
+<td>同步</td>
+<td>总是返回到下一条指令</td>
+</tr>
+<tr>
+<td>故障</td>
+<td>潜在可恢复的错误</td>
+<td>同步</td>
+<td>可能返回到当前指令</td>
+</tr>
+<tr>
+<td>终止</td>
+<td>不可恢复的错误</td>
+<td>同步</td>
+<td>不会返回</td>
+</tr>
+</tbody>
+</table>
+<h2 id="异步异常（中断）"><a href="#异步异常（中断）" class="headerlink" title="异步异常（中断）"></a>异步异常（中断）</h2><p>异步异常(Asynchronous Exception)称之为中断(Interrupt)，是由处理器外部的 I/O 设备引起的。<br>比较常见的中断有两种：</p>
+<ul>
+<li>计时器中断：计时器中断是由计时器芯片每隔几毫秒触发的，内核用计时器中断来从用户程序手上拿回控制权。</li>
+<li>I/O 中断类型比较多样，比如是键盘输入了<code>ctrl-c</code>，网络中一个包接收完毕。</li>
+</ul>
+<h2 id="同步异常"><a href="#同步异常" class="headerlink" title="同步异常"></a>同步异常</h2><p><strong>陷阱</strong>  </p>
+<p>陷阱最重要的用途是在<code>用户程序</code>和<code>内核之间</code>提供一个像过程一样的接口，叫做<code>系统调用</code>。<br>用户程序经常需要向内核请求服务，比如<code>read</code>、<code>fork</code>、<code>execve</code>和<code>exit</code>。为了允许这些服务的<code>受控访问</code>，处理器提供了一系列特殊的 <code>syscall n</code> 指令。<br>执行 <code>syscall n</code> 指令会导致一个到异常处理程序的陷阱，这个处理程序对参数解码，并调用适当的内核程序。</p>
+<p><strong>故障</strong></p>
+<p>故障的处理根据故障能否被修复，故障处理程序要么重新执行处理引起故障的指令，要么终止。<br>缺页异常：当指令引用一个虚拟地址，而与该地址对应的物理地址页面不在存储器中，因此必须从磁盘中取出时，就会发生故障。（具体的请参考第九章）</p>
+<p><strong>终止</strong></p>
+<p>终止处理程序，就像名字说的那样，从不将控制返回给应用程序。</p>
+<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p>进程是计算机科学中最深刻最成功的概念之一<br>进程的经典定义：一个执行中的程序的实例。<br>进程提供给程序的关键抽象：</p>
+<ul>
+<li>一个独立的逻辑控制流。逻辑控制流通过上下文切换(context switching)的内核机制让每个程序都感觉自己在独占处理器</li>
+<li>一个私有的地址空间。私有地址空间则是通过虚拟内存(virtual memory)的机制让每个程序都感觉自己在独占内存</li>
+</ul>
+<p><strong>逻辑控制流</strong></p>
+<p>程序计数器的值唯一对应于包含在程序的<code>可执行目标文件</code>中的指令，或者是包含在运行时动态链接到程序的<code>共享对象</code>中的指令。这个PC值的序列叫做逻辑控制流，或者简称逻辑流。</p>
+<p><strong>并发流</strong></p>
+<p>一个逻辑流的执行在时间上与另一个流重叠，称为并发流（concurrent flow）。<br>多个流并发地执行的一般现象称为并发（concurrency）。一个进程和其他进程轮流运行的概念称为多任务（multitasking）。</p>
+<p><strong>上下文切换</strong></p>
+<p>操作系统内核使用一种称为<code>上下文切换（context switch）</code>的较高层形式的异常控制流来实现多任务。<br>内核为每一个进程维持一个<code>上下文（context）</code>。<code>上下文</code>就是内核重新启动一个被抢占的进程所需的状态。它由一些对象的值组成，这些对象包括通用目的寄存器、浮点寄存器、程序计数器、用户栈、状态寄存器、内核栈和各种内核数据结构，比如描述地址空间的<code>页表</code>、包含有关当前进程信息的<code>进程表</code>，以及包含进程已打开文件的信息的<code>文件表</code>。<br>上下文切换：  </p>
+<ul>
+<li>保存当前进程的上下文</li>
+<li>恢复某个先前被抢占的进程被保存的上下文</li>
+<li>将控制传递给这个新恢复的进程</li>
+</ul>
+<h2 id="进程切换-Process-Context-Switch"><a href="#进程切换-Process-Context-Switch" class="headerlink" title="进程切换 Process Context Switch"></a>进程切换 Process Context Switch</h2><p>这么多进程，是如何工作的呢？<br><img src="http://o90jubpdi.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A21.jpg" alt=""><br>左边是单进程模型，内存里保存着进程所需的各种信息，因为该进程<code>独占</code>CPU，所以并不需要保存寄存器值。<br>而在右边的单核多进程中，虚线部分可以认为是当前正在执行的进程，因为我们可能会切换到其他进程，所以内存中需要另一块区域来保存当前的<code>寄存器值</code>，以便下次执行的时候进行<code>恢复</code>（也就是所谓的上下文切换）。整个个过程中，CPU<code>交替执行</code>不同的进程，虚拟内存系统会负责管理<code>地址空间</code>，而没有执行的进程的寄存器值会保存在内存中。切换到另一个进程的时候，会载入已保存的对应于将要执行的进程的寄存器值。</p>
+<p>而现代处理器一般有多个核心，所以可以真正同时执行多个进程。这些进程会共享主存以及一部分缓存，具体的调度是由内核控制的，示意图如下：<br><img src="http://o90jubpdi.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A22.jpg" alt=""><br>切换进程时，内核会负责调度，如下图所示：<br><img src="http://o90jubpdi.bkt.clouddn.com/%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A23.jpg" alt=""></p>
+<h2 id="系统调用错误处理"><a href="#系统调用错误处理" class="headerlink" title="系统调用错误处理"></a>系统调用错误处理</h2><p>在遇到错误的时候，Linux 系统级函数通常会返回-1并且设置<code>errno</code>这个全局变量来表示错误的原因。使用的时候记住两个规则：</p>
+<ol>
+<li>对于每个系统调用都应该检查返回值</li>
+<li>当然有一些系统调用的返回值为 void，在这里就不适用</li>
+</ol>
+<h2 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h2><p><strong>获取进程信息：</strong></p>
+<ul>
+<li><code>pid_t getpid(void)</code>-返回调用进程的PID</li>
+<li><code>pid_t getppid(void)</code>-返回它的父进程的PID（创建调用进程的进程）</li>
+</ul>
+<p>上面两个函数都会返回一个类型为<code>pid_t</code>的整数值，在Linux上它在<code>types.h</code>中定义为<code>int</code>。<br>进程总是处在下面三种状态：</p>
+<ul>
+<li>运行。进程要么在CPU上执行，要么在等待被执行且最终会被内核调度。</li>
+<li>停止。进程的执行被挂起（suspend），且不会被调度。当收到 SIGSTOP、SIGTSTP、SIDTTID 或者 SIGTTOU 信号时，进程就停止，并且保持停止直到它收到一个<code>SIGCONT</code>信号，在这个时刻，进程再次开始运行。</li>
+<li>终止。 进程终止的三个原因：<ul>
+<li>收到一个信号，该信号的默认行为是终止进程</li>
+<li>从主程序返回</li>
+<li>调用<code>exit</code>函数</li>
+</ul>
+</li>
+</ul>
+<p><code>exit</code>函数以<code>status</code>退出状态来终止进程。<br><code>父进程</code>通过调用<code>fork</code>函数创建一个新的运行子进程。</p>
+<p><strong>创建进程</strong><br>调用<code>fork</code>来创建新进程，具体的函数原型为</p>
+<pre><code>//对于子进程，返回0
+//对于父进程，返回子进程的PID
+int fork(void)
+</code></pre><p>子进程和父进程几乎一模一样，会有相同且独立的虚拟地址空间，包括文本、数据和bss段、堆以及用户栈。也会得到父进程已经打开的文件描述符（file description）。最大的区别就是不同的PID。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">int main()&#123;</span><br><span class="line">	pid_t pid;</span><br><span class="line">	int x = 1;</span><br><span class="line"></span><br><span class="line">	pid = Fork();</span><br><span class="line">	if (pid == 0)/*Child*/</span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;child : x=%d\n&quot;, ++x);</span><br><span class="line">		exit(0);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/*parent*/</span><br><span class="line">	printf(&quot;parent: x=%d\n&quot;, --x);</span><br><span class="line">	exit(0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">unix&gt; ./fork </span><br><span class="line">parent: x=0</span><br><span class="line">child : x=2</span><br></pre></td></tr></table></figure></p>
+<p><code>fork</code>函数的特征：</p>
+<ul>
+<li>调用一次，返回两次。fork函数被父进程调用一次，但是却返回两次 —— 一次返回到父进程，一次返回到新创建的子进程。</li>
+<li>并发执行。父进程和子进程时并发运行的独立进程。</li>
+<li>相同的但是独立的地址空间</li>
+<li>共享文件</li>
+</ul>
+<p>对应的进程图：<br><img src="http://o90jubpdi.bkt.clouddn.com/fork.jpg" alt=""></p>
+<h2 id="回收子进程"><a href="#回收子进程" class="headerlink" title="回收子进程"></a>回收子进程</h2><p>如果主进程已经终止，子进程还在消耗系统资源，我们称之为【僵尸】。<br>如果父进程没有回收它的僵死进程就终止了，那么内核就会安排<code>init</code>进程来回收他们。<code>init</code>进程的 PID 为1，并且是在系统初始化时由内核创建。<br>一个进程可以通过调用<code>wait</code>或者<code>waitpid</code>函数来等待它的子进程终止或者停止。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/type.h&gt;</span><br><span class="line">#include &lt;sys/wait.h&gt;</span><br><span class="line"></span><br><span class="line">pid_t waitpid(pid_t pid, int *status, int options);</span><br><span class="line">/*返回：如果成功，则为子进程的PID，如果WNOHANG，则为0，如果其他错误，则为-1*/</span><br></pre></td></tr></table></figure></p>
+<p>waitpid函数使用实例：使用<code>waitpid</code>函数不按照特定的顺序回收僵死子进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include &quot;caspp.h&quot;</span><br><span class="line">#define N 2</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	int status, i;</span><br><span class="line">	pid_t pid;</span><br><span class="line"></span><br><span class="line">	/*parents creates N childrens*/</span><br><span class="line">	for(i=0; i &lt; N; i++)</span><br><span class="line">		if((pid = Fork()) == 0)/*Child*/</span><br><span class="line">			exit(100 + i);</span><br><span class="line">        /*parent reaps N children in no particular order*/</span><br><span class="line">	while((pid = waitpid(-1, &amp;status, 0)) &gt; 0)&#123;</span><br><span class="line">		if (WIFEXITED(status))</span><br><span class="line">			printf(&quot;child %d terminated normally with the exit status = %d\n&quot;,pid, WEXITSTATUS(status));</span><br><span class="line">		else </span><br><span class="line">			printf(&quot;child %d terminated abnormally\n&quot;, pid);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if(errno != ECHILD)</span><br><span class="line">		unix_error(&quot;waitpid error&quot;);</span><br><span class="line"></span><br><span class="line">	exit(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在第十四行，父进程调用<code>waitpid</code>函数作为<code>while循环</code>的测试条件，等待它的所有子进程终止。因为第一个参数是 -1，所以对<code>waitpid</code>的调用会<code>阻塞</code>，直到任意一个子进程终止。在每个子进程终止时，对<code>waitpid</code>调用会返回，返回值为该子进程的非零<code>pid</code>。</p>
+<p><code>sleep()</code>函数将一个进程挂起一段指定时间。如果请求的时间量到了，<code>sleep</code>返回0，否则返回剩下的要休眠的秒数。</p>
+<h1 id="信号-Signal"><a href="#信号-Signal" class="headerlink" title="信号 Signal"></a>信号 Signal</h1><p>信号是 Unix、类 Unix 以及其他 POSIX 兼容的操作系统中进程间通讯的一种有限的方式。它是一种异步的通知机制，用来提醒进程一个事件已经发生。当一个信号发送给一个进程，操作系统中断了进程正常的控制流程，此时，任何非原子操作将被中断。如果进程定义了信号的处理函数，那么它将被执行，否则就执行默认的处理函数。</p>
+<p>下面是几个常用的信号类型：</p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>名称</th>
+<th>默认动作</th>
+<th>对应事件  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>SIGINT</td>
+<td>终止</td>
+<td>用户输入 ctrl+c</td>
+</tr>
+<tr>
+<td>9</td>
+<td>SIGKILL</td>
+<td>终止</td>
+<td>终止程序（不能重写或忽略）</td>
+</tr>
+<tr>
+<td>11</td>
+<td>SIGSEGV</td>
+<td>终止且Dump</td>
+<td>段冲突 Segmentation violation</td>
+</tr>
+<tr>
+<td>14</td>
+<td>SIGALRM</td>
+<td>终止</td>
+<td>时间信号</td>
+</tr>
+<tr>
+<td>17</td>
+<td>SIGCHLD</td>
+<td>忽略</td>
+<td>子进程停止或终止</td>
+</tr>
+</tbody>
+</table>
+<p>如何传送一个信号到目的进程:</p>
+<ul>
+<li>发送信号：内核通过更新目的进程上下文中的某个状态，发送（递送）一个信号给目的进程。<ul>
+<li>内核检测到一个系统事件，如被零除错误或者子进程终止</li>
+<li>一个进程调用了<code>kill</code>函数</li>
+</ul>
+</li>
+<li>接收信号：当目的进程被内核强迫以某种方式对信号的发送做出反应时，目的进程就接收了信号。有以下几种操作：<ul>
+<li>忽略这个信号</li>
+<li>终止进程</li>
+<li>捕获信号，执行信号处理器(signal handler)，类似于异步中断中的异常处理器(exception handler)</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://o90jubpdi.bkt.clouddn.com/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86.jpg" alt=""></p>
+<p>如果信号已经发送但是未被接收，那么处于等待状态(pending)，同类型的信号至多只会有一个待处理信号(pending signal)，一定要注意这个特性，因为内部实现机制不可能提供复杂的数据结构，所以信号的接收并不是一个队列。比如说进程有一个 SIGCHLD 信号处于等待状态，那么之后进来的 SIGCHLD 信号都会被直接扔掉。</p>
+<p>当然，进程也可以阻塞特定信号的接收，但信号的发送不受控制，所以被阻塞的信号仍然可以被发送，不过直到进程取消阻塞该信号之后才会被接收。内核为每个进程在<code>pending</code>位向量中维护着待处理信号的集合，在<code>blocked</code>位向量中维护着被阻塞的信号集合。</p>
+<h2 id="进程组"><a href="#进程组" class="headerlink" title="进程组"></a>进程组</h2><p>每个进程都只属于一个进程组，进程组是由一个正整数进程组ID来标识的。</p>
+<ul>
+<li><code>getpgrp()</code>-返回当前进程的进程组</li>
+<li><code>setpgid()</code>-设置一个进程的进程组</li>
+</ul>
+<p>简单示例：父进程通过发送 SIGINT 信号来终止正在无限循环的子进程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void forkandkill()</span><br><span class="line">&#123;</span><br><span class="line">	pid_t pid[N];</span><br><span class="line">	int i;</span><br><span class="line">	int child_status;</span><br><span class="line"></span><br><span class="line">	for (i = 0; i &lt; N; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		if ((pid[i] = fork()) == 0)</span><br><span class="line">			while(1); //死循环</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	for (i = 0; i &lt; N; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		pid_t wpid = wait(&amp;child_status);</span><br><span class="line">		if (WIFEXITED(child_status))</span><br><span class="line">			printf(&quot;Child %d terminated with exit status %d\n&quot;,wpid, WEXITSTATUS(child_status));</span><br><span class="line">		else </span><br><span class="line">			printf(&quot;Child %d terminated abnormally\n&quot;,wpid);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="接收信号"><a href="#接收信号" class="headerlink" title="接收信号"></a>接收信号</h2><p>所有的上下文切换都是通过调用某个异常处理器(exception handler)完成的，内核会计算对应于某个进程<code>p</code>的<code>pnb</code>值：<code>pnb = pending &amp; ~blocked</code></p>
+<ul>
+<li>如果<code>pnb == 0</code>，那么就把控制交给进程p的逻辑流中的下一条指令</li>
+<li>如果<code>pnb != 0</code><ul>
+<li>选择<code>pnb</code>中最小的非零位k，并强制进程p接收信号k</li>
+<li>接收到信号之后，进程p会执行对应的动作</li>
+<li>对pnb中所有的非零位进行这个操作</li>
+<li>最后把控制交给进程p的逻辑流的下一条指令</li>
+</ul>
+</li>
+</ul>
+<p>每个信号都有一个预定义的<code>默认行为</code>：</p>
+<ul>
+<li>终止进程</li>
+<li>终止进程并转储存储器(dump core)</li>
+<li>停止进程直到被<code>SIGCONT</code>信号重启</li>
+<li>进程忽略该信号</li>
+</ul>
+<p><code>signal</code>可以修改默认动作，函数原型为 <code>handler_t *signal(int signum, handler_t *handler)</code>。通过一个例子来感受下，这里我们屏蔽了<code>SIGINT</code>函数，即使按下<code>ctrl+c</code>也不会终止。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">void sigint_handler(int sig) // SIGINT 处理器</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;想通过 ctrl+c 来关闭我？\n&quot;);</span><br><span class="line">    sleep(2);</span><br><span class="line">    fflush(stdout);</span><br><span class="line">    sleep(1);</span><br><span class="line">    printf(&quot;OK. :-)\n&quot;);</span><br><span class="line">    exit(0);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    // 设定 SIGINT 处理器</span><br><span class="line">    if (signal(SIGINT, sigint_handler) == SIG_ERR)</span><br><span class="line">        unix_error(&quot;signal error&quot;);</span><br><span class="line">        </span><br><span class="line">    // 等待接收信号</span><br><span class="line">    pause();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="阻塞信号（-）"><a href="#阻塞信号（-）" class="headerlink" title="阻塞信号（*）"></a>阻塞信号（*）</h2><h2 id="安全处理信号（-）"><a href="#安全处理信号（-）" class="headerlink" title="安全处理信号（*）"></a>安全处理信号（*）</h2><h1 id="非本地跳转-Non-Local-Jump"><a href="#非本地跳转-Non-Local-Jump" class="headerlink" title="非本地跳转 Non Local Jump"></a>非本地跳转 Non Local Jump</h1><p>所谓的本地跳转，指的是在一个程序中通过 goto 语句进行流程跳转，尽管不推荐使用 goto 语句，但是在嵌入式系统中为了提高程序的效率，goto 语句还是可以使用的。本地跳转的限制在于，我们不能从一个函数跳转到另一个函数中。如果想突破函数的限制，就要使用<code>setjmp</code>或<code>longjmp</code>来进行非本地跳转了。</p>
+<p><code>setjmp</code>保存当前程序的堆栈上下文环境(stack context)，注意，这个保存的堆栈上下文环境仅在调用<code>setjmp</code>的函数内有效，如果调用<code>setjmp</code>的函数返回了，这个保存的堆栈上下文就失效了。调用<code>setjmp</code>的直接返回值为0。</p>
+<p><code>longjmp</code>将会恢复由<code>setjmp</code>保存的程序堆栈上下文，即程序从调用<code>setjmp</code>处开始执行，不过此时的<code>setjmp</code>的返回值将是由<code>longjmp</code>指定的值。注意<code>longjmp</code>不能指定0位返回值，即使指定了0，<code>longjmp</code>也会使<code>setjmp</code>返回1</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/29/第9章-虚拟存储器/" rel="next" title="第9章 虚拟存储器">
+                <i class="fa fa-chevron-left"></i> 第9章 虚拟存储器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/08/第7章-链接/" rel="prev" title="第7章 链接">
+                第7章 链接 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/08/第8章-异常控制流/"
+           data-title="第8章 异常控制流" data-url="http://yoursite.com/2017/01/08/第8章-异常控制流/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg"
+               alt="GuangchaoSun" />
+          <p class="site-author-name" itemprop="name">GuangchaoSun</p>
+          <p class="site-description motion-element" itemprop="description">coding change the world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sunguangchao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/sun-guang-chao-64" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-delicious"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2966219821/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#异常控制流"><span class="nav-number">1.</span> <span class="nav-text">异常控制流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常"><span class="nav-number">2.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步异常（中断）"><span class="nav-number">2.1.</span> <span class="nav-text">异步异常（中断）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步异常"><span class="nav-number">2.2.</span> <span class="nav-text">同步异常</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程"><span class="nav-number">3.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程切换-Process-Context-Switch"><span class="nav-number">3.1.</span> <span class="nav-text">进程切换 Process Context Switch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调用错误处理"><span class="nav-number">3.2.</span> <span class="nav-text">系统调用错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">3.3.</span> <span class="nav-text">进程控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回收子进程"><span class="nav-number">3.4.</span> <span class="nav-text">回收子进程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#信号-Signal"><span class="nav-number">4.</span> <span class="nav-text">信号 Signal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程组"><span class="nav-number">4.1.</span> <span class="nav-text">进程组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接收信号"><span class="nav-number">4.2.</span> <span class="nav-text">接收信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞信号（-）"><span class="nav-number">4.3.</span> <span class="nav-text">阻塞信号（*）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全处理信号（-）"><span class="nav-number">4.4.</span> <span class="nav-text">安全处理信号（*）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#非本地跳转-Non-Local-Jump"><span class="nav-number">5.</span> <span class="nav-text">非本地跳转 Non Local Jump</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuangchaoSun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunguangchao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

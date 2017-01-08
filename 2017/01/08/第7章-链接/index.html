@@ -1,0 +1,912 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="编译C语言代码最终成为机器可执行的程序，会像流水线上的产品一样接受各项处理：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第7章 链接">
+<meta property="og:url" content="http://yoursite.com/2017/01/08/第7章-链接/index.html">
+<meta property="og:site_name" content="GuangchaoSun's Blog">
+<meta property="og:description" content="编译C语言代码最终成为机器可执行的程序，会像流水线上的产品一样接受各项处理：">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F.png">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/ELF.jpg">
+<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E8%BD%BD%E5%85%A5%E5%86%85%E5%AD%98.jpg">
+<meta property="og:updated_time" content="2017-01-08T14:13:36.973Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第7章 链接">
+<meta name="twitter:description" content="编译C语言代码最终成为机器可执行的程序，会像流水线上的产品一样接受各项处理：">
+<meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/08/第7章-链接/"/>
+
+
+
+
+
+  <title> 第7章 链接 | GuangchaoSun's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">GuangchaoSun's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-battery-1"></i> <br />
+            
+            书单
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/08/第7章-链接/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="GuangchaoSun">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="GuangchaoSun's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="GuangchaoSun's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第7章 链接
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-08T22:01:04+08:00">
+              2017-01-08
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-01-08T22:13:36+08:00">
+              2017-01-08
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSAPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CSAPP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/08/第7章-链接/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/08/第7章-链接/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>C语言代码最终成为机器可执行的程序，会像流水线上的产品一样接受各项处理：<br><img src="http://o90jubpdi.bkt.clouddn.com/%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F.png" alt=""><br><a id="more"></a></p>
+<ul>
+<li>预处理阶段：预处理器<code>cpp</code>根据以字符<code>#</code>开头的命令，修改原始的 C 程序。预处理阶段根据已放置在文件中的预处理指令来修改源文件的内容。主要是以下几方面的处理：<ul>
+<li>宏定义指令，如<code>#define a b</code>这种伪指令，预编译所要做的是将程序中的所有a用b替换，但作为字符串常量的a则不被替换。还有#undef，则取消对某个宏的定义，使以后该串的出现不会被替换。</li>
+<li>条件编译指令，如<code>#ifdef</code>，<code>#idndef</code>，<code>#else</code>，<code>#elif</code>，<code>#endif</code>等。这些伪指令的引入使得程序员可以通过定义不同的宏来决定编译程序对哪些代码进行处理。预编译程序将根据有关的文件，将那些不必要的代码过滤掉。</li>
+<li>头文件包含指令，如<code>#include &quot;filename&quot;</code>。该指令将头文件中的定义统统都加入到它所产生的输出文件中，以供编译程序对之进行处理。</li>
+<li>特殊符号，预编译程序可以识别一些特殊的符号。例如在源程序中出现的<code>LINE</code>标识将被解释为当前行号(十进制数)，<code>FILE</code>则被解释为当前被编译的C源程序的名称。预编译程序对于在源程序中出现的这些串将用合适的值进行替换。</li>
+</ul>
+</li>
+<li>编译阶段：编译器<code>ccl</code>将文本文件<code>hello.i</code>翻译成文本文件<code>hello.s</code>，它包含一个汇编语言程序。编译程序所做的工作就是通过词法分析和语法分析，在确认所有的指令都符合语法规则之后，将其翻译成等价的中间代码表示或汇编代码。</li>
+<li>汇编阶段：接下来，汇编器<code>as</code>将<code>hello.s</code>翻译成机器语言指令，把这些指令打包成一种叫做<code>可重定位目标程序(relocatable object program)</code>的格式，并将结果保存在目标文件<code>hello.o</code>中。目标文件由段组成。通常一个目标文件中至少有两个段：<ul>
+<li>代码段：该段中所包含的主要是程序的指令。该段一般是可读和可执行的，但一般不可写</li>
+<li>数据段：主要存放程序中要用到的各种全局变量或静态的数据。一般数据段都是可读，可写，可执行的</li>
+</ul>
+</li>
+<li>链接阶段：对象程序<code>hello.o</code>以及所需的静态库经过链接器<code>ld</code>的处理最终成为可执行目标程序。</li>
+<li>加载阶段：加载器<code>loader</code>将可执行目标程序加载到内存并执行。</li>
+</ul>
+<p>链接（linking）是将各种代码和数据部分收集起来并合并成一个单一文件的过程，这个文件可以被加载（或拷贝）到存储器执行。<br>下面来看一个实例：</p>
+<pre><code>void swap();
+
+int buf[2] = {1,2};
+
+int main(){
+    swap();
+    retunr 0;
+
+}
+/*--------------------*/
+extern int buf[];
+int *bufp0 = &amp;buf[0];
+int *bufp1;
+
+void swap(){
+    int temp;
+    bufp1 = &amp;buf[1];
+    temp = *bufp0;
+    *bufp0 = *bufp1;
+    *bufp1 = temp;
+
+}
+</code></pre><h1 id="链接基本知识"><a href="#链接基本知识" class="headerlink" title="链接基本知识"></a>链接基本知识</h1><blockquote>
+<p>为什么要使用链接器？</p>
+</blockquote>
+<p>有如下两个原因：</p>
+<ul>
+<li>模块化角度考虑。我们可以把程序分散到不同的小的源代码中，而不是一个巨大的类中。这样带来的好处是可以复用常见的功能/库，比方说 <code>Math library</code>,<code>standard C library</code>.</li>
+<li>效率角度考虑。改动代码时只需要重新编译改动的文件，其他不受影响。而常用的函数和功能可以封装成库，提供给程序进行调用（节省空间）</li>
+</ul>
+<h2 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h2><p>像unix ld这样的静态链接器以一组<code>可重定位目标文件</code>和<code>命令行参数</code>作为输入，生成一个完全链接的可以加载和运行的可执行目标文件作为输出。<br>链接器的两个任务：</p>
+<ul>
+<li>符号解析(symbol resolution)。目标文件定义和引用符号。符号解析的目的是将每个符号引用刚好和一个符号定义联系起来</li>
+<li>重定位(relocation)。编译器和汇编器生成从地址0开始的代码和数据节。链接器通过把每个符号定义和一个存储器位置联系起来，然后修改所有对这些符号的引用，使得它们指向这个存储器位置，从而重定位这些节。</li>
+</ul>
+<p>目标文件的三种形式：</p>
+<ul>
+<li>可重定位目标文件Relocatable object file(<code>.o</code> file)<ul>
+<li>包含二进制代码和数据，其形式可以在编译时与其他可重定位目标文件合并起来，创建一个可执行目标文件。</li>
+</ul>
+</li>
+<li>可执行目标文件Executable object file(<code>a.out</code> file)<ul>
+<li>包含二进制代码和数据，其形式可以被直接拷贝到存储器并执行。</li>
+</ul>
+</li>
+<li>共享目标文件Shared object file(<code>.so</code> file)<ul>
+<li>一种特殊类型的可重定位目标文件，可以在加载或者运行时被动态地加载到内存并链接。</li>
+</ul>
+</li>
+</ul>
+<h2 id="可重定位目标文件"><a href="#可重定位目标文件" class="headerlink" title="可重定位目标文件"></a>可重定位目标文件</h2><p>以上的三种对象文件有统一的格式，即（Executable and Linkable Format,ELF）。一个典型的ELF可重定位目标文件包含以下几个节：<br><img src="http://o90jubpdi.bkt.clouddn.com/ELF.jpg" alt=""></p>
+<ul>
+<li>ELF header<ul>
+<li>包含 word size,byte ordering,file type(<code>.o</code>,<code>exec</code>,<code>.so</code>),machine type,etc</li>
+</ul>
+</li>
+<li>Segment header table<ul>
+<li>包含 page size,virtual address memory segments(sections),segment sizes</li>
+</ul>
+</li>
+<li>.text<ul>
+<li>已编译程序的机器代码</li>
+</ul>
+</li>
+<li>.rodata<ul>
+<li>只读程序</li>
+</ul>
+</li>
+<li>.data<ul>
+<li>已初始化的全局C变量</li>
+</ul>
+</li>
+<li>.bss<ul>
+<li>未初始化的全局C变量</li>
+</ul>
+</li>
+<li>.symtab<ul>
+<li>一个符号表，它存放在程序中定义和引用的函数和全局变量的信息。</li>
+</ul>
+</li>
+<li>.rel.text<ul>
+<li>一个.text节中位置的列表，当链接器把这个目标文件和其他文件结合时，需要修改这些位置。</li>
+</ul>
+</li>
+<li>.rel.data<ul>
+<li>被模块引用或定义的任何全局变量的重定位信息。</li>
+</ul>
+</li>
+<li>.debug<ul>
+<li>一个符号调试表</li>
+</ul>
+</li>
+<li>.line<ul>
+<li>原始C源程序的行号和.text节中机器指令之间的映射</li>
+</ul>
+</li>
+<li>.strtab<ul>
+<li>一个字符串表</li>
+</ul>
+</li>
+</ul>
+<p>任何声明带有<code>static</code>属性的全局变量或者函数都是模块私有的</p>
+<h2 id="符号和符号表"><a href="#符号和符号表" class="headerlink" title="符号和符号表"></a>符号和符号表</h2><p>每个可重定位目标模块m都有一个符号表，它包含m所定义和引用的符号的信息。</p>
+<ul>
+<li>全局符号 Global symbols<ul>
+<li>由m定义并能被其他模块引用的全局符号</li>
+</ul>
+</li>
+<li>外部符号 External symbols<ul>
+<li>由其他模块定义并被m引用的全局符号</li>
+</ul>
+</li>
+<li>本地符号 Local symbols<ul>
+<li>只被模块m定义和引用的本地符号</li>
+</ul>
+</li>
+</ul>
+<p>符号表是由汇编器构造的，使用编译器输出到汇编语言<code>.s</code>文件中的符号。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">typedef</span> <span class="keyword">struct</span> </span><br><span class="line">    &#123;</span><br><span class="line">    	<span class="keyword">int</span> name;      <span class="comment">/*String table offset*/</span></span><br><span class="line">    	<span class="keyword">int</span> value;     <span class="comment">/*Section offset,or VM address*/</span></span><br><span class="line">    	<span class="keyword">int</span> size;      <span class="comment">/*Object size in bytes*/</span></span><br><span class="line">    	<span class="keyword">char</span> type:<span class="number">4</span>,   <span class="comment">/*Data, func, section, or src file name(4 bits)*/</span></span><br><span class="line">    		 binding:<span class="number">4</span>;<span class="comment">/*Local or global(4 bits)*/</span></span><br><span class="line">    	<span class="keyword">char</span> reserved; <span class="comment">/*Unused*/</span></span><br><span class="line">    	<span class="keyword">char</span> section;  <span class="comment">/*Scection header index, ABS, UNDEF*/</span></span><br><span class="line">                       <span class="comment">/*Or COMMON*/</span></span><br><span class="line">    &#125; Elf_Symbol;   </span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line">链接过程</span><br><span class="line">===========</span><br><span class="line">链接器主要是将有关的目标文件彼此相连生成可加载、可执行的目标文件。链接器的核心工作就是`符号表解析`和`重定位`</span><br><span class="line"></span><br><span class="line">第一步 符号解析 Symbol resolution</span><br><span class="line">---------------</span><br><span class="line">链接器解析符号引用的方法是将每个引用与它输入的可重定位目标文件的符号表中的一个确定的符号定义联系起来。</span><br></pre></td></tr></table></figure></p>
+<p>// 文件 main.c<br>int sum(int <em>a, int n);<br>int array<a href="http://o90jubpdi.bkt.clouddn.com/ELF.jpg" target="_blank" rel="external">2</a> = {1, 2}; // 变量 array 在此定义<br>int main() // 定义了一个全局函数<br>{<br>    int val = sum(array, 2);<br>    // val 是局部变量，链接器并不知道<br>    // sum 函数是一个全局引用<br>    // array 变量是一个全局引用<br>    return val;<br>}<br>// —————————————–<br>// 文件 sum.c<br>int sum(int </em>a, int n) // 定义了一个全局函数<br>{<br>    int i, s = 0;<br>    // i 和 s 是局部变量，链接器并不知道<br>    for (i = 0; i &lt; n; i++)<br>        s += a[i];</p>
+<pre><code>return s;
+</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">我们可以看到，链接器只知道非静态的全局变量，而对于局部变量一无所知。然后我们来看看局部非静态变量和局部静态变量的区别：</span><br><span class="line"></span><br><span class="line">* 局部非静态变量会保存在栈中</span><br><span class="line">* 局部静态变量会保存在`.bss`和`.data`中</span><br><span class="line"></span><br><span class="line">如果两个文件中定义了同名的全局变量，编译器向汇编器输出的时候会有强弱之分：</span><br><span class="line"></span><br><span class="line">* 强符号：函数和初始化的全局变量</span><br><span class="line">* 弱符号：未初始化的全局变量</span><br><span class="line"></span><br><span class="line">链接器在处理强弱符号的时候遵守以下规则：</span><br><span class="line"></span><br><span class="line">1. 不允许出现多个强符号</span><br><span class="line">2. 如果有同名的强符号和弱符号，选择强符号，也就意味着弱符号是无效的</span><br><span class="line">3. 如果有多个弱符号，随便选择一个</span><br><span class="line"></span><br><span class="line">**如果可能，尽量避免使用全局变量**  </span><br><span class="line">如果一定要用，注意下面几点：</span><br><span class="line"></span><br><span class="line">* 使用静态变量</span><br><span class="line">* 定义全局变量的时候初始化</span><br><span class="line">* 注意使用`extern`关键字</span><br><span class="line"></span><br><span class="line">第二步 重定位 Relocation</span><br><span class="line">------------</span><br><span class="line">一旦链接器完成了符号解析这一步，它就把代码中的每个符号引用和确定的一个符号定义（即它的一个输入目标模块中的一个符号表条目）联系起来。由下面两步组成：</span><br><span class="line"></span><br><span class="line">* 重定位和符号定义。链接器将所有相同类型的节合并为同一类型的新的聚合节。</span><br><span class="line">* 重定位节中的符号引用。链接器修改代码节和数据节中对每个符号的引用，使得它们指向正确的地址。</span><br><span class="line"></span><br><span class="line">下面是重定位的过程，就是把不同重定位对象拼成可执行对象文件：</span><br><span class="line"></span><br><span class="line">![][3]</span><br><span class="line"> </span><br><span class="line">链接器的重定位算法的伪代码：</span><br></pre></td></tr></table></figure></p>
+<p>foreach section a{<br>    foreach reloaction entry r{<br>        refptr = s + r.offset;</p>
+<pre><code>    if(r.type == R_386_PC32){ /*Relocate a PC-relative reference*/
+        refaddr = ADDR(s) + r.offset;
+        *refptr = (unsigned)(ADDR(r.symbol) + *refptr - refaddr);
+    }
+    if(r.type == R_386_32){
+        *refptr = (unsigned)(ADDR(r.symbol) + *refptr);
+    }
+}
+</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">我们从汇编代码的角度来看看具体链接器是如何工作的：</span><br></pre></td></tr></table></figure></p>
+<p>int sum(int *a, int n);<br>int array<a href="http://o90jubpdi.bkt.clouddn.com/ELF.jpg" target="_blank" rel="external">2</a> = {1, 2};<br>int main()<br>{<br>    int val = sum(array, 2);<br>    return val;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过`objdump -r -d main.o`反编译对应的可重定位对象文件，可以得到如下的汇编代码：</span><br></pre></td></tr></table></figure></p>
+<p>0000000000000000 <main>:<br>    0: 48 83 ec 08      sub   $0x8, %rsp<br>    4: be 02 00 00 00   mov   $0x2, %esi<br>    9: bf 00 00 00 00   mov   $0x0, %edi  # %edi = &amp;array<br>                a: R_X86_64_32 array      # Relocation entry<br>    e: e8 00 00 00 00   callq 13 <main+0x13> # sum()<br>                f: R_X86_64_PC32 sum-0x4  # Relocation entry<br>   13: 48 83 c4 08      add   $0x8, %rsp<br>   17: c3               retq<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这里我们可以看到，编译器用relocation entry 来标记不同的调用（对应代码后面四组数字都是零，就是留出位置让链接器在链接的时候填上对应的实际内存地址）</span><br><span class="line">在完成链接之后我们得到prog这个程序，同样反编译`objdump -dx prog`可以看到：</span><br></pre></td></tr></table></figure></main+0x13></main></p>
+<p>00000000004004d0 <main>:<br>    4004d0: 48 83 ec 08      sub   $0x8, %rsp<br>    4004d4: be 02 00 00 00   mov   $0x2, %esi<br>    4004d9: bf 18 10 60 00   mov   $0x0, %edi  # %edi = &amp;array<br>    4004de: e8 05 00 00 00   callq 4004e8 <sum> # sum()<br>    4004e3: 48 83 c4 08      add   $0x8, %rsp<br>    4004e7: c3               retq<br>00000000004004e8 <sum>:<br>    4004e8: b8 00 00 00 00   mov   $0x0, %eax<br>    …<br>    …<br>    400501: f3 c3            repz retq<br><code>``
+对应地址已经填上去了，这里用的是相对位置，比如说</code>0x4004de<code>的</code>05 00 00 00<code>的意思实际上是说在下一句的基础上加上0x5，也就是0x4004e8，即</code>sum`函数的开始位置。<br>具体载入内存时：<br><img src="http://o90jubpdi.bkt.clouddn.com/%E8%BD%BD%E5%85%A5%E5%86%85%E5%AD%98.jpg" alt=""><br>需要注意左边的部分地址从上往下（上面的地址较小），右边则是从下往上（下面的地址较小）。</sum></sum></main></p>
+<h1 id="打包常用程序"><a href="#打包常用程序" class="headerlink" title="打包常用程序"></a>打包常用程序</h1><h2 id="静态库-Static-Library"><a href="#静态库-Static-Library" class="headerlink" title="静态库 Static Library"></a>静态库 Static Library</h2><p>所有的编译系统都提供一种机制，将所有相关的目标模块打包称为一个单独的文件，称为静态库（static library），它可以用作链接器的输入。当构造器构造一个输出的可执行文件时，它只拷贝静态库里被应用程序引用的目标模块。相关的函数可以被编译为独立的目标模块，然后封装成一个单独的静态库文件。</p>
+<p><strong>Other:</strong>静态库是一个外部函数与变量的集合体。静态库的文件内容，通常包含一堆程序员自定的变量与函数，其内容不像动态链接那么复杂，在编译期间由编译器与链接器将它集成至应用程序内，并制成目标文件以及可以独立运作的可执行文件。这个可执行文件与编译可执行文件的程序，都是一种程序的静态创建(static build)<br>具体过程就是把不同文件的.o文件通过Archiver打包成一个.a文件。Archiver支持增量更新，如果有函数变动，只需重新编译改动的部分。</p>
+<h2 id="共享库-Shared-Library"><a href="#共享库-Shared-Library" class="headerlink" title="共享库 Shared Library"></a>共享库 Shared Library</h2><p>共享库是一个目标模块，在运行时，可以加载到任意的存储器地址，并和一个在存储器中的程序链接起来。这个过程称为动态链接<code>（dynamic linking）</code>，是由一个叫做动态链接器<code>（dynamic linker）</code>的程序来执行的。<br>共享库在Unix系统中常用.so后缀来表示。<br>共享的两种方式：</p>
+<ul>
+<li>在文件系统中，只有一个<code>.so</code>文件，所以，所有引用该库的可执行目标文件共享这个.so文件中的代码和数据。</li>
+<li>在存储器中，一个共享库的<code>.text</code>节的副本可以被不同的正在运行的进程共享。</li>
+</ul>
+<p>Linux允许应用程序在运行时加载和链接共享库</p>
+<pre><code># include &lt;dlfcn.h&gt;
+void *dlopen(const char *filename, int flag)
+//返回：若成功则为指向句柄的指针，若出错则为NULL
+</code></pre><p>案例学习 Library Interpositioning</p>
+<p><a href="http://jayconrod.com/posts/23/tutorial-function-interposition-in-linux" target="_blank" rel="external">Tutorial: Function Interposition in Linux</a></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>链接可以在编译时由静态编译器来完成，也可以在加载和运行时由动态链接器来完成。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/08/第8章-异常控制流/" rel="next" title="第8章 异常控制流">
+                <i class="fa fa-chevron-left"></i> 第8章 异常控制流
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/08/第7章-链接/"
+           data-title="第7章 链接" data-url="http://yoursite.com/2017/01/08/第7章-链接/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg"
+               alt="GuangchaoSun" />
+          <p class="site-author-name" itemprop="name">GuangchaoSun</p>
+          <p class="site-description motion-element" itemprop="description">coding change the world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sunguangchao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/sun-guang-chao-64" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-delicious"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2966219821/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#编译"><span class="nav-number">1.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链接基本知识"><span class="nav-number">2.</span> <span class="nav-text">链接基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态链接"><span class="nav-number">2.1.</span> <span class="nav-text">静态链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可重定位目标文件"><span class="nav-number">2.2.</span> <span class="nav-text">可重定位目标文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#符号和符号表"><span class="nav-number">2.3.</span> <span class="nav-text">符号和符号表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打包常用程序"><span class="nav-number">3.</span> <span class="nav-text">打包常用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库-Static-Library"><span class="nav-number">3.1.</span> <span class="nav-text">静态库 Static Library</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享库-Shared-Library"><span class="nav-number">3.2.</span> <span class="nav-text">共享库 Shared Library</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuangchaoSun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunguangchao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
