@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/10/08/git阶段总结/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
 <meta property="og:description" content="因为在工作中要经常与git打交道，想想入职时间有四个五月了，实际工作时间两三个月左右。正好趁着这个假期做一下总结。">
-<meta property="og:updated_time" content="2016-11-14T14:03:22.772Z">
+<meta property="og:updated_time" content="2017-01-16T14:33:36.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git阶段总结">
 <meta name="twitter:description" content="因为在工作中要经常与git打交道，想想入职时间有四个五月了，实际工作时间两三个月左右。正好趁着这个假期做一下总结。">
@@ -323,8 +323,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-14T22:03:22+08:00">
-              2016-11-14
+            <time title="Post modified" itemprop="dateModified" datetime="2017-01-16T22:33:36+08:00">
+              2017-01-16
             </time>
             
           </span>
@@ -381,7 +381,8 @@
       
 
       
-        <p>因为在工作中要经常与git打交道，想想入职时间有四个五月了，实际工作时间两三个月左右。正好趁着这个假期做一下总结。<br><a id="more"></a><br>先推荐两个git的教程：<br>a. <a href="https://git-scm.com/book/zh/v2" title="git-book" target="_blank" rel="external">git-book</a><br>b. <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/" target="_blank" rel="external">git教程-廖雪峰</a></p>
+        <p>因为在工作中要经常与git打交道，想想入职时间有四个五月了，实际工作时间两三个月左右。正好趁着这个假期做一下总结。<br><a id="more"></a><br>先推荐两个git的教程：  </p>
+<p>a. <a href="https://git-scm.com/book/zh/v2" title="git-book" target="_blank" rel="external">git-book</a><br>b. <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/" target="_blank" rel="external">git教程-廖雪峰</a></p>
 <h2 id="git基础-获取git仓库"><a href="#git基础-获取git仓库" class="headerlink" title="git基础-获取git仓库"></a>git基础-获取git仓库</h2><p>git版本库的初始化，一般有两种方式：<br><strong>a. 克隆现有的仓库</strong><br>克隆仓库的命令格式为<code>git clone [url]</code>，比如：</p>
 <pre><code>$ git clone https://github.com/libgit2/libgit2
 </code></pre><p><strong>b. 在现有的目录下初始化仓库</strong><br>如果你打算使用 Git 来对现有的项目进行管理，你只需要进入该项目目录并输入：</p>
@@ -410,22 +411,19 @@ Deleted branch dev (was fec145a).
 </code></pre><p>工作中经常遇到的情景是：别人远程创建了一个分支，怎么切换到远程的分支上呢？</p>
 <pre><code>git branch -D #删除一个分支
 git branch -va #查看所有的远程分支
-git branch -b &lt;name&gt; &lt;remote name&gt; #创建并转到远程分支并改名字为name
-</code></pre><p><code>git branch -b &lt;name&gt; &lt;remote name&gt;</code>就是在本地新建一个名为<code>&lt;name&gt;</code>的分支，并转到远程的分支<code>&lt;remote name&gt;</code>上。</p>
+git checkout -b &lt;name&gt; &lt;remote name&gt; #创建并转到远程分支并改名字为name
+</code></pre><p><code>git checkout -b &lt;name&gt; &lt;remote name&gt;</code>就是在本地新建一个名为<code>&lt;name&gt;</code>的分支，并转到远程的分支<code>&lt;remote name&gt;</code>上。</p>
 <h2 id="git-版本回退"><a href="#git-版本回退" class="headerlink" title="git-版本回退"></a>git-版本回退</h2><p>有时候我们发现，自己<code>commit</code>提交的东西不对，那可怎么办呢？<br>首先，git必须知道当前版本是哪个版本，在git中，用<code>HEAD</code>表示当前版本，也就是最新的提交，上一个版本就是<code>HEAD^</code>，上上一个版本就是<code>HEAD^^</code>，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。</p>
 <pre><code>$ git reset --hard HEAD^
-</code></pre><p>总结一下：   </p>
-<blockquote>
+</code></pre><p>总结一下： </p>
 <ul>
 <li>HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令<code>git reset --hard commit_id</code>。</li>
 <li>穿梭前，用<code>git log</code>可以查看提交历史，以便确定要回退到哪个版本。</li>
 <li>要重返未来，用<code>git reflog</code>查看命令历史，以便确定要回到未来的哪个版本。</li>
 </ul>
-</blockquote>
 <h2 id="git-子模块-submoudle"><a href="#git-子模块-submoudle" class="headerlink" title="git-子模块(submoudle)"></a>git-子模块(submoudle)</h2><p>有种情况我们经常会遇到：某个工作中的项目需要包含并使用另一个项目。 也许是第三方库，或者你独立开发的，用于多个父项目的库。 现在问题来了：你想要把它们当做两个独立的项目，同时又想在一个项目中使用另一个。<br>git通过<code>子模块</code>来解决这个问题。 子模块允许你将一个 Git 仓库作为另一个git仓库的子目录。 它能让你将另一个仓库克隆到自己的项目中，同时还保持提交的独立。<br>我们首先将一个已存在的git仓库添加为正在工作的仓库的子模块。 你可以通过在 <code>git submodule add</code>命令后面加上想要跟踪的项目 <code>URL</code> 来添加新的子模块。</p>
 <pre><code>$ git submodule add https://github.com/chaconinc/DbConnector
-</code></pre><h2 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h2><blockquote>
-<ol>
+</code></pre><h2 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h2><ol>
 <li>使用<code>git stash</code>保存当前的工作现场，那么就可以切换到其他分支进行工作，或者在当前分支上完成其他紧急的工作，比如修订一个bug测试提交。</li>
 <li>如果一个使用了一个<code>git stash</code>，切换到一个分支，且在该分支上的工作未完成也需要保存它的工作现场。再使用<code>git stash</code>。那么stash 队列中就有了两个工作现场。</li>
 <li>可以使用<code>git stash list</code>。查看stash队列。</li>
@@ -434,8 +432,7 @@ git branch -b &lt;name&gt; &lt;remote name&gt; #创建并转到远程分支并�
 <li>同时注意使用<code>git stash pop</code>命令是恢复<code>stash</code>队列中的<code>stash@{0}</code>即最上层的那个工</li>
 <li><code>git stash apply [--index] [&lt;stash&gt;]</code> 不删除已恢复的进度，其他同<code>git stash pop</code></li>
 </ol>
-</blockquote>
-<h2 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title=" cherry-pick"></a> cherry-pick</h2><pre><code>git cherry-pick commit_ID
+<h2 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title="cherry-pick"></a>cherry-pick</h2><pre><code>git cherry-pick commit_ID
 </code></pre><p>简而言之，<code>cherry-pick</code>就是从不同的分支中捡出一个单独的<code>commit</code>，并把它和你当前的分支合并。如果你以并行方式在处理两个或以上分支，你可能会发现一个在全部分支中都有的<code>bug</code>。如果你在一个分支中解决了它，你可以使用<code>cherry-pick</code>命令把它<code>commit</code>到其它分支上去，而不会弄乱其他的文件或<code>commit</code>。</p>
 <h2 id="git-常用命令"><a href="#git-常用命令" class="headerlink" title="git-常用命令"></a>git-常用命令</h2><p><strong>a. <code>版本（tag）</code>操作相关命令</strong></p>
 <pre><code>$ git tag #查看版本
@@ -448,12 +445,33 @@ $ git clean -f -d
 $ git clean -fd
 </code></pre><p>其中 <code>-f</code> 表示文件 <code>-d</code> 表示目录, 如果还要删除<code>.gitignore</code>中的文件那么再加上-x.<br>如果<code>git submodule</code>中也存在需要删除的文件那么需要再加个<code>-f</code>， 变成<code>git clean -dff</code> </p>
 <pre><code>$ git revert
-</code></pre><p>还原一个版本的修改，必须提供一个具体的Git版本号，例如<code>git revert bbaf6fb5060b4875b18ff9ff637ce118256d6f20</code>，Git的版本号都是生成的一个哈希值<br><strong>c. <code>git pull --rebase</code>用法</strong></p>
+</code></pre><p>还原一个版本的修改，必须提供一个具体的Git版本号，例如<code>git revert bbaf6fb5060b4875b18ff9ff637ce118256d6f20</code>，Git的版本号都是生成的一个哈希值  </p>
+<p><strong>c. <code>git pull --rebase</code>用法</strong></p>
 <pre><code>git pull = git fetch + git merge  
 git pull --rebase = git fetch + git rebase
-</code></pre><p><strong>d. <code>git add .</code>和<code>git reset HEAD 文件名</code>配合使用</strong><br><code>git reset HEAD 文件名</code>可以将某文件从已经git add的列表中剔除出去<br><strong>e. 撤销git本地的所有修改:</strong></p>
+</code></pre><p><strong>d. <code>git add .</code>和<code>git reset HEAD 文件名</code>配合使用</strong><br><code>git reset HEAD 文件名</code>可以将某文件从已经git add的列表中剔除出去</p>
+<p><strong>e. 撤销git本地的所有修改:</strong></p>
 <pre><code>git checkout .
-</code></pre>
+</code></pre><p><strong>f. <code>git bash</code>出现<code>vim</code>的时候怎么退出？</strong></p>
+<ul>
+<li>命令模式下，先输入<code>i</code>进入编辑模式  </li>
+<li>想退出的话，首先<code>Esc</code>退出输入状态，然后<code>Shift+;</code>，再输入<code>q</code>或<code>wq</code>（q不保存改动，wq是保存文件的写入修改）  </li>
+<li><a href="http://www.tuicool.com/articles/j267be" target="_blank" rel="external">vim使用教程</a>  </li>
+</ul>
+<p><strong>g. <code>git add .</code>和<code>git reset HEAD 文件名</code>配合使用</strong><br><code>git reset HEAD 文件名</code>可以将某文件从已经git add的列表中剔除出去  </p>
+<p><strong>h. tag</strong></p>
+<pre><code>git tag -a [name] -m &apos;comment&apos; #新建一个name tag，并添加comment
+git push origin [tagname] #把标签传送到远程服务器
+</code></pre><p><strong>I. merge</strong><br>要想从一个branch merge回<code>main-line</code>可以通过merge <code>commit ID</code>,<code>tag</code>,<code>branch</code>来进行。</p>
+<ul>
+<li>为了确保安全，要基于最新的main-line新建一个temporary branch当做跳板。</li>
+<li>在temporary branch 上进行merge并resolve conflict，完成后一定要push到远程。</li>
+<li>然后在main-line上merge <code>romote temporary branch</code></li>
+<li>注意：在main-line上merge <code>romote temporary branch</code>的时候，不能有别人的提交，不然会失败，这是使用tempary branch的意义之一：可以减少这个过程的时间。</li>
+</ul>
+<p><strong>g. git checkout</strong><br>命令<code>git checkout -- readme.txt</code>意思就是，把<code>readme.txt</code>文件在工作区的修改全部撤销，这里有两种情况：<br>一种是<code>readme.txt</code>自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；<br>一种是<code>readme.txt</code>已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。总之，就是让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态。</p>
+<p><strong>h. 复原</strong><br>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令<code>git checkout -- file</code>。<br>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。</p>
+
       
     </div>
 
@@ -650,7 +668,7 @@ git pull --rebase = git fetch + git rebase
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git基础-获取git仓库"><span class="nav-number">1.</span> <span class="nav-text">git基础-获取git仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-分支"><span class="nav-number">2.</span> <span class="nav-text">git-分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-版本回退"><span class="nav-number">3.</span> <span class="nav-text">git-版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-子模块-submoudle"><span class="nav-number">4.</span> <span class="nav-text">git-子模块(submoudle)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-stash"><span class="nav-number">5.</span> <span class="nav-text">git stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cherry-pick"><span class="nav-number">6.</span> <span class="nav-text"> cherry-pick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-常用命令"><span class="nav-number">7.</span> <span class="nav-text">git-常用命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git基础-获取git仓库"><span class="nav-number">1.</span> <span class="nav-text">git基础-获取git仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-分支"><span class="nav-number">2.</span> <span class="nav-text">git-分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-版本回退"><span class="nav-number">3.</span> <span class="nav-text">git-版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-子模块-submoudle"><span class="nav-number">4.</span> <span class="nav-text">git-子模块(submoudle)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-stash"><span class="nav-number">5.</span> <span class="nav-text">git stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cherry-pick"><span class="nav-number">6.</span> <span class="nav-text">cherry-pick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-常用命令"><span class="nav-number">7.</span> <span class="nav-text">git-常用命令</span></a></li></ol></div>
             
 
           </div>
