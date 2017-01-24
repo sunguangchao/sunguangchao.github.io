@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/20/1-2-Data-abstraction/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
 <meta property="og:description" content="抽象数据类型(ADT)是一种能够对使用者隐蔽数据表示的数据类型。">
-<meta property="og:updated_time" content="2016-12-18T07:19:39.422Z">
+<meta property="og:updated_time" content="2017-01-24T15:46:58.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.2 Data abstraction">
 <meta name="twitter:description" content="抽象数据类型(ADT)是一种能够对使用者隐蔽数据表示的数据类型。">
@@ -323,8 +323,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-18T15:19:39+08:00">
-              2016-12-18
+            <time title="Post modified" itemprop="dateModified" datetime="2017-01-24T23:46:58+08:00">
+              2017-01-24
             </time>
             
           </span>
@@ -381,18 +381,16 @@
       
 
       
-        <p>抽象数据类型(ADT)是一种能够对使用者隐蔽数据表示的数据类型。<br><a id="more"></a><br>每当用例调用了new，系统就会</p>
+        <p>抽象数据类型(ADT)是一种能够对使用者隐蔽数据表示的数据类型。<br><a id="more"></a><br>每当用例调用了new，系统就会：</p>
 <ol>
 <li>为新的对象分配存储空间</li>
 <li>调用构造函数初始化对象中的值</li>
 <li>返回该对象的一个引用<br>方法的每次触发都是和一个对象相关的</li>
 </ol>
-<h2 id="web-exercise"><a href="#web-exercise" class="headerlink" title="web exercise"></a>web exercise</h2><ol>
-<li><p>A string s is a circular rotation of a string t if it matches when the characters are circularly shifted by any number of positions; e.g., <code>ACTGACG</code> is a circular shift of <code>TGACGAC</code>, and vice versa. Detecting this condition is important in the study of genomic sequences. Write a program that checks whether two given strings s and t are circular shifts of one another.</p>
-<p> solution:<br> <code>(s.length() == t.length())&amp;&amp;(s.concat(s).indexOf(t) &gt; 0)</code></p>
-</li>
-<li><code>recursive(递归的)</code>loop:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">     public static String mystery(String s)</span><br><span class="line">&#123;</span><br><span class="line">     int N = s.length();</span><br><span class="line">     if(N &lt;= 1) return s;</span><br><span class="line">     String a = substring(0,N/2);</span><br><span class="line">     String b = subString(N/2,0);</span><br><span class="line">     return b + a;</span><br><span class="line"> &#125;//Reverse the string</span><br></pre></td></tr></table></figure></li>
-</ol>
+<h2 id="web-exercise"><a href="#web-exercise" class="headerlink" title="web exercise"></a>web exercise</h2><p>6.A string s is a circular rotation of a string t if it matches when the characters are circularly shifted by any number of positions; e.g., <code>ACTGACG</code> is a circular shift of <code>TGACGAC</code>, and vice versa. Detecting this condition is important in the study of genomic sequences. Write a program that checks whether two given strings s and t are circular shifts of one another.</p>
+<pre><code>solution:
+`(s.length() == t.length())&amp;&amp;(s.concat(s).indexOf(t) &gt; 0)`
+</code></pre><p>7.<code>recursive(递归的)</code>loop:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static String mystery(String s)</span><br><span class="line">&#123;</span><br><span class="line">    int N = s.length();</span><br><span class="line">    if(N &lt;= 1) return s;</span><br><span class="line">    String a = substring(0,N/2);</span><br><span class="line">    String b = subString(N/2,0);</span><br><span class="line">    return b + a;</span><br><span class="line">&#125;//Reverse the string</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -509,7 +507,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">29</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

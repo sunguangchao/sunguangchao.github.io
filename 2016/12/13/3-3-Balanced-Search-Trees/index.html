@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/redblack-left-rotate.png">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/redblack-right-rotate.png">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/color-flip.png">
-<meta property="og:updated_time" content="2016-12-18T07:19:02.010Z">
+<meta property="og:updated_time" content="2017-01-24T15:54:49.773Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3.3 Balanced Search Trees">
 <meta name="twitter:description" content="2-3查找树结点构成：">
@@ -329,8 +329,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-18T15:19:02+08:00">
-              2016-12-18
+            <time title="Post modified" itemprop="dateModified" datetime="2017-01-24T23:54:49+08:00">
+              2017-01-24
             </time>
             
           </span>
@@ -417,6 +417,13 @@
 </ul>
 <p>红黑树的插入算法<a href="https://github.com/sunguangchao/algorithm/blob/master/algorithms_4th_edition/web_exercise3_3/RedBlackBST.java" target="_blank" rel="external">RedBlackBST.java</a></p>
 <h2 id="红黑树的性质"><a href="#红黑树的性质" class="headerlink" title="红黑树的性质"></a>红黑树的性质</h2><p>结论：所有基于红黑树的符号表实现都能保证操作的运行时间为对数级别（范围查找除外，它所需的额外时间和返回的键的数量成正比）<br>一颗大小为N的红黑树的高度不会超过<code>2lgN</code><br>一颗大小为N的红黑树中，根结点到任意结点的平均路径长度为~1.00lgN。  </p>
+<h2 id="Creative-Problems"><a href="#Creative-Problems" class="headerlink" title="Creative Problems"></a>Creative Problems</h2><ol>
+<li><strong>Fundamental theorem of rotations.</strong> Show that any BST can be transformed into any other BST on the same set of keys by a sequence of left and right rotations.<br>Solution sketch: rotate the smallest key in the first BST to the root along the leftward spine; then recur with the resulting right subtree until you have a tree of height N (with every left link null). Do the same with the second BST. Remark: it is unknown whether there exists a polynomial-time algorithm for determining the minimum number of rotations needed to transform one BST into the other (even though the rotation distance is at most 2N - 6 for BSTs with at least 11 nodes).</li>
+</ol>
+<h2 id="Web-Exercise"><a href="#Web-Exercise" class="headerlink" title="Web Exercise"></a>Web Exercise</h2><ol>
+<li><strong>Memory of a BST.</strong> What is the memory usage of a BST and RedBlackBST and TreeMap?<br>Solution. MemoryOfBSTs.java.</li>
+<li><strong>Randomized BST.</strong> Program RandomizedBST.java implements a randomized BST, including deletion. Expected O(log N) performance per operations. Expectation depends only on the randomness in the algorithm; it does not depend on the input distribution. Must store subtree count field in each node; generates O(log N) random numbers per insert.<br>Proposition. Tree has same distribution as if the keys were inserted in random order.</li>
+</ol>
 
       
     </div>
@@ -527,7 +534,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">29</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -608,7 +615,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3查找树"><span class="nav-number">1.</span> <span class="nav-text">2-3查找树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#红黑二叉查找树"><span class="nav-number">2.</span> <span class="nav-text">红黑二叉查找树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#红黑树的性质"><span class="nav-number">3.</span> <span class="nav-text">红黑树的性质</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3查找树"><span class="nav-number">1.</span> <span class="nav-text">2-3查找树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#红黑二叉查找树"><span class="nav-number">2.</span> <span class="nav-text">红黑二叉查找树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#红黑树的性质"><span class="nav-number">3.</span> <span class="nav-text">红黑树的性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creative-Problems"><span class="nav-number">4.</span> <span class="nav-text">Creative Problems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-Exercise"><span class="nav-number">5.</span> <span class="nav-text">Web Exercise</span></a></li></ol></div>
             
 
           </div>
