@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Python," />
 
 
 
@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="Unix I/O一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为UnixI/O。这使得所有的输入输出都用同一种方式来进行：">
+<meta name="description" content="今天做Python的练习时，用到了导入模块，一开始不会用，搜了几篇博客，顺便做一些记录。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第10章 系统级I/O">
-<meta property="og:url" content="http://yoursite.com/2016/12/29/第10章-系统级I-O/index.html">
+<meta property="og:title" content="Python中导入模块的三种方法">
+<meta property="og:url" content="http://yoursite.com/2017/02/13/Python中导入模块的三种方法/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="Unix I/O一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为UnixI/O。这使得所有的输入输出都用同一种方式来进行：">
-<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E9%87%8D%E5%AE%9A%E4%BD%8D1.jpg">
-<meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E9%87%8D%E5%AE%9A%E4%BD%8D2.jpg">
-<meta property="og:updated_time" content="2016-12-29T14:30:27.037Z">
+<meta property="og:description" content="今天做Python的练习时，用到了导入模块，一开始不会用，搜了几篇博客，顺便做一些记录。">
+<meta property="og:updated_time" content="2017-02-13T14:09:11.579Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第10章 系统级I/O">
-<meta name="twitter:description" content="Unix I/O一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为UnixI/O。这使得所有的输入输出都用同一种方式来进行：">
-<meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/%E9%87%8D%E5%AE%9A%E4%BD%8D1.jpg">
+<meta name="twitter:title" content="Python中导入模块的三种方法">
+<meta name="twitter:description" content="今天做Python的练习时，用到了导入模块，一开始不会用，搜了几篇博客，顺便做一些记录。">
 
 
 
@@ -124,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/12/29/第10章-系统级I-O/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/02/13/Python中导入模块的三种方法/"/>
 
 
 
 
 
-  <title> 第10章 系统级I/O | GuangchaoSun's Blog </title>
+  <title> Python中导入模块的三种方法 | GuangchaoSun's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -281,7 +278,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/29/第10章-系统级I-O/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/13/Python中导入模块的三种方法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="GuangchaoSun">
@@ -305,7 +302,7 @@
             
             
               
-                第10章 系统级I/O
+                Python中导入模块的三种方法
               
             
           </h1>
@@ -317,8 +314,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-29T22:25:14+08:00">
-              2016-12-29
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T22:06:30+08:00">
+              2017-02-13
             </time>
 
             &nbsp;|&nbsp;
@@ -326,8 +323,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-29T22:30:27+08:00">
-              2016-12-29
+            <time title="Post modified" itemprop="dateModified" datetime="2017-02-13T22:09:11+08:00">
+              2017-02-13
             </time>
             
           </span>
@@ -341,8 +338,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSAPP/" itemprop="url" rel="index">
-                    <span itemprop="name">CSAPP</span>
+                  <a href="/categories/转载/" itemprop="url" rel="index">
+                    <span itemprop="name">转载</span>
                   </a>
                 </span>
 
@@ -357,8 +354,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/29/第10章-系统级I-O/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/29/第10章-系统级I-O/" itemprop="commentCount"></span>
+                <a href="/2017/02/13/Python中导入模块的三种方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/13/Python中导入模块的三种方法/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -384,43 +381,32 @@
       
 
       
-        <h2 id="Unix-I-O"><a href="#Unix-I-O" class="headerlink" title="Unix I/O"></a>Unix I/O</h2><p>一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为<code>UnixI/O</code>。这使得所有的输入输出都用同一种方式来进行：<br><a id="more"></a></p>
+        <p>今天做Python的练习时，用到了导入模块，一开始不会用，搜了几篇博客，顺便做一些记录。<br><a id="more"></a></p>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import module_name</span><br></pre></td></tr></table></figure>
+<p>模块是指一个可以交互使用，或者从另一Python程序访问的代码段。只要导入了一个模块，就可以引用它的任何公共的函数、类或属性。模块可以通过这种方法来使用其它模块的功能。</p>
+<p>用import语句导入模块，就在当前的名称空间(namespace)建立了一个到该模块的引用.这种引用必须使用全称，也就是说，当使用在被导入模块中定义的函数时，必须包含模块的名字。所以不能只使用  funcname，而应该使用 module_name.funcname</p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from module_name import funcname</span><br><span class="line">from module_name import fa, fb, fc</span><br><span class="line">from module_name import *</span><br></pre></td></tr></table></figure>
+<p>与方法一的区别：funcname 被直接导入到本地名字空间去了，所以它可以直接使用，而不需要加上模块名的限定</p>
+<p>* 表示，该模块的所有公共对象(public objects)都被导入到当前的名称空间，也就是任何只要不是以”_”开始的东西都会被导入。</p>
+<p>module_name没有被定义，所以module_name.funcname这种方式不起作用。并且，如果funcname如果已经被定义，它会被新版本（该导入模块中的版本）所替代。如果funcname被改成指向其他对象，module_name不能不会觉察到。</p>
+<p>建议:</p>
 <ul>
-<li>打开文件<ul>
-<li>一个应用程序通过内核打开文件</li>
-<li>内核返回一个小的非负整数，叫做描述符</li>
-<li>内核记录这个文件的所有信息，应用程序记录描述符</li>
+<li>如果你要经常访问模块的属性和方法，且不想一遍又一遍地敲入模块名，使用 <code>from module import</code></li>
+<li>如果你想要有选择地导入某些属性和方法，而不想要其它的，使用 <code>from module import</code></li>
+<li>如果模块包含的属性和方法与你的某个模块同名，你必须使用<code>import module</code>来避免名字冲突</li>
+<li>尽量少用 <code>from module import *</code> ，因为判定一个特殊的函数或属性是从哪来的有些困难，并且会造成调试和重构都更困难。</li>
 </ul>
-</li>
-<li>改变文件的当前位置<ul>
-<li>对于打开的文件，内核保持一个<code>文件位置k</code>，初始为0，字节偏移量</li>
-<li>应用程序可以通过 seek 操作，显式地设置文件的当前位置为 k </li>
-</ul>
-</li>
-<li>读写文件<ul>
-<li>一个读操作就是从文件拷贝 n&gt;0 个字节到存储器，从当前文件位置k开始，然后将k增加到 k+n。  </li>
-<li>给定一个字节大小为 m 的文件，当 K≥m 时执行读操作会触发一个称为 end-of-file(EOF) 的条件。</li>
-</ul>
-</li>
-<li>关闭文件<ul>
-<li>当应用完成访问这个文件后，会通知内核关闭这个文件</li>
-<li>内核释放文件打开时创建的数据结构，并将这个描述符恢复到可用的描述符池中</li>
-</ul>
-</li>
-</ul>
-<p>一次一个字节地从标准输入拷贝到标准输出：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"csapp.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">while</span>(Read(STDIN_FILENO, &amp;c, <span class="number">1</span>) != <span class="number">0</span>)</span><br><span class="line">		Write(STDOUT_FILENO, &amp;c, <span class="number">1</span>);</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="用RIO包健壮地读写"><a href="#用RIO包健壮地读写" class="headerlink" title="用RIO包健壮地读写"></a>用RIO包健壮地读写</h2><p>RIO(Robust I/O)提供了两类函数：</p>
+<h2 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h2><p>内建函数 <code>__import__()</code><br>除了前面两种使用import关键字的方法以外，我们还可以使用内建函数 <code>__import__()</code> 来导入 module。两者的区别是，import 后面跟的必须是一个类型(type)，而 <code>__import__()</code> 的参数是一个字符串，这个字符串可能来自配置文件，也可能是某个表达式计算结果。例如 <code>mymodule = __import__ (&#39;module_name&#39;)</code></p>
+<p>附注：</p>
 <ul>
-<li>无缓冲的输入输出函数<ul>
-<li>直接在存储器和文件之间传送数据，没有应用级缓冲。它们对将二进制数读写到网络和从网络读写二进制数据尤其有用。</li>
+<li>模块的内容都放在一个模块文件中，如 mymodule 的内容应该放在 <code>PYTHONPATH</code> 目录下的一个mymodule.py中，C实现的除外</li>
+<li>包可以将几个模块名称空间组织起来, 如A.b 就表示在包A中的一个子模块b 可以单独导入某一个子模块，如Python文档中给出的例子</li>
 </ul>
-</li>
-<li>带缓冲的输入输出函数</li>
-</ul>
-<p>RIO无缓冲的输入输出函数：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"csapp.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ssize_t</span> rio_readn(<span class="keyword">int</span> fd, <span class="keyword">void</span> *usrbuf, <span class="keyword">size_t</span> n);</span><br><span class="line"><span class="keyword">ssize_t</span> rio_writen(<span class="keyword">int</span> fd, <span class="keyword">void</span> *usrbuf, <span class="keyword">size_t</span> n);</span><br></pre></td></tr></table></figure></p>
-<p><code>rio_readn</code>函数描述从描述符 fd 的当前文件位置最多传送 n 个字节到存储器位置<code>usrbuf</code>。在遇到 EOF 时只能返回一个不足值。<br><code>rio_writen</code>函数从位置<code>usrbuf</code>传送 n 个字节到描述符 fd。</p>
-<h2 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h2><p>使用<code>fork</code>：子进程实际上是会继承父进程打开的文件的。在fork之后，子进程实际上和父进程的指向是一样的，这里需要注意的是会把引用进程加1，如下图所示：<br><img src="http://o90jubpdi.bkt.clouddn.com/%E9%87%8D%E5%AE%9A%E4%BD%8D1.jpg" alt=""><br>重定向的实现：只需要使用<code>dup2(oldfd,newfd)</code>即可。我们只需要改变文件描述符指向的文件，也就完成了重定向过程，下图我们把指向中端的描述符指向了磁盘文件，也就把终端上的输出保存在了文件中：<br><img src="http://o90jubpdi.bkt.clouddn.com/%E9%87%8D%E5%AE%9A%E4%BD%8D2.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import sound.effects.echo</span><br></pre></td></tr></table></figure>
+<p>这样必须使用全称对里面的对象进行引用，如<br><code>sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)</code><br>还可以使用下面的语句来加载echo子模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from Sound.Effects import echo</span><br></pre></td></tr></table></figure></p>
+<p>它在没有包前缀的情况下也可以使用， 所以它可以如下方式调用：<br><code>echo.echofilter(input, output, delay=0.7, atten=4)</code>不主张从一个包或模块中用<code>import *</code> 导入所有模块，因为这样的通常会导致可读性很差。<br><code>from Package import specific_submodule</code>的用法并没有错，实际上这还是推荐的用法，除非导入的模块需要使用其它包中的同名子模块(the importing module needs to use submodules with the same name from different packages).</p>
+<p>我还发现导入的模块会产生.pyc文件：<br>输入一个模块相对来说是一个比较费时的事情，所以Python做了一些技巧，以便使输入模块更加快一些。一种方法是创建 字节编译的文件 ，这些文件以.pyc作为扩展名。<br>在计算机内部，Python解释器把源代码转换成称为字节码的中间形式，然后再把它翻译成计算机使用的机器语言并运行</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.cnblogs.com/allenblogs/archive/2011/05/24/2055149.html" target="_blank" rel="external">http://www.cnblogs.com/allenblogs/archive/2011/05/24/2055149.html</a></p>
 
       
     </div>
@@ -442,13 +428,19 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/26/第12章-并发编程/" rel="next" title="第12章 并发编程">
-                <i class="fa fa-chevron-left"></i> 第12章 并发编程
+              <a href="/2017/02/11/Leetcode-Best-Time-to-Bug-and-Sell-Stock/" rel="next" title="Leetcode-Bset Time to Bug and Sell Stock">
+                <i class="fa fa-chevron-left"></i> Leetcode-Bset Time to Bug and Sell Stock
               </a>
             
           </div>
@@ -456,10 +448,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/29/第9章-虚拟存储器/" rel="prev" title="第9章 虚拟存储器">
-                第9章 虚拟存储器 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -485,8 +473,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/29/第10章-系统级I-O/"
-           data-title="第10章 系统级I/O" data-url="http://yoursite.com/2016/12/29/第10章-系统级I-O/">
+      <div class="ds-thread" data-thread-key="2017/02/13/Python中导入模块的三种方法/"
+           data-title="Python中导入模块的三种方法" data-url="http://yoursite.com/2017/02/13/Python中导入模块的三种方法/">
       </div>
     
   </div>
@@ -612,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unix-I-O"><span class="nav-number">1.</span> <span class="nav-text">Unix I/O</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用RIO包健壮地读写"><span class="nav-number">2.</span> <span class="nav-text">用RIO包健壮地读写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向"><span class="nav-number">3.</span> <span class="nav-text">重定向</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">2.</span> <span class="nav-text">方法二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法三"><span class="nav-number">3.</span> <span class="nav-text">方法三</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
