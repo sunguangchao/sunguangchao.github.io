@@ -84,16 +84,28 @@
 
 
 
-<meta name="description" content="Primitive types:">
+<meta name="description" content="读完本文你会了解到：
+
+Java有关数组的基础知识
+静态方法的深入理解-见参考
+练习一下二分查找">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1.1 Programming Model">
 <meta property="og:url" content="http://yoursite.com/2017/01/24/1-1-Programming-Model/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="Primitive types:">
-<meta property="og:updated_time" content="2017-01-24T15:45:35.798Z">
+<meta property="og:description" content="读完本文你会了解到：
+
+Java有关数组的基础知识
+静态方法的深入理解-见参考
+练习一下二分查找">
+<meta property="og:updated_time" content="2017-02-23T15:37:41.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.1 Programming Model">
-<meta name="twitter:description" content="Primitive types:">
+<meta name="twitter:description" content="读完本文你会了解到：
+
+Java有关数组的基础知识
+静态方法的深入理解-见参考
+练习一下二分查找">
 
 
 
@@ -323,8 +335,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-01-24T23:45:35+08:00">
-              2017-01-24
+            <time title="Post modified" itemprop="dateModified" datetime="2017-02-23T23:37:41+08:00">
+              2017-02-23
             </time>
             
           </span>
@@ -381,8 +393,14 @@
       
 
       
-        <p><strong>Primitive types:</strong><br><a id="more"></a></p>
-<table>
+        <p>读完本文你会了解到：</p>
+<ul>
+<li>Java有关数组的基础知识</li>
+<li>静态方法的深入理解-见参考</li>
+<li>练习一下二分查找<a id="more"></a>
+</li>
+</ul>
+<h2 id="Primitive-types"><a href="#Primitive-types" class="headerlink" title="Primitive types:"></a>Primitive types:</h2><table>
 <thead>
 <tr>
 <th>data type</th>
@@ -416,21 +434,28 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Array</strong><br><code>Definition:</code>An arroy stores a sequence of values that are all of the same type.if we have <code>N</code> values,we can use the notation <code>a[i]</code> to refer <code>i</code>th value of <code>i</code> from <code>0</code> to <code>N-1</code>.  </p>
+<p>声明语句：声明语句将一个变量名和一个类型在编译时关联起来。Java是一种强类型的语言，因为Java编译器会检查类型的一致性。</p>
+<p>循环语句：</p>
+<ul>
+<li>break语句，立即从循环中退出</li>
+<li>continue语句，立即开始下一循环</li>
+</ul>
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><p><code>Definition:</code>An arroy stores a sequence of values that are all of the same type.if we have <code>N</code> values,we can use the notation <code>a[i]</code> to refer <code>i</code>th value of <code>i</code> from <code>0</code> to <code>N-1</code>.  </p>
 <p>Making an array involves three distinct steps:</p>
 <ul>
 <li>Declare the array name and type</li>
 <li>Creat the array</li>
 <li>Initialize the array values</li>
 </ul>
-<p><strong>example:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">double[] a;               //declaration</span><br><span class="line">a = new double[N];        //creation</span><br><span class="line">for(int i = 0; i&lt;N ; i++) //initialization</span><br><span class="line">    a[i] = 0.0;</span><br></pre></td></tr></table></figure></p>
+<h2 id="example"><a href="#example" class="headerlink" title="example:"></a>example:</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span>[] a;               <span class="comment">//declaration</span></span><br><span class="line">a = <span class="keyword">new</span> <span class="keyword">double</span>[N];        <span class="comment">//creation</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;N ; i++) <span class="comment">//initialization</span></span><br><span class="line">    a[i] = <span class="number">0.0</span>;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>Using:</code>Java does automatic bounds checking-if you access an array with an illegal index your program will terminate with an <code>ArrayIndexOutOfBoundsException</code></li>
 <li><code>Alising(混淆):</code>An array name refers to the whole array-if wo assign one array name to another,then both refer to the same array,as illustrate in the following code fragment.</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int [] a = new int[N];</span><br><span class="line">...</span><br><span class="line">a[i] = 1234;</span><br><span class="line">...</span><br><span class="line">int [] b = a;</span><br><span class="line">...</span><br><span class="line">b[i] = 5678;   //a[i] = 5678.</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] a = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">...</span><br><span class="line">a[i] = <span class="number">1234</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">int</span> [] b = a;</span><br><span class="line">...</span><br><span class="line">b[i] = <span class="number">5678</span>;   <span class="comment">//a[i] = 5678.</span></span><br></pre></td></tr></table></figure>
+<p>有关数组的典型静态方法实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//颠倒数组的元素</span></span><br><span class="line"><span class="keyword">int</span> N = a.length;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; N/<span class="number">2</span>; i++) &#123;</span><br><span class="line">	<span class="keyword">double</span> temp = a[i];</span><br><span class="line">	a[i] = a[N-<span class="number">1</span>-i];</span><br><span class="line">	a[N-<span class="number">1</span>-i] = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//矩阵相乘</span></span><br><span class="line"><span class="keyword">int</span> N = a.length;</span><br><span class="line"><span class="keyword">double</span>[][] c = <span class="keyword">new</span> <span class="keyword">double</span>[N][N];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i &lt; N; i++)</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j &lt; N; j++)&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">0</span>;k &lt; N; k++)</span><br><span class="line">			c[i][j] += a[i][k]*a[k][j];</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="Static-method"><a href="#Static-method" class="headerlink" title="Static method"></a>Static method</h2><ul>
-<li><code>Defining a static method:</code>A method takes arguments and computes a return value of some data type or causes a <code>side effect</code>.</li>
+<li><code>Defining a static method:</code>A method encapsulates a computation that is defined as a statements. A method takes arguments and computes a return value of some data type or causes a <code>side effect</code>.</li>
 <li>Java method have features:<ul>
 <li>Arguments are passd by value.</li>
 <li>Method names can be overloaded.</li>
@@ -439,22 +464,15 @@
 </ul>
 </li>
 </ul>
-<h2 id="Web-Exercises"><a href="#Web-Exercises" class="headerlink" title="Web Exercises"></a>Web Exercises</h2><p><strong>Wget.</strong> Write a program <code>Wget.java</code> that reads in data from the URL specifiedon the command line and saves it in a file with the same name.</p>
-<pre><code>public static void main(String[] args)
-{
-    String URL = args[0];
-    In in = new In(URL);
-    String data = Sed.readAll();
-    String filename = URL.substring(URL.lastIndexOf(&apos;/&apos;)+1);
-    Out out = new Out(filename);
-    out.println(data);
-    out.close;
-}
-</code></pre><p>编写一段代码，将一个正整数N用二进制表示并转换为一个<code>String</code>类型的值s。</p>
-<pre><code>String s = &quot;&quot;;
-for(int n = N;n &gt; 0;n++)
-    s = (n % 2) + s;
-</code></pre>
+<h2 id="Binary-Search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a>Binary Search</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinarySearch</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">rank</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span>[] a)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> lo = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> hi = a.length - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(lo &lt;= hi)&#123;</span><br><span class="line">			<span class="keyword">int</span> mid = lo + (hi - lo)/<span class="number">2</span>;</span><br><span class="line">			<span class="keyword">if</span> (key &lt; mid) hi = mid - <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span> (key &gt; mid) lo = mid + <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">return</span> mid;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		In in = <span class="keyword">new</span> In(args[<span class="number">0</span>]);</span><br><span class="line">		<span class="keyword">int</span>[] whitelist = in.readInts();</span><br><span class="line">		Array.sort(whitelist);</span><br><span class="line">		<span class="keyword">while</span>(!in.isEmpty())&#123;</span><br><span class="line">			<span class="keyword">int</span> key = in.readInt();</span><br><span class="line">			<span class="keyword">if</span> (rank(key, whitelist) &lt; <span class="number">0</span>)</span><br><span class="line">				StdOut.println(key)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Web-Exercises"><a href="#Web-Exercises" class="headerlink" title="Web Exercises"></a>Web Exercises</h2><p>1 <strong>Wget.</strong> Write a program <code>Wget.java</code> that reads in data from the URL specifiedon the command line and saves it in a file with the same name.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    String URL = args[<span class="number">0</span>];</span><br><span class="line">    In in = <span class="keyword">new</span> In(URL);</span><br><span class="line">    String data = Sed.readAll();</span><br><span class="line">    String filename = URL.substring(URL.lastIndexOf(<span class="string">'/'</span>)+<span class="number">1</span>);</span><br><span class="line">    Out out = <span class="keyword">new</span> Out(filename);</span><br><span class="line">    out.println(data);</span><br><span class="line">    out.close;</span><br><span class="line">&#125;   </span><br><span class="line">```        </span><br><span class="line"><span class="number">2</span> 编写一段代码，将一个正整数N用二进制表示并转换为一个`String`类型的值s。</span><br><span class="line">```    </span><br><span class="line">String s = <span class="string">""</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> n = N;n &gt; <span class="number">0</span>;n++)</span><br><span class="line">   s = (n % <span class="number">2</span>) + s;</span><br></pre></td></tr></table></figure></p>
+<p>3 <strong>Right triangle.</strong>Write a client <a href="https://github.com/sunguangchao/algorithm-learning/blob/master/algorithms_4th_edition/web_exercise1_1/RightTriangle.java" target="_blank" rel="external">RightTriangle.java</a> that draws a right triangle and a circumscribing circle.</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>static method:</p>
+<ul>
+<li><a href="http://crunchify.com/java-static-methods-variables-static-block-and-class-with-example/" target="_blank" rel="external">Beginner Guide to Java Static Method, Variables,Static Block and Class with Example</a></li>
+<li><a href="http://stackoverflow.com/questions/2671496/java-when-to-use-static-methods" target="_blank" rel="external">Java:when to use static methods</a></li>
+</ul>
+
       
     </div>
 
@@ -645,7 +663,7 @@ for(int n = N;n &gt; 0;n++)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Static-method"><span class="nav-number">1.</span> <span class="nav-text">Static method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-Exercises"><span class="nav-number">2.</span> <span class="nav-text">Web Exercises</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Primitive-types"><span class="nav-number">1.</span> <span class="nav-text">Primitive types:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array"><span class="nav-number">2.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#example"><span class="nav-number">3.</span> <span class="nav-text">example:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Static-method"><span class="nav-number">4.</span> <span class="nav-text">Static method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Search"><span class="nav-number">5.</span> <span class="nav-text">Binary Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-Exercises"><span class="nav-number">6.</span> <span class="nav-text">Web Exercises</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
