@@ -84,34 +84,25 @@
 
 
 
-<meta name="description" content="运行时间的数学模型：
+<meta name="description" content="本节你会了解到：
 
-确定输入模型，定义问题的规模
-识别内循环
-根据内循环中的的操作确定成本模型
-对于给定的输入，判断这些操作的执行频率">
+各种数据结构在内存中所占空间的大小">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1.4 Analysis of Alorithms">
 <meta property="og:url" content="http://yoursite.com/2016/11/20/1-4-Analysis-of-Alorithms/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="运行时间的数学模型：
+<meta property="og:description" content="本节你会了解到：
 
-确定输入模型，定义问题的规模
-识别内循环
-根据内循环中的的操作确定成本模型
-对于给定的输入，判断这些操作的执行频率">
+各种数据结构在内存中所占空间的大小">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/Integer-memory.png">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/Date-memory.png">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/Node-memory.png">
-<meta property="og:updated_time" content="2016-11-27T01:23:14.552Z">
+<meta property="og:updated_time" content="2017-02-28T00:45:04.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.4 Analysis of Alorithms">
-<meta name="twitter:description" content="运行时间的数学模型：
+<meta name="twitter:description" content="本节你会了解到：
 
-确定输入模型，定义问题的规模
-识别内循环
-根据内循环中的的操作确定成本模型
-对于给定的输入，判断这些操作的执行频率">
+各种数据结构在内存中所占空间的大小">
 <meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/Integer-memory.png">
 
 
@@ -342,8 +333,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-11-27T09:23:14+08:00">
-              2016-11-27
+            <time title="Post modified" itemprop="dateModified" datetime="2017-02-28T08:45:04+08:00">
+              2017-02-28
             </time>
             
           </span>
@@ -400,19 +391,24 @@
       
 
       
-        <p>运行时间的数学模型：</p>
+        <p>本节你会了解到：</p>
+<ul>
+<li>各种数据结构在内存中所占空间的大小</li>
+</ul>
+<a id="more"></a>
+<p>运行时间的数学模型：</p>
 <ul>
 <li>确定输入模型，定义问题的规模</li>
 <li>识别内循环</li>
 <li>根据内循环中的的操作确定成本模型</li>
 <li>对于给定的输入，判断这些操作的执行频率</li>
 </ul>
-<a id="more"></a>
-<p>找到数组中三者和为零的个数<br>ThreeSumFast:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static int count(int[] a)</span><br><span class="line">&#123;</span><br><span class="line">    Array.sort(a);</span><br><span class="line">    int N = a.length();</span><br><span class="line">    itn cnt = 0;</span><br><span class="line">    for(int i = 0;i &lt; N;i++)</span><br><span class="line">        for(int j = i+1;j &lt; N;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            int k = Array.binarySearch(-a[i]-a[j],a);</span><br><span class="line">            if(k &gt; j) cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        return cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>TwoSumFast:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static int count(int[] a)</span><br><span class="line">&#123;</span><br><span class="line">    int n = a.length;</span><br><span class="line">    Array.sort(a);</span><br><span class="line">    int count = 0;</span><br><span class="line">    for(int i = 0;i &lt; n; i++)&#123;</span><br><span class="line">        int j = Array.binarySearch(a,-a[i]);</span><br><span class="line">        if(j &gt; i) count++;</span><br><span class="line">    &#125;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2-sum问题的线性对数级别的解决<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class TwoSumFast&#123;</span><br><span class="line">    public static int count(int [] a)</span><br><span class="line">    &#123;</span><br><span class="line">        Arrays.sort(a);</span><br><span class="line">        int N = a.length();</span><br><span class="line">        int cnt = 0;</span><br><span class="line">        for(int i = 0;i &lt; N;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (BinarySearch.rank(-a[i],a) &gt; 0)</span><br><span class="line">                cnt ++;</span><br><span class="line">        &#125;</span><br><span class="line">        return cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        int[] a = In.readInts(args[0]);</span><br><span class="line">        StdOut.println(count(a));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3-sum问题的快速算法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class ThreeSumFast&#123;</span><br><span class="line">	public static int count(int[] a)</span><br><span class="line">	&#123;</span><br><span class="line">		Array.sort(a);</span><br><span class="line">		int N = a.length();</span><br><span class="line">		int cnt = 0;</span><br><span class="line">		for(int i = 0;i &lt; N;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			for(j = i+1;j &lt; N;j++)</span><br><span class="line">				if(BnarySearch.rank(-a[i]-a[j],a) &gt; j)</span><br><span class="line">					cnt ++;</span><br><span class="line">		&#125;</span><br><span class="line">		return cnt;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args)&#123;</span><br><span class="line">		int[] a = In.readInts(args[0]);</span><br><span class="line">		StdOut.println(count(a));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在对程序进行性能分析时的注意事项：</p>
+<p>对增长数量级的常见总结：<br>一般来说，<code>二分策略</code>的数量级为logN，比如二分查找；<code>分治策略</code>的数量级为NlogN，比如归并排序。</p>
+<p>找到数组中三者和为零的个数<br>ThreeSumFast:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public static int count(int[] a)</div><div class="line">&#123;</div><div class="line">    Array.sort(a);</div><div class="line">    int N = a.length();</div><div class="line">    itn cnt = 0;</div><div class="line">    for(int i = 0;i &lt; N;i++)</div><div class="line">        for(int j = i+1;j &lt; N;j++)</div><div class="line">        &#123;</div><div class="line">            int k = Array.binarySearch(-a[i]-a[j],a);</div><div class="line">            if(k &gt; j) cnt++;</div><div class="line">        &#125;</div><div class="line">        return cnt;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>TwoSumFast:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static int count(int[] a)</div><div class="line">&#123;</div><div class="line">    int n = a.length;</div><div class="line">    Array.sort(a);</div><div class="line">    int count = 0;</div><div class="line">    for(int i = 0;i &lt; n; i++)&#123;</div><div class="line">        int j = Array.binarySearch(a,-a[i]);</div><div class="line">        if(j &gt; i) count++;</div><div class="line">    &#125;</div><div class="line">    return count;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2-sum问题的线性对数级别的解决<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class TwoSumFast&#123;</div><div class="line">    public static int count(int [] a)</div><div class="line">    &#123;</div><div class="line">        Arrays.sort(a);</div><div class="line">        int N = a.length();</div><div class="line">        int cnt = 0;</div><div class="line">        for(int i = 0;i &lt; N;i++)</div><div class="line">        &#123;</div><div class="line">            if (BinarySearch.rank(-a[i],a) &gt; 0)</div><div class="line">                cnt ++;</div><div class="line">        &#125;</div><div class="line">        return cnt;</div><div class="line">    &#125;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        int[] a = In.readInts(args[0]);</div><div class="line">        StdOut.println(count(a));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>3-sum问题的快速算法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class ThreeSumFast&#123;</div><div class="line">	public static int count(int[] a)</div><div class="line">	&#123;</div><div class="line">		Array.sort(a);</div><div class="line">		int N = a.length();</div><div class="line">		int cnt = 0;</div><div class="line">		for(int i = 0;i &lt; N;i++)</div><div class="line">		&#123;</div><div class="line">			for(j = i+1;j &lt; N;j++)</div><div class="line">				if(BnarySearch.rank(-a[i]-a[j],a) &gt; j)</div><div class="line">					cnt ++;</div><div class="line">		&#125;</div><div class="line">		return cnt;</div><div class="line">	&#125;</div><div class="line">	public static void main(String[] args)&#123;</div><div class="line">		int[] a = In.readInts(args[0]);</div><div class="line">		StdOut.println(count(a));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>命题D</strong>：在Bag、Stack、Queue的链表实现中所有的操作在最坏情况下所需时间都是常数级别的。<br>在对程序进行性能分析时的注意事项：</p>
 <ul>
 <li>大常数</li>
 <li>非决定性的内循环</li>
@@ -422,97 +418,17 @@
 <li>对输入的强烈依赖</li>
 <li>多个问题参量</li>
 </ul>
-<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><p>对象<br>一个Integer对象会使用24字节的空间，其中16字节的对象开销，4字节存储int值，还有4字节填充字节（padding）。<br><img src="http://o90jubpdi.bkt.clouddn.com/Integer-memory.png" alt="Integer memory"><br>同理，一个Date对象使用32字节的空间。<br><img src="http://o90jubpdi.bkt.clouddn.com/Date-memory.png" alt="Date momery"><br>链表<br>一个内部类的话：<code>16字节的对象开销</code>+<code>8字节的额外开销</code>+<code>指向item和next对象引用各需8字节</code> = <code>40byte</code><br><img src="http://o90jubpdi.bkt.clouddn.com/Node-memory.png" alt="此处输入图片的描述"><br>数组<br>Java中数组被实现为对象，数组的空间包括对象所需内存加上引用所需内存。<br>例如，一个含有N个Date对象的数组，需要使用24字节（数组开销，包括16字节的对象开销，4字节保存长度以及4填充字节）加上8N字节（所有对象的引用）加上每个Date对象的32字节，总共（24+40N）字节<br>字符串对象<br>一个String对象一般需要40字节（16字节表示对象，三个int实例变量：偏移量、计数器、散列值个需要4字节，加上数组引用8个字节和4个填充字节）。</p>
+<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><p>对象<br>一个Integer对象会使用24字节的空间，其中16字节的对象开销，4字节存储int值，还有4字节填充字节（padding）。<br><img src="http://o90jubpdi.bkt.clouddn.com/Integer-memory.png" alt="Integer memory"></p>
+<p>同理，一个Date对象使用32字节的空间。<br><img src="http://o90jubpdi.bkt.clouddn.com/Date-memory.png" alt="Date momery"></p>
+<p>链表<br>一个内部类的话：<code>16字节的对象开销</code>+<code>8字节的额外开销</code>+<code>指向item和next对象引用各需8字节</code> = <code>40byte</code></p>
+<p><img src="http://o90jubpdi.bkt.clouddn.com/Node-memory.png" alt="此处输入图片的描述"></p>
+<p>数组<br>Java中数组被实现为对象，数组的空间包括对象所需内存加上引用所需内存。</p>
+<p>例如，一个含有N个Date对象的数组，需要使用24字节（数组开销，包括16字节的对象开销，4字节保存长度以及4填充字节）加上8N字节（所有对象的引用）加上每个Date对象的32字节，总共(24+40N)字节</p>
+<p>字符串对象<br>一个String对象一般需要40字节（16字节表示对象，三个int实例变量：偏移量、计数器、散列值个需要4字节，加上数组引用8个字节和4个填充字节）。</p>
 <h2 id="Q-A"><a href="#Q-A" class="headerlink" title="Q + A"></a>Q + A</h2><p>Q. What is the purpose of padding(填充字节)?<br>A. Padding makes all abjects take space that is a mulitple of 8 bytes.This can waste some memory but it speeds up memory access and garbage collection(垃圾回收).</p>
-<h2 id="Creative-Problems"><a href="#Creative-Problems" class="headerlink" title="Creative Problems"></a>Creative Problems</h2><ol>
-<li><p><strong>4-sum</strong>.Develop a brute-force solution FourSum.java to the 4-sum problem.</p>
-<pre><code>public class FourSum {
-
-    // print distinct 4-tuples (i, j, k, l) such that a[i] + a[j] + a[k] + a[l] = 0
-    public static int printAll(long[] a) {
-        int N = a.length;
-        int cnt = 0;
-        for (int i = 0; i &lt; N; i++) {
-            for (int j = i+1; j &lt; N; j++) {
-                for (int k = j+1; k &lt; N; k++) {
-                    for (int l = k+1; l &lt; N; l++) {
-                        if (a[i] + a[j] + a[k] + a[l] == 0) {
-                            StdOut.println(a[i] + &quot; &quot; + a[j] + &quot; &quot; + a[k] + &quot; &quot; + a[l]);
-                        }
-                    }
-                }
-            }
-        }
-        return cnt;
-    } 
-
-    // return number of distinct 4-tuples (i, j, k, l) such that a[i] + a[j] + a[k] + a[l] = 0
-    public static int count(long[] a) {
-        int N = a.length;
-        int cnt = 0;
-        for (int i = 0; i &lt; N; i++) {
-            for (int j = i+1; j &lt; N; j++) {
-                for (int k = j+1; k &lt; N; k++) {
-                    for (int l = k+1; l &lt; N; l++) {
-                        if (a[i] + a[j] + a[k] + a[l] == 0) {
-                            cnt++;
-                        }
-                    }
-                }
-            }
-        }
-        return cnt;
-    } 
-
-    public static void main(String[] args)  { 
-        int N = StdIn.readInt(); 
-        long[] a = new long[N]; 
-        for (int i = 0; i &lt; N; i++) {
-            a[i] = StdIn.readLong();
-        }
-        int cnt = count(a);
-        StdOut.println(cnt);
-        if (cnt &lt; 10) {
-            printAll(a);
-        }
-    } 
-} 
-</code></pre></li>
-<li><p><strong>bitonic search(双调查线)</strong>.An array is bitonic if it is comprised of an increasing sequence of integers followed immediately by a decreasing sequence of integers. Write a program that, given a bitonic array of N distinct int values, determines whether a given integer is in the array. Your program should use ~ 3 lg N compares in the worst case.<br>Answer: Use a version of binary search, as in BitonicMax.java, to find the maximum (in ~ 1 lg N compares); then use binary search to search in each piece (in ~ 1 lg N compares per piece).</p>
-<pre><code>public class BitonicMax{
-    public static int[] bitonic(int N){
-        int mid = StdRandom.uniform(N);
-        int[] a = new int[N];
-        for(int i=1; i&lt;mid; i++){
-            a[i] = a[i-1] + 1 + StdRandom.uniform(9);
-        }
-        if(mid &gt; 0) a[mid] = a[mid-1] + StdRandom.uniform(10) - 5;
-
-        for(int i = mid+1; i&lt;N; i++){
-            a[i] = a[i-1] - 1 - StdRandom.uniform(9); 
-        }
-
-        for(int i = 0;i &lt; N; i++){
-            StdOut.println(a[i]);
-        }
-        return a;
-    }
-    public static int max(int[] a,int lo,int hi){
-        if(hi == lo) return hi;
-        int mid = lo + (hi-lo)/2;
-        if(a[mid] &lt;a[mid+1]) return max(a,mid+1,hi);
-        if(a[mid] &gt;a[mid+1]) return max(a,lo,mid);
-        else return mid;
-    }
-
-    public static void main(String[] args){
-        int N = Integer.parseInt(args[0]);
-        int[] a = bitonic(N);
-        StdOut.println(&quot;max = &quot; + a[max(a,0,N-1)]);
-    }
-}
-</code></pre></li>
-</ol>
+<h2 id="Creative-Problems"><a href="#Creative-Problems" class="headerlink" title="Creative Problems"></a>Creative Problems</h2><p>14.<strong>4-sum</strong>.Develop a brute-force solution FourSum.java to the 4-sum problem.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FourSum</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// print distinct 4-tuples (i, j, k, l) such that a[i] + a[j] + a[k] + a[l] = 0</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">printAll</span><span class="params">(<span class="keyword">long</span>[] a)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> N = a.length;</div><div class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; N; j++) &#123;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j+<span class="number">1</span>; k &lt; N; k++) &#123;</div><div class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> l = k+<span class="number">1</span>; l &lt; N; l++) &#123;</div><div class="line">                        <span class="keyword">if</span> (a[i] + a[j] + a[k] + a[l] == <span class="number">0</span>) &#123;</div><div class="line">                            StdOut.println(a[i] + <span class="string">" "</span> + a[j] + <span class="string">" "</span> + a[k] + <span class="string">" "</span> + a[l]);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> cnt;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// return number of distinct 4-tuples (i, j, k, l) such that a[i] + a[j] + a[k] + a[l] = 0</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="keyword">long</span>[] a)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> N = a.length;</div><div class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; N; j++) &#123;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j+<span class="number">1</span>; k &lt; N; k++) &#123;</div><div class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> l = k+<span class="number">1</span>; l &lt; N; l++) &#123;</div><div class="line">                        <span class="keyword">if</span> (a[i] + a[j] + a[k] + a[l] == <span class="number">0</span>) &#123;</div><div class="line">                            cnt++;</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> cnt;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span>  </span>&#123;</div><div class="line">        <span class="keyword">int</span> N = StdIn.readInt();</div><div class="line">        <span class="keyword">long</span>[] a = <span class="keyword">new</span> <span class="keyword">long</span>[N];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</div><div class="line">            a[i] = StdIn.readLong();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> cnt = count(a);</div><div class="line">        StdOut.println(cnt);</div><div class="line">        <span class="keyword">if</span> (cnt &lt; <span class="number">10</span>) &#123;</div><div class="line">            printAll(a);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>20.<strong>bitonic search(双调查线)</strong>.An array is bitonic if it is comprised of an increasing sequence of integers followed immediately by a decreasing sequence of integers. Write a program that, given a bitonic array of N distinct int values, determines whether a given integer is in the array. Your program should use ~ 3 lg N compares in the worst case.</p>
+<p>Answer: Use a version of binary search, as in BitonicMax.java, to find the maximum (in ~ 1 lg N compares); then use binary search to search in each piece (in ~ 1 lg N compares per piece).<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BitonicMax</span></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] bitonic(<span class="keyword">int</span> N)&#123;</div><div class="line">        <span class="keyword">int</span> mid = StdRandom.uniform(N);</div><div class="line">        <span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[N];</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;mid; i++)&#123;</div><div class="line">            a[i] = a[i-<span class="number">1</span>] + <span class="number">1</span> + StdRandom.uniform(<span class="number">9</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(mid &gt; <span class="number">0</span>) a[mid] = a[mid-<span class="number">1</span>] + StdRandom.uniform(<span class="number">10</span>) - <span class="number">5</span>;</div><div class="line"></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = mid+<span class="number">1</span>; i&lt;N; i++)&#123;</div><div class="line">            a[i] = a[i-<span class="number">1</span>] - <span class="number">1</span> - StdRandom.uniform(<span class="number">9</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N; i++)&#123;</div><div class="line">            StdOut.println(a[i]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> a;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span>[] a,<span class="keyword">int</span> lo,<span class="keyword">int</span> hi)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(hi == lo) <span class="keyword">return</span> hi;</div><div class="line">        <span class="keyword">int</span> mid = lo + (hi-lo)/<span class="number">2</span>;</div><div class="line">        <span class="keyword">if</span>(a[mid] &lt;a[mid+<span class="number">1</span>]) <span class="keyword">return</span> max(a,mid+<span class="number">1</span>,hi);</div><div class="line">        <span class="keyword">if</span>(a[mid] &gt;a[mid+<span class="number">1</span>]) <span class="keyword">return</span> max(a,lo,mid);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">return</span> mid;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> N = Integer.parseInt(args[<span class="number">0</span>]);</div><div class="line">        <span class="keyword">int</span>[] a = bitonic(N);</div><div class="line">        StdOut.println(<span class="string">"max = "</span> + a[max(a,<span class="number">0</span>,N-<span class="number">1</span>)]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>

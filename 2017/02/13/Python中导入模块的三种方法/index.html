@@ -382,10 +382,10 @@
 
       
         <p>今天做Python的练习时，用到了导入模块，一开始不会用，搜了几篇博客，顺便做一些记录。<br><a id="more"></a></p>
-<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import module_name</span><br></pre></td></tr></table></figure>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import module_name</div></pre></td></tr></table></figure>
 <p>模块是指一个可以交互使用，或者从另一Python程序访问的代码段。只要导入了一个模块，就可以引用它的任何公共的函数、类或属性。模块可以通过这种方法来使用其它模块的功能。</p>
 <p>用import语句导入模块，就在当前的名称空间(namespace)建立了一个到该模块的引用.这种引用必须使用全称，也就是说，当使用在被导入模块中定义的函数时，必须包含模块的名字。所以不能只使用  funcname，而应该使用 module_name.funcname</p>
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from module_name import funcname</span><br><span class="line">from module_name import fa, fb, fc</span><br><span class="line">from module_name import *</span><br></pre></td></tr></table></figure>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">from module_name import funcname</div><div class="line">from module_name import fa, fb, fc</div><div class="line">from module_name import *</div></pre></td></tr></table></figure>
 <p>与方法一的区别：funcname 被直接导入到本地名字空间去了，所以它可以直接使用，而不需要加上模块名的限定</p>
 <p>* 表示，该模块的所有公共对象(public objects)都被导入到当前的名称空间，也就是任何只要不是以”_”开始的东西都会被导入。</p>
 <p>module_name没有被定义，所以module_name.funcname这种方式不起作用。并且，如果funcname如果已经被定义，它会被新版本（该导入模块中的版本）所替代。如果funcname被改成指向其他对象，module_name不能不会觉察到。</p>
@@ -402,8 +402,8 @@
 <li>模块的内容都放在一个模块文件中，如 mymodule 的内容应该放在 <code>PYTHONPATH</code> 目录下的一个mymodule.py中，C实现的除外</li>
 <li>包可以将几个模块名称空间组织起来, 如A.b 就表示在包A中的一个子模块b 可以单独导入某一个子模块，如Python文档中给出的例子</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import sound.effects.echo</span><br></pre></td></tr></table></figure>
-<p>这样必须使用全称对里面的对象进行引用，如<br><code>sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)</code><br>还可以使用下面的语句来加载echo子模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from Sound.Effects import echo</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import sound.effects.echo</div></pre></td></tr></table></figure>
+<p>这样必须使用全称对里面的对象进行引用，如<br><code>sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)</code><br>还可以使用下面的语句来加载echo子模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">from Sound.Effects import echo</div></pre></td></tr></table></figure></p>
 <p>它在没有包前缀的情况下也可以使用， 所以它可以如下方式调用：<br><code>echo.echofilter(input, output, delay=0.7, atten=4)</code>不主张从一个包或模块中用<code>import *</code> 导入所有模块，因为这样的通常会导致可读性很差。<br><code>from Package import specific_submodule</code>的用法并没有错，实际上这还是推荐的用法，除非导入的模块需要使用其它包中的同名子模块(the importing module needs to use submodules with the same name from different packages).</p>
 <p>我还发现导入的模块会产生.pyc文件：<br>输入一个模块相对来说是一个比较费时的事情，所以Python做了一些技巧，以便使输入模块更加快一些。一种方法是创建 字节编译的文件 ，这些文件以.pyc作为扩展名。<br>在计算机内部，Python解释器把源代码转换成称为字节码的中间形式，然后再把它翻译成计算机使用的机器语言并运行</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.cnblogs.com/allenblogs/archive/2011/05/24/2055149.html" target="_blank" rel="external">http://www.cnblogs.com/allenblogs/archive/2011/05/24/2055149.html</a></p>
