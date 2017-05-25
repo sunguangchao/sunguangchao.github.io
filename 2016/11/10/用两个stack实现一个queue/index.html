@@ -84,16 +84,25 @@
 
 
 
-<meta name="description" content="题目：用两个stack实现一个queuepush(x) – 把元素x插入queue的尾部pop(x) –  删除queue头部的元素">
+<meta name="description" content="题目：
+用两个stack实现一个queue  
+push(x) – 把元素x插入queue的尾部  
+pop(x) –  删除queue头部的元素">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用两个stack实现一个queue">
 <meta property="og:url" content="http://yoursite.com/2016/11/10/用两个stack实现一个queue/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="题目：用两个stack实现一个queuepush(x) – 把元素x插入queue的尾部pop(x) –  删除queue头部的元素">
-<meta property="og:updated_time" content="2016-12-18T07:16:51.354Z">
+<meta property="og:description" content="题目：
+用两个stack实现一个queue  
+push(x) – 把元素x插入queue的尾部  
+pop(x) –  删除queue头部的元素">
+<meta property="og:updated_time" content="2017-05-18T13:15:29.603Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用两个stack实现一个queue">
-<meta name="twitter:description" content="题目：用两个stack实现一个queuepush(x) – 把元素x插入queue的尾部pop(x) –  删除queue头部的元素">
+<meta name="twitter:description" content="题目：
+用两个stack实现一个queue  
+push(x) – 把元素x插入queue的尾部  
+pop(x) –  删除queue头部的元素">
 
 
 
@@ -323,8 +332,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-18T15:16:51+08:00">
-              2016-12-18
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-18T21:15:29+08:00">
+              2017-05-18
             </time>
             
           </span>
@@ -381,16 +390,20 @@
       
 
       
-        <p><strong>题目：</strong><br>用两个<code>stack</code>实现一个<code>queue</code><br><code>push(x)</code> – 把元素x插入<code>queue</code>的尾部<br><code>pop(x)</code> –  删除queue头部的元素<br><a id="more"></a></p>
-<p><strong>备注</strong><br>只能使用stack的标准操作，<code>push to top</code>，<code>peek/pop from top</code>, <code>is empty</code>等<br>所有的操作必须是合法的，比如当<code>queue</code>是空的时候不会有<code>pop</code>操作</p>
-<p><strong>题目介绍</strong><br>这道题目牵涉到两个基础的数据结构，<code>stack</code>和<code>queue</code>。<br><code>stack：</code>先进后出<code>(FILO, First In Last Out)</code>，<code>stack</code>可以比喻成一个盒子，我们往盒子里先放a书，再放b书，最后放c书，如果我们想要拿出a书，那么要先拿出c书，再拿出b书，最后才能拿到a书。<br><code>queue：</code> 先进先出<code>(FIFO, First In First Out)</code>，就像我们结账排队，先到先结账，<code>queue</code>正好具备和<code>stack</code>相反的性质。<br><strong>思路总结</strong>  </p>
-<ul>
+        <h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><ul>
+<li>用两个<code>stack</code>实现一个<code>queue</code>  </li>
+<li><code>push(x)</code> – 把元素x插入<code>queue</code>的尾部  </li>
+<li><code>pop(x)</code> –  删除queue头部的元素  <a id="more"></a>
+</li>
+</ul>
+<h2 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h2><p>只能使用stack的标准操作，<code>push to top</code>，<code>peek/pop from top</code>, <code>is empty</code>等<br>所有的操作必须是合法的，比如当<code>queue</code>是空的时候不会有<code>pop</code>操作</p>
+<h2 id="题目介绍："><a href="#题目介绍：" class="headerlink" title="题目介绍： "></a>题目介绍： </h2><p>这道题目牵涉到两个基础的数据结构，<code>stack</code>和<code>queue</code>。<br><code>stack：</code>先进后出<code>(FILO, First In Last Out)</code>，<code>stack</code>可以比喻成一个盒子，我们往盒子里先放a书，再放b书，最后放c书，如果我们想要拿出a书，那么要先拿出c书，再拿出b书，最后才能拿到a书。<br><code>queue：</code> 先进先出<code>(FIFO, First In First Out)</code>，就像我们结账排队，先到先结账，<code>queue</code>正好具备和<code>stack</code>相反的性质。  </p>
+<h2 id="思路总结"><a href="#思路总结" class="headerlink" title="思路总结 "></a>思路总结 </h2><ul>
 <li>inbox：总是用来存储新元素。  </li>
 <li>outbox：用来取出元素，以此来满足queue FIFO的性质。  </li>
 </ul>
 <p>只要有新的元素进来，就把它放进<code>inbox</code>。<br>如果需要删除元素，直接从<code>outbox</code>里面拿元素出来，但是注意这是在<code>outbox</code>里面有元素的情况下。<br>如果<code>outbox</code>里面没有元素呢？那就把i<code>nbox(if any)</code>里面的元素先放进<code>outbox</code>。</p>
-<p><strong>代码实现</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> Queue&#123;</div><div class="line">	<span class="keyword">private</span> Stack&lt;Integer&gt; inbox;</div><div class="line">	<span class="keyword">private</span> Stack&lt;Integer&gt; outbox;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Queue</span><span class="params">()</span></span>&#123;</div><div class="line">		inbox = <span class="keyword">new</span> Stack&lt;&gt;();</div><div class="line">		outbox = <span class="keyword">new</span> Stack&lt;&gt;();</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">		inbox.push(x);</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">		move();</div><div class="line">		<span class="keyword">return</span> outbox.isEmpty() ? <span class="keyword">null</span> : outbox.pop();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(outbox.isEmpty())</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">while</span> (!inbox.isEmpty()) &#123;</div><div class="line">				outbox.push(inbox.pop());</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> Queue&#123;</div><div class="line">	<span class="keyword">private</span> Stack&lt;Integer&gt; inbox;</div><div class="line">	<span class="keyword">private</span> Stack&lt;Integer&gt; outbox;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Queue</span><span class="params">()</span></span>&#123;</div><div class="line">		inbox = <span class="keyword">new</span> Stack&lt;&gt;();</div><div class="line">		outbox = <span class="keyword">new</span> Stack&lt;&gt;();</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">		inbox.push(x);</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">		move();</div><div class="line">		<span class="keyword">return</span> outbox.isEmpty() ? <span class="keyword">null</span> : outbox.pop();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(outbox.isEmpty())</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">while</span> (!inbox.isEmpty()) &#123;</div><div class="line">				outbox.push(inbox.pop());</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -485,8 +498,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg"
@@ -568,6 +590,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目："><span class="nav-number">1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注："><span class="nav-number">2.</span> <span class="nav-text">备注：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目介绍："><span class="nav-number">3.</span> <span class="nav-text">题目介绍： </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路总结"><span class="nav-number">4.</span> <span class="nav-text">思路总结 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">5.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
