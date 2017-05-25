@@ -84,16 +84,31 @@
 
 
 
-<meta name="description" content="泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
+<meta name="description" content="学习目标：
+
+Bag,Queue和Stack的实现
+迭代器的使用
+
+泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1.3 Stack and Queues">
 <meta property="og:url" content="http://yoursite.com/2016/11/19/1-3-Stack-and-Queues/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
-<meta property="og:updated_time" content="2017-04-08T10:28:23.003Z">
+<meta property="og:description" content="学习目标：
+
+Bag,Queue和Stack的实现
+迭代器的使用
+
+泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
+<meta property="og:updated_time" content="2017-05-25T04:02:21.111Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.3 Stack and Queues">
-<meta name="twitter:description" content="泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
+<meta name="twitter:description" content="学习目标：
+
+Bag,Queue和Stack的实现
+迭代器的使用
+
+泛型(Generics)An essential characteristic of collections ADTs is that we should be able to use them for any type of data.有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。">
 
 
 
@@ -323,8 +338,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-04-08T18:28:23+08:00">
-              2017-04-08
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-25T12:02:21+08:00">
+              2017-05-25
             </time>
             
           </span>
@@ -381,23 +396,29 @@
       
 
       
-        <h2 id="泛型-Generics"><a href="#泛型-Generics" class="headerlink" title="泛型(Generics)"></a>泛型(Generics)</h2><p>An essential characteristic of collections ADTs is that we should be able to use them for any type of data.<br>有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。<br><a id="more"></a></p>
+        <p>学习目标：</p>
+<ul>
+<li>Bag,Queue和Stack的实现</li>
+<li>迭代器的使用</li>
+</ul>
+<h2 id="泛型-Generics"><a href="#泛型-Generics" class="headerlink" title="泛型(Generics)"></a>泛型(Generics)</h2><p>An essential characteristic of collections ADTs is that we should be able to use them for any type of data.<br>有了泛型，我们只需要一份API（和一次实现）就能够处理所有类型的数据。<br><a id="more"></a></p>
 <h2 id="Autoboxing"><a href="#Autoboxing" class="headerlink" title="Autoboxing"></a>Autoboxing</h2><p>类型参数必须被实例化为引用类型，因此Java有一种特殊机制来使泛型代码能够处理原始数据类型。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;Integer&gt;();</div><div class="line">stack.push(<span class="number">17</span>);       <span class="comment">//自动装箱(int -&gt; Integer)</span></div><div class="line"><span class="keyword">int</span> i = stack.pop();  <span class="comment">//自动拆箱(Integer -&gt; int)</span></div></pre></td></tr></table></figure></p>
 <p>Java automatically converts between a primitives type and its corresponding wrapper type in assgnment,method arguments,and arithmetic/logic expressions.</p>
 <h2 id="Iterable-collections"><a href="#Iterable-collections" class="headerlink" title="Iterable collections"></a>Iterable collections</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Queue&lt;Transcation&gt; collection = <span class="keyword">new</span> Queue&lt;Transcation&gt;();</div><div class="line"><span class="keyword">for</span>(Transcation t : collection)</div><div class="line">    StdOut.println(t);</div></pre></td></tr></table></figure>
-<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><p>在任意可迭代的集合数据类型中需要实现：</p>
+<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Iterator&lt;String&gt; i = collection.iterator();</div><div class="line"><span class="keyword">while</span>(i.hasNext())&#123;</div><div class="line">  String s = i.next();</div><div class="line">  StdOut.println(s);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在任意可迭代的集合数据类型中需要实现：</p>
 <ul>
 <li>集合数据类型必须实现一个<code>iterator</code>方法并返回一个Iterator对象；</li>
 <li>Iterator类必须包含两个方法：<code>hasNext()</code>和<code>next()</code>；</li>
 </ul>
-<p>要使一个类可迭代，第一步就要在声明中加入implements Iterable<item>，对应的接口(java.lang.Iterable)为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public inerface Iterable&lt;Item&gt;&#123;</div><div class="line">  Iterator&lt;Item&gt; iterator();</div><div class="line">&#125;</div></pre></td></tr></table></figure></item></p>
-<p>然后在类中添加一个方法iterator()并返回一个迭代器Iterator<item>。</item></p>
+<p>要使一个类可迭代，第一步就要在声明中加入<code>implements Iterable&lt;Item&gt;</code>，对应的接口<code>java.lang.Iterable</code>为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public inerface Iterable&lt;Item&gt;&#123;</div><div class="line">  Iterator&lt;Item&gt; iterator();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后在类中添加一个方法<code>iterator()</code>并返回一个迭代器<code>Iterator&lt;Item&gt;</code>。</p>
 <h2 id="Bags"><a href="#Bags" class="headerlink" title="Bags"></a>Bags</h2><ul>
 <li>A bag is a collection where removing items is not supported-its purpose is to provide clients with the abilty to collect items and then to iterate through the collected items</li>
 <li>Stats is a bag client that reads a sequence of real numbers from standard input and prints out their mean and standard deviation  </li>
 </ul>
 <p>下面的练习是简单地计算标准输入中的所有double值得平均值和样本标准差<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Stats</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </div><div class="line">        Bag&lt;Double&gt; numbers = <span class="keyword">new</span> Bag&lt;Double&gt;();  </div><div class="line">        <span class="keyword">while</span> (!StdIn.isEmpty())&#123;  </div><div class="line">            numbers.add(StdIn.readDouble());  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">int</span> n = numbers.size();</div><div class="line">        <span class="keyword">double</span> sum = <span class="number">0.0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">double</span> x : numbers)</div><div class="line">            sum += x;</div><div class="line">        <span class="keyword">double</span> mean = sum/n;</div><div class="line">        sum = <span class="number">0.0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">double</span> x:numbers)&#123;</div><div class="line">            sum +=(x-mean)*(x-mean);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">double</span> stddev = Math.sqrt(sum/(n-<span class="number">1</span>));</div><div class="line">        StdOut.printf(<span class="string">"Mean:   %.2f\n"</span>,mean);</div><div class="line">        StdOut.printf(<span class="string">"Std dev:%.2f\n"</span>,stddev);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="Pushdown-stack"><a href="#Pushdown-stack" class="headerlink" title="Pushdown stack"></a>Pushdown stack</h2><p>下压栈一个典型的用例就是算数表达式求值。</p>
+<h2 id="Pushdown-stack"><a href="#Pushdown-stack" class="headerlink" title="Pushdown stack"></a>Pushdown stack</h2><p>下压栈一个典型的用例就是<code>算数表达式求值</code>。</p>
 <p>用例<code>Reverse</code>会把标准输入的所有整数逆序排列，无需预先知道整数有多少。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Reverse</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;Integer&gt;();</div><div class="line">        <span class="keyword">while</span>(!StdIn.isEmpty())&#123;</div><div class="line">            Stack.push(StdIn.readInt());</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : stack) &#123;</div><div class="line">            StdOut.println(i);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li>创建泛型数组在Java中是不允许的，需要使用类型转换<br><code>a = (Item[])new Object[cap];</code></li>
@@ -491,11 +512,11 @@ public Stack(Stack&lt;Item&gt; s) {
 <li><p>Expression evaluation with precedence. Write a problem <a href="https://github.com/sunguangchao/algorithm-learning/blob/master/algorithms_4th_edition/web_exercise1_3/EvaluateDeluxe.java" target="_blank" rel="external">EvaluateDeluxe.java</a> that extends <a href="">Evaluate.java</a> to handle expression that are not fully parenthesized,using the standard precedence order for the operators +,-,*,/.</p>
 </li>
 </ol>
-<h2 id="web-exercise"><a href="#web-exercise" class="headerlink" title="web exercise"></a>web exercise</h2><p>21.List iterators.To implement <code>previous()</code> we can use a doubly-linked list. Program <a href="https://github.com/sunguangchao/algorithm-learning/blob/master/algorithms_4th_edition/web_exercise1_3/DoublyLinkedList.java" target="_blank" rel="external">DoublyLinkedList.java</a></p>
-<p>25.Adding a list to itself.What is the result of the following code fragment?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">List list1 = new ArrayList();</div><div class="line">List list2 = new ArrayList();</div><div class="line">list1.add(list2);</div><div class="line">list2.add(list1);</div><div class="line">System.out.println(list1.equals(list2));</div><div class="line"></div><div class="line">List list = new ArrayList();</div><div class="line">list.add(list);</div><div class="line">System.out.println(list.hashCode());</div></pre></td></tr></table></figure></p>
+<h2 id="web-exercise"><a href="#web-exercise" class="headerlink" title="web exercise"></a>web exercise</h2><p>21 List iterators.To implement <code>previous()</code> we can use a doubly-linked list. Program <a href="https://github.com/sunguangchao/algorithm-learning/blob/master/algorithms_4th_edition/web_exercise1_3/DoublyLinkedList.java" target="_blank" rel="external">DoublyLinkedList.java</a></p>
+<p>25 Adding a list to itself.What is the result of the following code fragment?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">List list1 = new ArrayList();</div><div class="line">List list2 = new ArrayList();</div><div class="line">list1.add(list2);</div><div class="line">list2.add(list1);</div><div class="line">System.out.println(list1.equals(list2));</div><div class="line"></div><div class="line">List list = new ArrayList();</div><div class="line">list.add(list);</div><div class="line">System.out.println(list.hashCode());</div></pre></td></tr></table></figure></p>
 <p>Answer. stack overflow. The Java documents say that”while it is permissible for lists to contain themselves as elements, extreme caution is advised: the equals and hasCode methods are no longer well defined on such a list.”</p>
-<p>31.Queue with two stacks.Implement a queue with two stacks so that each queue operations takes a constant amortized number of stack operations.<br>Solutuion:<a href="https://github.com/sunguangchao/algorithm-learning/blob/master/algorithms_4th_edition/web_exercise1_3/QueueWithTwoStack.java" target="_blank" rel="external">QueueWithTwoStacks.java</a></p>
-<p>32-61</p>
+<p>31 Queue with two stacks.Implement a queue with two stacks so that each queue operations takes a constant amortized number of stack operations.<br>Solutuion:<a href="https://github.com/sunguangchao/algorithm-learning/blob/master/algorithms_4th_edition/web_exercise1_3/QueueWithTwoStack.java" target="_blank" rel="external">QueueWithTwoStacks.java</a></p>
+<p>32-61未完待续</p>
 
       
     </div>

@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/11/20/1-2-Data-abstraction/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
 <meta property="og:description" content="抽象数据类型(ADT)是一种能够对使用者隐蔽数据表示的数据类型。">
-<meta property="og:updated_time" content="2017-02-25T06:54:49.102Z">
+<meta property="og:updated_time" content="2017-05-25T03:47:45.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.2 Data abstraction">
 <meta name="twitter:description" content="抽象数据类型(ADT)是一种能够对使用者隐蔽数据表示的数据类型。">
@@ -323,8 +323,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-02-25T14:54:49+08:00">
-              2017-02-25
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-25T11:47:45+08:00">
+              2017-05-25
             </time>
             
           </span>
@@ -429,12 +429,12 @@
 </table>
 <p>使用对象</p>
 <ul>
-<li>生命该类型的变量，以用来引用对象</li>
+<li>声明该类型的变量，以用来引用对象</li>
 <li>使用关键字new触发能够创建该类型的对象的一个构造函数</li>
 <li>使用变量名在语句或表达式中调用实例方法</li>
 </ul>
-<p>将对象作为返回值<br>Java中的方法只能有一个返回值，如果我们想返回多个值怎么办？-返回对象就可以了</p>
-<p>对象数组实际上是<code>对象的引用</code>组成的数组</p>
+<p>将对象作为返回值<br>Java中的方法只能有一个返回值，如果我们想返回多个值怎么办？返回对象就可以了</p>
+<p>对象数组实际上是<code>对象的引用</code>组成的数组<br><img src="" alt=""></p>
 <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>构造函数类似于静态方法，但它能够直接访问实例变量并且没有返回值。一般来说，构造函数的作用是初始化实例变量，每个构造函数都将创建一个对象并向调用者返回一个该对象的引用。</p>
 <p>作用域：</p>
 <ul>
@@ -442,8 +442,64 @@
 <li>局部变量的作用域是当前代码段中它的定义之后的所有语句</li>
 <li>实例变量为该类的对象保存了数据类型的值，作用域是整个类</li>
 </ul>
-<h2 id="web-exercise"><a href="#web-exercise" class="headerlink" title="web exercise"></a>web exercise</h2><p>6.A string s is a circular rotation of a string t if it matches when the characters are circularly shifted by any number of positions; e.g., <code>ACTGACG</code> is a circular shift of <code>TGACGAC</code>, and vice versa. Detecting this condition is important in the study of genomic sequences. Write a program that checks whether two given strings s and t are circular shifts of one another.<br>solution:<br><code>(s.length() == t.length())&amp;&amp;(s.concat(s).indexOf(t) &gt; 0)</code></p>
-<p>7.<code>recursive(递归的)</code>loop:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">mystery</span><span class="params">(String s)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> N = s.length();</div><div class="line">    <span class="keyword">if</span>(N &lt;= <span class="number">1</span>) <span class="keyword">return</span> s;</div><div class="line">    String a = substring(<span class="number">0</span>,N/<span class="number">2</span>);</div><div class="line">    String b = subString(N/<span class="number">2</span>,<span class="number">0</span>);</div><div class="line">    <span class="keyword">return</span> b + a;</div><div class="line">&#125;<span class="comment">//Reverse the string</span></div></pre></td></tr></table></figure></p>
+<h2 id="Java的字符串API"><a href="#Java的字符串API" class="headerlink" title="Java的字符串API"></a>Java的字符串API</h2><table>
+<thead>
+<tr>
+<th>public class String</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String()</td>
+<td>创建一个空字符串</td>
+</tr>
+<tr>
+<td>int length()</td>
+<td>字符串长度</td>
+</tr>
+<tr>
+<td>int charAt(int i)</td>
+<td>第i个字符</td>
+</tr>
+<tr>
+<td>int indexOf(String p)</td>
+<td>p第一次出现的位置，没有则返回-1</td>
+</tr>
+<tr>
+<td>int indexOf(String p, int i)</td>
+<td>p在i个字符后第一次出现的位置</td>
+</tr>
+<tr>
+<td>String concat(String t)</td>
+<td>将t附在该字符串末尾</td>
+</tr>
+<tr>
+<td>String subString(int i, int j)</td>
+<td>返回第i到j-1个字符作为字符串</td>
+</tr>
+<tr>
+<td>String[] spilt(String delim)</td>
+<td>使用delim分隔符切分字符串</td>
+</tr>
+<tr>
+<td>int compareTo(String t)</td>
+<td>比较字符串</td>
+</tr>
+<tr>
+<td>boolean equals(String t)</td>
+<td>该字符串的值和t的值是否相等</td>
+</tr>
+<tr>
+<td>int hashCode()</td>
+<td>散列值</td>
+</tr>
+</tbody>
+</table>
+<p>判断字符串是否是一条回文<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">//判断字符串是否是一条回文</div><div class="line">public static boolean isPalindrome(String s)&#123;</div><div class="line">    int N = s.length();</div><div class="line">    for (int i=0; i &lt; N/2; i++) &#123;</div><div class="line">        if (s.charAt(i) != s.charAt(N-1-i))</div><div class="line">            return false;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//从一个命令行参数中提取文件名和扩展名</div><div class="line">String s = args[0];</div><div class="line">int dot = s.indexOf(&quot;.&quot;);</div><div class="line">String base = s.subString(0, dot);</div><div class="line">String extension = s.subString(dot+1, s.length());</div><div class="line">//打印标准输入中所有含有通过命令行指定的字符串的所有的行</div><div class="line">String query = args[0];</div><div class="line">while (!StdIn.isEmpty())&#123;</div><div class="line">    String s = StdIn.readLine();</div><div class="line">    if (s.contains(query)) StdOut.println(s);</div><div class="line">&#125;</div><div class="line">//以空白字符为分隔符从StdIn中创建一个字符串数组</div><div class="line">String input = StdIn.readAll();</div><div class="line">String[] words = input.split(&quot;\\s+&quot;);</div></pre></td></tr></table></figure></p>
+<h2 id="web-exercise"><a href="#web-exercise" class="headerlink" title="web exercise"></a>web exercise</h2><p>6 A string s is a circular rotation of a string t if it matches when the characters are circularly shifted by any number of positions; e.g., <code>ACTGACG</code> is a circular shift of <code>TGACGAC</code>, and vice versa. Detecting this condition is important in the study of genomic sequences. Write a program that checks whether two given strings s and t are circular shifts of one another.<br>solution:  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(s.length() == t.length())&amp;&amp;(s.concat(s).indexOf(t) &gt; <span class="number">0</span>)</div></pre></td></tr></table></figure>
+<p>7 <code>recursive(递归的)</code>loop:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">mystery</span><span class="params">(String s)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> N = s.length();</div><div class="line">    <span class="keyword">if</span>(N &lt;= <span class="number">1</span>) <span class="keyword">return</span> s;</div><div class="line">    String a = substring(<span class="number">0</span>,N/<span class="number">2</span>);</div><div class="line">    String b = subString(N/<span class="number">2</span>,<span class="number">0</span>);</div><div class="line">    <span class="keyword">return</span> b + a;</div><div class="line">&#125;<span class="comment">//Reverse the string</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -641,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象"><span class="nav-number">1.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数"><span class="nav-number">2.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web-exercise"><span class="nav-number">3.</span> <span class="nav-text">web exercise</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象"><span class="nav-number">1.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数"><span class="nav-number">2.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java的字符串API"><span class="nav-number">3.</span> <span class="nav-text">Java的字符串API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web-exercise"><span class="nav-number">4.</span> <span class="nav-text">web exercise</span></a></li></ol></div>
             
 
           </div>
