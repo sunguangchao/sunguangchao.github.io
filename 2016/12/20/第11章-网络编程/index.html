@@ -84,22 +84,31 @@
 
 
 
-<meta name="description" content="网络架构每个网络应用都是基于客户端-服务器模型。对于一个主机而言，网络只是一种I/O设备，作为数据源和数据接收方。">
+<meta name="description" content="学习目标：
+了解网络的基本架构
+了解常见的网络协议
+学会编写web服务器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第11章 网络编程">
 <meta property="og:url" content="http://yoursite.com/2016/12/20/第11章-网络编程/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="网络架构每个网络应用都是基于客户端-服务器模型。对于一个主机而言，网络只是一种I/O设备，作为数据源和数据接收方。">
+<meta property="og:description" content="学习目标：
+了解网络的基本架构
+了解常见的网络协议
+学会编写web服务器">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E4%B8%BB%E6%9C%BA%E7%9A%84%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90.jpg">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E4%BB%A5%E5%A4%AA%E7%BD%91%E6%AE%B5.jpg">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E6%A1%A5%E6%8E%A5%E4%BB%A5%E5%A4%AA%E7%BD%91.jpg">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E4%BA%92%E8%81%94%E7%BD%91%E7%BB%9C.jpg">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E4%BA%92%E8%81%94%E7%BD%91%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93.jpg">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E5%A5%97%E6%8E%A5%E5%AD%97%E6%8E%A5%E5%8F%A3%E6%A6%82%E8%BF%B0.jpg">
-<meta property="og:updated_time" content="2016-12-20T14:14:29.994Z">
+<meta property="og:updated_time" content="2017-05-26T09:23:16.219Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第11章 网络编程">
-<meta name="twitter:description" content="网络架构每个网络应用都是基于客户端-服务器模型。对于一个主机而言，网络只是一种I/O设备，作为数据源和数据接收方。">
+<meta name="twitter:description" content="学习目标：
+了解网络的基本架构
+了解常见的网络协议
+学会编写web服务器">
 <meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E4%B8%BB%E6%9C%BA%E7%9A%84%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90.jpg">
 
 
@@ -330,8 +339,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-20T22:14:29+08:00">
-              2016-12-20
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-26T17:23:16+08:00">
+              2017-05-26
             </time>
             
           </span>
@@ -388,7 +397,13 @@
       
 
       
-        <h1 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h1><p>每个网络应用都是基于<code>客户端-服务器</code>模型。对于一个主机而言，网络只是一种I/O设备，作为数据源和数据接收方。<br><a id="more"></a><br><img src="http://o90jubpdi.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E4%B8%BB%E6%9C%BA%E7%9A%84%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90.jpg" alt=""><br>根据网络的应用范围和架构层级：</p>
+        <h1 id="学习目标："><a href="#学习目标：" class="headerlink" title="学习目标："></a>学习目标：</h1><ul>
+<li>了解网络的基本架构</li>
+<li>了解常见的网络协议</li>
+<li>学会编写web服务器</li>
+</ul>
+<a id="more"></a>
+<h1 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h1><p>每个网络应用都是基于<code>客户端-服务器</code>模型。对于一个主机而言，网络只是一种I/O设备，作为数据源和数据接收方。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E4%B8%BB%E6%9C%BA%E7%9A%84%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90.jpg" alt=""><br>根据网络的应用范围和架构层级：</p>
 <ul>
 <li>LAN-Local Area Network<ul>
 <li>以太网(Ethernet)</li>
@@ -399,7 +414,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="最底层Ethernet-segment"><a href="#最底层Ethernet-segment" class="headerlink" title="最底层Ethernet segment"></a>最底层Ethernet segment</h2><p>几个host连接到hub上，通常范围是一个房间或一个楼层。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E4%BB%A5%E5%A4%AA%E7%BD%91%E6%AE%B5.jpg" alt=""></p>
+<h2 id="最底层Ethernet-segment"><a href="#最底层Ethernet-segment" class="headerlink" title="最底层Ethernet segment"></a>最底层Ethernet segment</h2><p>几个host连接到hub上，通常范围是一个房间或一个楼层<br><img src="http://o90jubpdi.bkt.clouddn.com/%E4%BB%A5%E5%A4%AA%E7%BD%91%E6%AE%B5.jpg" alt=""></p>
 <ul>
 <li>每个以太网适配器都有一个全球唯一的48位地址（也就是MAC地址）</li>
 <li>不同主机间传送数据的称为帧，由header和有效载荷组成</li>
@@ -448,9 +463,10 @@
 <ul>
 <li>主机集合被映射为一组32位的IP地址</li>
 <li>IP地址被映射到域名</li>
-<li>不同主机之间通信，可以通过 connection 来交换数据</li>
+<li>不同主机之间通信，可以通过 connection 来交换数据<br>Internet域名</li>
 </ul>
-<h2 id="Internet域名"><a href="#Internet域名" class="headerlink" title="Internet域名"></a>Internet域名</h2><ul>
+<hr>
+<ul>
 <li>因特网定义了域名集合和IP地址集合之间的映射。</li>
 <li>这个映射是通过分布世界范围内的数据库DNS（Domain Name System，域名系统）来维护的。</li>
 <li>DNS数据库是由数以百万计的<code>主机条目结构（host entry structure）</code>组成的。  </li>
@@ -473,7 +489,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="套接字接口"><a href="#套接字接口" class="headerlink" title="套接字接口"></a>套接字接口</h2><p>套接字接口（socket interface）是一组函数，它们和<code>Unix I/O</code>函数结合起来，用以创建应用。<br>从Unix内核的角度来看，一个套接字就是通信的一个端点；从Unix程序的角度来看，套接字就是一个有相应描述符的打开文件。<br>connect、bind和accept函数要求一个指向与协议相关的套接字地址结构的指针。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E5%A5%97%E6%8E%A5%E5%AD%97%E6%8E%A5%E5%8F%A3%E6%A6%82%E8%BF%B0.jpg" alt=""></p>
+<h2 id="套接字接口"><a href="#套接字接口" class="headerlink" title="套接字接口"></a>套接字接口</h2><p>套接字接口（socket interface）是一组函数，它们和Unix I/O函数结合起来，用以创建应用。<br>从Unix内核的角度来看，一个套接字就是通信的一个端点；从Unix程序的角度来看，套接字就是一个有相应描述符的打开文件。<br>connect、bind和accept函数要求一个指向与协议相关的套接字地址结构的指针。<br><img src="http://o90jubpdi.bkt.clouddn.com/%E5%A5%97%E6%8E%A5%E5%AD%97%E6%8E%A5%E5%8F%A3%E6%A6%82%E8%BF%B0.jpg" alt=""></p>
 <h1 id="简单服务器实现"><a href="#简单服务器实现" class="headerlink" title="简单服务器实现"></a>简单服务器实现</h1><p>架构总览<br>根据上面的流程图，总共有5个步骤：</p>
 <ol>
 <li>开启服务器(open_listenfd函数)<ul>
@@ -529,7 +545,7 @@
 </ul>
 </li>
 <li>关闭客户端（主要是<code>close</code>）<ul>
-<li>[Client]<code>close</code>:关闭连接</li>
+<li>[Client]close:关闭连接</li>
 </ul>
 </li>
 <li>断开客户端<ul>
@@ -541,7 +557,12 @@
 <h2 id="Client-open-clientfd"><a href="#Client-open-clientfd" class="headerlink" title="Client:open_clientfd "></a>Client:<code>open_clientfd</code> </h2><p>将<code>socket</code>和<code>connect</code>函数包装成一个叫做<code>open_clientfd</code>的辅助函数。<br><code>open_clientfd</code>函数和运行在主机<code>hostname</code>上的服务器建立一个连接，并在知名端口<code>port</code>上监听连接请求。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">open_clientfd</span><span class="params">(<span class="keyword">char</span> *hostname, <span class="keyword">int</span> port)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> clientfd;</div><div class="line">	<span class="keyword">struct</span> hostent *hp;</div><div class="line">	<span class="keyword">struct</span> sockaddr_in serveraddr;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>((clientfd = socket(AF_INET,SOCK_STREAM, <span class="number">0</span>)) &lt; <span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>((hp = gethostbyname(hostname)) == <span class="literal">NULL</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">-2</span>;</div><div class="line">	bzero((<span class="keyword">char</span> *) &amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</div><div class="line">	serveraddr.sin_family = AF_INET;</div><div class="line">	bcopy((<span class="keyword">char</span>*)hp-&gt;h_addr_list[<span class="number">0</span>],(<span class="keyword">char</span> *)&amp;serveraddr.sin_addr.s_addr, hp-&gt;h_length);</div><div class="line">	serveraddr.sin_port = htons(port);</div><div class="line"></div><div class="line">	<span class="comment">/*Establish a connection with the server*/</span></div><div class="line">	<span class="keyword">if</span>(connect(clientfd,(SA *) &amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr)) &lt; <span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	<span class="keyword">return</span> clientfd;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>在这里用文字描述一下流程：在创建了套接字描述符（第7行）后，我们检索服务器的<code>DNS主机条目</code>，并拷贝主机条目中的第一个IP地址到服务器的<code>套接字地址结构</code>（10~14行）。在用按照<code>网络字节顺序</code>的服务器的<code>知名端口号</code>初始化套接字地址结构（15行）之后，我们发起了一个到服务器的<code>连接请求</code>（18行）。当<code>connect</code>函数返回时，我们返回<code>套接字描述符</code>给客户端，客户端就可以立即开始用<code>Unix I/O</code>和服务器通信了。</p>
 <h2 id="Server-open-listenfd"><a href="#Server-open-listenfd" class="headerlink" title="Server:open_listenfd"></a>Server:open_listenfd</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function">nt <span class="title">open_listenfd</span><span class="params">(<span class="keyword">int</span> port)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> listenfd, optval = <span class="number">1</span>;</div><div class="line">	<span class="keyword">struct</span> sockaddr_in serveraddr;</div><div class="line"></div><div class="line">	<span class="comment">/*create a socket descriptor*/</span></div><div class="line">	<span class="keyword">if</span>((listenfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>)) &lt; <span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	<span class="keyword">if</span>(setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, (<span class="keyword">const</span> <span class="keyword">void</span> *)&amp;optval, <span class="keyword">sizeof</span>(<span class="keyword">int</span>)) &lt; <span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	<span class="comment">/*Listenfd will be an end point for all request to port on any IP address for this host*/</span></div><div class="line">	bzero((<span class="keyword">char</span> *) &amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</div><div class="line">	serveraddr.sin_family = AF_INET;</div><div class="line">	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);</div><div class="line">	serveraddr.sin_port = htons((<span class="keyword">unsigned</span> <span class="keyword">short</span>)port);</div><div class="line">	<span class="keyword">if</span>(bind(listenfd, (SA *)&amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr)) &lt; <span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(listen(listenfd, LISTENQ) &lt; <span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">	<span class="keyword">return</span> listenfd;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="简单的socket服务器实例"><a href="#简单的socket服务器实例" class="headerlink" title="简单的socket服务器实例"></a>简单的socket服务器实例</h1>
+<h1 id="简单的socket服务器实例"><a href="#简单的socket服务器实例" class="headerlink" title="简单的socket服务器实例"></a>简单的socket服务器实例</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://www.cnblogs.com/vamei/archive/2012/12/05/2802811.html" target="_blank" rel="external">协议森林</a></li>
+<li><a href="http://www.cnblogs.com/maybe2030/p/4781555.html" target="_blank" rel="external">计算机网络基础知识总结</a></li>
+<li><a href="http://wdxtub.com/2016/04/16/thin-csapp-8/" target="_blank" rel="external">网络编程</a></li>
+</ul>
+
       
     </div>
 
@@ -732,7 +753,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络架构"><span class="nav-number">1.</span> <span class="nav-text">网络架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最底层Ethernet-segment"><span class="nav-number">1.1.</span> <span class="nav-text">最底层Ethernet segment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#桥接以太网bridge-Ethernet"><span class="nav-number">1.2.</span> <span class="nav-text">桥接以太网bridge Ethernet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下一层-internet"><span class="nav-number">1.3.</span> <span class="nav-text">下一层-internet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络协议"><span class="nav-number">2.</span> <span class="nav-text">网络协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Internet域名"><span class="nav-number">2.1.</span> <span class="nav-text">Internet域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Internet连接"><span class="nav-number">2.2.</span> <span class="nav-text">Internet连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#套接字接口"><span class="nav-number">2.3.</span> <span class="nav-text">套接字接口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单服务器实现"><span class="nav-number">3.</span> <span class="nav-text">简单服务器实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Client-open-clientfd"><span class="nav-number">3.1.</span> <span class="nav-text">Client:open_clientfd </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Server-open-listenfd"><span class="nav-number">3.2.</span> <span class="nav-text">Server:open_listenfd</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单的socket服务器实例"><span class="nav-number">4.</span> <span class="nav-text">简单的socket服务器实例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#学习目标："><span class="nav-number">1.</span> <span class="nav-text">学习目标：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络架构"><span class="nav-number">2.</span> <span class="nav-text">网络架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最底层Ethernet-segment"><span class="nav-number">2.1.</span> <span class="nav-text">最底层Ethernet segment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#桥接以太网bridge-Ethernet"><span class="nav-number">2.2.</span> <span class="nav-text">桥接以太网bridge Ethernet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下一层-internet"><span class="nav-number">2.3.</span> <span class="nav-text">下一层-internet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络协议"><span class="nav-number">3.</span> <span class="nav-text">网络协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Internet连接"><span class="nav-number">3.1.</span> <span class="nav-text">Internet连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#套接字接口"><span class="nav-number">3.2.</span> <span class="nav-text">套接字接口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单服务器实现"><span class="nav-number">4.</span> <span class="nav-text">简单服务器实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Client-open-clientfd"><span class="nav-number">4.1.</span> <span class="nav-text">Client:open_clientfd </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Server-open-listenfd"><span class="nav-number">4.2.</span> <span class="nav-text">Server:open_listenfd</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单的socket服务器实例"><span class="nav-number">5.</span> <span class="nav-text">简单的socket服务器实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

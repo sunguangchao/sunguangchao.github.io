@@ -84,17 +84,32 @@
 
 
 
-<meta name="description" content="并行方法现代操作系统提供了三种基本的构造并发程序的方法：">
+<meta name="description" content="学习目标
+理解并行的几个层次：进程、事件、线程
+了解同步问题产生的背景，以及信号量的工作机制
+理解线程安全和一致性问题
+
+并行方法现代操作系统提供了三种基本的构造并发程序的方法：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第12章 并发编程">
 <meta property="og:url" content="http://yoursite.com/2016/12/26/第12章-并发编程/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="并行方法现代操作系统提供了三种基本的构造并发程序的方法：">
+<meta property="og:description" content="学习目标
+理解并行的几个层次：进程、事件、线程
+了解同步问题产生的背景，以及信号量的工作机制
+理解线程安全和一致性问题
+
+并行方法现代操作系统提供了三种基本的构造并发程序的方法：">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85.jpg">
-<meta property="og:updated_time" content="2016-12-26T15:48:42.482Z">
+<meta property="og:updated_time" content="2017-05-26T09:25:24.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第12章 并发编程">
-<meta name="twitter:description" content="并行方法现代操作系统提供了三种基本的构造并发程序的方法：">
+<meta name="twitter:description" content="学习目标
+理解并行的几个层次：进程、事件、线程
+了解同步问题产生的背景，以及信号量的工作机制
+理解线程安全和一致性问题
+
+并行方法现代操作系统提供了三种基本的构造并发程序的方法：">
 <meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85.jpg">
 
 
@@ -325,8 +340,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-26T23:48:42+08:00">
-              2016-12-26
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-26T17:25:24+08:00">
+              2017-05-26
             </time>
             
           </span>
@@ -383,7 +398,12 @@
       
 
       
-        <h1 id="并行方法"><a href="#并行方法" class="headerlink" title="并行方法"></a>并行方法</h1><p>现代操作系统提供了三种基本的构造并发程序的方法：<br><a id="more"></a></p>
+        <h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
+<li>理解并行的几个层次：进程、事件、线程</li>
+<li>了解同步问题产生的背景，以及信号量的工作机制</li>
+<li>理解线程安全和一致性问题</li>
+</ul>
+<h1 id="并行方法"><a href="#并行方法" class="headerlink" title="并行方法"></a>并行方法</h1><p>现代操作系统提供了三种基本的构造并发程序的方法：<br><a id="more"></a></p>
 <ul>
 <li>进程<ul>
 <li>每个逻辑流都是一个进程，由<code>内核</code>来调度和维护。</li>
@@ -756,7 +776,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并行方法"><span class="nav-number">1.</span> <span class="nav-text">并行方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于进程"><span class="nav-number">1.1.</span> <span class="nav-text">基于进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于I-O多路复用"><span class="nav-number">1.2.</span> <span class="nav-text">基于I/O多路复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于线程"><span class="nav-number">1.3.</span> <span class="nav-text">基于线程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同步"><span class="nav-number">2.</span> <span class="nav-text">同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#共享变量"><span class="nav-number">2.1.</span> <span class="nav-text">共享变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用信号量同步线程"><span class="nav-number">2.2.</span> <span class="nav-text">用信号量同步线程(*)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量"><span class="nav-number">2.3.</span> <span class="nav-text">信号量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生产者-消费者问题"><span class="nav-number">3.</span> <span class="nav-text">生产者-消费者问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读者-写者问题"><span class="nav-number">4.</span> <span class="nav-text">读者-写者问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程安全"><span class="nav-number">5.</span> <span class="nav-text">线程安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#学习目标"><span class="nav-number">1.</span> <span class="nav-text">学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并行方法"><span class="nav-number">2.</span> <span class="nav-text">并行方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于进程"><span class="nav-number">2.1.</span> <span class="nav-text">基于进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于I-O多路复用"><span class="nav-number">2.2.</span> <span class="nav-text">基于I/O多路复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于线程"><span class="nav-number">2.3.</span> <span class="nav-text">基于线程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#同步"><span class="nav-number">3.</span> <span class="nav-text">同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#共享变量"><span class="nav-number">3.1.</span> <span class="nav-text">共享变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用信号量同步线程"><span class="nav-number">3.2.</span> <span class="nav-text">用信号量同步线程(*)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量"><span class="nav-number">3.3.</span> <span class="nav-text">信号量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生产者-消费者问题"><span class="nav-number">4.</span> <span class="nav-text">生产者-消费者问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读者-写者问题"><span class="nav-number">5.</span> <span class="nav-text">读者-写者问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程安全"><span class="nav-number">6.</span> <span class="nav-text">线程安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>

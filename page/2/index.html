@@ -327,8 +327,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-01-08T22:28:08+08:00">
-              2017-01-08
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-26T17:14:01+08:00">
+              2017-05-26
             </time>
             
           </span>
@@ -386,7 +386,12 @@
 
       
         
-          <h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>C语言代码最终成为机器可执行的程序，会像流水线上的产品一样接受各项处理：<br><img src="http://o90jubpdi.bkt.clouddn.com/%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F.png" alt=""><br>
+          <h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
+<li>编译的整个过程，各个部分的任务</li>
+<li>链接的概念</li>
+<li>链接的过程</li>
+<li>打包中常用的两种技术</li>
+</ul>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/01/08/第7章-链接/#more" rel="contents">
@@ -478,8 +483,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-01-08T22:10:19+08:00">
-              2017-01-08
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-26T17:17:09+08:00">
+              2017-05-26
             </time>
             
           </span>
@@ -537,7 +542,12 @@
 
       
         
-          <h1 id="异常控制流"><a href="#异常控制流" class="headerlink" title="异常控制流"></a>异常控制流</h1><p>异常控制流存在于系统的每个层级，最底层的机制称为<code>异常(Exception)</code>，用以改变控制流以响应系统事件，通常是由硬件和操作系统共同实现的。更高层次的异常控制流包括<code>进程切换(Process Context Switch)</code>、<code>信号(Signal)</code>和<code>非本地跳转(Nonlocal Jumps)</code>，也可以看做是一个从硬件过渡到操作系统。再从操作系统过渡到语言库的过程。进程切换是由硬件计时器和操作系统共同实现的，而信号只是操作系统层面的概念看了，到了非本地跳转就已经是在C运行库中实现了。<br>
+          <h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
+<li>了解异步异常与同步异常</li>
+<li>理解进程的工作机制</li>
+<li>了解信号的基本原理以及如何处理信号</li>
+<li>如何进行非本地跳转</li>
+</ul>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/01/08/第8章-异常控制流/#more" rel="contents">
@@ -629,8 +639,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-29T22:30:04+08:00">
-              2016-12-29
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-26T17:19:03+08:00">
+              2017-05-26
             </time>
             
           </span>
@@ -688,11 +698,11 @@
 
       
         
-          <p>虚拟存储器（VM）的三大功能：</p>
-<ul>
-<li>高效使用主存：通过将主存看成是一个存储在磁盘上的地址空间的高速缓存，在主存中只保留活动区域，并根据需要在磁盘和主存之间来回传送数据。</li>
-<li>为每个进程提供了一致的地址空间，简化了存储管理，进而简化了链接、进程间共享数据、进程的存储器分配以及程序加载。</li>
-<li>通过在每条页表条目中加入保护位，从而保护了每个进程的地址空间不被其他进程破坏。</li>
+          <h1 id="学习目标："><a href="#学习目标：" class="headerlink" title="学习目标："></a>学习目标：</h1><ul>
+<li>虚拟存储器的功能和角色</li>
+<li>地址翻译的工作机制</li>
+<li>了解动态内存分配的原理</li>
+<li>理解垃圾回收机制</li>
 </ul>
           <!--noindex-->
           <div class="post-more-link text-center">
@@ -785,8 +795,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-29T22:30:27+08:00">
-              2016-12-29
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-26T17:20:30+08:00">
+              2017-05-26
             </time>
             
           </span>
@@ -844,7 +854,11 @@
 
       
         
-          <h2 id="Unix-I-O"><a href="#Unix-I-O" class="headerlink" title="Unix I/O"></a>Unix I/O</h2><p>一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为<code>UnixI/O</code>。这使得所有的输入输出都用同一种方式来进行：<br>
+          <h2 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h2><ul>
+<li>理解Unix I/O的设计与应用</li>
+<li>理解输入输出重定向的实现机制</li>
+</ul>
+<h2 id="Unix-I-O"><a href="#Unix-I-O" class="headerlink" title="Unix I/O"></a>Unix I/O</h2><p>一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为<code>UnixI/O</code>。这使得所有的输入输出都用同一种方式来进行：<br>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/12/29/第10章-系统级I-O/#more" rel="contents">
@@ -936,8 +950,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-26T23:48:42+08:00">
-              2016-12-26
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-26T17:25:24+08:00">
+              2017-05-26
             </time>
             
           </span>
@@ -995,7 +1009,12 @@
 
       
         
-          <h1 id="并行方法"><a href="#并行方法" class="headerlink" title="并行方法"></a>并行方法</h1><p>现代操作系统提供了三种基本的构造并发程序的方法：<br>
+          <h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
+<li>理解并行的几个层次：进程、事件、线程</li>
+<li>了解同步问题产生的背景，以及信号量的工作机制</li>
+<li>理解线程安全和一致性问题</li>
+</ul>
+<h1 id="并行方法"><a href="#并行方法" class="headerlink" title="并行方法"></a>并行方法</h1><p>现代操作系统提供了三种基本的构造并发程序的方法：<br>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/12/26/第12章-并发编程/#more" rel="contents">
@@ -1238,8 +1257,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-20T22:14:29+08:00">
-              2016-12-20
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-26T17:23:16+08:00">
+              2017-05-26
             </time>
             
           </span>
@@ -1297,7 +1316,11 @@
 
       
         
-          <h1 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h1><p>每个网络应用都是基于<code>客户端-服务器</code>模型。对于一个主机而言，网络只是一种I/O设备，作为数据源和数据接收方。<br>
+          <h1 id="学习目标："><a href="#学习目标：" class="headerlink" title="学习目标："></a>学习目标：</h1><ul>
+<li>了解网络的基本架构</li>
+<li>了解常见的网络协议</li>
+<li>学会编写web服务器</li>
+</ul>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/12/20/第11章-网络编程/#more" rel="contents">

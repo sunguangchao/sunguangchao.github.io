@@ -84,18 +84,30 @@
 
 
 
-<meta name="description" content="Unix I/O一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为UnixI/O。这使得所有的输入输出都用同一种方式来进行：">
+<meta name="description" content="学习目标
+理解Unix I/O的设计与应用
+理解输入输出重定向的实现机制
+
+Unix I/O一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为UnixI/O。这使得所有的输入输出都用同一种方式来进行：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第10章 系统级I/O">
 <meta property="og:url" content="http://yoursite.com/2016/12/29/第10章-系统级I-O/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="Unix I/O一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为UnixI/O。这使得所有的输入输出都用同一种方式来进行：">
+<meta property="og:description" content="学习目标
+理解Unix I/O的设计与应用
+理解输入输出重定向的实现机制
+
+Unix I/O一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为UnixI/O。这使得所有的输入输出都用同一种方式来进行：">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E9%87%8D%E5%AE%9A%E4%BD%8D1.jpg">
 <meta property="og:image" content="http://o90jubpdi.bkt.clouddn.com/%E9%87%8D%E5%AE%9A%E4%BD%8D2.jpg">
-<meta property="og:updated_time" content="2016-12-29T14:30:27.037Z">
+<meta property="og:updated_time" content="2017-05-26T09:20:30.813Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第10章 系统级I/O">
-<meta name="twitter:description" content="Unix I/O一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为UnixI/O。这使得所有的输入输出都用同一种方式来进行：">
+<meta name="twitter:description" content="学习目标
+理解Unix I/O的设计与应用
+理解输入输出重定向的实现机制
+
+Unix I/O一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为UnixI/O。这使得所有的输入输出都用同一种方式来进行：">
 <meta name="twitter:image" content="http://o90jubpdi.bkt.clouddn.com/%E9%87%8D%E5%AE%9A%E4%BD%8D1.jpg">
 
 
@@ -326,8 +338,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2016-12-29T22:30:27+08:00">
-              2016-12-29
+            <time title="Post modified" itemprop="dateModified" datetime="2017-05-26T17:20:30+08:00">
+              2017-05-26
             </time>
             
           </span>
@@ -384,7 +396,11 @@
       
 
       
-        <h2 id="Unix-I-O"><a href="#Unix-I-O" class="headerlink" title="Unix I/O"></a>Unix I/O</h2><p>一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为<code>UnixI/O</code>。这使得所有的输入输出都用同一种方式来进行：<br><a id="more"></a></p>
+        <h2 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h2><ul>
+<li>理解Unix I/O的设计与应用</li>
+<li>理解输入输出重定向的实现机制</li>
+</ul>
+<h2 id="Unix-I-O"><a href="#Unix-I-O" class="headerlink" title="Unix I/O"></a>Unix I/O</h2><p>一个 Unix 文件就是一个 m 字节的序列。所有的 I/O 设备，如网络，磁盘和终端，都被模型化为文件。这种将设备优雅地映射为文件的方式，允许 Unix 内核引出一个简单、低级的应用接口，称为<code>UnixI/O</code>。这使得所有的输入输出都用同一种方式来进行：<br><a id="more"></a></p>
 <ul>
 <li>打开文件<ul>
 <li>一个应用程序通过内核打开文件</li>
@@ -612,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unix-I-O"><span class="nav-number">1.</span> <span class="nav-text">Unix I/O</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用RIO包健壮地读写"><span class="nav-number">2.</span> <span class="nav-text">用RIO包健壮地读写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向"><span class="nav-number">3.</span> <span class="nav-text">重定向</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习目标"><span class="nav-number">1.</span> <span class="nav-text">学习目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unix-I-O"><span class="nav-number">2.</span> <span class="nav-text">Unix I/O</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用RIO包健壮地读写"><span class="nav-number">3.</span> <span class="nav-text">用RIO包健壮地读写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向"><span class="nav-number">4.</span> <span class="nav-text">重定向</span></a></li></ol></div>
             
 
           </div>
