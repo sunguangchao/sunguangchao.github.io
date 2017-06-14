@@ -1,0 +1,923 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="近段时间来总结的一些Java方面的面试题，基础很重要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题总结">
+<meta property="og:url" content="http://yoursite.com/2017/06/14/面试题总结/index.html">
+<meta property="og:site_name" content="GuangchaoSun's Blog">
+<meta property="og:description" content="近段时间来总结的一些Java方面的面试题，基础很重要">
+<meta property="og:updated_time" content="2017-06-14T13:29:41.389Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试题总结">
+<meta name="twitter:description" content="近段时间来总结的一些Java方面的面试题，基础很重要">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/14/面试题总结/"/>
+
+
+
+
+
+  <title> 面试题总结 | GuangchaoSun's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">GuangchaoSun's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-battery-1"></i> <br />
+            
+            书单
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/14/面试题总结/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="GuangchaoSun">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="GuangchaoSun's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="GuangchaoSun's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                面试题总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-14T21:26:05+08:00">
+              2017-06-14
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-06-14T21:29:41+08:00">
+              2017-06-14
+            </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/14/面试题总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/14/面试题总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>近段时间来总结的一些Java方面的面试题，基础很重要<br><a id="more"></a><br>Java中的原始数据类型有哪些，它们的大小及对应的封装类？</p>
+<table>
+<thead>
+<tr>
+<th>data type</th>
+<th>representation</th>
+<th>封装类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byte</td>
+<td>8-bit</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>char</td>
+<td>16-bit</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>short</td>
+<td>16-bit</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>int</td>
+<td>32-bit</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>float</td>
+<td>32-bit</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>long</td>
+<td>64-bit</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>double</td>
+<td>64-bit</td>
+<td>Double</td>
+</tr>
+</tbody>
+</table>
+<p>boolean类型单独使用是4个字节，在数组中是一个字节。</p>
+<hr>
+<p>面对对象的三个特性：封装，继承，多态  </p>
+<p>多态的定义：变量shape可以引用任何Shape子类类型的对象，这叫多态，即一种类型的变量，可以引用多种类型对象。</p>
+<p>如何实现多态：</p>
+<ul>
+<li>接口实现</li>
+<li>继承父类重写方法</li>
+<li>同一类中进行方法重载</li>
+</ul>
+<p>虚拟机是如何实现多态的：<br>动态绑定技术(dynamic binding)，执行期间判断所引用对象的实际类型，根据实际类型调用对应的方法。</p>
+<p>参考：<a href="http://javabc.baike.com/article-692235.html" target="_blank" rel="external">面向对象三大特性</a></p>
+<hr>
+<p>抽象类的意义：  </p>
+<ol>
+<li>为其他子类提供一个公共的类型</li>
+<li>封装子类中重复定义的内容</li>
+<li>定义抽象方法</li>
+</ol>
+<p>抽象类与接口的区别<br>| 比较     | 抽象类                                      | 接口                                 |<br>| —— | —————————————- | ———————————- |<br>| 默认方法   | 抽象类可以有默认的方法实现                            | Java8之前，接口中不存在方法的实现                |<br>| 实现方式   | 子类使用extends关键字来继承抽象类，子类需要提供抽象类中所声明方法的实现。 | 子类使用implements来实现接口，需要提供接口中所有声明的实现 |<br>| 构造器    | 抽象类中可以有构造器                               | 接口中不能                              |<br>| 和正常类区别 | 抽象类不能被实例化                                | 接口则是完全不同的类型                        |<br>| 访问修饰符  | 抽象方法可以有public,protected和default等修饰符      | 接口默认是public，不能使用其他修饰符              |<br>| 添加新方法  | 向抽象类中添加新方法，可以提供默认的实现，因此可以不修改子类现有的代码      | 如果往接口中添加新方法，则子类中需要实现该方法            |</p>
+<hr>
+<p>什么是不可变对象：<br>不可变对象指对象一旦被创建，状态就不能被改变。任何修改都会创建一个新的对象。如String、Integer及其他包装类</p>
+<p>Java中创建对象的几种方式：</p>
+<ol>
+<li>采用new语句创建对象</li>
+<li>采用反射，调用java.lang.Class或者java.lang.reflect.Constructor类的newInstance()方法</li>
+<li>调用对象的clone()方法</li>
+<li>运用反序列手段，调用java.io.ObjectInputStream对象的readObject方法</li>
+</ol>
+<p>Object中的公共方法有哪些：</p>
+<ol>
+<li>equals(),hashCode(),toString()</li>
+<li>clone():obj.clone().getClass() == obj.getClass()</li>
+<li>getClass()</li>
+<li>notify(),notifyAll(),wait()</li>
+</ol>
+<hr>
+<h2 id="谈一谈Java中-和equals-的区别"><a href="#谈一谈Java中-和equals-的区别" class="headerlink" title="谈一谈Java中==和equals()的区别  "></a>谈一谈Java中<code>==</code>和<code>equals()</code>的区别  </h2><p>Java中的数据类型，可分为两类： </p>
+<ol>
+<li><p>基本数据类型，也称原始数据类型。byte,short,char,int,float,double,long,boolean他们之间的比较，应该用双等号<code>==</code>,比较的是他们的值。还有枚举类型也要用<code>==</code>  </p>
+</li>
+<li><p>复合数据类型（类）<br>当他们用<code>==</code>进行比较的时候，比较的是他们在<code>内存</code>中的存放地址，所以，除非是同一个new出来的对象，他们的比较后的结果为true，否则比较后结果为false。 </p>
+</li>
+</ol>
+<p>Java当中所有的类都是继承于Object这个基类的，在Object中的基类中定义了一个equals的方法，这个方法的<code>初始行为</code>是比较对象的<code>内存地址</code>，但在一些类库当中这个方法被覆盖(重写)掉了，如String、Integer、Date，在这些类当中equals有其自身的实现，而不再是比较类在堆内存中的存放地址了。</p>
+<p>总结：<br>对于复合数据类型之间进行equals比较，在没有覆写equals方法的情况下，他们之间的比较还是基于他们在内存中的存放位置的地址值的，因为Object的equals方法也是用双等号（==）进行比较的，所以比较后的结果跟双等号（==）的结果相同</p>
+<p>总的来说，==用于比较是不是一个人，equals比较的是长得是否一样。</p>
+<p>参考：<a href="http://www.cnblogs.com/zhxhdean/archive/2011/03/25/1995431.html" target="_blank" rel="external">Java中equals和==的区别</a></p>
+<h2 id="equals-和hashCode-的联系"><a href="#equals-和hashCode-的联系" class="headerlink" title="equals()和hashCode()的联系"></a><code>equals()</code>和<code>hashCode()</code>的联系</h2><p><code>hashCode()</code>是Object类的一个方法，返回一个哈希值。如果两个对象根据<code>equals()</code>方法比较相等，那么调用这两个对象中任意一个对象的<code>hashCode()</code>方法必须产生相同的hash值。<br>如果两个对象根据<code>equals()</code>方法比较不相等，那么产生的哈希值不一定相等（碰撞的情况下还是会相等的）</p>
+<h2 id="a-hashCode-有什么用-与a-equals-b-有什么关系"><a href="#a-hashCode-有什么用-与a-equals-b-有什么关系" class="headerlink" title="a.hashCode()有什么用?与a.equals(b)有什么关系  "></a><code>a.hashCode()</code>有什么用?与<code>a.equals(b)</code>有什么关系  </h2><p><code>hashCode()</code>方法是相应对象整型的 hash 值。它常用于基于hash的集合类，如 Hashtable、HashMap、LinkedHashMap等等。它与<code>equals()</code>方法关系特别紧密。根据 Java 规范，两个使用<code>equals()</code>方法来判断相等的对象，必须具有相同的 <code>hashcode</code>。<br>将对象放入到集合中时,首先判断要放入对象的<code>hashcode</code>是否已经在集合中存在,不存在则直接放入集合.如果<code>hashcode</code>相等,然后通过<code>equals()</code>方法判断要放入对象与集合中的任意对象是否相等:如果<code>equals()</code>判断不相等,直接将该元素放入集合中,否则不放入.</p>
+<hr>
+<h2 id="内部类的作用："><a href="#内部类的作用：" class="headerlink" title="内部类的作用："></a>内部类的作用：</h2><p>内部类可以有多个实例，每个实例都有自己的状态信息，并与其它外围对象的信息相互独立。在单个外围类中，可以让多个内部类以不同的方式实现同一接口，或者继承同一个类。创建内部类对象的时刻并不依赖于外部类对象的创建。内部类没有令人疑惑的<code>is-a</code>关系，它就像一个独立的实体。<br>内部类提供了更好的封装，除了该外围类，其他类都不能访问。</p>
+<h2 id="String-StringBuilder和StringBuffer区别"><a href="#String-StringBuilder和StringBuffer区别" class="headerlink" title="String,StringBuilder和StringBuffer区别"></a>String,StringBuilder和StringBuffer区别</h2><ul>
+<li><a href="http://blog.csdn.net/rmn190/article/details/1492013" target="_blank" rel="external">String,StringBuilder和StringBuffer的区别</a></li>
+<li><a href="http://stackoverflow.com/questions/2971315/string-stringbuffer-and-stringbuilder" target="_blank" rel="external">stackoverflow</a></li>
+</ul>
+<hr>
+<p>进程，线程之间的区别<br>进程是程序运行和资源分配的基本单位，一个程序至少有一个进程，一个进程至少有一个线程。进程在执行过程中拥有独立的内存单元，而多个线程共享内存资源，减少上下文切换次数，从而效率更高。同一个进程中的多个线程可以并发执行。</p>
+<p>守护线程<br>程序运行完毕，jvm会等待非守护线程完成后关闭，但是jvm不会等待守护线程。守护线程最典型的的例子就是GC线程。</p>
+<p>多线程的上下文切换<br>指CPU控制权由一个已经正在运行的线程切换到另外一个就绪并等待获取CPU执行权的线程的过程。 </p>
+<p>Runnable和Callable的区别:<br>Runnable接口中的run方法的返回值是void，它做的事只是去执行run方法中的代码；Callable接口中的call()方法是有返回值的，是一个泛型，和Future、FutureTask配合可以用来获取异步执行的结果。<code>Callable+Future/FutureTask</code>可以获得多线程运行的结果，在等待时间太长没获取到需要的数据的情况下取消该线程的任务。</p>
+<p>什么导致线程阻塞</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sleep()</td>
+<td>sleep() 允许 指定以毫秒为单位的一段时间作为参数，它使得线程在指定的时间内进入阻塞状态，不能得到CPU 时间，指定的时间一过，线程重新进入可执行状态。 典型地，sleep() 被用在等待某个资源就绪的情形：测试发现条件不满足后，让线程阻塞一段时间后重新测试，直到条件满足为止</td>
+</tr>
+<tr>
+<td>suspend()和resume()</td>
+<td>两个方法配套使用，suspend()使得线程进入阻塞状态，并且不会自动恢复，必须其对应的resume() 被调用，才能使得线程重新进入可执行状态。典型地，suspend() 和 resume() 被用在等待另一个线程产生的结果的情形：测试发现结果还没有产生后，让线程阻塞，另一个线程产生了结果后，调用 resume() 使其恢复。</td>
+</tr>
+<tr>
+<td>yield()</td>
+<td>yield() 使得线程放弃当前分得的 CPU 时间，但是不使线程阻塞，即线程仍处于可执行状态，随时可能再次分得 CPU 时间。调用 yield() 的效果等价于调度程序认为该线程已执行了足够的时间从而转到另一个线程</td>
+</tr>
+<tr>
+<td>wait()和notify()</td>
+<td>两个方法配套使用，wait() 使得线程进入阻塞状态，它有两种形式，一种允许 指定以毫秒为单位的一段时间作为参数，另一种没有参数，前者当对应的 notify() 被调用或者超出指定时间时线程重新进入可执行状态，后者则必须对应的 notify() 被调用.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="http://hovertree.com/hvtart/bjae/329665288828761a.htm" target="_blank" rel="external">Java多线程suspend()、resume()和wait()、notify()的区别</a></p>
+<p><a href="http://baikkp.blog.51cto.com/3131132/1190175" target="_blank" rel="external">为什么wait(),notify(),notifyAll()必须在同步方法/代码块中调用？</a></p>
+<p>wait方法和notify()/notifyAll()方法在放弃对象监视器时有什么区别？<br>wait()方法会立刻释放对象监视器，notify()/notifyAll()方法则会等待线程剩余代码执行完毕才会放弃对象监视器。</p>
+<p>wait()和sleep()的区别  </p>
+<ul>
+<li>sleep()来自Thread类，wait()来自Object类。调用sleep()方法的过程中，线程不会释放对象锁。而调用wait()方法线程会释放对象锁（前提是当前线程为对象锁的持有者）。</li>
+<li>sleep()睡眠后不出让系统资源，wait让其他线程可以占用CPU</li>
+<li>sleep(milliseconds)需要制定一个睡眠时间，时间一到会自动唤醒。而wait()需要notify()/notifyAll()配合使用。</li>
+</ul>
+<p>ReentrantLock</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/locks/ReentrantLock.html" target="_blank" rel="external">官方文档</a></li>
+<li><a href="http://ifeve.com/reentrantlock-and-fairness/" target="_blank" rel="external">ReentrantLock(重入锁)以及公平性</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/java/j-jtp10264/" target="_blank" rel="external">Java中的ReentrantLock和synchronized两种锁定机制的对比</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class X&#123;</div><div class="line">	private final ReentrantLock lock = new ReentrantLock();</div><div class="line">	//...</div><div class="line"></div><div class="line">	public void m()&#123;</div><div class="line">		lock.lock();//block until condition holds</div><div class="line">		try&#123;</div><div class="line">			//...method body</div><div class="line">		&#125;finally&#123;</div><div class="line">			lock.unlock()</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>FutureTask是什么？<br>FutureTask表示一个异步运算的任务。FutureTask里面可以传入一个Callable的具体实现类，可以对这个异步运算的任务的结果进行等待获取、判断是否已经完成、取消任务等操作。当然，由于FutureTask也是Runnable接口的实现类，所以FutureTask也可以放到线程池中。</p>
+<p>如何正确地使用wait()?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">synchronized(obj)&#123;</div><div class="line">    while(condition does not hold)</div><div class="line">        obj.wait();//Release lock,and reacquires on wake up</div><div class="line">        ...//Perform action appropriate to conditon</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>什么是线程局部变量(ThreadLocal)？<br>当工作于多线程的对象使用ThreadLocal维护变量时，ThreadLocal为每一个使用该变量的线程分配一个独立的变量副本。所以每一个线程都可以独立地改变自己的副本，而不影响其他线程对应的变量副本；<br>ThreadLocal是一种以空间换时间的做法，在每个Thread里面维护了一个<code>ThreadLocal.ThreadLocalMap</code>把数据进行隔离，数据不共享，自然没有线程安全方面的问题。<br>参考：<a href="http://lavasoft.blog.51cto.com/62575/51926/" target="_blank" rel="external">深入研究java.lang.ThreadLocal类</a></p>
+<h2 id="线程池的作用"><a href="#线程池的作用" class="headerlink" title="线程池的作用"></a>线程池的作用</h2><p>在程序启动的时候就创建若干线程来响应处理，它们被称为线程池，里面的线程叫做工作线程  </p>
+<ol>
+<li>降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗</li>
+<li>提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行</li>
+<li>提高线程的可管理性<br>常用线程池：ExecutorService</li>
+</ol>
+<h2 id="生产者消费者模型的作用是什么？"><a href="#生产者消费者模型的作用是什么？" class="headerlink" title="生产者消费者模型的作用是什么？"></a>生产者消费者模型的作用是什么？</h2><ul>
+<li>通过平衡生产者的生产能力和消费者的消费能力来提升整个系统的运行效率，这是生产者模型最重要的作用。</li>
+<li>解耦，这是生产者消费者模型的附带作用，解耦意味着生产者和消费者之间联系少，联系越少越可以独自发展而不需要受到相互的制约。</li>
+</ul>
+<p>参考：<a href="http://www.infoq.com/cn/articles/producers-and-consumers-mode" target="_blank" rel="external">聊聊并发——生产者消费者模式</a></p>
+<p>通过阻塞队列实现模型：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BlockingQueue&lt;Integer&gt; queue;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(BlockingQueue q)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.queue = q;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</div><div class="line">                Thread.sleep(<span class="number">1000</span>);</div><div class="line">                queue.put(produce());</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">produce</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> n = <span class="keyword">new</span> Random().nextInt(<span class="number">10000</span>);</div><div class="line">        System.out.println(<span class="string">"Thread: "</span> + Thread.currentThread().getId() + <span class="string">" produce: "</span> + n);</div><div class="line">        <span class="keyword">return</span> n;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">public class Consumer implements Runnable &#123;</div><div class="line">    private final BlockingQueue&lt;Integer&gt; queue;</div><div class="line">    public Consumer(BlockingQueue q)&#123;</div><div class="line">        this.queue = q;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void run()&#123;</div><div class="line">        while (true)&#123;</div><div class="line">            try &#123;</div><div class="line">                Thread.sleep(2000);</div><div class="line">                consume(queue.take());</div><div class="line">            &#125;catch (InterruptedException e)&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void consume(Integer n)&#123;</div><div class="line">        System.out.println(&quot;Thread: &quot; + Thread.currentThread().getId() + &quot; consume: &quot; + n);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        BlockingQueue&lt;Integer&gt; q1 = new ArrayBlockingQueue&lt;Integer&gt;(100);</div><div class="line">        Producer p = new Producer(q1);</div><div class="line">        Consumer c1 = new Consumer(q1);</div><div class="line">        Consumer c2 = new Consumer(q1);</div><div class="line"></div><div class="line">        new Thread(p).start();</div><div class="line">        new Thread(c1).start();</div><div class="line">        new Thread(c2).start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h2><ul>
+<li><a href="https://www.ibm.com/developerworks/cn/java/j-jtp06197.html" target="_blank" rel="external">Java理论与实践：正确使用Volatile变量</a></li>
+<li><a href="http://www.infoq.com/cn/articles/java-memory-model-4" target="_blank" rel="external">深入理解Java内存模型——volatile</a></li>
+</ul>
+<p>volatile如何保证内存可见性  </p>
+<ol>
+<li>当写一个volatile变量时，JMM会把该线程对应的本地内存中的共享变量刷新到主内存。</li>
+<li>当读一个volatile变量时，JMM会把该线程对应的本地内存置为无效。线程接下来将从主内存中读取共享变量。</li>
+</ol>
+<h2 id="synchronized关键字"><a href="#synchronized关键字" class="headerlink" title="synchronized关键字"></a>synchronized关键字</h2><ul>
+<li><a href="http://www.importnew.com/21866.html" target="_blank" rel="external">Java中synchronized的用法</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/java/j-threads/" target="_blank" rel="external">轻松使用线程：同步不是敌人</a></li>
+<li><a href="http://uule.iteye.com/blog/1104562" target="_blank" rel="external">synchronized关键字总结</a></li>
+</ul>
+<h2 id="fail-fast机制"><a href="#fail-fast机制" class="headerlink" title="fail-fast机制"></a><a href="http://blog.csdn.net/chenssy/article/details/38151189" target="_blank" rel="external">fail-fast机制</a></h2><p>fail-fast机制是Java集合(Collection)中的一种错误机制。当多个线程对一个集合的内容进行操作时，就可能会产生fail-fast事件，并抛出ConcurrentModificationException异常</p>
+<h2 id="happens-before"><a href="#happens-before" class="headerlink" title="happens-before"></a>happens-before</h2><p>如果两个操作之间具有happens-before关系，那么前一个操作的结果就会对会面一个可见</p>
+<ul>
+<li>程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作</li>
+<li>监视器锁规则：对一个监视器的解锁，happens-before于随后对这个监视器的加锁</li>
+<li>volatile变量规则：对一个volatile域的写，happens-before于任意后续对这这个volatile域的读</li>
+<li>传递性：如果A happens-before B，且 B happens-before C，那么 A happens-before C</li>
+<li>线程启动规则：Thread对象的start()方法happens-before于此线程的每一个动作</li>
+</ul>
+<p>其他参考：</p>
+<ul>
+<li><a href="http://www.importnew.com/22868.html" target="_blank" rel="external">Spring + Redis 实现数据的缓存</a></li>
+<li><a href="http://www.importnew.com/23560.html" target="_blank" rel="external">谈谈Java反射机制</a></li>
+<li><a href="http://www.importnew.com/11657.html" target="_blank" rel="external">关于Spring的69个面试问答</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/19/多线程/" rel="next" title="Java多线程">
+                <i class="fa fa-chevron-left"></i> Java多线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/06/14/面试题总结/"
+           data-title="面试题总结" data-url="http://yoursite.com/2017/06/14/面试题总结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg"
+               alt="GuangchaoSun" />
+          <p class="site-author-name" itemprop="name">GuangchaoSun</p>
+          <p class="site-description motion-element" itemprop="description">coding change the world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sunguangchao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/sun-guang-chao-64" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-delicious"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2966219821/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#谈一谈Java中-和equals-的区别"><span class="nav-number">1.</span> <span class="nav-text">谈一谈Java中==和equals()的区别  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals-和hashCode-的联系"><span class="nav-number">2.</span> <span class="nav-text">equals()和hashCode()的联系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a-hashCode-有什么用-与a-equals-b-有什么关系"><span class="nav-number">3.</span> <span class="nav-text">a.hashCode()有什么用?与a.equals(b)有什么关系  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部类的作用："><span class="nav-number">4.</span> <span class="nav-text">内部类的作用：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-StringBuilder和StringBuffer区别"><span class="nav-number">5.</span> <span class="nav-text">String,StringBuilder和StringBuffer区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池的作用"><span class="nav-number">6.</span> <span class="nav-text">线程池的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生产者消费者模型的作用是什么？"><span class="nav-number">7.</span> <span class="nav-text">生产者消费者模型的作用是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile关键字"><span class="nav-number">8.</span> <span class="nav-text">volatile关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized关键字"><span class="nav-number">9.</span> <span class="nav-text">synchronized关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fail-fast机制"><span class="nav-number">10.</span> <span class="nav-text">fail-fast机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#happens-before"><span class="nav-number">11.</span> <span class="nav-text">happens-before</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuangchaoSun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunguangchao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
