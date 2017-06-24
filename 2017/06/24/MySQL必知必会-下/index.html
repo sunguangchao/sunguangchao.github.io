@@ -1,0 +1,865 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL 数据库," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="19. 插入数据   如果数据检索是最重要的（通常是这样），则你可以通过在INSERT和INTO之间添加关键字LOW_PRIORITY，指示MySQL降低INSERT语句的优先级：   INSERT LOW_PRIORITY INTO   使用INSERT SELECT从custnew中将所有数据导入customers：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL必知必会-上">
+<meta property="og:url" content="http://yoursite.com/2017/06/24/MySQL必知必会-下/index.html">
+<meta property="og:site_name" content="GuangchaoSun's Blog">
+<meta property="og:description" content="19. 插入数据   如果数据检索是最重要的（通常是这样），则你可以通过在INSERT和INTO之间添加关键字LOW_PRIORITY，指示MySQL降低INSERT语句的优先级：   INSERT LOW_PRIORITY INTO   使用INSERT SELECT从custnew中将所有数据导入customers：">
+<meta property="og:updated_time" content="2017-06-24T14:43:21.273Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL必知必会-上">
+<meta name="twitter:description" content="19. 插入数据   如果数据检索是最重要的（通常是这样），则你可以通过在INSERT和INTO之间添加关键字LOW_PRIORITY，指示MySQL降低INSERT语句的优先级：   INSERT LOW_PRIORITY INTO   使用INSERT SELECT从custnew中将所有数据导入customers：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/24/MySQL必知必会-下/"/>
+
+
+
+
+
+  <title> MySQL必知必会-上 | GuangchaoSun's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">GuangchaoSun's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-battery-1"></i> <br />
+            
+            书单
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/24/MySQL必知必会-下/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="GuangchaoSun">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="GuangchaoSun's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="GuangchaoSun's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MySQL必知必会-上
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-24T22:37:06+08:00">
+              2017-06-24
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-06-24T22:43:21+08:00">
+              2017-06-24
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/24/MySQL必知必会-下/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/24/MySQL必知必会-下/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="19-插入数据"><a href="#19-插入数据" class="headerlink" title="19. 插入数据"></a>19. 插入数据</h1><p>   如果数据检索是最重要的（通常是这样），则你可以通过在INSERT和INTO之间添加关键字<code>LOW_PRIORITY</code>，指示MySQL降低INSERT语句的优先级：<br>   <code>INSERT LOW_PRIORITY INTO</code><br>   使用INSERT SELECT从custnew中将所有数据导入customers：</p>
+<a id="more"></a>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> customers(cust_id,</div><div class="line">    cust_contact,</div><div class="line">    cust_email,</div><div class="line">    cust_name,</div><div class="line">    cust_address,</div><div class="line">    cust_city,</div><div class="line">    cust_state,</div><div class="line">    cust_zip,</div><div class="line">    cust_country)</div><div class="line"><span class="keyword">SELECT</span> cust_id,</div><div class="line">    cust_contact,</div><div class="line">    cust_email,</div><div class="line">    cust_name,</div><div class="line">    cust_address,</div><div class="line">    cust_city,</div><div class="line">    cust_state,</div><div class="line">    cust_zip,</div><div class="line">    cust_country</div><div class="line"><span class="keyword">FROM</span> costnew;</div></pre></td></tr></table></figure>
+<h1 id="20-更新和删除数据"><a href="#20-更新和删除数据" class="headerlink" title="20. 更新和删除数据"></a>20. 更新和删除数据</h1><h2 id="更新数据"><a href="#更新数据" class="headerlink" title="   更新数据"></a>   更新数据</h2><p>UPDATE由3部分组成：</p>
+<ul>
+<li>要更新的表；</li>
+<li>列名和它们的新值；</li>
+<li>确定要更新行的过滤条件；</li>
+</ul>
+<p>注意：不要忘记where条件，不然会更新表中指定类列的所有行<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">UPDATE</span> customers</div><div class="line"><span class="keyword">SET</span> cust_name = <span class="string">'The Fudds'</span>,</div><div class="line">    cust_email = <span class="string">'elmer@fudd.com'</span></div><div class="line"><span class="keyword">WHERE</span> cust_id = <span class="number">10005</span>;</div></pre></td></tr></table></figure></p>
+<p>IGNORE关键字<br>如果用UPDATE语句更新多行，并且在更新这些行中的一行或多行时出一个现错误，则整个UPDATE操作被取消（错误发生前更新的所有行被恢复到它们原来的值）。为即使是发生错误，也继续进行更新，可使用IGNORE关键字，如下所示：<code>UPDATE IGNORE customers…</code></p>
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><p>DELETE不需要列名或通配符。DELETE删除整行而不是删除列。为了删除指定的列，请使用UPDATE语句。<br>如果想从表中删除所有行，建议使用TRUNCATE TABLE</p>
+<p>使用UPDATE或DELETE时的注意事项：</p>
+<ul>
+<li>除非确实打算更新和删除每一行，否则绝对不要使用不带WHERE子句的UPDATE或DELETE语句。 </li>
+<li>保证每个表都有主键（如果忘记这个内容，请参阅第15章），尽可能像WHERE子句那样使用它（可以指定各主键、多个值或值的范围）。 </li>
+<li>在对UPDATE或DELETE语句使用WHERE子句前，应该先用SELECT进行测试，保证它过滤的是正确的记录，以防编写的WHERE子句不正确。 </li>
+<li>使用强制实施引用完整性的数据库（关于这个内容，请参阅第15章），这样MySQL将不允许删除具有与其他表相关联的数据的行。 </li>
+</ul>
+<h1 id="21-创建和操纵表"><a href="#21-创建和操纵表" class="headerlink" title="21. 创建和操纵表"></a>21. 创建和操纵表</h1><p>   为利用CREATE TABLE创建表，必须给出下列信息：</p>
+<ul>
+<li>新表的名字，在关键字CREATE TABLE之后给出；</li>
+<li>表列的名字和定义，用逗号分隔。</li>
+</ul>
+<p>允许NULL值得列也允许在插入行时不给出该列的值。<br>主键中只能使用不允许NULL值的列。<br>AUTO_INCREMENT高速MySQL，本列每当增加一行时自动增量。<br><code>SELECT last_insert_id()</code>此语句返回最后一个AUTO_INCREMENT值。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> orderitems</div><div class="line">(</div><div class="line">  order_num   <span class="built_in">int</span>          <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  order_item  <span class="built_in">int</span>          <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  prod_id     <span class="built_in">char</span>(<span class="number">10</span>)     <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  quantity    <span class="built_in">int</span>          <span class="keyword">NOT</span> <span class="literal">NULL</span>  <span class="keyword">DEFAULT</span> <span class="number">1</span>,</div><div class="line">  item_price  <span class="built_in">decimal</span>(<span class="number">8</span>,<span class="number">2</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span>(order_num, order_item)</div><div class="line"> ) ENGING=<span class="keyword">InnoDB</span>;</div></pre></td></tr></table></figure></p>
+<p>关于引擎<code>ENGING=</code></p>
+<ul>
+<li>InnoDB是一个可靠的事务处理引擎（参见第26章），它不支持全文本搜索；</li>
+<li>MEMORY在功能等同于MyISAM， 但由于数据存储在内存（不是磁盘）中，速度很快（特别适合于临时表）；</li>
+<li>MyISAM是一个性能极高的引擎，它支持全文本搜索（参见第18章），但不支持事务处理。  </li>
+</ul>
+<h2 id="更新表定义，可用ALTER-TABLE"><a href="#更新表定义，可用ALTER-TABLE" class="headerlink" title="更新表定义，可用ALTER TABLE"></a>更新表定义，可用ALTER TABLE</h2><p>给表添加一个列：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> vendors</div><div class="line"><span class="keyword">ADD</span> vend_phone <span class="built_in">CHAR</span>(<span class="number">20</span>);</div></pre></td></tr></table></figure></p>
+<p>删除刚刚添加的列：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> vendors</div><div class="line"><span class="keyword">DROP</span> <span class="keyword">COLUMN</span> vend_phone;</div></pre></td></tr></table></figure></p>
+<p>更常见的用途是定义外键：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> orderitems</div><div class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> fk_orderitems_orders</div><div class="line">FORGEIN <span class="keyword">KEY</span> (order_num) <span class="keyword">REFERENCES</span> orders (order_num);</div></pre></td></tr></table></figure></p>
+<h1 id="22-使用视图-complete"><a href="#22-使用视图-complete" class="headerlink" title="22. 使用视图(complete)"></a>22. 使用视图(complete)</h1><p>   定义：视图是虚拟的表，只包含使用时动态检索数据的查询。</p>
+<p>视图的常见应用：</p>
+<ul>
+<li>重用SQL语句</li>
+<li>简化复杂的SQL操作。在编写查询后，可以方便地重用它而不必知道它的基本查询细节</li>
+<li>使用表的组成部分而不是整个表</li>
+<li>保护数据。可以给用户授予表的特定部分的访问权限而不是整个表的访问权限</li>
+<li>更改数据格式和表示。视图可返回与底层表的表示和格式不同的数据</li>
+</ul>
+<p>在视图创建之后，可以用与表基本相同的方式利用它们。可以对视图行SELECT操作，过滤和排序数据，将视图联结到其他视图或表，甚至能添加和更新数据 </p>
+<p>视图的规则和限制：</p>
+<ul>
+<li>视图必须唯一命名</li>
+<li>对于可以创建的视图数目没有限制</li>
+<li>为了创建视图，必须有足够的访问权限</li>
+<li>视图可以嵌套，即可以利用从其他视图中检索数据的查询来构造一个视图。</li>
+<li>ORDER BY可以用在视图中，但如果该视图检索数据SELECT中也含有ORDER BY，那么该视图中的ORDER BY将被覆盖。</li>
+<li>视图不能索引，也不能有关联的触发器或默认值。</li>
+<li>视图可以和表一起使用</li>
+</ul>
+<p>视图的创建：</p>
+<ul>
+<li>视图用CREATE VIEW语句来创建</li>
+<li>使用SHOW CREATE VIEW viewname:来查看创建视图的语句</li>
+<li>使用DROP删除视图时，其语法为DROP VIEW viewname;</li>
+<li>更新视图时，可以先用DROP再用CREATE，也可以直接用CREATE OR REPLACE VIEW。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> productcustomers <span class="keyword">AS</span></div><div class="line"><span class="keyword">SELECT</span> cust_name, cust_contact, prod_id</div><div class="line"><span class="keyword">FROM</span> customers, orders, orderitems</div><div class="line"><span class="keyword">WHERE</span> customers.cust_id = orders.cust_id</div><div class="line">  <span class="keyword">AND</span> orderitems.order <span class="keyword">num</span> = orders.order <span class="keyword">num</span></div></pre></td></tr></table></figure>
+<p>更新视图：<br>如果MySQL不能正确地确定被更新的基数据，则不允许更新。</p>
+<p>视图提供了一种MySQL的SELECT语句层次的封装，可用来简化数据处理以及重新格式化基础数据或保护基础数据 </p>
+<h1 id="23-使用存储过程"><a href="#23-使用存储过程" class="headerlink" title="23. 使用存储过程"></a>23. 使用存储过程</h1><p>   为什么要使用存储过程</p>
+<ul>
+<li>通过把处理封装在容易使用的单元中，简化复杂的操作</li>
+<li>由于不要求反复建立一系列处理步骤，这保证了数据的完整性。<br>如果所有开发人员和应用程序都使用同一（试验和测试）存储过程，则所使用的代码都是相同的。<br>这一点的延伸就是防止错误。需要执行的步骤越多，出错的可能性就越大。防止错误保证了数据的一致性。 </li>
+<li>简化对变动的管理。如果表名、列名或业务逻辑（或别的内容）有变化，只需要更改存储过程的代码。使用它的人员甚至不需要知道这些变化。 </li>
+<li>提高性能。因为使用存储过程比使用单独的SQL语句要快。 </li>
+<li>存在一些只能用在单个请求中的MySQL元素和特性，存储过程可以使用它们来编写功能更强更灵活的代码 </li>
+</ul>
+<p>一个返回产品平均价格的存储过程<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> productionpricing()</div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">    <span class="keyword">SELECT</span> <span class="keyword">Avg</span>(prod_price) <span class="keyword">AS</span> priceaverage</div><div class="line">    <span class="keyword">FROM</span> products;</div><div class="line"><span class="keyword">END</span>;</div></pre></td></tr></table></figure></p>
+<p>如果存储过程接受参数，它们将在()中列举出来。此存储过程没有参数，但后跟的()仍然需要。BEGIN和END语句用来限定存储过程体，过程体本身仅是一个简单的SELECT语句<br>CALL productpricing();执行刚创建的存储过程并显示返回的结果。</p>
+<p>删除存储过程<br><code>DROP PRCEODURE productionpricing();</code>、</p>
+<p>使用参数<br>关键字OUT指出相应的参数用来从存储过程传出一个值（返回给调用者）。 MySQL支持IN（传递给存储过程）、OUT（从存储过程传出，如这里所用）和INOUT（对存储过程传入和传出）类型的参数。存储过程的代码位于BEGIN和END语句内，如前所见，它们是一系列SELECT语句，用来检索值，然后保存到相应的变量（通过指定INTO关键字）。</p>
+<p>练习：</p>
+<ul>
+<li>获得合计</li>
+<li>把营业税添加到合计</li>
+<li>返回合计</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> ordertotal(</div><div class="line">    <span class="keyword">IN</span> onumber <span class="built_in">INT</span>,</div><div class="line">    <span class="keyword">OUT</span> ototal <span class="built_in">DECIMAL</span>(<span class="number">8</span>,<span class="number">2</span>)</div><div class="line">)</div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">    <span class="keyword">SELECT</span> <span class="keyword">Sum</span>(item_pirce*quantity)</div><div class="line">    <span class="keyword">FROM</span> orderitems</div><div class="line">    <span class="keyword">WHERE</span> order_num = onumber</div><div class="line">    <span class="keyword">INTO</span> ototal;</div><div class="line"><span class="keyword">END</span>;</div></pre></td></tr></table></figure>
+<p>调用上面的存储过程：<code>CALL ordertotal(20005, @total);</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- Name: ordertotal</span></div><div class="line"><span class="comment">-- Parameters: onumber = order number</span></div><div class="line"><span class="comment">--			   taxable = 0 if not taxable, 1 if taxable</span></div><div class="line"><span class="comment">--             ototal  = order total variable</span></div><div class="line"></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> ordertotal(</div><div class="line">	<span class="keyword">IN</span> onumber <span class="built_in">INT</span>,</div><div class="line">	<span class="keyword">IN</span> taxable <span class="built_in">BOOLEAN</span>,</div><div class="line">	<span class="keyword">OUT</span> ototal <span class="built_in">DECIMAL</span>(<span class="number">8</span>,<span class="number">2</span>)</div><div class="line">	)<span class="keyword">COMMENT</span> <span class="string">'Obtain order total, optionally adding tax'</span></div><div class="line"><span class="keyword">BEGIN</span></div><div class="line"></div><div class="line">	<span class="comment">--Declare variable fot total</span></div><div class="line">	<span class="keyword">DECLARE</span> total <span class="built_in">DECIMAL</span>(<span class="number">8</span>,<span class="number">2</span>);</div><div class="line">	<span class="comment">--Declare tax precentage</span></div><div class="line">	<span class="keyword">DECLARE</span> taxrate <span class="built_in">INT</span> <span class="keyword">DEFAULT</span> <span class="number">6</span>;</div><div class="line"></div><div class="line">	<span class="comment">--Get the order total</span></div><div class="line">	<span class="keyword">SELECT</span> <span class="keyword">Sum</span>(item_price*quantity)</div><div class="line">	<span class="keyword">FROM</span> orderitems</div><div class="line">	<span class="keyword">WHERE</span> order_num = onumber</div><div class="line">	<span class="keyword">INTO</span> total;</div><div class="line"></div><div class="line">	<span class="comment">--Is this taxable?</span></div><div class="line">	IF taxable THEN</div><div class="line">		<span class="comment">--Yes, so add taxrate to the total</span></div><div class="line">		<span class="keyword">SELECT</span> total+(total/<span class="number">100</span>*taxrate) <span class="keyword">INTO</span> total;</div><div class="line">	<span class="keyword">END</span> <span class="keyword">IF</span>;</div><div class="line">	<span class="comment">--And finally, save to out variable</span></div><div class="line">	<span class="keyword">SELECT</span> total <span class="keyword">INTO</span> ototal;</div><div class="line"></div><div class="line"><span class="keyword">END</span>;</div></pre></td></tr></table></figure>
+<h2 id="24-使用游标"><a href="#24-使用游标" class="headerlink" title="24. 使用游标"></a>24. 使用游标</h2><p> 游标(cursor)是一个存储在MySQL服务器上的数据库查询，它不是一条SELECT语句，而是被该语句检索出来的结果集。在存储了游标之后，应用程序可以根据需要滚动或浏览其中的数据。<br>MySQL游标只能用于存储过程和函数<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> processorders()</div><div class="line"><span class="keyword">BEGIN</span></div><div class="line"></div><div class="line">    <span class="comment">--Declare local variables</span></div><div class="line">    DELCERE o <span class="built_in">INT</span>;</div><div class="line"></div><div class="line">    <span class="comment">--Delcare the CURSOR</span></div><div class="line">    <span class="keyword">DECLARE</span> ordernumbers <span class="keyword">CURSOR</span></div><div class="line">    <span class="keyword">FOR</span></div><div class="line">    <span class="keyword">SELECT</span> order_num <span class="keyword">FROM</span> orders;</div><div class="line">    </div><div class="line">    <span class="comment">--Open the cursor</span></div><div class="line">    OPEN ordernumbers;</div><div class="line">    </div><div class="line">    <span class="comment">--Get order number</span></div><div class="line">    FETCH ordernumbers INTO o;</div><div class="line">    </div><div class="line">    <span class="comment">--Close the cursor</span></div><div class="line">    CLOSE ordernumbers;</div><div class="line"></div><div class="line"><span class="keyword">END</span>;</div></pre></td></tr></table></figure></p>
+<p>2017.6.24</p>
+<h2 id="25-使用触发器"><a href="#25-使用触发器" class="headerlink" title="25. 使用触发器"></a>25. 使用触发器</h2><p>需求：想要某条语句在事件发生时自动执行。<br>创建触发器时，需要给出4条信息：</p>
+<ul>
+<li>唯一的触发器名</li>
+<li>触发器关联的表</li>
+<li>触发器应该相应的活动(DELETE、INSERT或UPDATE)</li>
+<li>触发器何时执行（处理之前或之后）<br>）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CREATE TRIGGER newproduct AFTER INSERT ON products</div><div class="line">FOR EACH ROW SELECT &apos;Product added&apos;</div></pre></td></tr></table></figure>
+<h1 id="26-管理事务处理-complete"><a href="#26-管理事务处理-complete" class="headerlink" title="26. 管理事务处理(complete)"></a>26. 管理事务处理(complete)</h1><p>   事务处理(transaction processing)可以用来维护数据库的完整性，它保证成批的MySQL要么完全执行，要么完全不执行。<br>   ROLLBACK用来回退（撤销）MySQL语句<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> ordertotals;</div><div class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> ordertotals;</div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> ordertotals;</div><div class="line"><span class="keyword">ROLLBACK</span>;</div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> orderstotals;</div></pre></td></tr></table></figure></p>
+<p>那些语句可以回退？<br>事务处理用来管理<code>INSERT</code>、<code>UPDATE</code>和<code>DELETE</code>语句。你不能回退<code>SELECT</code>语句。（这样做也没有什么意义。）你不能回退<code>CREATE</code>或<code>DROP</code>操作。事务处理块中可以使用这两条语句，但如果你执行回退，它们不会被撤销。</p>
+<h2 id="使用COMMIT"><a href="#使用COMMIT" class="headerlink" title="使用COMMIT"></a>使用COMMIT</h2><p>在事务处理模块中，提交不会隐含地进行。为了进行明确的提交，使用COMMIT语句，如下所示：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span></div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> orderitems <span class="keyword">WHERE</span> order_num = <span class="number">20010</span>;</div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> orders <span class="keyword">WHERE</span> order_num = <span class="number">20010</span>;</div><div class="line"><span class="keyword">COMMIT</span>;</div></pre></td></tr></table></figure></p>
+<p>使用保留点：保留点指事务处理中的临时占位符(place-holder)，你可以对它发布回退<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SAVEPOINT</span> delete1;</div><div class="line">ROOLBACK TO delete1;</div></pre></td></tr></table></figure></p>
+<p>保留点在事务处理完成(执行一条ROLLBACK或COMMIT)后自动释放</p>
+<p>默认的MySQL自动提交所有修改，为指示MySQL不自动提交：<code>SET autocommit=0;</code></p>
+<h2 id="27-指定字符集和校对顺序"><a href="#27-指定字符集和校对顺序" class="headerlink" title="27. 指定字符集和校对顺序"></a>27. 指定字符集和校对顺序</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> RABLE mytable</div><div class="line">(</div><div class="line">    column1    <span class="built_in">INT</span>,</div><div class="line">    column2    CARCHAR(<span class="number">10</span>)</div><div class="line">)<span class="keyword">DEFAULT</span> CHARCTER <span class="keyword">SET</span> hebrew</div><div class="line"><span class="keyword">COLLATE</span> hebrew_general_ci;</div></pre></td></tr></table></figure>
+<h2 id="28-安全管理"><a href="#28-安全管理" class="headerlink" title="28. 安全管理"></a>28. 安全管理</h2><p>MySQL用户账号和信息存储在名为mysql的MySQL数据库中。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> mysql;</div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">user</span> <span class="keyword">FROM</span> <span class="keyword">user</span>;</div></pre></td></tr></table></figure></p>
+<p>创建用户账号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CREATE USER ben IDENTIFIED BY &apos;password&apos;</div></pre></td></tr></table></figure></p>
+<p>重命名一个用户账号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">RENAME USER ben TO btorta;</div></pre></td></tr></table></figure></p>
+<p>删除用户账号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DROP USER btorta;</div></pre></td></tr></table></figure></p>
+<p>设置访问权限：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- SHOW GRANTS FOR bforta;</span></div><div class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> crashcourse.* <span class="keyword">TO</span> bforta;</div></pre></td></tr></table></figure></p>
+<p>此GRANT允许用户在crashcourse.*（ crashcourse数据库的所有表）上使用SELECT。通过只授予SELECT访问权限，用户<code>bforta</code>对<code>crashcourse</code>数据库中的所有数据具有<code>只读</code>访问权限。</p>
+<p>GRANT的反操作为REVOKE,用它来撤销指定的权限。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">REVOKE</span> <span class="keyword">SELECT</span> <span class="keyword">ON</span> crashcourse.* <span class="keyword">TO</span> bforta;</div></pre></td></tr></table></figure></p>
+<p>GRANT和REVOKE可在几个层次上控制访问权限：</p>
+<ul>
+<li>整个服务器，使用GRANT ALL和REVOKE ALL;</li>
+<li>整个数据库，使用ON database.*;</li>
+<li>特定的表，使用ON database.table;</li>
+<li>特定的列</li>
+<li>特定的存储过程</li>
+</ul>
+<p>更改口令：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SET</span> <span class="keyword">PASSWORD</span> <span class="keyword">FOR</span> bforta = <span class="keyword">Password</span>(<span class="string">'n3w p@$$w0rd'</span>);</div></pre></td></tr></table></figure></p>
+<p>不指定用户名时，SET PASSWORD更新当前登录用户的口令。</p>
+<h2 id="29-数据库维护"><a href="#29-数据库维护" class="headerlink" title="29. 数据库维护"></a>29. 数据库维护</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL-数据库/" rel="tag"># MySQL 数据库</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/17/MySQL必知必会-上/" rel="next" title="MySQL必知必会-上">
+                <i class="fa fa-chevron-left"></i> MySQL必知必会-上
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/06/24/MySQL必知必会-下/"
+           data-title="MySQL必知必会-上" data-url="http://yoursite.com/2017/06/24/MySQL必知必会-下/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg"
+               alt="GuangchaoSun" />
+          <p class="site-author-name" itemprop="name">GuangchaoSun</p>
+          <p class="site-description motion-element" itemprop="description">coding change the world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sunguangchao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/sun-guang-chao-64" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-delicious"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2966219821/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#19-插入数据"><span class="nav-number">1.</span> <span class="nav-text">19. 插入数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#20-更新和删除数据"><span class="nav-number">2.</span> <span class="nav-text">20. 更新和删除数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#更新数据"><span class="nav-number">2.1.</span> <span class="nav-text">   更新数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除数据"><span class="nav-number">2.2.</span> <span class="nav-text">删除数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#21-创建和操纵表"><span class="nav-number">3.</span> <span class="nav-text">21. 创建和操纵表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#更新表定义，可用ALTER-TABLE"><span class="nav-number">3.1.</span> <span class="nav-text">更新表定义，可用ALTER TABLE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#22-使用视图-complete"><span class="nav-number">4.</span> <span class="nav-text">22. 使用视图(complete)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#23-使用存储过程"><span class="nav-number">5.</span> <span class="nav-text">23. 使用存储过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#24-使用游标"><span class="nav-number">5.1.</span> <span class="nav-text">24. 使用游标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-使用触发器"><span class="nav-number">5.2.</span> <span class="nav-text">25. 使用触发器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#26-管理事务处理-complete"><span class="nav-number">6.</span> <span class="nav-text">26. 管理事务处理(complete)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用COMMIT"><span class="nav-number">6.1.</span> <span class="nav-text">使用COMMIT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27-指定字符集和校对顺序"><span class="nav-number">6.2.</span> <span class="nav-text">27. 指定字符集和校对顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28-安全管理"><span class="nav-number">6.3.</span> <span class="nav-text">28. 安全管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#29-数据库维护"><span class="nav-number">6.4.</span> <span class="nav-text">29. 数据库维护</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuangchaoSun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunguangchao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
