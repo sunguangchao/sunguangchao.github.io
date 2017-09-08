@@ -1,0 +1,729 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="MySQL的45道练习题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL的45道练习题">
+<meta property="og:url" content="http://yoursite.com/2017/09/08/MySQL的45道练习题/index.html">
+<meta property="og:site_name" content="GuangchaoSun's Blog">
+<meta property="og:description" content="MySQL的45道练习题">
+<meta property="og:updated_time" content="2017-09-08T07:09:48.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL的45道练习题">
+<meta name="twitter:description" content="MySQL的45道练习题">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/08/MySQL的45道练习题/"/>
+
+
+
+
+
+  <title> MySQL的45道练习题 | GuangchaoSun's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">GuangchaoSun's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-battery-1"></i> <br />
+            
+            书单
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/08/MySQL的45道练习题/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="GuangchaoSun">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="GuangchaoSun's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="GuangchaoSun's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MySQL的45道练习题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-08T15:07:53+08:00">
+              2017-09-08
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-09-08T15:09:48+08:00">
+              2017-09-08
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/09/08/MySQL的45道练习题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/08/MySQL的45道练习题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>MySQL的45道练习题</p>
+<a id="more"></a>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div></pre></td><td class="code"><pre><div class="line">#查询Score表中的最高分的学生学号和课程号。（子查询或者排序）</div><div class="line">mysql&gt; select sno,cno from score where degree = (select max(degree) from score);</div><div class="line">+-----+-------+</div><div class="line">| sno | cno   |</div><div class="line">+-----+-------+</div><div class="line">| 103 | 3-105 |</div><div class="line">+-----+-------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select sno,cno from score order by degree desc limit 0,1;</div><div class="line">+-----+-------+</div><div class="line">| sno | cno   |</div><div class="line">+-----+-------+</div><div class="line">| 103 | 3-105 |</div><div class="line">+-----+-------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line">#查询每门课的平均成绩。</div><div class="line">mysql&gt; select cno,avg(degree) from score group by cno;</div><div class="line">+-------+-------------+</div><div class="line">| cno   | avg(degree) |</div><div class="line">+-------+-------------+</div><div class="line">| 3-105 |     81.5000 |</div><div class="line">| 3-245 |     76.3333 |</div><div class="line">| 6-166 |     81.6667 |</div><div class="line">+-------+-------------+</div><div class="line">3 rows in set (0.02 sec)</div><div class="line"></div><div class="line">#查询score表中至少有5名学生选修的并以3开头的课程的平均分数。</div><div class="line">mysql&gt; select avg(degree) from score where cno like '3%' and cno in (select cno from score group by cno having count(*) &gt;= 5);</div><div class="line">+-------------+</div><div class="line">| avg(degree) |</div><div class="line">+-------------+</div><div class="line">|     81.5000 |</div><div class="line">+-------------+</div><div class="line">1 row in set (0.01 sec)</div><div class="line"></div><div class="line"># 查询每门课的平均成绩。</div><div class="line">mysql&gt; select cno,avg(degree) from score group by cno;</div><div class="line">+-------+-------------+</div><div class="line">| cno   | avg(degree) |</div><div class="line">+-------+-------------+</div><div class="line">| 3-105 |     81.5000 |</div><div class="line">| 3-245 |     76.3333 |</div><div class="line">| 6-166 |     81.6667 |</div><div class="line">+-------+-------------+</div><div class="line">3 rows in set (0.02 sec)</div><div class="line"></div><div class="line">mysql&gt; select avg(degree) from score where cno like '3%' and cno in (select cno from score group by cno having count(*) &gt;= 5);</div><div class="line">+-------------+</div><div class="line">| avg(degree) |</div><div class="line">+-------------+</div><div class="line">|     81.5000 |</div><div class="line">+-------------+</div><div class="line">1 row in set (0.01 sec)</div><div class="line"></div><div class="line">#查询所有学生的Sname、Cname和Degree列。</div><div class="line">mysql&gt; select sname,cname,degree from student join score on student.sno = score.sno join course on course.cno = score.cno;</div><div class="line">+--------+-----------------+--------+</div><div class="line">| sname  | cname           | degree |</div><div class="line">+--------+-----------------+--------+</div><div class="line">| 陆君   | 操作系统        |     86 |</div><div class="line">| 匡明   | 操作系统        |     75 |</div><div class="line">| 王芳   | 操作系统        |     68 |</div><div class="line">| 陆君   | 计算机导论      |     92 |</div><div class="line">| 匡明   | 计算机导论      |     88 |</div><div class="line">| 王芳   | 计算机导论      |     76 |</div><div class="line">| 陆君   | 计算机导论      |     64 |</div><div class="line">| 匡明   | 计算机导论      |     91 |</div><div class="line">| 王芳   | 计算机导论      |     78 |</div><div class="line">| 陆君   | 数字电路        |     85 |</div><div class="line">| 匡明   | 数字电路        |     79 |</div><div class="line">| 王芳   | 数字电路        |     81 |</div><div class="line">+--------+-----------------+--------+</div><div class="line">12 rows in set (0.01 sec)</div><div class="line"></div><div class="line"># 查询“95031”班学生的平均分</div><div class="line">mysql&gt; select avg(degree) as 'class = 95031' from score where sno in (select sno from student where class = '95031');</div><div class="line">+---------------+</div><div class="line">| class = 95031 |</div><div class="line">+---------------+</div><div class="line">|       80.2500 |</div><div class="line">+---------------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">#查询选修“3-105”课程的成绩高于“109”号同学成绩的所有同学的记录。</div><div class="line">mysql&gt; select * from score where cno = '3-105' and degree &gt; (select max(degree) from score where sno = '109' and cno = '3-105');</div><div class="line">+-----+-------+--------+</div><div class="line">| sno | cno   | degree |</div><div class="line">+-----+-------+--------+</div><div class="line">| 103 | 3-105 |     92 |</div><div class="line">| 105 | 3-105 |     88 |</div><div class="line">| 105 | 3-105 |     91 |</div><div class="line">+-----+-------+--------+</div><div class="line">3 rows in set (0.02 sec)</div><div class="line"></div><div class="line">#选了多门课程并且是这个课程下不是最高分的</div><div class="line">mysql&gt; select * from score a where sno in (select sno from score group by sno having count(*) &gt; 1) and degree &lt; (select max(degree) from score b where b.cno = a.cno);</div><div class="line">+-----+-------+--------+</div><div class="line">| sno | cno   | degree |</div><div class="line">+-----+-------+--------+</div><div class="line">| 105 | 3-245 |     75 |</div><div class="line">| 109 | 3-245 |     68 |</div><div class="line">| 105 | 3-105 |     88 |</div><div class="line">| 109 | 3-105 |     76 |</div><div class="line">| 103 | 3-105 |     64 |</div><div class="line">| 105 | 3-105 |     91 |</div><div class="line">| 109 | 3-105 |     78 |</div><div class="line">| 105 | 6-166 |     79 |</div><div class="line">| 109 | 6-166 |     81 |</div><div class="line">+-----+-------+--------+</div><div class="line">9 rows in set (0.02 sec)</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div></pre></td><td class="code"><pre><div class="line">mysql&gt; use 45exercise;</div><div class="line">Database changed</div><div class="line"></div><div class="line">#查询和学号为108的同学同年出生的所有学生的Sno、Sname和Sbirthday列。</div><div class="line">mysql&gt; select sno,sname,sbirthday from student where year(sbirthday) = (select year(sbirthday) from student where sno = '108');</div><div class="line">+-----+--------+---------------------+</div><div class="line">| sno | sname  | sbirthday           |</div><div class="line">+-----+--------+---------------------+</div><div class="line">| 108 | 曾华   | 1977-09-01 00:00:00 |</div><div class="line">+-----+--------+---------------------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">#查询“张旭“教师任课的学生成绩。</div><div class="line">mysql&gt; select sno,degree from score,course where score.cno = course.cno and course.tno = (select tno from teacher where tname = '张旭');</div><div class="line">+-----+--------+</div><div class="line">| sno | degree |</div><div class="line">+-----+--------+</div><div class="line">| 103 |     85 |</div><div class="line">| 105 |     79 |</div><div class="line">| 109 |     81 |</div><div class="line">+-----+--------+</div><div class="line">3 rows in set (0.01 sec)</div><div class="line"></div><div class="line">#查询选修某课程的同学人数多于5人的教师姓名。</div><div class="line">mysql&gt; select tname from teacher,course where teacher.tno = course.tno and course.cno = (select cno from score group by cno having count(*) &gt; 5 );</div><div class="line">+--------+</div><div class="line">| tname  |</div><div class="line">+--------+</div><div class="line">| 王萍   |</div><div class="line">+--------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">#查询95033班和95031班全体学生的记录</div><div class="line">mysql&gt; select * from student where class in ('95033','95031');</div><div class="line">+-----+--------+------+---------------------+-------+</div><div class="line">| sno | sname  | ssex | sbirthday           | class |</div><div class="line">+-----+--------+------+---------------------+-------+</div><div class="line">| 101 | 李军   | 男   | 1976-02-20 00:00:00 | 95033 |</div><div class="line">| 103 | 陆君   | 男   | 1974-06-03 00:00:00 | 95031 |</div><div class="line">| 105 | 匡明   | 男   | 1975-10-02 00:00:00 | 95031 |</div><div class="line">| 107 | 王丽   | 女   | 1976-01-23 00:00:00 | 95033 |</div><div class="line">| 108 | 曾华   | 男   | 1977-09-01 00:00:00 | 95033 |</div><div class="line">| 109 | 王芳   | 女   | 1975-02-10 00:00:00 | 95031 |</div><div class="line">+-----+--------+------+---------------------+-------+</div><div class="line">6 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询存在有85分以上成绩的课程Cno.</div><div class="line">mysql&gt; select cno from score where degree &gt; 85;</div><div class="line">+-------+</div><div class="line">| cno   |</div><div class="line">+-------+</div><div class="line">| 3-245 |</div><div class="line">| 3-105 |</div><div class="line">| 3-105 |</div><div class="line">| 3-105 |</div><div class="line">+-------+</div><div class="line">4 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询出“计算机系“教师所教课程的成绩表。</div><div class="line">mysql&gt; select * from course where cno in (select cno from course where tno in (select tno from teacher where depart='计算机系' ));</div><div class="line">+-------+-----------------+-----+</div><div class="line">| cno   | cname           | tno |</div><div class="line">+-------+-----------------+-----+</div><div class="line">| 3-245 | 操作系统        | 804 |</div><div class="line">| 3-105 | 计算机导论      | 825 |</div><div class="line">+-------+-----------------+-----+</div><div class="line">2 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询“计算机系”与“电子工程系“不同职称的教师的Tname和Prof。</div><div class="line">mysql&gt; select tname, prof from teacher where depart = '计算机系' and prof in (select prof from teacher where depart = '电子工程系') union select tname,prof from teacher where depart = '电子工程系' and prof not in (select prof from teacher where depart = '计算机系');</div><div class="line">+--------+--------+</div><div class="line">| tname  | prof   |</div><div class="line">+--------+--------+</div><div class="line">| 王萍   | 助教   |</div><div class="line">| 张旭   | 讲师   |</div><div class="line">+--------+--------+</div><div class="line">2 rows in set (0.02 sec)</div><div class="line"></div><div class="line">#查询选修编号为“3-105“课程且成绩至少高于选修编号为“3-245”的同学的Cno、Sno和Degree,并按Degree从高到低次序排序。</div><div class="line">mysql&gt; select cno,sno,degree from score where cno = '3-105' and degree &gt; any(select degree from score where cno = '3-245') order by degree desc;</div><div class="line">+-------+-----+--------+</div><div class="line">| cno   | sno | degree |</div><div class="line">+-------+-----+--------+</div><div class="line">| 3-105 | 103 |     92 |</div><div class="line">| 3-105 | 105 |     91 |</div><div class="line">| 3-105 | 105 |     88 |</div><div class="line">| 3-105 | 109 |     78 |</div><div class="line">| 3-105 | 109 |     76 |</div><div class="line">+-------+-----+--------+</div><div class="line">5 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询选修编号为“3-105”且成绩高于选修编号为“3-245”课程的同学的Cno、Sno和Degree.</div><div class="line">mysql&gt; select cno,sno,degree from score where cno = '3-105' and degree &gt; all(select degree from score where cno = '3-245') order by degree desc;</div><div class="line">+-------+-----+--------+</div><div class="line">| cno   | sno | degree |</div><div class="line">+-------+-----+--------+</div><div class="line">| 3-105 | 103 |     92 |</div><div class="line">| 3-105 | 105 |     91 |</div><div class="line">| 3-105 | 105 |     88 |</div><div class="line">+-------+-----+--------+</div><div class="line">3 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询所有教师和同学的name、sex和birthday.</div><div class="line">mysql&gt; select tname,tsex,tbirthday from teacher union select sname,ssex,sbirthday from student;</div><div class="line">+--------+------+---------------------+</div><div class="line">| tname  | tsex | tbirthday           |</div><div class="line">+--------+------+---------------------+</div><div class="line">| 李诚   | 男   | 1958-12-02          |</div><div class="line">| 王萍   | 女   | 1972-05-05          |</div><div class="line">| 刘冰   | 女   | 1977-08-14          |</div><div class="line">| 张旭   | 男   | 1969-03-12          |</div><div class="line">| 李军   | 男   | 1976-02-20 00:00:00 |</div><div class="line">| 陆君   | 男   | 1974-06-03 00:00:00 |</div><div class="line">| 匡明   | 男   | 1975-10-02 00:00:00 |</div><div class="line">| 王丽   | 女   | 1976-01-23 00:00:00 |</div><div class="line">| 曾华   | 男   | 1977-09-01 00:00:00 |</div><div class="line">| 王芳   | 女   | 1975-02-10 00:00:00 |</div><div class="line">+--------+------+---------------------+</div><div class="line">10 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询所有“女”教师和“女”同学的name、sex和birthday.</div><div class="line">mysql&gt; select tname,tsex,tbirthday from teacher where tsex = '女' union select sname,ssex,sbirthday from student where ssex = '女';、</div><div class="line">+--------+------+---------------------+</div><div class="line">| tname  | tsex | tbirthday           |</div><div class="line">+--------+------+---------------------+</div><div class="line">| 王萍   | 女   | 1972-05-05          |</div><div class="line">| 刘冰   | 女   | 1977-08-14          |</div><div class="line">| 王丽   | 女   | 1976-01-23 00:00:00 |</div><div class="line">| 王芳   | 女   | 1975-02-10 00:00:00 |</div><div class="line">+--------+------+---------------------+</div><div class="line">4 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询成绩比该课程平均成绩低的同学的成绩表。</div><div class="line">mysql&gt; select * from score a where degree &lt; (select avg(degree) from score b where b.cno = a.cno);</div><div class="line">+-----+-------+--------+</div><div class="line">| sno | cno   | degree |</div><div class="line">+-----+-------+--------+</div><div class="line">| 105 | 3-245 |     75 |</div><div class="line">| 109 | 3-245 |     68 |</div><div class="line">| 109 | 3-105 |     76 |</div><div class="line">| 103 | 3-105 |     64 |</div><div class="line">| 109 | 3-105 |     78 |</div><div class="line">| 105 | 6-166 |     79 |</div><div class="line">| 109 | 6-166 |     81 |</div><div class="line">+-----+-------+--------+</div><div class="line">7 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询所有任课教师的Tname和Depart.</div><div class="line">mysql&gt; select tname,depart from teacher where tno in (select tno from course);</div><div class="line">+--------+-----------------+</div><div class="line">| tname  | depart          |</div><div class="line">+--------+-----------------+</div><div class="line">| 李诚   | 计算机系        |</div><div class="line">| 王萍   | 计算机系        |</div><div class="line">| 刘冰   | 电子工程系      |</div><div class="line">| 张旭   | 电子工程系      |</div><div class="line">+--------+-----------------+</div><div class="line">4 rows in set (0.01 sec)</div><div class="line"></div><div class="line">#查询所有未讲课的教师的Tname和Depart.</div><div class="line">mysql&gt; select tname,depart from teacher where tno not in (select tno from course where cno in (select cno from score));</div><div class="line">+--------+-----------------+</div><div class="line">| tname  | depart          |</div><div class="line">+--------+-----------------+</div><div class="line">| 刘冰   | 电子工程系      |</div><div class="line">+--------+-----------------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">#查询至少有2名男生的班号。</div><div class="line">mysql&gt; select class from student where ssex = '男' group by class having count(*) &gt; 1;</div><div class="line">+-------+</div><div class="line">| class |</div><div class="line">+-------+</div><div class="line">| 95031 |</div><div class="line">| 95033 |</div><div class="line">+-------+</div><div class="line">2 rows in set (0.01 sec)</div><div class="line"></div><div class="line">#查询Student表中不姓“王”的同学记录。</div><div class="line">mysql&gt; select * from student where sname not like '王%%';</div><div class="line">+-----+--------+------+---------------------+-------+</div><div class="line">| sno | sname  | ssex | sbirthday           | class |</div><div class="line">+-----+--------+------+---------------------+-------+</div><div class="line">| 101 | 李军   | 男   | 1976-02-20 00:00:00 | 95033 |</div><div class="line">| 103 | 陆君   | 男   | 1974-06-03 00:00:00 | 95031 |</div><div class="line">| 105 | 匡明   | 男   | 1975-10-02 00:00:00 | 95031 |</div><div class="line">| 108 | 曾华   | 男   | 1977-09-01 00:00:00 | 95033 |</div><div class="line">+-----+--------+------+---------------------+-------+</div><div class="line">4 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询Student表中每个学生的姓名和年龄。</div><div class="line">mysql&gt; select sname,year(now()) - year(sbirthday) from student;</div><div class="line">+--------+-------------------------------+</div><div class="line">| sname  | year(now()) - year(sbirthday) |</div><div class="line">+--------+-------------------------------+</div><div class="line">| 李军   |                            41 |</div><div class="line">| 陆君   |                            43 |</div><div class="line">| 匡明   |                            42 |</div><div class="line">| 王丽   |                            41 |</div><div class="line">| 曾华   |                            40 |</div><div class="line">| 王芳   |                            42 |</div><div class="line">+--------+-------------------------------+</div><div class="line">6 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询Student表中最大和最小的Sbirthday日期值</div><div class="line">mysql&gt; select Max(sbirthday),Min(sbirthday) from student;</div><div class="line">+---------------------+---------------------+</div><div class="line">| Max(sbirthday)      | Min(sbirthday)      |</div><div class="line">+---------------------+---------------------+</div><div class="line">| 1977-09-01 00:00:00 | 1974-06-03 00:00:00 |</div><div class="line">+---------------------+---------------------+</div><div class="line">1 row in set (0.00 sec)</div><div class="line"></div><div class="line">#以班号和年龄从大到小的顺序查询Student表中的全部记录。</div><div class="line">mysql&gt; select * from student order by class desc,sbirthday;</div><div class="line">+-----+--------+------+---------------------+-------+</div><div class="line">| sno | sname  | ssex | sbirthday           | class |</div><div class="line">+-----+--------+------+---------------------+-------+</div><div class="line">| 107 | 王丽   | 女   | 1976-01-23 00:00:00 | 95033 |</div><div class="line">| 101 | 李军   | 男   | 1976-02-20 00:00:00 | 95033 |</div><div class="line">| 108 | 曾华   | 男   | 1977-09-01 00:00:00 | 95033 |</div><div class="line">| 103 | 陆君   | 男   | 1974-06-03 00:00:00 | 95031 |</div><div class="line">| 109 | 王芳   | 女   | 1975-02-10 00:00:00 | 95031 |</div><div class="line">| 105 | 匡明   | 男   | 1975-10-02 00:00:00 | 95031 |</div><div class="line">+-----+--------+------+---------------------+-------+</div><div class="line">6 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询“男”教师及其所上的课程。</div><div class="line">mysql&gt; select tname,cname from course,teacher where course.tno = teacher.tno and teacher.tsex = '男';</div><div class="line">+--------+--------------+</div><div class="line">| tname  | cname        |</div><div class="line">+--------+--------------+</div><div class="line">| 李诚   | 操作系统     |</div><div class="line">| 张旭   | 数字电路     |</div><div class="line">+--------+--------------+</div><div class="line">2 rows in set (0.02 sec)</div><div class="line"></div><div class="line">#查询最高分同学的Sno、Cno和Degree列。</div><div class="line">mysql&gt; select sno,cno,degree from score order by degree desc limit 0,1;</div><div class="line">+-----+-------+--------+</div><div class="line">| sno | cno   | degree |</div><div class="line">+-----+-------+--------+</div><div class="line">| 103 | 3-105 |     92 |</div><div class="line">+-----+-------+--------+</div><div class="line">1 row in set (0.01 sec)</div><div class="line"></div><div class="line">#查询和“李军”同性别的所有同学的Sname</div><div class="line">mysql&gt; select sname from student where ssex = (select ssex from student where sname = '李军');</div><div class="line">+--------+</div><div class="line">| sname  |</div><div class="line">+--------+</div><div class="line">| 李军   |</div><div class="line">| 陆君   |</div><div class="line">| 匡明   |</div><div class="line">| 曾华   |</div><div class="line">+--------+</div><div class="line">4 rows in set (0.00 sec)</div><div class="line"></div><div class="line">#查询和“李军”同性别并同班的同学Sname.</div><div class="line">mysql&gt; select sname from student where ssex = (select ssex from student where sname = '李军') and class = (select class from student where sname = '李军');</div><div class="line">+--------+</div><div class="line">| sname  |</div><div class="line">+--------+</div><div class="line">| 李军   |</div><div class="line">| 曾华   |</div><div class="line">+--------+</div><div class="line">2 rows in set (0.01 sec)</div><div class="line"></div><div class="line">#查询所有选修“计算机导论”课程的“男”同学的成绩表。</div><div class="line">mysql&gt; select sno,cno,degree from score where cno = (select cno from course where cname = '计算机导论') and sno in (select sno from student where ssex = '男');</div><div class="line">+-----+-------+--------+</div><div class="line">| sno | cno   | degree |</div><div class="line">+-----+-------+--------+</div><div class="line">| 103 | 3-105 |     92 |</div><div class="line">| 103 | 3-105 |     64 |</div><div class="line">| 105 | 3-105 |     88 |</div><div class="line">| 105 | 3-105 |     91 |</div><div class="line">+-----+-------+--------+</div><div class="line">4 rows in set (0.02 sec)</div></pre></td></tr></table></figure>
+<p>reference:</p>
+<ul>
+<li><a href="http://www.cnblogs.com/aqxss/p/6563625.html" target="_blank" rel="external">MySQL查询语句的45道练习题</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/20/JavaScript-w3school/" rel="next" title="JavaScript-w3school">
+                <i class="fa fa-chevron-left"></i> JavaScript-w3school
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/09/08/MySQL的45道练习题/"
+           data-title="MySQL的45道练习题" data-url="http://yoursite.com/2017/09/08/MySQL的45道练习题/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg"
+               alt="GuangchaoSun" />
+          <p class="site-author-name" itemprop="name">GuangchaoSun</p>
+          <p class="site-description motion-element" itemprop="description">coding change the world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sunguangchao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/sun-guang-chao-64" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-delicious"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2966219821/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuangchaoSun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunguangchao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
