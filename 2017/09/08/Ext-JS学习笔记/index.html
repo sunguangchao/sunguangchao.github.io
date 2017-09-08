@@ -1,0 +1,812 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="The Class SystemThere is also a dedicated config property that gets processed by the powerful Ext.Class pre-processors before the class is created.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ext JS学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/09/08/Ext-JS学习笔记/index.html">
+<meta property="og:site_name" content="GuangchaoSun's Blog">
+<meta property="og:description" content="The Class SystemThere is also a dedicated config property that gets processed by the powerful Ext.Class pre-processors before the class is created.">
+<meta property="og:image" content="http://docs.sencha.com/extjs/6.5.0/guides/core_concepts/images/component_heirarchy_5.png">
+<meta property="og:image" content="http://docs.sencha.com/extjs/6.5.0/guides/core_concepts/images/template_pattern.png">
+<meta property="og:image" content="http://docs.sencha.com/extjs/6.5.1/guides/core_concepts/images/data-model.png">
+<meta property="og:image" content="http://docs.sencha.com/extjs/6.5.1/guides/core_concepts/images/model-breakdown.png">
+<meta property="og:updated_time" content="2017-09-08T09:16:05.234Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ext JS学习笔记">
+<meta name="twitter:description" content="The Class SystemThere is also a dedicated config property that gets processed by the powerful Ext.Class pre-processors before the class is created.">
+<meta name="twitter:image" content="http://docs.sencha.com/extjs/6.5.0/guides/core_concepts/images/component_heirarchy_5.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/08/Ext-JS学习笔记/"/>
+
+
+
+
+
+  <title> Ext JS学习笔记 | GuangchaoSun's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">GuangchaoSun's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-battery-1"></i> <br />
+            
+            书单
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/08/Ext-JS学习笔记/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="GuangchaoSun">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="GuangchaoSun's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="GuangchaoSun's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ext JS学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-08T17:13:55+08:00">
+              2017-09-08
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2017-09-08T17:16:05+08:00">
+              2017-09-08
+            </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/09/08/Ext-JS学习笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/08/Ext-JS学习笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="The-Class-System"><a href="#The-Class-System" class="headerlink" title="The Class System"></a>The Class System</h1><p>There is also a dedicated <code>config</code> property that gets processed by the powerful Ext.Class pre-processors before the class is created.<br><a id="more"></a></p>
+<h1 id="Layouts-and-Containers"><a href="#Layouts-and-Containers" class="headerlink" title="Layouts and Containers"></a>Layouts and Containers</h1><p>layout系统是Ext JS中最为重要的部分之一。它控制着应用中每个组件的形状和位置。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Ext.create(<span class="string">'Ext.panel.Panel'</span>,&#123;</div><div class="line">	<span class="attr">renderTo</span>: Ext.getBody(),</div><div class="line">	<span class="attr">width</span>: <span class="number">200</span>,</div><div class="line">	<span class="attr">height</span>: <span class="number">400</span>,</div><div class="line">	<span class="attr">title</span>: <span class="string">'Container Panel'</span>,</div><div class="line">	<span class="attr">items</span>: [&#123;</div><div class="line">		<span class="attr">xtype</span>: <span class="string">'panel'</span>,</div><div class="line">		<span class="attr">title</span>: <span class="string">'Child Panel 1'</span>,</div><div class="line">		<span class="attr">height</span>: <span class="number">100</span>,</div><div class="line">		<span class="attr">width</span>: <span class="string">'50%'</span></div><div class="line">	&#125;, &#123;</div><div class="line">		<span class="attr">xtype</span>: <span class="string">'panel'</span>,</div><div class="line">		<span class="attr">title</span>: <span class="string">'Child Panel 2'</span>,</div><div class="line">		<span class="attr">height</span>: <span class="string">'100'</span>,</div><div class="line">		<span class="attr">width</span>: <span class="string">'75%'</span></div><div class="line">	&#125;]</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>We just created a Panel that renders itself to the document body, and we used the items config to add two child Panels to our Container Panel.</p>
+<h2 id="Layouts"><a href="#Layouts" class="headerlink" title="Layouts"></a>Layouts</h2><p>在容器中使用<code>Column Layout</code>可以让组件并排显示。<br>上面的例子中没有使用layout这个属性，会默认使用Auto Layout，下面使用 Column Layout 属性来看一下。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">Ext.create(<span class="string">'Ext.panel.Panel'</span>, &#123;</div><div class="line">    <span class="attr">renderTo</span>: Ext.getBody(),</div><div class="line">    <span class="attr">width</span>: <span class="number">400</span>,</div><div class="line">    <span class="attr">height</span>: <span class="number">200</span>,</div><div class="line">    <span class="attr">title</span>: <span class="string">'Container Panel'</span>,</div><div class="line">    <span class="attr">layout</span>: <span class="string">'column'</span>,</div><div class="line">    <span class="attr">items</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">xtype</span>: <span class="string">'panel'</span>,</div><div class="line">            <span class="attr">title</span>: <span class="string">'Child Panel 1'</span>,</div><div class="line">            <span class="attr">height</span>: <span class="number">100</span>,</div><div class="line">            <span class="attr">columnWidth</span>: <span class="number">1</span>/<span class="number">3</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">xtype</span>: <span class="string">'panel'</span>,</div><div class="line">            <span class="attr">title</span>: <span class="string">'Child Panel 2'</span>,</div><div class="line">            <span class="attr">height</span>: <span class="number">100</span>,</div><div class="line">            <span class="attr">columnWidth</span>: <span class="number">1</span>/<span class="number">3</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">xtype</span>: <span class="string">'panel'</span>,</div><div class="line">            <span class="attr">title</span>: <span class="string">'Child Panel 3'</span>,</div><div class="line">            <span class="attr">height</span>: <span class="number">100</span>,</div><div class="line">            <span class="attr">columnWidth</span>: <span class="number">1</span>/<span class="number">3</span></div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>How the layout system works?</p>
+<p>A Container’s Layout is responsible for the initial positioning and sizing of all of the Container’s children. Internally the framework calls the Container’s updateLayout method which triggers the Layout to calculate the correct sizes and positions for all of the Container’s children and update the DOM. The updateLayout method is fully recursive, so any of the Container’s children will have their updateLayout method called as well. This continues until the bottom of the Component hierarchy is reached. </p>
+<p>有的时候，我们不想框架自动布局，这样我们可以将多个操作组合在一起，然后再完成时手动触发布局。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> containerPanel = Ext.create(<span class="string">'Ext.panel.Panel'</span>,&#123;</div><div class="line">	<span class="attr">renderTo</span>: Ext.getBody(),</div><div class="line">	<span class="attr">width</span>: <span class="number">400</span>,</div><div class="line">	<span class="attr">height</span>: <span class="number">200</span>,</div><div class="line">	<span class="attr">title</span>: <span class="string">'Container Panel'</span>,</div><div class="line">	<span class="attr">layout</span>: <span class="string">'column'</span>,</div><div class="line">	<span class="attr">suspendLayout</span>: <span class="literal">true</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">containerPanel.add(&#123;</div><div class="line">  <span class="attr">xtype</span>: <span class="string">'panel'</span>,</div><div class="line">  <span class="attr">title</span>: <span class="string">'Child Panel 1'</span>,</div><div class="line">  <span class="attr">height</span>: <span class="number">100</span>,</div><div class="line">  <span class="attr">columnWidth</span>: <span class="number">0.5</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">containerPanel.add(&#123;</div><div class="line">  <span class="attr">xtype</span>: <span class="string">'panel'</span>,</div><div class="line">  <span class="attr">title</span>: <span class="string">'Child Panel 2'</span>,</div><div class="line">  <span class="attr">height</span>: <span class="number">100</span>,</div><div class="line">  <span class="attr">columnWidth</span>: <span class="number">0.5</span></div><div class="line">&#125;);</div><div class="line"><span class="comment">//Turn the suspendLayout flag off.</span></div><div class="line">containerPanel.suspendLayout = <span class="literal">false</span>;</div><div class="line"><span class="comment">//trigger a layout.</span></div><div class="line">containerPanel.updateLayout();</div></pre></td></tr></table></figure></p>
+<h1 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h1><p>容器是一种特殊类型的组件，组件的层级结构类似于典型的树形结构。容器主要管理子组件的生命周期，包括：创建，着色，改变大小，位置和结束。<br><img src="http://docs.sencha.com/extjs/6.5.0/guides/core_concepts/images/component_heirarchy_5.png" alt=""></p>
+<h2 id="XTypes-and-Lazy-Instantiation"><a href="#XTypes-and-Lazy-Instantiation" class="headerlink" title="XTypes and Lazy Instantiation"></a>XTypes and Lazy Instantiation</h2><p>XTypes是Ext 2.0中新的概念，被认为是Ext组件的特定类型。可用的xtype摘要可在 Component类API开始的地方找到。与一般JavaScript对象用法相似，XTypes可用于查找或比较组件对象，如isXType和getXType的方法。你亦可以列出任意组件的xtpye层次表，用方法getXTypes。</p>
+<p>然而，如何把Xtypes用于优化组件的创建和渲染过程才是XTypes发挥威力的地方。通过指定一个xtype的配置对象的写法，可隐式声明的方式创建组件，使得如果没有渲染的需要就只是一个对象而免去实例化的步骤，这时不仅渲染的动作是延时的，而且创建实际对象的这一步也是延时的，从而节省了内存和资源。在复杂的布局中，这种性能上的改进尤为明显。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">Ext.create(<span class="string">'Ext.tab.Panel'</span>, &#123;</div><div class="line">    <span class="attr">renderTo</span>: Ext.getBody(),</div><div class="line">    <span class="attr">height</span>: <span class="number">100</span>,</div><div class="line">    <span class="attr">width</span>: <span class="number">200</span>,</div><div class="line">    <span class="attr">items</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="comment">// Explicitly define the xtype of this Component configuration.</span></div><div class="line">            <span class="comment">// This tells the Container (the tab panel in this case)</span></div><div class="line">            <span class="comment">// to instantiate a Ext.panel.Panel when it deems necessary</span></div><div class="line">            xtype: <span class="string">'panel'</span>,</div><div class="line">            <span class="attr">title</span>: <span class="string">'Tab One'</span>,</div><div class="line">            <span class="attr">html</span>: <span class="string">'The first tab'</span>,</div><div class="line">            <span class="attr">listeners</span>: &#123;</div><div class="line">                <span class="attr">render</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                    Ext.MessageBox.alert(<span class="string">'Rendered One'</span>, <span class="string">'Tab One was rendered.'</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="comment">// xtype for all Component configurations in a Container</span></div><div class="line">            title: <span class="string">'Tab Two'</span>,</div><div class="line">            <span class="attr">html</span>: <span class="string">'The second tab'</span>,</div><div class="line">            <span class="attr">listeners</span>: &#123;</div><div class="line">                <span class="attr">render</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                    Ext.MessageBox.alert(<span class="string">'Rendered One'</span>, <span class="string">'Tab Two was rendered.'</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="Creating-Custom-Components"><a href="#Creating-Custom-Components" class="headerlink" title="Creating Custom Components"></a>Creating Custom Components</h2><p>子类：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Ext.define(<span class="string">'My.custom.Component'</span>,&#123;</div><div class="line">	<span class="attr">extend</span>: <span class="string">'Ext.Component'</span>,</div><div class="line">	<span class="attr">newMethod</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="comment">//...</span></div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>render and onRender:<br>render is a method defined in Component. It is responsible for initiating the rendering phase of the Component lifecycle. render must not be overridden, but it calls onRender during processing to allow the subclass implementor to add an onRender method to perform class-specific processing. Every onRender method must call its superclass’ onRender method before “contributing” its extra logic.</p>
+<p><img src="http://docs.sencha.com/extjs/6.5.0/guides/core_concepts/images/template_pattern.png" alt=""></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Ext.define(<span class="string">'My.custom.Component'</span>,&#123;</div><div class="line">	<span class="attr">extend</span>: <span class="string">'Ext.Component'</span>,</div><div class="line">	<span class="attr">onRender</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">this</span>.callParent(<span class="built_in">arguments</span>);<span class="comment">// call the superclass onRender method</span></div><div class="line">		<span class="comment">// perform additional rendering tasks here.</span></div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="Data-Package"><a href="#Data-Package" class="headerlink" title="Data Package"></a>Data Package</h1><ul>
+<li>Ext.data.Model</li>
+<li>Store</li>
+<li>Ext.data.proxy.Proxy</li>
+</ul>
+<p><img src="http://docs.sencha.com/extjs/6.5.1/guides/core_concepts/images/data-model.png" alt=""></p>
+<p>Let’s look at a few of the principal part of Model:</p>
+<ul>
+<li>Fields</li>
+<li>Proxies</li>
+<li>Validations</li>
+<li>Associations</li>
+</ul>
+<p><img src="http://docs.sencha.com/extjs/6.5.1/guides/core_concepts/images/model-breakdown.png" alt=""></p>
+<h1 id="项目中常用到的关于Ext的方法"><a href="#项目中常用到的关于Ext的方法" class="headerlink" title="项目中常用到的关于Ext的方法"></a>项目中常用到的关于Ext的方法</h1><h2 id="Ext-Msg-alert"><a href="#Ext-Msg-alert" class="headerlink" title="Ext.Msg.alert"></a>Ext.Msg.alert</h2><p>Utility class for generating different styles of message boxes. The singleton instance, Ext.MessageBox alias Ext.Msg can also be used.</p>
+<p>Note that a MessageBox is asynchronous. Unlike a regular JavaScript alert (which will halt browser execution), showing a MessageBox will not cause the code to stop. For this reason, if you have code that should only run after some user feedback from the MessageBox, you must use a callback function (see the function parameter for method-show for more details).</p>
+<h2 id="Ext-data-Store"><a href="#Ext-data-Store" class="headerlink" title="Ext.data.Store"></a>Ext.data.Store</h2><p>The Store class encapsulates a client side cache of Ext.data.Model objects. Stores load data via a Ext.data.proxy.Proxy, and also provide functions for sorting, filtering and querying the Ext.data.Model instances contained within it.</p>
+<p>Creating a Store is easy - we just tell it the Model and the Proxy to use for loading and saving its data:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Set up a model to use in our Store</span></div><div class="line"> Ext.define(<span class="string">'User'</span>, &#123;</div><div class="line">     <span class="attr">extend</span>: <span class="string">'Ext.data.Model'</span>,</div><div class="line">     <span class="attr">fields</span>: [</div><div class="line">         &#123;<span class="attr">name</span>: <span class="string">'firstName'</span>, <span class="attr">type</span>: <span class="string">'string'</span>&#125;,</div><div class="line">         &#123;<span class="attr">name</span>: <span class="string">'lastName'</span>,  <span class="attr">type</span>: <span class="string">'string'</span>&#125;,</div><div class="line">         &#123;<span class="attr">name</span>: <span class="string">'age'</span>,       <span class="attr">type</span>: <span class="string">'int'</span>&#125;,</div><div class="line">         &#123;<span class="attr">name</span>: <span class="string">'eyeColor'</span>,  <span class="attr">type</span>: <span class="string">'string'</span>&#125;</div><div class="line">     ]</div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> <span class="keyword">var</span> myStore = Ext.create(<span class="string">'Ext.data.Store'</span>, &#123;</div><div class="line">     <span class="attr">model</span>: <span class="string">'User'</span>,</div><div class="line">     <span class="attr">proxy</span>: &#123;</div><div class="line">         <span class="attr">type</span>: <span class="string">'ajax'</span>,</div><div class="line">         <span class="attr">url</span>: <span class="string">'/users.json'</span>,</div><div class="line">         <span class="attr">reader</span>: &#123;</div><div class="line">             <span class="attr">type</span>: <span class="string">'json'</span>,</div><div class="line">             <span class="attr">rootProperty</span>: <span class="string">'users'</span></div><div class="line">         &#125;</div><div class="line">     &#125;,</div><div class="line">     <span class="attr">autoLoad</span>: <span class="literal">true</span></div><div class="line"> &#125;);</div></pre></td></tr></table></figure>
+<h2 id="Ext-getBody"><a href="#Ext-getBody" class="headerlink" title="Ext.getBody()"></a>Ext.getBody()</h2><p>Returns the current document body as an Ext.dom.Element.</p>
+<h2 id="Ext-form-FieldSet"><a href="#Ext-form-FieldSet" class="headerlink" title="Ext.form.FieldSet"></a>Ext.form.FieldSet</h2><p>A container for grouping sets of fields, rendered as a HTML fieldset element. The title config will be rendered as the fieldset’s legend.</p>
+<p>While FieldSets commonly contain simple groups of fields, they are general Containers and may therefore contain any type of components in their items, including other nested containers. The default layout for the FieldSet’s items is ‘anchor’, but it can be configured to use any other layout type.</p>
+<h2 id="Ext-data-Store-1"><a href="#Ext-data-Store-1" class="headerlink" title="Ext.data.Store"></a>Ext.data.Store</h2><p>remoteSort:Booealn<br>设置为 true 则将所有的排序操作推迟到服务器. 如果设置为 false, 则在客户端本地排序.<br>Defaults to: false</p>
+<h2 id="Ext-data-reader-Reader"><a href="#Ext-data-reader-Reader" class="headerlink" title="Ext.data.reader.Reader"></a>Ext.data.reader.Reader</h2><p>totalProperty:String<br>检索数据集中记录总数的属性名称. 只有在所有的数据集没有一次得到，而是由服务端分页得到时，该属性才需要用。<br>Default to:”total”</p>
+<h2 id="Ext-form-Basic"><a href="#Ext-form-Basic" class="headerlink" title="Ext.form.Basic"></a>Ext.form.Basic</h2><p>baseParams:Object<br>参数，来传递所有的请求。例如：baseParams: {id: ‘123’, foo: ‘bar’}<br>使用Ext.Object.toQueryString把参数编译成标准HTTP参数。</p>
+<h2 id="Ext-panel-AbstractPanel"><a href="#Ext-panel-AbstractPanel" class="headerlink" title="Ext.panel.AbstractPanel"></a>Ext.panel.AbstractPanel</h2><p>bodyStyle:String/Object/Function<br>用户自定义CSS样式被应用到panel的body元素上，这个样式可以是一个有效的CSS样式串， 可以是一个包含样式属性名/值的对象或者是一个方法返回一个字符串或对象。 下面两种方法是等效的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">bodyStyle: <span class="string">'background:#ffc; padding:10px;'</span></div><div class="line"></div><div class="line">bodyStyle: &#123;</div><div class="line">    <span class="attr">background</span>: <span class="string">'#ffc'</span>,</div><div class="line">    <span class="attr">padding</span>: <span class="string">'10px'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Ext-grid-RowNumber"><a href="#Ext-grid-RowNumber" class="headerlink" title="Ext.grid.RowNumber"></a>Ext.grid.RowNumber</h2><p>此类为一个辅助类，它可以传递到Ext.grid.column.Column中作为column列配置项， 并作为一个可以自动生成数字，为每行提供编号的列。</p>
+<h2 id="Ext-Viewport"><a href="#Ext-Viewport" class="headerlink" title="Ext.Viewport"></a>Ext.Viewport</h2><p>Ext.Viewport is a specialized container that automatically sizes itself to the size of the browser viewport and conveniently manages the sizing and positioning of components that are added to the viewport.</p>
+<h2 id="Ext-form-field-Text"><a href="#Ext-form-field-Text" class="headerlink" title="Ext.form.field.Text"></a>Ext.form.field.Text</h2><p>enableKeyEvents:Boolean<br>true用于启用HTML输入表单项的按键事件代理<br>Defaults to:false</p>
+<p>keyup( Ext.form.field.Text this, Ext.EventObject e, Object eOpts )<br>输入栏的keyup事件。 只有在 enableKeyEvents 被设置为true时才触发此事件。</p>
+<p>Parameters</p>
+<ul>
+<li>this:Ext.form.field,Text<ul>
+<li>当前文本表单项     </li>
+</ul>
+</li>
+<li>e:Ext.EventObject</li>
+<li>eOpts:Object<ul>
+<li>The options object passed to Ext.util.Observable.addListener</li>
+</ul>
+</li>
+</ul>
+<h2 id="Ext-Component"><a href="#Ext-Component" class="headerlink" title="Ext.Component"></a>Ext.Component</h2><p>show([animateTarget], [callback], [scope])<br>shows this Component, rendering it first if autoRender or cfg-floating are true.<br>After being shown, a cfg-floating Component(such as a Ext.window.Window), is activated it and brought to the front of its z-index stack.</p>
+<p>destroy<br>Destroy the Component, This methos must not be overridden because Component destruction sequence is conditional; if  a beforedestroy handler returns false we must abort destruction.To add extra functionally to destruction time in a subclass, override the doDestroy method.</p>
+<p>autoScroll:Boolean</p>
+<p>‘true’使用溢出：’自动’的组件布局元素，并在必要时自动显示滚动条， ‘false’溢出的内容。 不能像这样定义<a href="#!/api/Ext.Component-cfg-overflowX">overflowX</a> or <a href="#!/api/Ext.Component-cfg-overflowY">overflowY</a>.</p>
+<h2 id="Ext-AbstractComponent"><a href="#Ext-AbstractComponent" class="headerlink" title="Ext.AbstractComponent"></a>Ext.AbstractComponent</h2><p>afterrender:<br>在组件渲染完成之后触发.afterrender 事件在当前组件被 <a href="#!/api/Ext.AbstractComponent-property-rendered">rendered</a> 之后, 在为组件定义的所有afterRender方法执行之后 触发.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/08/MySQL的45道练习题/" rel="next" title="MySQL的45道练习题">
+                <i class="fa fa-chevron-left"></i> MySQL的45道练习题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/09/08/Ext-JS学习笔记/"
+           data-title="Ext JS学习笔记" data-url="http://yoursite.com/2017/09/08/Ext-JS学习笔记/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://o90jubpdi.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160916204640.jpg"
+               alt="GuangchaoSun" />
+          <p class="site-author-name" itemprop="name">GuangchaoSun</p>
+          <p class="site-description motion-element" itemprop="description">coding change the world</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sunguangchao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/sun-guang-chao-64" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-delicious"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2966219821/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Class-System"><span class="nav-number">1.</span> <span class="nav-text">The Class System</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Layouts-and-Containers"><span class="nav-number">2.</span> <span class="nav-text">Layouts and Containers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Layouts"><span class="nav-number">2.1.</span> <span class="nav-text">Layouts</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Components"><span class="nav-number">3.</span> <span class="nav-text">Components</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XTypes-and-Lazy-Instantiation"><span class="nav-number">3.1.</span> <span class="nav-text">XTypes and Lazy Instantiation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creating-Custom-Components"><span class="nav-number">3.2.</span> <span class="nav-text">Creating Custom Components</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Package"><span class="nav-number">4.</span> <span class="nav-text">Data Package</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目中常用到的关于Ext的方法"><span class="nav-number">5.</span> <span class="nav-text">项目中常用到的关于Ext的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-Msg-alert"><span class="nav-number">5.1.</span> <span class="nav-text">Ext.Msg.alert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-data-Store"><span class="nav-number">5.2.</span> <span class="nav-text">Ext.data.Store</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-getBody"><span class="nav-number">5.3.</span> <span class="nav-text">Ext.getBody()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-form-FieldSet"><span class="nav-number">5.4.</span> <span class="nav-text">Ext.form.FieldSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-data-Store-1"><span class="nav-number">5.5.</span> <span class="nav-text">Ext.data.Store</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-data-reader-Reader"><span class="nav-number">5.6.</span> <span class="nav-text">Ext.data.reader.Reader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-form-Basic"><span class="nav-number">5.7.</span> <span class="nav-text">Ext.form.Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-panel-AbstractPanel"><span class="nav-number">5.8.</span> <span class="nav-text">Ext.panel.AbstractPanel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-grid-RowNumber"><span class="nav-number">5.9.</span> <span class="nav-text">Ext.grid.RowNumber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-Viewport"><span class="nav-number">5.10.</span> <span class="nav-text">Ext.Viewport</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-form-field-Text"><span class="nav-number">5.11.</span> <span class="nav-text">Ext.form.field.Text</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-Component"><span class="nav-number">5.12.</span> <span class="nav-text">Ext.Component</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ext-AbstractComponent"><span class="nav-number">5.13.</span> <span class="nav-text">Ext.AbstractComponent</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuangchaoSun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunguangchao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
