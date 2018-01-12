@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="GuangchaoSun's Blog">
 <meta property="og:description" content="volatilevolatile要求程序对变量的每次修改，都写回主内存，读变量是从主内存中读取，这样便对其他线程可见，解决了可见性问题，但是不能保证数据的一致性；特别注意，原子操作：根据Java规范，对于基本类型的赋值或者返回操作，是原子操作。但这里的基本数据类型不包括long和double，因为JVM看到的基本存储单位是32位，而long和double是64位。所以无法在一个时钟周期内完成。
 通">
-<meta property="og:updated_time" content="2017-12-28T16:05:37.941Z">
+<meta property="og:updated_time" content="2018-01-12T10:10:21.373Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java线程内存模型-如何保证线程安全">
 <meta name="twitter:description" content="volatilevolatile要求程序对变量的每次修改，都写回主内存，读变量是从主内存中读取，这样便对其他线程可见，解决了可见性问题，但是不能保证数据的一致性；特别注意，原子操作：根据Java规范，对于基本类型的赋值或者返回操作，是原子操作。但这里的基本数据类型不包括long和double，因为JVM看到的基本存储单位是32位，而long和double是64位。所以无法在一个时钟周期内完成。
@@ -326,8 +326,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2017-12-29T00:05:37+08:00">
-              2017-12-29
+            <time title="Post modified" itemprop="dateModified" datetime="2018-01-12T18:10:21+08:00">
+              2018-01-12
             </time>
             
           </span>
@@ -385,7 +385,7 @@
 
       
         <h1 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h1><p>volatile要求程序对变量的每次修改，都写回主内存，读变量是从主内存中读取，这样便对其他线程可见，解决了可见性问题，但是不能保证数据的一致性；特别注意，原子操作：根据Java规范，对于基本类型的赋值或者返回操作，是原子操作。但这里的基本数据类型不包括long和double，因为JVM看到的基本存储单位是32位，而long和double是64位。所以无法在一个时钟周期内完成。</p>
-<p>通俗的讲一个对象的状态就是它的数据，存储在状态变量中，比如实力域或者静态域；无论何时，只要多于一个的线程访问给定的状态变量。而且其中某个线程会写入该变量，此时必须使用同步来协调线程对该变量的访问。</p>
+<p>通俗的讲一个对象的状态就是它的数据，存储在状态变量中，比如实力域或者静态域；无论何时，只要多于一个的线程访问给定的状态变量。而且其中某个线程会写入该变量，此时必须使用同步来协调线程对该变量的访问。<br><a id="more"></a></p>
 <h1 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h1><p>同步锁：每个Java对象有且只有一个同步锁，任何时刻，最多只允许一个线程拥有这把锁。</p>
 <p>当一个线程试图访问带有synchronized(this)标记的代码块时，必须获得this关键字应用对象的锁，在以下的两种情况下，此线程将有不同的命运：</p>
 <ol>
@@ -444,6 +444,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/12/Java并发性与多线程/" rel="prev" title="Java并发性与多线程">
+                Java并发性与多线程 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -515,7 +519,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -617,7 +621,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
