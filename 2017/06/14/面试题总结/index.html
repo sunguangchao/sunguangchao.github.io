@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="近段时间来总结的一些Java方面的面试题，基础很重要">
+<meta name="description" content="总结的一些关于Java的面试题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试题总结">
 <meta property="og:url" content="http://yoursite.com/2017/06/14/面试题总结/index.html">
 <meta property="og:site_name" content="GuangchaoSun's Blog">
-<meta property="og:description" content="近段时间来总结的一些Java方面的面试题，基础很重要">
-<meta property="og:updated_time" content="2018-02-07T15:09:56.401Z">
+<meta property="og:description" content="总结的一些关于Java的面试题">
+<meta property="og:updated_time" content="2018-03-21T14:52:49.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试题总结">
-<meta name="twitter:description" content="近段时间来总结的一些Java方面的面试题，基础很重要">
+<meta name="twitter:description" content="总结的一些关于Java的面试题">
 
 
 
@@ -323,8 +323,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2018-02-07T23:09:56+08:00">
-              2018-02-07
+            <time title="Post modified" itemprop="dateModified" datetime="2018-03-21T22:52:49+08:00">
+              2018-03-21
             </time>
             
           </span>
@@ -381,8 +381,8 @@
       
 
       
-        <p>近段时间来总结的一些Java方面的面试题，基础很重要<br><a id="more"></a><br>Java中的原始数据类型有哪些，它们的大小及对应的封装类？</p>
-<table>
+        <p>总结的一些关于Java的面试题<br><a id="more"></a></p>
+<h2 id="1-Java中的原始数据类型有哪些，它们的大小及对应的封装类？"><a href="#1-Java中的原始数据类型有哪些，它们的大小及对应的封装类？" class="headerlink" title="1.Java中的原始数据类型有哪些，它们的大小及对应的封装类？"></a>1.Java中的原始数据类型有哪些，它们的大小及对应的封装类？</h2><table>
 <thead>
 <tr>
 <th>data type</th>
@@ -429,9 +429,8 @@
 </tbody>
 </table>
 <p>boolean类型单独使用是4个字节，在数组中是一个字节。</p>
-<hr>
 <p>面对对象的三个特性：封装，继承，多态  </p>
-<p>多态的定义：变量shape可以引用任何Shape子类类型的对象，这叫多态，即一种类型的变量，可以引用多种类型对象。</p>
+<h2 id="2-Java中实现多态的机制是什么？"><a href="#2-Java中实现多态的机制是什么？" class="headerlink" title="2.Java中实现多态的机制是什么？"></a>2.Java中实现多态的机制是什么？</h2><p>靠的是<strong>父类或接口定义的引用变量</strong>可以指向<strong>子类或者具体实现类的实例对象</strong>，而程序的调用方法在运行期才动态绑定，就是引用变量指向的具体实例对象的方法，也就是内部里正在运行的那个对象的方法，而不是引用变量的类型中定义的方法。</p>
 <p>如何实现多态：</p>
 <ul>
 <li>接口实现</li>
@@ -440,15 +439,59 @@
 </ul>
 <p>虚拟机是如何实现多态的：<br>动态绑定技术(dynamic binding)，执行期间判断所引用对象的实际类型，根据实际类型调用对应的方法。</p>
 <p>参考：<a href="http://javabc.baike.com/article-692235.html" target="_blank" rel="external">面向对象三大特性</a></p>
-<hr>
-<p>抽象类的意义：  </p>
+<h2 id="3-short-s1-1-s1-s1-1-有什么错？short-s1-1-s1-1-有什么错？"><a href="#3-short-s1-1-s1-s1-1-有什么错？short-s1-1-s1-1-有什么错？" class="headerlink" title="3.short s1 = 1; s1 = s1 + 1;有什么错？short s1 = 1; s1 += 1;有什么错？"></a>3.short s1 = 1; s1 = s1 + 1;有什么错？short s1 = 1; s1 += 1;有什么错？</h2><p>对于short s1 = 1; s1 = s1 + 1;由于s1 + 1运算时会自动提升表达式的类型，所以结果是int型，在赋值给short类型s1时，编译器将报需要强制转换类型的错误。</p>
+<p>对于short s1 = 1; s1 += 1;由于 +=是java语言规定的运算符，java编译器会对它进行特殊处理，因此可以正确编译。</p>
+<h2 id="4-char型变量中能不能贮存一个中文汉字？为什么？"><a href="#4-char型变量中能不能贮存一个中文汉字？为什么？" class="headerlink" title="4.char型变量中能不能贮存一个中文汉字？为什么？"></a>4.char型变量中能不能贮存一个中文汉字？为什么？</h2><p>char型变量是用来存储Unicode编码的字符的，unicode编码字符集中包含了汉字，所以，char型变量当然可以存储汉字。不过，如果某个特殊的汉字没有被包含在unicode编码字符集中，那么这个char型变量中就不能存储这个特殊的汉字。补充：unicode编码占用两个字节，所以char类型的变量也是占用两个字节。</p>
+<h2 id="5-接口是否可以继承接口？抽象类是否可实现接口？抽象类是否可继承具体类？抽象类中是否可以有静态的main方法？"><a href="#5-接口是否可以继承接口？抽象类是否可实现接口？抽象类是否可继承具体类？抽象类中是否可以有静态的main方法？" class="headerlink" title="5.接口是否可以继承接口？抽象类是否可实现接口？抽象类是否可继承具体类？抽象类中是否可以有静态的main方法？"></a>5.接口是否可以继承接口？抽象类是否可实现接口？抽象类是否可继承具体类？抽象类中是否可以有静态的main方法？</h2><p>都可以有。<br>抽象类与普通类的唯一区别：就是不能创建实例和允许有abstract方法</p>
+<h2 id="6-构造器Constructor是否可被override？"><a href="#6-构造器Constructor是否可被override？" class="headerlink" title="6.构造器Constructor是否可被override？"></a>6.构造器Constructor是否可被override？</h2><p>构造器Constructor不能被继承，因此不能被重写Override，但可以被重载。</p>
+<h2 id="7-abstract-class和interface的区别？"><a href="#7-abstract-class和interface的区别？" class="headerlink" title="7.abstract class和interface的区别？"></a>7.abstract class和interface的区别？</h2><p>抽象类的意义：  </p>
 <ol>
 <li>为其他子类提供一个公共的类型</li>
 <li>封装子类中重复定义的内容</li>
-<li>定义抽象方法</li>
+<li>定义抽象方法（为了被子类实现）</li>
 </ol>
-<p>抽象类与接口的区别<br>| 比较     | 抽象类                                      | 接口                                 |<br>| —— | —————————————- | ———————————- |<br>| 默认方法   | 抽象类可以有默认的方法实现                            | Java8之前，接口中不存在方法的实现                |<br>| 实现方式   | 子类使用extends关键字来继承抽象类，子类需要提供抽象类中所声明方法的实现。 | 子类使用implements来实现接口，需要提供接口中所有声明的实现 |<br>| 构造器    | 抽象类中可以有构造器                               | 接口中不能                              |<br>| 和正常类区别 | 抽象类不能被实例化                                | 接口则是完全不同的类型                        |<br>| 访问修饰符  | 抽象方法可以有public,protected和default等修饰符      | 接口默认是public，不能使用其他修饰符              |<br>| 添加新方法  | 向抽象类中添加新方法，可以提供默认的实现，因此可以不修改子类现有的代码      | 如果往接口中添加新方法，则子类中需要实现该方法            |</p>
-<hr>
+<p>抽象类与接口的区别</p>
+<table>
+<thead>
+<tr>
+<th>比较</th>
+<th>抽象类</th>
+<th>接口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>默认方法</td>
+<td>抽象类可以有默认的方法实现</td>
+<td>Java8之前，接口中不存在方法的实现</td>
+</tr>
+<tr>
+<td>实现方式</td>
+<td>子类使用extends关键字来继承抽象类，子类需要提供抽象类中所声明方法的实现。</td>
+<td>子类使用implements来实现接口，需要提供接口中所有声明的实现</td>
+</tr>
+<tr>
+<td>构造器</td>
+<td>抽象类中可以有构造器</td>
+<td>接口中不能</td>
+</tr>
+<tr>
+<td>和正常类区别</td>
+<td>抽象类不能被实例化</td>
+<td>接口则是完全不同的类型</td>
+</tr>
+<tr>
+<td>访问修饰符</td>
+<td>抽象方法可以有public,protected和default等修饰符</td>
+<td>接口默认是public，不能使用其他修饰符</td>
+</tr>
+<tr>
+<td>添加新方法</td>
+<td>向抽象类中添加新方法，可以提供默认的实现，因此可以不修改子类现有的代码</td>
+<td>如果往接口中添加新方法，则子类中需要实现该方法</td>
+</tr>
+</tbody>
+</table>
 <p>什么是不可变对象：<br>不可变对象指对象一旦被创建，状态就不能被改变。任何修改都会创建一个新的对象。如String、Integer及其他包装类</p>
 <p>Java中创建对象的几种方式：</p>
 <ol>
@@ -457,15 +500,13 @@
 <li>调用对象的clone()方法</li>
 <li>运用反序列手段，调用java.io.ObjectInputStream对象的readObject方法</li>
 </ol>
-<p>Object中的公共方法有哪些：</p>
-<ol>
+<h2 id="8-Object中的公共方法有哪些："><a href="#8-Object中的公共方法有哪些：" class="headerlink" title="8.Object中的公共方法有哪些："></a>8.Object中的公共方法有哪些：</h2><ol>
 <li>equals(),hashCode(),toString()</li>
 <li>clone():obj.clone().getClass() == obj.getClass()</li>
 <li>getClass()</li>
 <li>notify(),notifyAll(),wait()</li>
 </ol>
-<hr>
-<h2 id="谈一谈Java中-和equals-的区别"><a href="#谈一谈Java中-和equals-的区别" class="headerlink" title="谈一谈Java中==和equals()的区别  "></a>谈一谈Java中<code>==</code>和<code>equals()</code>的区别  </h2><p>Java中的数据类型，可分为两类： </p>
+<h2 id="9-谈一谈Java中-和equals-的区别"><a href="#9-谈一谈Java中-和equals-的区别" class="headerlink" title="9.谈一谈Java中==和equals()的区别  "></a>9.谈一谈Java中<code>==</code>和<code>equals()</code>的区别  </h2><p>Java中的数据类型，可分为两类： </p>
 <ol>
 <li><p>基本数据类型，也称原始数据类型。byte,short,char,int,float,double,long,boolean他们之间的比较，应该用双等号<code>==</code>,比较的是他们的值。还有枚举类型也要用<code>==</code>  </p>
 </li>
@@ -476,11 +517,10 @@
 <p>总结：<br>对于复合数据类型之间进行equals比较，在没有覆写equals方法的情况下，他们之间的比较还是基于他们在内存中的存放位置的地址值的，因为Object的equals方法也是用双等号（==）进行比较的，所以比较后的结果跟双等号（==）的结果相同</p>
 <p>总的来说，==用于比较是不是一个人，equals比较的是长得是否一样。</p>
 <p>参考：<a href="http://www.cnblogs.com/zhxhdean/archive/2011/03/25/1995431.html" target="_blank" rel="external">Java中equals和==的区别</a></p>
-<h2 id="equals-和hashCode-的联系"><a href="#equals-和hashCode-的联系" class="headerlink" title="equals()和hashCode()的联系"></a><code>equals()</code>和<code>hashCode()</code>的联系</h2><p><code>hashCode()</code>是Object类的一个方法，返回一个哈希值。如果两个对象根据<code>equals()</code>方法比较相等，那么调用这两个对象中任意一个对象的<code>hashCode()</code>方法必须产生相同的hash值。<br>如果两个对象根据<code>equals()</code>方法比较不相等，那么产生的哈希值不一定相等（碰撞的情况下还是会相等的）</p>
-<h2 id="a-hashCode-有什么用-与a-equals-b-有什么关系"><a href="#a-hashCode-有什么用-与a-equals-b-有什么关系" class="headerlink" title="a.hashCode()有什么用?与a.equals(b)有什么关系  "></a><code>a.hashCode()</code>有什么用?与<code>a.equals(b)</code>有什么关系  </h2><p><code>hashCode()</code>方法是相应对象整型的 hash 值。它常用于基于hash的集合类，如 Hashtable、HashMap、LinkedHashMap等等。它与<code>equals()</code>方法关系特别紧密。根据 Java 规范，两个使用<code>equals()</code>方法来判断相等的对象，必须具有相同的 <code>hashcode</code>。<br>将对象放入到集合中时,首先判断要放入对象的<code>hashcode</code>是否已经在集合中存在,不存在则直接放入集合.如果<code>hashcode</code>相等,然后通过<code>equals()</code>方法判断要放入对象与集合中的任意对象是否相等:如果<code>equals()</code>判断不相等,直接将该元素放入集合中,否则不放入.</p>
-<hr>
-<h2 id="内部类的作用："><a href="#内部类的作用：" class="headerlink" title="内部类的作用："></a>内部类的作用：</h2><p>内部类可以有多个实例，每个实例都有自己的状态信息，并与其它外围对象的信息相互独立。在单个外围类中，可以让多个内部类以不同的方式实现同一接口，或者继承同一个类。创建内部类对象的时刻并不依赖于外部类对象的创建。内部类没有令人疑惑的<code>is-a</code>关系，它就像一个独立的实体。<br>内部类提供了更好的封装，除了该外围类，其他类都不能访问。</p>
-<h2 id="String-StringBuilder和StringBuffer区别"><a href="#String-StringBuilder和StringBuffer区别" class="headerlink" title="String,StringBuilder和StringBuffer区别"></a>String,StringBuilder和StringBuffer区别</h2><ul>
+<h2 id="10-equals-和hashCode-的联系"><a href="#10-equals-和hashCode-的联系" class="headerlink" title="10.equals()和hashCode()的联系"></a>10.equals()和hashCode()的联系</h2><p><code>hashCode()</code>是Object类的一个方法，返回一个哈希值。如果两个对象根据<code>equals()</code>方法比较相等，那么调用这两个对象中任意一个对象的<code>hashCode()</code>方法必须产生相同的hash值。<br>如果两个对象根据<code>equals()</code>方法比较不相等，那么产生的哈希值不一定相等（碰撞的情况下还是会相等的）</p>
+<h2 id="11-a-hashCode-有什么用-与a-equals-b-有什么关系"><a href="#11-a-hashCode-有什么用-与a-equals-b-有什么关系" class="headerlink" title="11.a.hashCode()有什么用?与a.equals(b)有什么关系  "></a>11.a.hashCode()有什么用?与a.equals(b)有什么关系  </h2><p><code>hashCode()</code>方法是相应对象整型的 hash 值。它常用于基于hash的集合类，如 Hashtable、HashMap、LinkedHashMap等等。它与<code>equals()</code>方法关系特别紧密。根据 Java 规范，两个使用<code>equals()</code>方法来判断相等的对象，必须具有相同的 <code>hashcode</code>。<br>将对象放入到集合中时,首先判断要放入对象的<code>hashcode</code>是否已经在集合中存在,不存在则直接放入集合.如果<code>hashcode</code>相等,然后通过<code>equals()</code>方法判断要放入对象与集合中的任意对象是否相等:如果<code>equals()</code>判断不相等,直接将该元素放入集合中,否则不放入.</p>
+<h2 id="12-内部类的作用："><a href="#12-内部类的作用：" class="headerlink" title="12.内部类的作用："></a>12.内部类的作用：</h2><p>内部类可以有多个实例，每个实例都有自己的状态信息，并与其它外围对象的信息相互独立。<br>内部类提供了更好的封装，除了该外围类，其他类都不能访问。</p>
+<h2 id="13-String-StringBuilder和StringBuffer区别"><a href="#13-String-StringBuilder和StringBuffer区别" class="headerlink" title="13.String,StringBuilder和StringBuffer区别"></a>13.String,StringBuilder和StringBuffer区别</h2><ul>
 <li><a href="http://blog.csdn.net/rmn190/article/details/1492013" target="_blank" rel="external">String,StringBuilder和StringBuffer的区别</a></li>
 <li><a href="http://stackoverflow.com/questions/2971315/string-stringbuffer-and-stringbuilder" target="_blank" rel="external">stackoverflow</a></li>
 </ul>
@@ -489,8 +529,7 @@
 <p>守护线程<br>程序运行完毕，jvm会等待非守护线程完成后关闭，但是jvm不会等待守护线程。守护线程最典型的的例子就是GC线程。</p>
 <p>多线程的上下文切换<br>指CPU控制权由一个已经正在运行的线程切换到另外一个就绪并等待获取CPU执行权的线程的过程。 </p>
 <p>Runnable和Callable的区别:<br>Runnable接口中的run方法的返回值是void，它做的事只是去执行run方法中的代码；Callable接口中的call()方法是有返回值的，是一个泛型，和Future、FutureTask配合可以用来获取异步执行的结果。<code>Callable+Future/FutureTask</code>可以获得多线程运行的结果，在等待时间太长没获取到需要的数据的情况下取消该线程的任务。</p>
-<p>什么导致线程阻塞</p>
-<table>
+<h2 id="14-什么导致线程阻塞"><a href="#14-什么导致线程阻塞" class="headerlink" title="14.什么导致线程阻塞"></a>14.什么导致线程阻塞</h2><table>
 <thead>
 <tr>
 <th>方法</th>
@@ -519,12 +558,22 @@
 <p><a href="http://hovertree.com/hvtart/bjae/329665288828761a.htm" target="_blank" rel="external">Java多线程suspend()、resume()和wait()、notify()的区别</a></p>
 <p><a href="http://baikkp.blog.51cto.com/3131132/1190175" target="_blank" rel="external">为什么wait(),notify(),notifyAll()必须在同步方法/代码块中调用？</a></p>
 <p>wait方法和notify()/notifyAll()方法在放弃对象监视器时有什么区别？<br>wait()方法会立刻释放对象监视器，notify()/notifyAll()方法则会等待线程剩余代码执行完毕才会放弃对象监视器。</p>
-<p>wait()和sleep()的区别  </p>
-<ul>
+<h2 id="15-wait-和sleep-的区别"><a href="#15-wait-和sleep-的区别" class="headerlink" title="15.wait()和sleep()的区别  "></a>15.wait()和sleep()的区别  </h2><ul>
 <li>sleep()来自Thread类，wait()来自Object类。调用sleep()方法的过程中，线程不会释放对象锁。而调用wait()方法线程会释放对象锁（前提是当前线程为对象锁的持有者）。</li>
 <li>sleep()睡眠后不出让系统资源，wait让其他线程可以占用CPU</li>
 <li>sleep(milliseconds)需要制定一个睡眠时间，时间一到会自动唤醒。而wait()需要notify()/notifyAll()配合使用。</li>
 </ul>
+<p>sleep是线程类的方法，导致此线程暂停执行指定时间，把执行机会给其他线程，但是监控状态依然保持，到时后会自动恢复。调用sleep不会释放对象锁。<br>wait是Object类的方法，对此对象调用wait方法导致本线程放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象发出notify方法（或notifyAll）后本线程才进入对象锁定池准备获得对象锁进入运行状态。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MutiThread</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Thread1()).start();</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            Thread.sleep(<span class="number">10</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Thread2()).start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread1</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="keyword">synchronized</span> (MutiThread.class)&#123;</div><div class="line">                System.out.println(<span class="string">"enter thread1"</span>);</div><div class="line">                System.out.println(<span class="string">"thread1 is waiting"</span>);</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    MutiThread.class.wait();</div><div class="line">                &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">                System.out.println(<span class="string">"thread1 is going on..."</span>);</div><div class="line">                System.out.println(<span class="string">"thread1 is being over!"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread2</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="keyword">synchronized</span> (MutiThread.class)&#123;</div><div class="line">                System.out.println(<span class="string">"enter thread2..."</span>);</div><div class="line">                System.out.println(<span class="string">"thread2 notify other thread can release wait status..."</span>);</div><div class="line">                MutiThread.class.notify();</div><div class="line">                System.out.println(<span class="string">"thread2 is sleeping ten millisecond..."</span>);</div><div class="line"></div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    Thread.sleep(<span class="number">10</span>);</div><div class="line">                &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">                System.out.println(<span class="string">"thread2 is going on..."</span>);</div><div class="line">                System.out.println(<span class="string">"thread2 is being over!"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="16-当一个线程如果一个对象的一个synchronized方法后，其他线程是否可以进入此对象的其他方法？"><a href="#16-当一个线程如果一个对象的一个synchronized方法后，其他线程是否可以进入此对象的其他方法？" class="headerlink" title="16.当一个线程如果一个对象的一个synchronized方法后，其他线程是否可以进入此对象的其他方法？"></a>16.当一个线程如果一个对象的一个synchronized方法后，其他线程是否可以进入此对象的其他方法？</h2><ol>
+<li>其他方法前是否加了synchronized关键字，如果没加，则能。</li>
+<li>如果这个方法内部调用了wait，则可以进入其他synchronized方法</li>
+<li>如果其他各个方法都加了synchronized关键字，并且内部没有调用wait，则不能</li>
+<li>如果其他方法是static，它用的同步锁是当前类的字节码，与非静态类的方法不能同步，因为非静态的方法用的是this。</li>
+</ol>
+<h2 id="17-线程的基本概念、线程的基本状态及状态之间的关系"><a href="#17-线程的基本概念、线程的基本状态及状态之间的关系" class="headerlink" title="17.线程的基本概念、线程的基本状态及状态之间的关系"></a>17.线程的基本概念、线程的基本状态及状态之间的关系</h2><p>状态：就绪，运行，synchronized阻塞，wait和sleep挂起，结束。wait必须在synchronized内部调用<br>调用线程的start方法后线程进入就绪状态，线程调度系统将就绪状态的线程转为运行状态，遇到synchronized语句时，由运行状态转为阻塞，当synchronized获得锁后，由阻塞转为运行，这种情况可以调用wait方法转为挂起状态，当线程关联的代码执行完毕后，线层变为结束状态。</p>
+<h2 id="18-设计四个线程，其中两个线程每次对j增加1，另外两个线程对j每次减少1。写出程序"><a href="#18-设计四个线程，其中两个线程每次对j增加1，另外两个线程对j每次减少1。写出程序" class="headerlink" title="18.设计四个线程，其中两个线程每次对j增加1，另外两个线程对j每次减少1。写出程序"></a>18.设计四个线程，其中两个线程每次对j增加1，另外两个线程对j每次减少1。写出程序</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> j;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ThreadTest test = <span class="keyword">new</span> ThreadTest();</div><div class="line">        Inc inc = test.new Inc();</div><div class="line">        Dec dec = test.new Dec();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; <span class="number">2</span>; i++)&#123;</div><div class="line">            Thread t = <span class="keyword">new</span> Thread(inc);</div><div class="line">            t.start();</div><div class="line">            t = <span class="keyword">new</span> Thread(dec);</div><div class="line">            t.start();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">inc</span><span class="params">()</span></span>&#123;</div><div class="line">        j++;</div><div class="line">        System.out.println(Thread.currentThread().getName()</div><div class="line">                + <span class="string">"-inc:"</span> + j);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">dec</span><span class="params">()</span></span>&#123;</div><div class="line">        j--;</div><div class="line">        System.out.println(Thread.currentThread().getName()</div><div class="line">                + <span class="string">"-dec:"</span> + j);</div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inc</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</div><div class="line">                inc();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Dec</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</div><div class="line">                dec();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="19-内存泄漏"><a href="#19-内存泄漏" class="headerlink" title="19.内存泄漏"></a>19.内存泄漏</h2><p>java中内存泄漏的情况：长生命周期的对象持有短生命周期对象的引用就很可能发生内存泄漏，尽管短生命周期对象已经不再需要，但是因为长生命周期对象持有它的引用而导致不能被回收，这就是Java中内存泄漏的发生场景。</p>
+<p>如果一个外部类的实例对象的方法返回了一个内部类的实例对象，这个内部类对象被长期引用了，即使那个外部类实例对象不再被引用，但由于内部类持久外部类的实例对象，这个外部类对象将不会被垃圾回收，这也会造成内存泄漏。</p>
 <p>ReentrantLock</p>
 <ul>
 <li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/locks/ReentrantLock.html" target="_blank" rel="external">官方文档</a></li>
@@ -693,7 +742,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">53</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -701,7 +750,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -710,7 +759,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -774,7 +823,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#谈一谈Java中-和equals-的区别"><span class="nav-number">1.</span> <span class="nav-text">谈一谈Java中==和equals()的区别  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals-和hashCode-的联系"><span class="nav-number">2.</span> <span class="nav-text">equals()和hashCode()的联系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a-hashCode-有什么用-与a-equals-b-有什么关系"><span class="nav-number">3.</span> <span class="nav-text">a.hashCode()有什么用?与a.equals(b)有什么关系  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部类的作用："><span class="nav-number">4.</span> <span class="nav-text">内部类的作用：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-StringBuilder和StringBuffer区别"><span class="nav-number">5.</span> <span class="nav-text">String,StringBuilder和StringBuffer区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池的作用"><span class="nav-number">6.</span> <span class="nav-text">线程池的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生产者消费者模型的作用是什么？"><span class="nav-number">7.</span> <span class="nav-text">生产者消费者模型的作用是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile关键字"><span class="nav-number">8.</span> <span class="nav-text">volatile关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized关键字"><span class="nav-number">9.</span> <span class="nav-text">synchronized关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fail-fast机制"><span class="nav-number">10.</span> <span class="nav-text">fail-fast机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#happens-before"><span class="nav-number">11.</span> <span class="nav-text">happens-before</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Java中的原始数据类型有哪些，它们的大小及对应的封装类？"><span class="nav-number">1.</span> <span class="nav-text">1.Java中的原始数据类型有哪些，它们的大小及对应的封装类？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Java中实现多态的机制是什么？"><span class="nav-number">2.</span> <span class="nav-text">2.Java中实现多态的机制是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-short-s1-1-s1-s1-1-有什么错？short-s1-1-s1-1-有什么错？"><span class="nav-number">3.</span> <span class="nav-text">3.short s1 = 1; s1 = s1 + 1;有什么错？short s1 = 1; s1 += 1;有什么错？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-char型变量中能不能贮存一个中文汉字？为什么？"><span class="nav-number">4.</span> <span class="nav-text">4.char型变量中能不能贮存一个中文汉字？为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-接口是否可以继承接口？抽象类是否可实现接口？抽象类是否可继承具体类？抽象类中是否可以有静态的main方法？"><span class="nav-number">5.</span> <span class="nav-text">5.接口是否可以继承接口？抽象类是否可实现接口？抽象类是否可继承具体类？抽象类中是否可以有静态的main方法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-构造器Constructor是否可被override？"><span class="nav-number">6.</span> <span class="nav-text">6.构造器Constructor是否可被override？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-abstract-class和interface的区别？"><span class="nav-number">7.</span> <span class="nav-text">7.abstract class和interface的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Object中的公共方法有哪些："><span class="nav-number">8.</span> <span class="nav-text">8.Object中的公共方法有哪些：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-谈一谈Java中-和equals-的区别"><span class="nav-number">9.</span> <span class="nav-text">9.谈一谈Java中==和equals()的区别  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-equals-和hashCode-的联系"><span class="nav-number">10.</span> <span class="nav-text">10.equals()和hashCode()的联系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-a-hashCode-有什么用-与a-equals-b-有什么关系"><span class="nav-number">11.</span> <span class="nav-text">11.a.hashCode()有什么用?与a.equals(b)有什么关系  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-内部类的作用："><span class="nav-number">12.</span> <span class="nav-text">12.内部类的作用：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-String-StringBuilder和StringBuffer区别"><span class="nav-number">13.</span> <span class="nav-text">13.String,StringBuilder和StringBuffer区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-什么导致线程阻塞"><span class="nav-number">14.</span> <span class="nav-text">14.什么导致线程阻塞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-wait-和sleep-的区别"><span class="nav-number">15.</span> <span class="nav-text">15.wait()和sleep()的区别  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-当一个线程如果一个对象的一个synchronized方法后，其他线程是否可以进入此对象的其他方法？"><span class="nav-number">16.</span> <span class="nav-text">16.当一个线程如果一个对象的一个synchronized方法后，其他线程是否可以进入此对象的其他方法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-线程的基本概念、线程的基本状态及状态之间的关系"><span class="nav-number">17.</span> <span class="nav-text">17.线程的基本概念、线程的基本状态及状态之间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-设计四个线程，其中两个线程每次对j增加1，另外两个线程对j每次减少1。写出程序"><span class="nav-number">18.</span> <span class="nav-text">18.设计四个线程，其中两个线程每次对j增加1，另外两个线程对j每次减少1。写出程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-内存泄漏"><span class="nav-number">19.</span> <span class="nav-text">19.内存泄漏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池的作用"><span class="nav-number">20.</span> <span class="nav-text">线程池的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生产者消费者模型的作用是什么？"><span class="nav-number">21.</span> <span class="nav-text">生产者消费者模型的作用是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile关键字"><span class="nav-number">22.</span> <span class="nav-text">volatile关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized关键字"><span class="nav-number">23.</span> <span class="nav-text">synchronized关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fail-fast机制"><span class="nav-number">24.</span> <span class="nav-text">fail-fast机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#happens-before"><span class="nav-number">25.</span> <span class="nav-text">happens-before</span></a></li></ol></div>
             
 
           </div>
