@@ -105,7 +105,7 @@ URG-紧急指针（urgent pointer）有">
 <meta property="og:image" content="http://www.52im.net/data/attachment/forum/201604/26/141612jaaglsb8ghh22sbs.png">
 <meta property="og:image" content="http://www.52im.net/data/attachment/forum/201604/26/141753hc3p885th8e6z55n.png">
 <meta property="og:image" content="http://www.52im.net/data/attachment/forum/201604/26/142520px6qkzx886895jn8.png">
-<meta property="og:updated_time" content="2018-04-10T23:20:31.688Z">
+<meta property="og:updated_time" content="2018-04-15T13:08:24.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP三次握手和四次挥手">
 <meta name="twitter:description" content="TCP提供一种面向连接的可靠的字节流服务
@@ -345,8 +345,8 @@ URG-紧急指针（urgent pointer）有">
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2018-04-11T07:20:31+08:00">
-              2018-04-11
+            <time title="Post modified" itemprop="dateModified" datetime="2018-04-15T21:08:24+08:00">
+              2018-04-15
             </time>
             
           </span>
@@ -435,7 +435,25 @@ URG-紧急指针（urgent pointer）有">
 </li>
 </ul>
 <h2 id="SYN攻击："><a href="#SYN攻击：" class="headerlink" title="SYN攻击："></a>SYN攻击：</h2><p>在三次握手过程中，Server发送SYN-ACK之后，收到Client的ACK之前的TCP连接称为半连接（half-open connect），此时Server处于SYN_RCVD状态，当收到ACK后，Server转入ESTABLISHED状态。SYN攻击就是Client在短时间内伪造大量不存在的IP地址，并向Server不断地发送SYN包，Server回复确认包，并等待Client的确认，由于源地址是不存在的，因此，Server需要不断重发直至超时，这些伪造的SYN包将产时间占用未连接队列，导致正常的SYN请求因为队列满而被丢弃，从而引起网络堵塞甚至系统瘫痪。SYN攻击时一种典型的DDOS攻击，检测SYN攻击的方式非常简单，即当Server上有大量半连接状态且源IP地址是随机的，则可以断定遭到SYN攻击了，使用如下命令可以让之现行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#netstat -apn | grep SYN_RECV</div></pre></td></tr></table></figure></p>
-<h1 id="4次挥手过程详解"><a href="#4次挥手过程详解" class="headerlink" title="4次挥手过程详解"></a>4次挥手过程详解</h1><p>所谓四次挥手(Four-Way Wavehand)即终止TCP连接，就是指断开一个TCP连接时，需要客户端和服务端总共发送4个包以确认连接的断开。在socket编程中，这一过程由客户端或服务端任一方执行close来触发，整个流程如下图所示：<br><img src="http://www.52im.net/data/attachment/forum/201604/26/142520px6qkzx886895jn8.png" alt=""><br>由于TCP连接是全双工的，因此，每个方向都必须要进行单独关闭。这一原则是当一方完成数据发送任务后，发送一个FIN来终止这一方向的连接，收到一个FIN只是意味着这一方向上没有数据流动了，即不会再收到数据了，但是这个TCP连接上仍然能够发送数据，直到这一方向也发送了FIN。首先进行关闭的一方将执行主动关闭，而另一方则执行被动关闭。</p>
+<h1 id="4次挥手过程详解"><a href="#4次挥手过程详解" class="headerlink" title="4次挥手过程详解"></a>4次挥手过程详解</h1><p>所谓四次挥手(Four-Way Wavehand)即终止TCP连接，就是指断开一个TCP连接时，需要客户端和服务端总共发送4个包以确认连接的断开。在socket编程中，这一过程由客户端或服务端任一方执行close来触发，整个流程如下图所示（有点问题）：<br><img src="http://www.52im.net/data/attachment/forum/201604/26/142520px6qkzx886895jn8.png" alt=""><br>由于TCP连接是全双工的，因此，每个方向都必须要进行单独关闭。这一原则是当一方完成数据发送任务后，发送一个FIN来终止这一方向的连接，收到一个FIN只是意味着这一方向上没有数据流动了，即不会再收到数据了，但是这个TCP连接上仍然能够发送数据，直到这一方向也发送了FIN。首先进行关闭的一方将执行主动关闭，而另一方则执行被动关闭。</p>
+<ul>
+<li>第一次挥手：<ul>
+<li>Client发送一个FIN，序号为M，用来关闭Clinet到Server的数据传送，Client进入FIN_WAIT_1状态。</li>
+</ul>
+</li>
+<li>第二次挥手：<ul>
+<li>Server收到FIN后，发送一个ACK给Client，确认序号ack=M+1，Server进入CLOSE_WAIT状态。</li>
+</ul>
+</li>
+<li>第三次挥手：<ul>
+<li>Server发送一个FIN，序号为N，确认序号依然为ack=M+1，Server进入LAST_ACK状态。</li>
+</ul>
+</li>
+<li>第四次挥手：<ul>
+<li>Client收到FIN后，Client进入TIME_WAIT状态，发送确认序号ack=N+1，Server进入CLOSED状态，完成四次挥手</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -477,6 +495,10 @@ URG-紧急指针（urgent pointer）有">
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/14/jvm调优常用命令/" rel="prev" title="jvm调优常用命令">
+                jvm调优常用命令 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -548,7 +570,7 @@ URG-紧急指针（urgent pointer）有">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">53</span>
+              <span class="site-state-item-count">54</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -565,7 +587,7 @@ URG-紧急指针（urgent pointer）有">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
